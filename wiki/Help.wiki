@@ -1,0 +1,15 @@
+#summary Main Help Page
+
+=Help=
+
+This help page contains general help information.
+
+There are other help pages available:
+
+ * CustomizationHelp
+ * ArduinoHelp
+ * AVRStudioHelp
+
+==Installation==
+
+Download the zip file, unzip the contents anywhere. The editor is AVRProjectIDE.exe, place a shortcut to it somewhere you want. When you want to open .avrproj files from Windows, in Window's "Open With" dialog, make it so that it always opens it with AVRProjectIDE.
