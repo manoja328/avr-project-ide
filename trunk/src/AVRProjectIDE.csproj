@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AB21876B-FE2C-48D4-A5F4-3EB344272950}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AVRProjectIDE</RootNamespace>
+    <AssemblyName>AVRProjectIDE</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ScintillaNet, Version=2.0.3138.25704, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.3.1.24483, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="arduino_resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>arduino_resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DummyPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DummyPanel.Designer.cs">
+      <DependentUpon>DummyPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IDEWindow.Designer.cs">
+      <DependentUpon>IDEWindow.cs</DependentUpon>
+    </Compile>
+    <None Include="IDEWindow.Designer.cs.copy">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="MessagePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessagePanel.Designer.cs">
+      <DependentUpon>MessagePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorPanel.Designer.cs">
+      <DependentUpon>EditorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IDEWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnumsAndStructs.cs" />
+    <Compile Include="ProjTemplate.cs" />
+    <Compile Include="SettingsManagement.cs" />
+    <Compile Include="FileOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileOptionsDialog.Designer.cs">
+      <DependentUpon>FileOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigWindow.Designer.cs">
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WelcomeWindow.Designer.cs">
+      <DependentUpon>WelcomeWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="INIFile.cs" />
+    <Compile Include="MenuWebLink.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectBuilderBurner.cs" />
+    <Compile Include="ProjectManagement.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="arduino_resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>arduino_resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessagePanel.resx">
+      <DependentUpon>MessagePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorPanel.resx">
+      <DependentUpon>EditorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDEWindow.resx">
+      <DependentUpon>IDEWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileOptionsDialog.resx">
+      <DependentUpon>FileOptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigWindow.resx">
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SerialPortPanel.resx">
+      <DependentUpon>SerialPortPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeWindow.resx">
+      <DependentUpon>WelcomeWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchPanel.resx">
+      <DependentUpon>SearchPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTreePanel.resx">
+      <DependentUpon>FileTreePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizard.resx">
+      <DependentUpon>Wizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SearchPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchPanel.Designer.cs">
+      <DependentUpon>SearchPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileTreePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileTreePanel.Designer.cs">
+      <DependentUpon>FileTreePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SerialPortPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SerialPortPanel.Designer.cs">
+      <DependentUpon>SerialPortPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizard.Designer.cs">
+      <DependentUpon>Wizard.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="arduinomakefile" />
+    <None Include="arduino\core\Makefile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="arduino\libraries\EEPROM\EEPROM.o" />
+    <None Include="arduino\libraries\EEPROM\examples\eeprom_clear\eeprom_clear.pde" />
+    <None Include="arduino\libraries\EEPROM\examples\eeprom_read\eeprom_read.pde" />
+    <None Include="arduino\libraries\EEPROM\examples\eeprom_write\eeprom_write.pde" />
+    <None Include="arduino\libraries\Ethernet\Client.o" />
+    <None Include="arduino\libraries\Ethernet\Ethernet.o" />
+    <None Include="arduino\libraries\Ethernet\examples\ChatServer\ChatServer.pde" />
+    <None Include="arduino\libraries\Ethernet\examples\WebClient\WebClient.pde" />
+    <None Include="arduino\libraries\Ethernet\examples\WebServer\WebServer.pde" />
+    <None Include="arduino\libraries\Ethernet\Server.o" />
+    <None Include="arduino\libraries\Ethernet\utility\socket.o" />
+    <None Include="arduino\libraries\Ethernet\utility\w5100.o" />
+    <None Include="arduino\libraries\Firmata\examples\AnalogFirmata\AnalogFirmata.pde" />
+    <None Include="arduino\libraries\Firmata\examples\AnalogFirmata\Makefile" />
+    <None Include="arduino\libraries\Firmata\examples\EchoString\EchoString.pde" />
+    <None Include="arduino\libraries\Firmata\examples\EchoString\Makefile" />
+    <None Include="arduino\libraries\Firmata\examples\I2CFirmata\I2CFirmata.pde" />
+    <None Include="arduino\libraries\Firmata\examples\ServoFirmata\Makefile" />
+    <None Include="arduino\libraries\Firmata\examples\ServoFirmata\ServoFirmata.pde" />
+    <None Include="arduino\libraries\Firmata\examples\SimpleAnalogFirmata\Makefile" />
+    <None Include="arduino\libraries\Firmata\examples\SimpleAnalogFirmata\SimpleAnalogFirmata.pde" />
+    <None Include="arduino\libraries\Firmata\examples\SimpleDigitalFirmata\Makefile" />
+    <None Include="arduino\libraries\Firmata\examples\SimpleDigitalFirmata\SimpleDigitalFirmata.pde" />
+    <None Include="arduino\libraries\Firmata\examples\StandardFirmata\Makefile" />
+    <None Include="arduino\libraries\Firmata\examples\StandardFirmata\StandardFirmata.pde" />
+    <None Include="arduino\libraries\Firmata\Firmata.o" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\Autoscroll\Autoscroll.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\Blink\Blink.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\Cursor\Cursor.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\Display\Display.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\HelloWorld\HelloWorld.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\Scroll\Scroll.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\SerialDisplay\SerialDisplay.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\setCursor\setCursor.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\examples\TextDirection\TextDirection.pde" />
+    <None Include="arduino\libraries\LiquidCrystal\LiquidCrystal.o" />
+    <None Include="arduino\libraries\Matrix\examples\hello_matrix\hello_matrix.pde" />
+    <None Include="arduino\libraries\Matrix\examples\sprite_animation\sprite_animation.pde" />
+    <None Include="arduino\libraries\Matrix\Matrix.o" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\all-wcprops" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\entries" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\diskio.h.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\integer.h.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\keywords.txt.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\mmc.c.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\petit_fatfs.cpp.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\petit_fatfs.h.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\pff.c.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\pff.h.svn-base" />
+    <None Include="arduino\libraries\petit_fatfs\mmc.o" />
+    <None Include="arduino\libraries\petit_fatfs\petit_fatfs.o" />
+    <None Include="arduino\libraries\petit_fatfs\pff.o" />
+    <None Include="arduino\libraries\Servo\examples\Knob\Knob.pde" />
+    <None Include="arduino\libraries\Servo\examples\Sweep\Sweep.pde" />
+    <None Include="arduino\libraries\Servo\Servo.o" />
+    <None Include="arduino\libraries\SoftwareSerial\SoftwareSerial.o" />
+    <None Include="arduino\libraries\Sprite\Sprite.o" />
+    <None Include="arduino\libraries\Stepper\examples\MotorKnob\MotorKnob.pde" />
+    <None Include="arduino\libraries\Stepper\Stepper.o" />
+    <None Include="arduino\libraries\Wire\examples\digital_potentiometer\digital_potentiometer.pde" />
+    <None Include="arduino\libraries\Wire\examples\master_reader\master_reader.pde" />
+    <None Include="arduino\libraries\Wire\examples\master_writer\master_writer.pde" />
+    <None Include="arduino\libraries\Wire\examples\SFRRanger_reader\SFRRanger_reader.pde" />
+    <None Include="arduino\libraries\Wire\examples\slave_receiver\slave_receiver.pde" />
+    <None Include="arduino\libraries\Wire\examples\slave_sender\slave_sender.pde" />
+    <None Include="arduino\libraries\Wire\utility\twi.o" />
+    <None Include="arduino\libraries\Wire\Wire.o" />
+    <None Include="graphics\find.png" />
+    <None Include="graphics\paste.png" />
+    <None Include="graphics\copy.png" />
+    <None Include="graphics\cut.png" />
+    <None Include="graphics\configure.ico" />
+    <None Include="graphics\build.ico" />
+    <None Include="graphics\burn.ico" />
+    <None Include="graphics\redo.ico" />
+    <None Include="graphics\comment.png" />
+    <None Include="graphics\file.ico" />
+    <None Include="graphics\findnext.png" />
+    <None Include="graphics\header.ico" />
+    <None Include="graphics\help.ico" />
+    <None Include="graphics\hppheader.ico" />
+    <None Include="graphics\indent.png" />
+    <None Include="graphics\missing.ico" />
+    <None Include="graphics\new.ico" />
+    <None Include="graphics\nocompile.ico" />
+    <None Include="graphics\save.png" />
+    <None Include="graphics\saveall.png" />
+    <None Include="graphics\search.ico" />
+    <None Include="graphics\searchall.png" />
+    <None Include="graphics\serial.ico" />
+    <None Include="graphics\SHELL32_223.ico" />
+    <None Include="graphics\treeroot.ico" />
+    <None Include="graphics\uncomment.png" />
+    <None Include="graphics\undo.ico" />
+    <None Include="graphics\unindent.png" />
+    <None Include="graphics\unknown.ico" />
+    <None Include="graphics\warning.ico" />
+    <None Include="graphics\exit.png" />
+    <Content Include="arduino\core\binary.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\HardwareSerial.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\HardwareSerial.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\main.cxx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\pins_arduino.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\pins_arduino.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\Print.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\Print.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\WConstants.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\WInterrupts.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\wiring.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\wiring.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\wiring_analog.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\wiring_digital.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\wiring_private.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\wiring_pulse.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\wiring_shift.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\WMath.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\core\WProgram.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="arduino\libraries\EEPROM\EEPROM.cpp" />
+    <Content Include="arduino\libraries\EEPROM\EEPROM.h" />
+    <Content Include="arduino\libraries\EEPROM\keywords.txt" />
+    <Content Include="arduino\libraries\Ethernet\Client.cpp" />
+    <Content Include="arduino\libraries\Ethernet\Client.h" />
+    <Content Include="arduino\libraries\Ethernet\Ethernet.cpp" />
+    <Content Include="arduino\libraries\Ethernet\Ethernet.h" />
+    <Content Include="arduino\libraries\Ethernet\keywords.txt" />
+    <Content Include="arduino\libraries\Ethernet\Server.cpp" />
+    <Content Include="arduino\libraries\Ethernet\Server.h" />
+    <Content Include="arduino\libraries\Ethernet\utility\socket.c" />
+    <Content Include="arduino\libraries\Ethernet\utility\socket.h" />
+    <Content Include="arduino\libraries\Ethernet\utility\spi.h" />
+    <Content Include="arduino\libraries\Ethernet\utility\types.h" />
+    <Content Include="arduino\libraries\Ethernet\utility\w5100.c" />
+    <Content Include="arduino\libraries\Ethernet\utility\w5100.h" />
+    <Content Include="arduino\libraries\Firmata\examples\StandardFirmata\LICENSE.txt" />
+    <Content Include="arduino\libraries\Firmata\Firmata.cpp" />
+    <Content Include="arduino\libraries\Firmata\Firmata.h" />
+    <Content Include="arduino\libraries\Firmata\keywords.txt" />
+    <Content Include="arduino\libraries\Firmata\LICENSE.txt" />
+    <Content Include="arduino\libraries\Firmata\TODO.txt" />
+    <Content Include="arduino\libraries\LiquidCrystal\keywords.txt" />
+    <Content Include="arduino\libraries\LiquidCrystal\LiquidCrystal.cpp" />
+    <Content Include="arduino\libraries\LiquidCrystal\LiquidCrystal.h" />
+    <Content Include="arduino\libraries\Matrix\keywords.txt" />
+    <Content Include="arduino\libraries\Matrix\Matrix.cpp" />
+    <Content Include="arduino\libraries\Matrix\Matrix.h" />
+    <Content Include="arduino\libraries\petit_fatfs\diskio.h" />
+    <Content Include="arduino\libraries\petit_fatfs\integer.h" />
+    <Content Include="arduino\libraries\petit_fatfs\keywords.txt" />
+    <Content Include="arduino\libraries\petit_fatfs\mmc.c" />
+    <Content Include="arduino\libraries\petit_fatfs\petit_fatfs.cpp" />
+    <Content Include="arduino\libraries\petit_fatfs\petit_fatfs.h" />
+    <Content Include="arduino\libraries\petit_fatfs\pff.c" />
+    <Content Include="arduino\libraries\petit_fatfs\pff.h" />
+    <Content Include="arduino\libraries\petit_mp3\petit_mp3.cpp" />
+    <Content Include="arduino\libraries\Servo\keywords.txt" />
+    <Content Include="arduino\libraries\Servo\Servo.cpp" />
+    <Content Include="arduino\libraries\Servo\Servo.h" />
+    <Content Include="arduino\libraries\SoftwareSerial\keywords.txt" />
+    <Content Include="arduino\libraries\SoftwareSerial\SoftwareSerial.cpp" />
+    <Content Include="arduino\libraries\SoftwareSerial\SoftwareSerial.h" />
+    <Content Include="arduino\libraries\Sprite\binary.h" />
+    <Content Include="arduino\libraries\Sprite\keywords.txt" />
+    <Content Include="arduino\libraries\Sprite\Sprite.cpp" />
+    <Content Include="arduino\libraries\Sprite\Sprite.h" />
+    <Content Include="arduino\libraries\Stepper\keywords.txt" />
+    <Content Include="arduino\libraries\Stepper\Stepper.cpp" />
+    <Content Include="arduino\libraries\Stepper\Stepper.h" />
+    <Content Include="arduino\libraries\Wire\keywords.txt" />
+    <Content Include="arduino\libraries\Wire\utility\twi.c" />
+    <Content Include="arduino\libraries\Wire\utility\twi.h" />
+    <Content Include="arduino\libraries\Wire\Wire.cpp" />
+    <Content Include="arduino\libraries\Wire\Wire.h" />
+    <Content Include="graphics\unknown2.ico" />
+    <None Include="graphics\web.png" />
+    <Content Include="helplinks.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SciLexer.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scintconfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ScintillaNet.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="template.xml" />
+    <Content Include="WeifenLuo.WinFormsUI.Docking.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="arduino\libraries\petit_fatfs\.svn\prop-base\" />
+    <Folder Include="arduino\libraries\petit_fatfs\.svn\props\" />
+    <Folder Include="arduino\libraries\petit_fatfs\.svn\tmp\prop-base\" />
+    <Folder Include="arduino\libraries\petit_fatfs\.svn\tmp\props\" />
+    <Folder Include="arduino\libraries\petit_fatfs\.svn\tmp\text-base\" />
+    <Folder Include="arduino\libraries\SoftwareSerial\examples\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
