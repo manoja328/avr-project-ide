@@ -1,0 +1,15 @@
+#summary Frequently Asked Questions
+
+===What are those checkboxes for beside my files?===
+
+Unchecked files are ignored during the build process.
+
+===Why can't I checkmark my .h or .hpp files?===
+
+You can't compile those, or at least, shouldn't.
+
+===How do I tell the project what language I am using===
+
+You don't have to, if a file is cpp, then it will be compiled with avr-g++, if a file is c, then avr-gcc is used, if any pde files are found, then the build process will use the same method that Arduino's editor builds the project.
+
+Note that you can't "supplement" a C or C++ project with a pde file as the Arduino core already defines a main function.
