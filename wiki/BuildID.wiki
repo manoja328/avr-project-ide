@@ -1,0 +1,3 @@
+BuildID is a build identifier used by the updating mechanism. This page will serve the BuildID to the application, if it is different from the one being used by the application, the updater will be triggered.
+
+BUILDID:SDADASDASDFSDGGFDG
