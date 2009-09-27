@@ -9,6 +9,8 @@ There are other help pages available:
  * AvrStudioHelp
  * FrequentlyAskedQuestions
 
+Of course, you can also email me at frank@circleofcurrent.com with questions
+
 ==Installation==
 
 Download the zip file, unzip the contents anywhere. The editor is AVRProjectIDE.exe, place a shortcut to it somewhere you want. When you want to open .avrproj files from Windows, in Window's "Open With" dialog, make it so that it always opens it with AVRProjectIDE.
