@@ -463,13 +463,11 @@
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />
     <Content Include="helplinks.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SciLexer.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scintconfig.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ScintillaNet.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
