@@ -4,6 +4,8 @@ The template file is templates.xml in the application data folder. See Customiza
 
 When a template is applied, only the settings that it needs to touch are modified, other project settings are NOT returned to default, they are LEFT ALONE.
 
+Templates cannot include files
+
 ===Adding a Custom Template===
 
 The XML for a template looks like:
