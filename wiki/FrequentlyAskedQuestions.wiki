@@ -13,3 +13,27 @@ You can't compile those, or at least, shouldn't.
 You don't have to, if a file is cpp, then it will be compiled with avr-g++, if a file is c, then avr-gcc is used, if any pde files are found, then the build process will use the same method that Arduino's editor builds the project.
 
 Note that you can't "supplement" a C or C++ project with a pde file as the Arduino core already defines a main function.
+
+===Please explain `-Wall` and `-gdwarf-2` and `-std=gnu99`===
+
+Those are the same default compiler options that AVRStudio used. It means all warnings are displayed, use dwarf-2 for debugging, and the C standard is GNU99.
+
+===What is the “Run Only Options” button for in the AVRDUDE command builder?===
+
+It'll run AVRDUDE but won't write the hex file to it, this is used to:
+ * Check that your programmer is working
+ * Burn fuses
+
+===How do I burn fuses?===
+
+Go to the fuse calculator provided in the help menu and the calculator should tell you the AVRDUDE command to burn the fuses you want, copy and paste that into the options text box along with any other options you need. Press “Run Only Options” after you are ready.
+
+===How do I send special characters through the serial port?===
+
+Use escape sequences, such as \r \n \t \v \b \a
+
+If you want to send a single byte, use \xFF where FF is the hexadecimal representation of the byte you want to send.
+
+===How do I debug or run a simulator?===
+
+Export as an aps file and open it with AVRStudio.
