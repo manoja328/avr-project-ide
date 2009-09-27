@@ -928,10 +928,13 @@ namespace AVRProjectIDE
             {
                 filePath = path;
                 isReady = true;
+                dirPath = filePath.Substring(0, filePath.LastIndexOf(Path.DirectorySeparatorChar));
+
 
                 if (string.IsNullOrEmpty(SettingsManagement.FavFolder))
                 {
-                    SettingsManagement.FavFolder = DirPath.Substring(0, DirPath.LastIndexOf(Path.DirectorySeparatorChar));
+
+                    SettingsManagement.FavFolder = dirPath.Substring(0, dirPath.LastIndexOf(Path.DirectorySeparatorChar));
                 }
             }
 

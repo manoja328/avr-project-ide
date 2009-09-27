@@ -1325,16 +1325,26 @@ namespace AVRProjectIDE
                         string tempArduinoPath = SettingsManagement.AppDataPath + "temp" + Path.DirectorySeparatorChar + "arduino_temp_main.cpp";
                         ardFile = new ProjectFile(tempArduinoPath);
 
-                        ardWriter = new StreamWriter(ardFile.FileAbsPath);
+                        Program.MakeSurePathExists(SettingsManagement.AppDataPath + "temp");
 
-                        ardWriter.WriteLine("#include <WProgram.h>"); // required for arduino functions to work
-                        ardWriter.WriteLine("extern \"C\" void __cxa_pure_virtual() {}"); // required to prevent a compile error
+                        try
+                        {
+                            ardWriter = new StreamWriter(ardFile.FileAbsPath);
 
-                        workingProject.IncludeDirList.Add(SettingsManagement.ArduinoCorePath);
+                            ardWriter.WriteLine("#include <WProgram.h>"); // required for arduino functions to work
+                            ardWriter.WriteLine("extern \"C\" void __cxa_pure_virtual() {}"); // required to prevent a compile error
+                            ardWriter.Flush();
 
-                        ardLibList.Clear();
+                            workingProject.IncludeDirList.Add(SettingsManagement.ArduinoCorePath);
 
-                        ardJoinStarted = true;
+                            ardLibList.Clear();
+
+                            ardJoinStarted = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            TextBoxModify(outputTextbox, "Error while writing " + ardFile.FileName + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                        }
                     }
 
                     // join all the .pde files into one cpp file
@@ -1620,13 +1630,13 @@ namespace AVRProjectIDE
             try
             {
                 // eliminate block comments with regex looking for /* blah */
-                string re1 = "(\\/)";	// Any Single Character 1
-                string re2 = "(\\*)";	// Any Single Character 2
-                string re3 = ".*?";	// Non-greedy match on filler
-                string re4 = "(\\*)";	// Any Single Character 3
-                string re5 = "(\\/)";	// Any Single Character 4
+                //string re1 = "(\\/)";	// Any Single Character 1
+                //string re2 = "(\\*)";	// Any Single Character 2
+                //string re3 = ".*?";	// Non-greedy match on filler
+                //string re4 = "(\\*)";	// Any Single Character 3
+                //string re5 = "(\\/)";	// Any Single Character 4
 
-                Regex r = new Regex(re1 + re2 + re3 + re4 + re5, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                Regex r = new Regex("(\\/\\*[\\d\\D]*?\\*\\/)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
                 Match m = r.Match(res);
                 while (m.Success)
                 {

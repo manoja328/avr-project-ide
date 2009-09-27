@@ -25,8 +25,6 @@ namespace AVRProjectIDE
 
             this.DialogResult = DialogResult.Cancel;
 
-            dropFileType.SelectedIndex = 0;
-
             string[] templateList = ProjTemplate.GetTemplateNames();
             foreach (string tempName in templateList)
             {
@@ -36,18 +34,44 @@ namespace AVRProjectIDE
             {
                 dropTemplates.Items.Add("No Templates Available");
             }
-            dropTemplates.SelectedIndex = 0;
+
+            string lastTemp = SettingsManagement.LastTemplate;
+            if (lastTemp == null) lastTemp = "";
+            if (dropTemplates.Items.Contains(lastTemp))
+                dropTemplates.SelectedIndex = dropTemplates.Items.IndexOf(lastTemp);
+            else
+                dropTemplates.SelectedIndex = 0;
+
+            // warning, hack
+            string lastFileType = SettingsManagement.LastInitialFileType;
+            if (lastFileType == null) lastFileType = "";
+            if (dropFileType.Items.Contains(lastFileType))
+                dropFileType.SelectedIndex = dropFileType.Items.IndexOf(lastFileType);
+            else
+                dropFileType.SelectedIndex = 0;
+
+            if (dropFileType.SelectedIndex < 0) dropFileType.SelectedIndex = 0;
+            if (dropTemplates.SelectedIndex < 0) dropTemplates.SelectedIndex = 0;
+
+
+            if (string.IsNullOrEmpty(SettingsManagement.FavFolder))
+            {
+                string mydocs = Program.CleanFilePath(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)) + Path.DirectorySeparatorChar + "Projects";
+                SettingsManagement.FavFolder = mydocs;
+            }
 
             txtFolderPath.Text = SettingsManagement.FavFolder + Path.DirectorySeparatorChar;
 
-            string newFileName = DateTime.Now.ToLongDateString().Replace(' ', '_');
+            string newFileName = DateTime.Now.ToShortDateString().Replace(' ', '_').Replace('-', '_').Replace(Path.AltDirectorySeparatorChar, '_').Replace(Path.DirectorySeparatorChar, '_'); ;
             char[] illegalChars = Path.GetInvalidFileNameChars();
             foreach (char c in illegalChars)
             {
                 newFileName.Replace(c, '_');
             }
 
-            txtProjName.Text = newFileName;
+            Random r = new Random();
+
+            txtProjName.Text = "Sketch_" + newFileName + "_" + r.Next(15).ToString("X");
         }
 
         private void txtProjName_TextChanged(object sender, EventArgs e)
@@ -139,18 +163,20 @@ namespace AVRProjectIDE
             string folderPath = Program.CleanFilePath(txtFolderPath.Text);
 
             if (Program.MakeSurePathExists(folderPath) == false)
+            //if (Directory.Exists(folderPath))
             {
-                MessageBox.Show("Error: Could Not Create Folder");
+                MessageBox.Show("Error Creating Folder");
+                //MessageBox.Show("Error: Folder Invalid");
                 return;
             }
 
             string projFilePath = folderPath + Path.DirectorySeparatorChar + projFilename + ".avrproj";
             string ext = "c";
-            if (((string)dropFileType.Items[dropFileType.SelectedIndex]).Contains("(.c)"))
+            if (((string)dropFileType.Items[dropFileType.SelectedIndex]) == "C++")
                 ext = "c";
-            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]).Contains("(.cpp)"))
+            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]) == "C")
                 ext = "cpp";
-            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]).Contains("(.pde)"))
+            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]) == "Arduino")
                 ext = "pde";
 
             string iniFilePath = folderPath + Path.DirectorySeparatorChar + iniFilename + "." + ext;
@@ -219,6 +245,18 @@ namespace AVRProjectIDE
             txtFolderPath.SelectionStart = txtFolderPath.Text.Length;
             txtFolderPath.SelectionLength = 0;
             txtFolderPath.ScrollToCaret();
+        }
+
+        private void dropFileType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dropFileType.SelectedIndex >= 0)
+                SettingsManagement.LastInitialFileType = (string)dropFileType.Items[dropFileType.SelectedIndex];
+        }
+
+        private void dropTemplates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dropTemplates.SelectedIndex >= 0)
+                SettingsManagement.LastTemplate = (string)dropTemplates.Items[dropTemplates.SelectedIndex];
         }
     }
 }

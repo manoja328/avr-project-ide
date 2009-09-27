@@ -186,6 +186,8 @@ namespace AVRProjectIDE
 
         public void PopulateList()
         {
+            rootNode.Text = project.FileName;
+
             sourceNode.Nodes.Clear();
             headerNode.Nodes.Clear();
             otherNode.Nodes.Clear();

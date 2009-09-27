@@ -151,13 +151,14 @@
             this.dropFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropFileType.FormattingEnabled = true;
             this.dropFileType.Items.AddRange(new object[] {
-            "C (.c)",
-            "C++ (.cpp)",
-            "Arduino (.pde)"});
+            "C",
+            "C++",
+            "Arduino"});
             this.dropFileType.Location = new System.Drawing.Point(310, 64);
             this.dropFileType.Name = "dropFileType";
             this.dropFileType.Size = new System.Drawing.Size(100, 21);
             this.dropFileType.TabIndex = 5;
+            this.dropFileType.SelectedIndexChanged += new System.EventHandler(this.dropFileType_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -178,6 +179,7 @@
             this.dropTemplates.Name = "dropTemplates";
             this.dropTemplates.Size = new System.Drawing.Size(313, 21);
             this.dropTemplates.TabIndex = 6;
+            this.dropTemplates.SelectedIndexChanged += new System.EventHandler(this.dropTemplates_SelectedIndexChanged);
             // 
             // Wizard
             // 
