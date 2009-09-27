@@ -1,14 +1,12 @@
 #summary Main Help Page
 
-=Help=
-
 This help page contains general help information.
 
 There are other help pages available:
 
  * CustomizationHelp
  * ArduinoHelp
- * AVRStudioHelp
+ * AvrStudioHelp
 
 ==Installation==
 
