@@ -1,0 +1,11 @@
+#summary Credits Thanks Acknowledgements
+
+Thanks to the following open source projects:
+
+[http://dockpanelsuite.sourceforge.net/ DockPanel Suite] for letting me add the docking windows and tab system just like in Visual Studio.
+
+[http://www.scintilla.org/ Scintilla] for being an excellent code editor, this is the same component used in Notepad++, Notepad2, and a bunch of other great development environments out there.
+
+[http://www.codeplex.com/ScintillaNET ScintillaNet] for allowing me to use Scintilla to be used with a C# Windows Form.
+
+[http://www.arduino.cc/ Arduino] for being open source and letting me see how it builds its sketches.
