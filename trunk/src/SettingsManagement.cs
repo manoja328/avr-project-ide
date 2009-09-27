@@ -297,7 +297,21 @@ namespace AVRProjectIDE
         static int backupInterval = 30;
         public static int BackupInterval
         {
-            get { return backupInterval; }
+            get
+            {
+                string str = iniFile.Read("Editor", "BackupInterval");
+                if (int.TryParse(str, out backupInterval) == false)
+                {
+                    BackupInterval = 30;
+                }
+
+                return backupInterval;
+            }
+            set
+            {
+                backupInterval = value;
+                iniFile.Write("Editor", "BackupInterval", backupInterval.ToString("0"));
+            }
         }
 
         /// <summary>
@@ -306,21 +320,6 @@ namespace AVRProjectIDE
         /// <returns>true if successful</returns>
         static private bool LoadScintSettings()
         {
-            try
-            {
-                // get non-scintilla related settings
-                string bkIntStr = iniFile.Read("Editor", "BackupInterval");
-                if (string.IsNullOrEmpty(bkIntStr) == false)
-                {
-                    if (int.TryParse(bkIntStr, out backupInterval) == false)
-                    {
-                        backupInterval = 30;
-                        iniFile.Write("Editor", "BackupInterval", backupInterval.ToString("0"));
-                    }
-                }
-            }
-            catch { }
-
             // first load a built in configuration
             scint.ConfigurationManager.Language = "cs";
 
