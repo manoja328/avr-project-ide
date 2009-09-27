@@ -1,5 +1,9 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 10==
+
+ * Fixed Arduino build process
+
 ==Alpha 8==
 
  * Experimental DLL unloading, does not work
