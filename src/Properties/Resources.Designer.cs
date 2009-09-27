@@ -266,11 +266,11 @@ namespace AVRProjectIDE.Properties {
         ///  &lt;Style Name=&quot;BACKTICKS&quot;					ForeColor=&quot;Red&quot; /&gt;
         ///  &lt;Style Name=&quot;BINARY&quot;					ForeColor=&quot;Orange&quot; /&gt;
         ///  &lt;Style Name=&quot;BINNUMBER&quot;					ForeColor=&quot;Orange&quot; /&gt;
-        ///  &lt;Style Name=&quot;BRACELIGHT&quot;				ForeColor=&quot;Red&quot; Bold=&quot;Yes&quot;/&gt;
+        ///  &lt;Style Name=&quot;BRACELIGHT&quot;				ForeColor=&quot;Red&quot; Bold=&quot;True&quot;/&gt;
         ///  &lt;Style Name=&quot;BLOCK_COMMENT&quot;				ForeColor=&quot;Green&quot; /&gt;
         ///  &lt;Style Name=&quot;CHAR&quot;						ForeColor=&quot;Red&quot; /&gt;
         ///  &lt;Style Name=&quot;CHARACTER&quot;					ForeColor=&quot;Red&quot; /&gt;
-        ///  &lt;Style Name=&quot;CLAS [rest of string was truncated]&quot;;.
+        ///  &lt;Style Name=&quot;CLA [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string scintconfig {
             get {
@@ -323,17 +323,23 @@ namespace AVRProjectIDE.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;ProjTemplates&gt;
-        ///  
-        ///  &lt;template name=&quot;default&quot;&gt;
-        ///    
+        ///
+        ///  &lt;template name=&quot;Blank Template&quot;&gt;
+        ///
         ///  &lt;/template&gt;
-        ///  
-        ///  &lt;template name=&quot;Arduino ATMega168 16MHz&quot;&gt;
-        ///    
-        ///  &lt;/template&gt;
-        /// 
-        ///&lt;/ProjTemplates&gt;
-        ///.
+        ///
+        ///  &lt;template name=&quot;Maximum Optimization&quot;&gt;
+        ///    &lt;Optimization&gt;-Os&lt;/Optimization&gt;
+        ///    &lt;PackStructs&gt;true&lt;/PackStructs&gt;
+        ///    &lt;ShortEnums&gt;true&lt;/ShortEnums&gt;
+        ///    &lt;UnsignedBitfields&gt;true&lt;/UnsignedBitfields&gt;
+        ///    &lt;UnsignedChars&gt;true&lt;/UnsignedChars&gt;
+        ///    &lt;FunctionSections&gt;true&lt;/FunctionSections&gt;
+        ///    &lt;DataSections&gt;true&lt;/DataSections&gt;
+        ///    &lt;LinkLibList&gt;
+        ///      &lt;Lib&gt;libm.a&lt;/Lib&gt;
+        ///      &lt;Lib&gt;liba.a&lt;/Lib&gt;
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string template {
             get {

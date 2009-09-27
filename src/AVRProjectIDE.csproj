@@ -12,20 +12,28 @@
     <AssemblyName>AVRProjectIDE</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>357C3D488677BF5BCC7E472B8FE5AEBA156D7659</ManifestCertificateThumbprint>
+    <ManifestKeyFile>AVRProjectIDE_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <PublishUrl>C:\Users\Frank\Documents\Projects\Visual Studio\AVRProject\AVRProjectIDE\publish\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <InstallUrl>http://code.google.com/p/avr-project-ide/downloads/list/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -84,6 +92,12 @@
     <Compile Include="DummyPanel.Designer.cs">
       <DependentUpon>DummyPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="ErrorReportWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorReportWindow.Designer.cs">
+      <DependentUpon>ErrorReportWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="IDEWindow.Designer.cs">
       <DependentUpon>IDEWindow.cs</DependentUpon>
     </Compile>
@@ -138,6 +152,9 @@
     <EmbeddedResource Include="arduino_resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>arduino_resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorReportWindow.resx">
+      <DependentUpon>ErrorReportWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MessagePanel.resx">
       <DependentUpon>MessagePanel.cs</DependentUpon>
@@ -289,19 +306,6 @@
     <None Include="arduino\libraries\Matrix\examples\hello_matrix\hello_matrix.pde" />
     <None Include="arduino\libraries\Matrix\examples\sprite_animation\sprite_animation.pde" />
     <None Include="arduino\libraries\Matrix\Matrix.o" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\all-wcprops" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\entries" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\diskio.h.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\integer.h.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\keywords.txt.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\mmc.c.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\petit_fatfs.cpp.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\petit_fatfs.h.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\pff.c.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\.svn\text-base\pff.h.svn-base" />
-    <None Include="arduino\libraries\petit_fatfs\mmc.o" />
-    <None Include="arduino\libraries\petit_fatfs\petit_fatfs.o" />
-    <None Include="arduino\libraries\petit_fatfs\pff.o" />
     <None Include="arduino\libraries\Servo\examples\Knob\Knob.pde" />
     <None Include="arduino\libraries\Servo\examples\Sweep\Sweep.pde" />
     <None Include="arduino\libraries\Servo\Servo.o" />
@@ -317,6 +321,7 @@
     <None Include="arduino\libraries\Wire\examples\slave_sender\slave_sender.pde" />
     <None Include="arduino\libraries\Wire\utility\twi.o" />
     <None Include="arduino\libraries\Wire\Wire.o" />
+    <None Include="AVRProjectIDE_TemporaryKey.pfx" />
     <None Include="graphics\find.png" />
     <None Include="graphics\paste.png" />
     <None Include="graphics\copy.png" />
@@ -433,15 +438,6 @@
     <Content Include="arduino\libraries\Matrix\keywords.txt" />
     <Content Include="arduino\libraries\Matrix\Matrix.cpp" />
     <Content Include="arduino\libraries\Matrix\Matrix.h" />
-    <Content Include="arduino\libraries\petit_fatfs\diskio.h" />
-    <Content Include="arduino\libraries\petit_fatfs\integer.h" />
-    <Content Include="arduino\libraries\petit_fatfs\keywords.txt" />
-    <Content Include="arduino\libraries\petit_fatfs\mmc.c" />
-    <Content Include="arduino\libraries\petit_fatfs\petit_fatfs.cpp" />
-    <Content Include="arduino\libraries\petit_fatfs\petit_fatfs.h" />
-    <Content Include="arduino\libraries\petit_fatfs\pff.c" />
-    <Content Include="arduino\libraries\petit_fatfs\pff.h" />
-    <Content Include="arduino\libraries\petit_mp3\petit_mp3.cpp" />
     <Content Include="arduino\libraries\Servo\keywords.txt" />
     <Content Include="arduino\libraries\Servo\Servo.cpp" />
     <Content Include="arduino\libraries\Servo\Servo.h" />
@@ -462,6 +458,7 @@
     <Content Include="arduino\libraries\Wire\Wire.h" />
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />
+    <None Include="packforupload.bat" />
     <Content Include="helplinks.xml">
     </Content>
     <Content Include="SciLexer.dll">
@@ -478,11 +475,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="arduino\libraries\petit_fatfs\.svn\prop-base\" />
-    <Folder Include="arduino\libraries\petit_fatfs\.svn\props\" />
-    <Folder Include="arduino\libraries\petit_fatfs\.svn\tmp\prop-base\" />
-    <Folder Include="arduino\libraries\petit_fatfs\.svn\tmp\props\" />
-    <Folder Include="arduino\libraries\petit_fatfs\.svn\tmp\text-base\" />
     <Folder Include="arduino\libraries\SoftwareSerial\examples\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

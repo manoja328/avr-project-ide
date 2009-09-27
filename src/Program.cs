@@ -15,31 +15,43 @@ namespace AVRProjectIDE
         [STAThread]
         public static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+#if CHECKFORDLLS
+            if (CheckForDLLs() == false) return;
+#endif
 
-            SettingsManagement.Load();
-            ProjTemplate.Load();
-
-            AVRProject newProject = new AVRProject();
-
-            if (args.Length > 0)
+            try
             {
-                string fname = args[0];
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-                if (newProject.Open(fname) == true)
+                SettingsManagement.Load();
+                ProjTemplate.Load();
+
+                AVRProject newProject = new AVRProject();
+
+                if (args.Length > 0)
                 {
-                    SettingsManagement.AddFileAsMostRecent(fname);
+                    string fname = args[0];
+
+                    if (newProject.Open(fname) == true)
+                    {
+                        SettingsManagement.AddFileAsMostRecent(fname);
+                    }
                 }
-            }
 
-            if (newProject.IsReady == false)
+                if (newProject.IsReady == false)
+                {
+                    Application.Run(new WelcomeWindow(newProject));
+                }
+
+                if (newProject.IsReady)
+                    Application.Run(new IDEWindow(newProject));
+            }
+            catch (Exception ex)
             {
-                Application.Run(new WelcomeWindow(newProject));
+                ErrorReportWindow erw = new ErrorReportWindow(ex);
+                erw.ShowDialog();
             }
-
-            if (newProject.IsReady)
-                Application.Run(new IDEWindow(newProject));
         }
 
         public static bool MakeSurePathExists(string dirPath)
@@ -134,5 +146,69 @@ namespace AVRProjectIDE
             }
             return CleanFilePath(relPath);
         }
+
+#if CHECKFORDLLS
+        static private bool CheckForDLLs()
+        {
+            try
+            {
+                string curdir = CleanFilePath(Directory.GetCurrentDirectory()) + Path.DirectorySeparatorChar;
+
+                if (File.Exists(curdir + "SciLexer.dll") == false)
+                {
+                    try
+                    {
+                        StreamWriter writer = new StreamWriter(curdir + "SciLexer.dll");
+                        writer.Write(Properties.Resources.SciLexer);
+                        writer.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error, SciLexer.dll is missing and could not be unpacked, " + ex.Message + ", program may not run");
+                        return false;
+                    }
+                }
+
+                if (File.Exists(curdir + "ScintillaNet.dll") == false)
+                {
+                    try
+                    {
+                        StreamWriter writer = new StreamWriter(curdir + "ScintillaNet.dll");
+                        writer.Write(Properties.Resources.ScintillaNet);
+                        writer.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error, ScintillaNet.dll is missing and could not be unpacked, " + ex.Message + ", program may not run");
+                        return false;
+                    }
+                }
+
+                if (File.Exists(curdir + "WeifenLuo.WinFormsUI.Docking.dll") == false)
+                {
+                    try
+                    {
+                        StreamWriter writer = new StreamWriter(curdir + "WeifenLuo.WinFormsUI.Docking.dll");
+                        writer.Write(Properties.Resources.WeifenLuo_WinFormsUI_Docking);
+                        writer.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error, WeifenLuo.WinFormsUI.Docking.dll is missing and could not be unpacked, " + ex.Message + ", program may not run");
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex);
+                erw.ShowDialog();
+                return false;
+            }
+        }
+#endif
+
     }
 }

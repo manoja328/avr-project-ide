@@ -47,6 +47,8 @@ namespace AVRProjectIDE
         /// </summary>
         static public void Load()
         {
+            Program.MakeSurePathExists(SettingsManagement.AppDataPath);
+
             recentFilePath = Program.CleanFilePath(AppDataPath + "recent.txt");
             settingsFilePath = Program.CleanFilePath(AppDataPath + "settings.ini");
             scintSettingFilePath = Program.CleanFilePath(AppDataPath + "scintconfig.xml");
@@ -718,7 +720,7 @@ namespace AVRProjectIDE
         {
             favFolderPath = iniFile.Read("Other", "FavFolder");
             if (string.IsNullOrEmpty(favFolderPath))
-                favFolderPath = "";
+                favFolderPath = Program.CleanFilePath(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)) + Path.DirectorySeparatorChar + "Projects";
             return FavFolder;
         }
 
@@ -729,5 +731,29 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        static public string LastTemplate
+        {
+            get
+            {
+                return iniFile.Read("Wizard", "LastTemplate");
+            }
+            set
+            {
+                iniFile.Write("Wizard", "LastTemplate", value);
+            }
+        }
+
+        static public string LastInitialFileType
+        {
+            get
+            {
+                return iniFile.Read("Wizard", "LastInitialFileType");
+            }
+            set
+            {
+                iniFile.Write("Wizard", "LastInitialFileType", value);
+            }
+        }
     }
 }
