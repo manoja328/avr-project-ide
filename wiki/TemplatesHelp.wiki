@@ -1,0 +1,24 @@
+#summary Help regarding using and writing templates
+
+The template file is templates.xml in the application data folder. See CustomizationHelp on how to find this file.
+
+When a template is applied, only the settings that it needs to touch are modified, other project settings are NOT returned to default, they are LEFT ALONE.
+
+===Adding a Custom Template===
+
+The XML for a template looks like:
+
+{{{
+  <template name="Arduino ATMega8 8MHz">
+    <Device>atmega8</Device>
+    <ClockFreq>8000000</ClockFreq>
+    <BurnPart>atmega8</BurnPart>
+    <BurnProgrammer>stk500</BurnProgrammer>
+    <BurnOptions>-F</BurnOptions>
+    <BurnBaud>19200</BurnBaud>
+  </template>
+}}}
+
+The each template is stored in its own "template" tag, with a "name" attribute.
+
+The easiest way to write your own template is to save a project with the desired settings, and then open the .avrproj file with a text editor. Copy and paste in the tags that you want the template to set.
