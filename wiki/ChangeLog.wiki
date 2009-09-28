@@ -1,5 +1,12 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 19==
+
+ * More fixes for Arduino build process
+ * Automatic updater included with alpha 18
+ * fixed issue 8, progress on 6
+ * Added global try-catch with error window.
+
 ==Alpha 10==
 
  * Fixed Arduino build process
