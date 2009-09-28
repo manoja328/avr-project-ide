@@ -9,3 +9,5 @@ Thanks to the following open source projects:
 [http://www.codeplex.com/ScintillaNET ScintillaNet] for allowing me to use Scintilla to be used with a C# Windows Form.
 
 [http://www.arduino.cc/ Arduino] for being open source and letting me see how it builds its sketches.
+
+[http://winavr.sourceforge.net/ WinAVR] for the tools used to build and burn projects.
