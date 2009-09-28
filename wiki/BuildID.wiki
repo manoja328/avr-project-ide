@@ -1,3 +1,5 @@
 BuildID is a build identifier used by the updating mechanism. This page will serve the BuildID to the application, if it is different from the one being used by the application, the updater will be triggered.
 
-BUILDID:"AVRProjectIDE_Alpha18"
+The updating mechanism checks this webpage for the following string, so this page is pretty important.
+
+BUILDID:"AVRProjectIDE_Alpha19"
