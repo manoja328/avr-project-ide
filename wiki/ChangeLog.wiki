@@ -1,5 +1,12 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 21==
+
+ * more fixes for build process, fixed bug that overwrote .hex file making it useless
+ * added autoreset and updated templates (delete your old template to get the new one)
+ * updater updates the IDE, and the IDE updates the updater, updater also unpacks DLLs for you
+ * window size now stored upon closing editor
+
 ==Alpha 19==
 
  * More fixes for Arduino build process
