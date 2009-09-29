@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AVRProjectIDE
@@ -21,6 +23,8 @@ namespace AVRProjectIDE
             SettingsManagement.FillListBox(listRecentFiles);
 
             this.project = project;
+
+            backgroundWorker1.RunWorkerAsync();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -148,6 +152,50 @@ namespace AVRProjectIDE
                 SettingsManagement.AddFileAsMostRecent(project.FilePath);
                 this.Close();
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                WebRequest wReq = WebRequest.Create("http://code.google.com/p/avr-project-ide/wiki/NewsFeedPage");
+                wReq.Credentials = CredentialCache.DefaultCredentials;
+                HttpWebResponse wResp = (HttpWebResponse)wReq.GetResponse();
+                Stream wStream = wResp.GetResponseStream();
+                StreamReader reader = new StreamReader(wStream);
+                string content = reader.ReadToEnd();
+                
+                Regex r = new Regex(
+                    "(<h3>)" + 
+                    "(<a name=\".*?\"\\/>)" +
+                    "(.*?)" + 
+                    "(<\\/h3>)",
+                    RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+                e.Result = "";
+
+                Match m = r.Match(content);
+                while (m.Success)
+                {
+                    e.Result += m.Groups[3].Value + "\r\n\r\n";
+                    m = m.NextMatch();
+                }
+
+                reader.Close();
+                wStream.Close();
+                wResp.Close();
+            }
+            catch (Exception ex)
+            {
+                e.Result = "Error retrieving news, " + ex.Message;
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result != null)
+                if (string.IsNullOrEmpty((string)e.Result) == false)
+                    txtNews.Text = (string)e.Result;
         }
     }
 }

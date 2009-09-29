@@ -25,7 +25,8 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error while creating templates, " + ex.Message);
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while creating templates");
+                    erw.ShowDialog();
                     return false;
                 }
             }
@@ -50,7 +51,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while loading templates, " + ex.Message);
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while loading templates");
+                erw.ShowDialog();
                 return false;
             }
 
@@ -171,6 +173,11 @@ namespace AVRProjectIDE
                     param = (XmlElement)docx.GetElementsByTagName("BurnBaud")[0];
                     try { proj.BurnBaud = int.Parse(param.InnerText); }
                     catch { }
+                }
+                if (docx.GetElementsByTagName("BurnAutoReset").Count > 0)
+                {
+                    param = (XmlElement)docx.GetElementsByTagName("BurnAutoReset")[0];
+                    proj.BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == "true";
                 }
 
                 XmlElement container;

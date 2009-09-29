@@ -88,6 +88,13 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
+        internal static byte[] AVRProjectIDEUpdater {
+            get {
+                object obj = ResourceManager.GetObject("AVRProjectIDEUpdater", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap build {
             get {
                 object obj = ResourceManager.GetObject("build", resourceCulture);

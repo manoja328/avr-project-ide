@@ -15,10 +15,6 @@ namespace AVRProjectIDE
         [STAThread]
         public static void Main(string[] args)
         {
-
-#if CHECKFORDLLS
-            if (CheckForDLLs() == false) return;
-#endif
             try
             {
                 Application.EnableVisualStyles();
@@ -33,7 +29,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex);
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Checking Updates");
                     erw.ShowDialog();
                 }
 
@@ -59,7 +55,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex);
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Main IDE Error");
                 erw.ShowDialog();
             }
 
@@ -69,29 +65,54 @@ namespace AVRProjectIDE
                 {
                     if (UpdateMech.UpdateAvailable)
                     {
-                        if (File.Exists(Program.CleanFilePath(Directory.GetCurrentDirectory()) + Path.DirectorySeparatorChar + "AVRProjectIDEUpdater.exe"))
+                        try
                         {
-                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available, Run the Updater?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            UpdateUpdater();
+                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + UpdateMech.NewBuildID + "), Run the Updater?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
                                 System.Diagnostics.Process updater = new System.Diagnostics.Process();
-                                updater.StartInfo = new System.Diagnostics.ProcessStartInfo("AVRProjectIDEUpdater.exe", UpdateMech.NewBuildID);
+                                updater.StartInfo = new System.Diagnostics.ProcessStartInfo("AVRProjectIDEUpdater.exe", UpdateMech.NewBuildID + " http://avr-project-ide.googlecode.com/files/" + UpdateMech.NewBuildID + ".exe" + " AVRProjectIDE.exe");
                                 updater.Start();
                             }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available\r\nYou Do Not Have the Automated Updater, Visit the AVRProjectIDE Website?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                            {
-                                System.Diagnostics.Process.Start("http://code.google.com/p/avr-project-ide/");
-                            }
+                            ErrorReportWindow erw = new ErrorReportWindow(ex, "Updater Error");
+                            erw.ShowDialog();
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex);
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Checking Updates");
                 erw.ShowDialog();
+            }
+        }
+
+        private static void UpdateUpdater()
+        {
+            bool rewrite = false;
+            byte[] newBArr = Properties.Resources.AVRProjectIDEUpdater;
+            string path = Program.CleanFilePath(Directory.GetCurrentDirectory()) + Path.DirectorySeparatorChar + "AVRProjectIDEUpdater.exe";
+            if (File.Exists(path))
+            {
+                byte[] oldBArr = File.ReadAllBytes(path);
+                for (int i = 0; i < oldBArr.Length && i < newBArr.Length; i += 16)
+                    if (oldBArr[i] != newBArr[i])
+                    {
+                        rewrite = true;
+                        break;
+                    }
+            }
+            else
+                rewrite = true;
+
+            if (rewrite)
+            {
+                File.WriteAllBytes(path, newBArr);
+
+                MessageBox.Show("Your Automatic Updater has been Updated");
             }
         }
 
@@ -187,69 +208,5 @@ namespace AVRProjectIDE
             }
             return CleanFilePath(relPath);
         }
-
-#if CHECKFORDLLS
-        static private bool CheckForDLLs()
-        {
-            try
-            {
-                string curdir = CleanFilePath(Directory.GetCurrentDirectory()) + Path.DirectorySeparatorChar;
-
-                if (File.Exists(curdir + "SciLexer.dll") == false)
-                {
-                    try
-                    {
-                        StreamWriter writer = new StreamWriter(curdir + "SciLexer.dll");
-                        writer.Write(Properties.Resources.SciLexer);
-                        writer.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error, SciLexer.dll is missing and could not be unpacked, " + ex.Message + ", program may not run");
-                        return false;
-                    }
-                }
-
-                if (File.Exists(curdir + "ScintillaNet.dll") == false)
-                {
-                    try
-                    {
-                        StreamWriter writer = new StreamWriter(curdir + "ScintillaNet.dll");
-                        writer.Write(Properties.Resources.ScintillaNet);
-                        writer.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error, ScintillaNet.dll is missing and could not be unpacked, " + ex.Message + ", program may not run");
-                        return false;
-                    }
-                }
-
-                if (File.Exists(curdir + "WeifenLuo.WinFormsUI.Docking.dll") == false)
-                {
-                    try
-                    {
-                        StreamWriter writer = new StreamWriter(curdir + "WeifenLuo.WinFormsUI.Docking.dll");
-                        writer.Write(Properties.Resources.WeifenLuo_WinFormsUI_Docking);
-                        writer.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error, WeifenLuo.WinFormsUI.Docking.dll is missing and could not be unpacked, " + ex.Message + ", program may not run");
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReportWindow erw = new ErrorReportWindow(ex);
-                erw.ShowDialog();
-                return false;
-            }
-        }
-#endif
-
     }
 }

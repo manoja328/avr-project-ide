@@ -156,6 +156,7 @@ namespace AVRProjectIDE
             project.BurnOptions = txtBurnOpt.Text;
             project.BurnPart = (string)dropPart.Items[dropPart.SelectedIndex];
             project.BurnProgrammer = (string)dropProg.Items[dropProg.SelectedIndex];
+            project.BurnAutoReset = chkAutoReset.Checked;
 
             int baud = 0;
             string selectedText = (string)dropBaud.Items[dropBaud.SelectedIndex];
@@ -272,6 +273,7 @@ namespace AVRProjectIDE
             listOptimization.SelectedIndex = listOptimization.Items.IndexOf(project.Optimization);
 
             txtBurnOpt.Text = project.BurnOptions;
+            chkAutoReset.Checked = project.BurnAutoReset;
 
             chklistOptions.SetItemChecked(2, project.PackStructs);
             chklistOptions.SetItemChecked(3, project.ShortEnums);
@@ -341,11 +343,6 @@ namespace AVRProjectIDE
                 e.Cancel = true;
                 doNotAllowClose = true;
             }
-        }
-
-        private void dgvMemory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            e.Cancel = doNotAllowClose;
         }
 
         private void dgvMemory_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
@@ -645,6 +642,8 @@ namespace AVRProjectIDE
 
         #endregion
 
+        #region Last Tab On The Right
+
         private void btnGotoAppdata_Click(object sender, EventArgs e)
         {
             Process.Start(SettingsManagement.AppDataPath);
@@ -705,5 +704,7 @@ namespace AVRProjectIDE
                 txtArduinoLibs.Text = SettingsManagement.ArduinoLibPath;
             }
         }
+
+        #endregion
     }
 }

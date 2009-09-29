@@ -342,7 +342,8 @@ namespace AVRProjectIDE
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error Creating New File " + file.FileName + ", " + ex.Message);
+                        ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Creating New File " + file.FileName);
+                        erw.ShowDialog();
                     }
                 }
 

@@ -45,6 +45,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btnImportAPS = new System.Windows.Forms.Button();
             this.btnWizard = new System.Windows.Forms.Button();
+            this.txtNews = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,14 +84,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.listRecentFiles);
             this.groupBox1.Controls.Add(this.btnOpen);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(548, 303);
+            this.groupBox1.Size = new System.Drawing.Size(548, 279);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recent Projects";
@@ -102,7 +103,7 @@
             this.listRecentFiles.FormattingEnabled = true;
             this.listRecentFiles.Location = new System.Drawing.Point(87, 19);
             this.listRecentFiles.Name = "listRecentFiles";
-            this.listRecentFiles.Size = new System.Drawing.Size(455, 264);
+            this.listRecentFiles.Size = new System.Drawing.Size(455, 238);
             this.listRecentFiles.TabIndex = 0;
             this.listRecentFiles.DoubleClick += new System.EventHandler(this.listRecentFiles_DoubleClick);
             // 
@@ -136,11 +137,30 @@
             this.btnWizard.UseVisualStyleBackColor = true;
             this.btnWizard.Click += new System.EventHandler(this.btnWizard_Click);
             // 
+            // txtNews
+            // 
+            this.txtNews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNews.Location = new System.Drawing.Point(12, 297);
+            this.txtNews.Multiline = true;
+            this.txtNews.Name = "txtNews";
+            this.txtNews.ReadOnly = true;
+            this.txtNews.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtNews.Size = new System.Drawing.Size(629, 61);
+            this.txtNews.TabIndex = 4;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // WelcomeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 327);
+            this.ClientSize = new System.Drawing.Size(653, 370);
+            this.Controls.Add(this.txtNews);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnImportAPS);
             this.Controls.Add(this.btnFind);
@@ -152,6 +172,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmWelcome_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -166,5 +187,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnImportAPS;
         private System.Windows.Forms.Button btnWizard;
+        private System.Windows.Forms.TextBox txtNews;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

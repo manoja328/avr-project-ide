@@ -124,7 +124,8 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error Deleting Backup, " + ex.Message);
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Deleting Backup");
+                    erw.ShowDialog();
                 }
             }
         }
@@ -407,6 +408,13 @@ namespace AVRProjectIDE
             set { burnBaud = value; }
         }
 
+        private bool burnAutoReset;
+        public bool BurnAutoReset
+        {
+            get { return burnAutoReset; }
+            set { burnAutoReset = value; }
+        }
+
         #endregion
 
         #region Lists
@@ -568,6 +576,7 @@ namespace AVRProjectIDE
                 xml.WriteElementString("BurnOptions", BurnOptions);
                 xml.WriteElementString("BurnPort", BurnPort);
                 xml.WriteElementString("BurnBaud", BurnBaud.ToString("0"));
+                xml.WriteElementString("BurnAutoReset", BurnAutoReset.ToString().ToLowerInvariant());
 
                 xml.WriteElementString("LastFile", LastFile);
 
@@ -737,6 +746,11 @@ namespace AVRProjectIDE
                     param = (XmlElement)docx.GetElementsByTagName("BurnBaud")[0];
                     try { BurnBaud = int.Parse(param.InnerText); }
                     catch { }
+                }
+                if (docx.GetElementsByTagName("BurnAutoReset").Count > 0)
+                {
+                    param = (XmlElement)docx.GetElementsByTagName("BurnAutoReset")[0];
+                    BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == "true";
                 }
 
                 XmlElement container;
@@ -1443,6 +1457,7 @@ namespace AVRProjectIDE
             burnOpt = "";
             burnBaud = 0;
             burnPort = "";
+            burnAutoReset = false;
 
             lastFile = "";
 
@@ -1495,6 +1510,7 @@ namespace AVRProjectIDE
             newObject.BurnProgrammer = this.BurnProgrammer;
             newObject.BurnBaud = this.BurnBaud;
             newObject.BurnPort = this.BurnPort;
+            newObject.BurnAutoReset = this.BurnAutoReset;
             newObject.ClockFreq = this.ClockFreq;
             newObject.Device = this.Device;
             newObject.dirPath = this.DirPath;

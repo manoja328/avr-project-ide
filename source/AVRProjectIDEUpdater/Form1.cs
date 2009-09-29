@@ -12,6 +12,7 @@ using System.Text;
 using System.Windows.Forms;
 using Ini;
 using AVRProjectIDEUpdater;
+using AVRProjectIDE;
 
 namespace AVRProjectIDEUpdater
 {
@@ -28,13 +29,17 @@ namespace AVRProjectIDEUpdater
         }
 
         private string buildID;
+        private string url;
+        private string fileName;
         private IniFile ini;
 
-        public Form1(string buildID)
+        public Form1(string buildID, string url, string fileName)
         {
             InitializeComponent();
 
             this.buildID = buildID;
+            this.url = url;
+            this.fileName = fileName;
 
             if (Program.MakeSurePathExists(AppDataPath) == false)
             {
@@ -52,7 +57,8 @@ namespace AVRProjectIDEUpdater
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error Creating settings.ini, " + ex.Message);
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Creating settings.ini");
+                    erw.ShowDialog();
                     this.Close();
                 }
             }
@@ -72,12 +78,12 @@ namespace AVRProjectIDEUpdater
                 {
                     try
                     {
-                        if (File.Exists(CurDirPath + "updatedexe.exe"))
+                        if (File.Exists(CurDirPath + "updatedtemp.bin"))
                         {
-                            File.Copy(CurDirPath + "updatedexe.exe", CurDirPath + "AVRProjectIDE.exe", true);
+                            File.Copy(CurDirPath + "updatedtemp.bin", CurDirPath + fileName, true);
                             ini.Write("Updater", "BuildID", buildID);
-                            MessageBox.Show("Update Complete!");
-                            File.Delete(CurDirPath + "updatedexe.exe");
+                            MessageBox.Show("Update of " + fileName + " Complete!");
+                            File.Delete(CurDirPath + "updatedtemp.bin");
                             this.Close();
                         }
                         else
@@ -87,12 +93,14 @@ namespace AVRProjectIDEUpdater
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error After Download Completion: " + ex.Message);
+                        ErrorReportWindow erw = new ErrorReportWindow(ex, "Error After Download Completion");
+                        erw.ShowDialog();
                     }
                 }
                 else if (e.Error != null)
                 {
-                    MessageBox.Show("Error During Download: " + e.Error.Message);
+                    ErrorReportWindow erw = new ErrorReportWindow(e.Error, "Error During Download");
+                    erw.ShowDialog();
                     this.Close();
                 }
             }
@@ -131,10 +139,11 @@ namespace AVRProjectIDEUpdater
 
             if (start)
             {
+                Program.CheckForDLLs();
                 timer1.Enabled = false;
                 progressBar1.Style = ProgressBarStyle.Blocks;
                 WebClient wc = new WebClient();
-                wc.DownloadFileAsync(new Uri("http://avr-project-ide.googlecode.com/files/" + buildID + ".exe"), CurDirPath + "updatedexe.exe");
+                wc.DownloadFileAsync(new Uri(url), CurDirPath + "updatedtemp.bin");
                 wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
                 wc.DownloadFileCompleted += new AsyncCompletedEventHandler(wc_DownloadFileCompleted);
             }
