@@ -1,0 +1,3 @@
+This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
+
+===The latest release is Alpha 22, if you have a version older than 22, I suggest you delete template.xml in your application data folder so the new one gets unpackaged automatically===
