@@ -1,5 +1,7 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Sweet, 6 downloads of alpha 22, also my personal website was on Hackaday yesterday and the traffic for yesterday was more than what I usually get within a month, my AVR Timer Calculator got featured, go look for it in the help menu===
+
 ===The latest release is Alpha 22, I suggest you delete template.xml in your application data folder so the new one gets unpackaged automatically===
 
 ===The new template.xml includes autoreset for Arduino===
