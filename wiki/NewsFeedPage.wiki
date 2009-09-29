@@ -1,9 +1,3 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
-===There may be problems if you run this on a non-english OS, will look into it===
-
-===Updater may give errors when unpacking DLLs, this is a race condition between the editor shutting down and the start of the unpacking, shouldn't happen since I have checks in place but I'll look into it===
-
-===The latest release is Alpha 22, I suggest you delete template.xml in your application data folder so the new one gets unpackaged automatically===
-
-===The new template.xml includes autoreset for Arduino===
+===The next update may fix a problem with Courier New font, and a small tweak to the updater, no other changes===
