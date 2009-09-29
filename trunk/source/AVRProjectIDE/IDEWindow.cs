@@ -43,6 +43,8 @@ namespace AVRProjectIDE
 
             InitializeComponent();
 
+            SettingsManagement.LoadWindowState(this);
+
             // set title
             this.Text = project.FileNameNoExt + " - AVRProjectIDE";
 
@@ -422,6 +424,7 @@ namespace AVRProjectIDE
         private void frmProjIDE_FormClosing(object sender, FormClosingEventArgs e)
         {
             dockPanel1.SaveAsXml(SettingsManagement.AppDataPath + "workspace.xml");
+            SettingsManagement.SaveWindowState(this);
         }
 
         private void frmProjIDE_FormClosed(object sender, FormClosedEventArgs e)

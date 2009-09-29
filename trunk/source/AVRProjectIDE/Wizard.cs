@@ -218,7 +218,8 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error While Creating Initial File, " + ex.Message);
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while creating initial file");
+                    erw.ShowDialog();
                 }
             }
 

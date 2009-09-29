@@ -39,14 +39,14 @@
             this.txtException.Name = "txtException";
             this.txtException.ReadOnly = true;
             this.txtException.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtException.Size = new System.Drawing.Size(284, 264);
+            this.txtException.Size = new System.Drawing.Size(632, 183);
             this.txtException.TabIndex = 0;
             // 
             // ErrorReportWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 264);
+            this.ClientSize = new System.Drawing.Size(632, 183);
             this.Controls.Add(this.txtException);
             this.Name = "ErrorReportWindow";
             this.Text = "Error Report";

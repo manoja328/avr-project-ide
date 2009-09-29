@@ -750,6 +750,8 @@ namespace AVRProjectIDE
 
         #endregion
 
+        #region Wizard Preferences
+
         static public string LastTemplate
         {
             get
@@ -771,6 +773,64 @@ namespace AVRProjectIDE
             set
             {
                 iniFile.Write("Wizard", "LastInitialFileType", value);
+            }
+        }
+
+        #endregion
+
+        public static void LoadWindowState(Form form)
+        {
+            try
+            {
+                string winMax = iniFile.Read("Editor", "WindowMax");
+                string winWidth = iniFile.Read("Editor", "WindowWidth");
+                string winHeight = iniFile.Read("Editor", "WindowHeight");
+                if (string.IsNullOrEmpty(winMax) || string.IsNullOrEmpty(winWidth) || string.IsNullOrEmpty(winHeight))
+                {
+                    form.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    if (winMax.ToLowerInvariant().Trim() == "true")
+                    {
+                        form.WindowState = FormWindowState.Maximized;
+                    }
+                    else
+                    {
+                        int w;
+                        int h;
+                        if (int.TryParse(winWidth, out w) == false || int.TryParse(winHeight, out h) == false)
+                        {
+                            form.WindowState = FormWindowState.Maximized;
+                        }
+                        else
+                        {
+                            form.WindowState = FormWindowState.Normal;
+                            form.Width = w;
+                            form.Height = h;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while loading window state");
+                erw.ShowDialog();
+            }
+        }
+
+        public static void SaveWindowState(Form form)
+        {
+            try
+            {
+                iniFile.Write("Editor", "WindowMax", (form.WindowState == FormWindowState.Maximized).ToString().ToLowerInvariant());
+                iniFile.Write("Editor", "WindowWidth", form.Width.ToString("0"));
+                iniFile.Write("Editor", "WindowHeight", form.Height.ToString("0"));
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while saving window state");
+                erw.ShowDialog();
             }
         }
     }
