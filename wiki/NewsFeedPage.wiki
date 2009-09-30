@@ -1,3 +1,5 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
-===The next update may fix a problem with Courier New font, and a small tweak to the updater, no other changes===
+===I understand how to use autocomplete with Scintilla now, working on implementing it with the default keywords===
+
+===The last update may fix a problem with Courier New font, and a small tweak to the updater, no other changes===
