@@ -1,5 +1,7 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Latest update has some behind the scene fixes, aps importing fixes, and a new templates.xml (so delete your old one to let the editor unpack the new one)===
+
 ===I understand how to use autocomplete with Scintilla now, working on implementing it with the default keywords===
 
 ===The last update may fix a problem with Courier New font, and a small tweak to the updater, no other changes===
