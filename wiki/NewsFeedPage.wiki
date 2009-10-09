@@ -1,5 +1,7 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Please visit http://code.google.com/p/avr-project-ide/ to download the latest update, it includes a bunch of files that are needed for the hardware explorer===
+
 ===There will be a hardware explorer in the next update, also a way to burn fuses===
 
 ===There are a few known bugs that will be fixed in the next update===
