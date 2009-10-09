@@ -1,5 +1,9 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===There will be a hardware explorer in the next update, also a way to burn fuses===
+
+===There are a few known bugs that will be fixed in the next update===
+
 ===Autocomplete is complete!===
 
 ===Latest update has some behind the scene fixes, aps importing fixes, and a new templates.xml (so delete your old one to let the editor unpack the new one)===
