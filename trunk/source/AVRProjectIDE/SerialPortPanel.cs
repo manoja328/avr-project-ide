@@ -131,6 +131,7 @@ namespace AVRProjectIDE
             try
             {
                 serialPort1.Close();
+                Thread.Sleep(250);
             }
             catch (Exception ex)
             {

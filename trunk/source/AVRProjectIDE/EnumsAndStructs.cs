@@ -32,63 +32,6 @@ namespace AVRProjectIDE
         Changed
     }
 
-    public struct AVRGCCErrorWarning
-    {
-        public string FileName;
-        public string FilePath;
-        public string Type;
-        public int LineNumber;
-        public string Location;
-        public string Message;
-
-        public AVRGCCErrorWarning(string fn, string fp, string t, string l, string m, string loc)
-        {
-            FileName = fn.Trim();
-            FilePath = fp.Trim();
-            Type = t.Trim();
-            if (int.TryParse(l, out LineNumber) == false)
-                LineNumber = 0;
-            Message = m.Trim();
-            Location = loc.Trim().TrimEnd(':').Trim();
-        }
-
-        public AVRGCCErrorWarning(string fn, string fp, string t, int l, string m, string loc)
-        {
-            FileName = fn.Trim();
-            FilePath = fp.Trim();
-            Type = t.Trim();
-            LineNumber = l;
-            Message = m.Trim();
-            Location = loc.Trim().TrimEnd(':').Trim();
-        }
-
-        public AVRGCCErrorWarning(string fn, string t, string l, string m, string loc)
-        {
-            FileName = fn.Trim();
-            FilePath = "";
-            Type = t.Trim();
-            if (int.TryParse(l, out LineNumber) == false)
-                LineNumber = 0;
-            Message = m.Trim();
-            Location = loc.Trim().TrimEnd(':').Trim();
-        }
-
-        public AVRGCCErrorWarning(string fn, string t, int l, string m, string loc)
-        {
-            FileName = fn.Trim();
-            FilePath = "";
-            Type = t.Trim();
-            LineNumber = l;
-            Message = m.Trim();
-            Location = loc.Trim().TrimEnd(':').Trim();
-        }
-
-        public override string ToString()
-        {
-            return String.Format("File Name: {0}, {4} Line {1}: {2}: {3}", FileName, LineNumber, Type, Message, Location);
-        }
-    }
-
     public struct MemorySegment
     {
         private string type;
@@ -117,6 +60,118 @@ namespace AVRProjectIDE
             this.type = t.ToLowerInvariant().Replace(' ', '_');
             this.name = n.Replace(' ', '_');
             this.addr = addr;
+        }
+    }
+
+    public enum KeywordType
+    {
+        Statement,
+        Function,
+        Type,
+        Modifier,
+        Constant,
+        Variable,
+        Preprocessor,
+        Block,
+        Other
+    }
+
+    public enum KeywordSource
+    {
+        C,
+        CPP,
+        Arduino,
+        AVRLibc,
+        User
+    }
+
+    public struct CodeKeyword
+    {
+        private KeywordType type;
+        public KeywordType Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        private KeywordSource source;
+        public KeywordSource Source
+        {
+            get { return source; }
+            set { source = value; }
+        }
+
+        private string text;
+        public string Text
+        {
+            get { return text.Trim(); }
+            set { text = value.Trim(); }
+        }
+
+        public string ListEntry
+        {
+            get
+            {
+                string res = text;
+                int i = KeywordImageGen.LookUpImgIndexForKeyword(source, type);
+                if (i >= 0)
+                    res += "?" + i.ToString("0");
+                return res;
+            }
+        }
+
+        public CodeKeyword(string text, KeywordSource source, KeywordType type)
+        {
+            this.text = text.Trim();
+            this.source = source;
+            this.type = type;
+        }
+    }
+
+    public enum KeywordShape
+    {
+        Square,
+        Box,
+        Circle,
+        Ring,
+        Diamond,
+        DiamondFrame,
+        Triangle,
+        TriangleFrame,
+        InvertedTriangle,
+        InvertedTriangleFrame,
+        Hash,
+        None
+    }
+
+    public struct IntVect
+    {
+        private string newName;
+        public string NewName
+        {
+            get { return newName.Trim(); }
+            set { newName = value.Trim(); }
+        }
+
+        private string oldName;
+        public string OldName
+        {
+            get { return oldName.Trim(); }
+            set { oldName = value.Trim(); }
+        }
+
+        private string description;
+        public string Description
+        {
+            get { return description.Trim(); }
+            set { description = value.Trim(); }
+        }
+
+        public IntVect(string newName, string oldName, string description)
+        {
+            this.newName = newName;
+            this.oldName = oldName;
+            this.description = description;
         }
     }
 }

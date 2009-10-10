@@ -22,17 +22,26 @@ namespace AVRProjectIDE
 
                 SettingsManagement.Load();
                 ProjTemplate.Load();
+                KeywordImageGen.GenerateKeywordImages();
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Initialization Error");
+                erw.ShowDialog();
+            }
 
-                try
-                {
-                    UpdateMech.CheckForUpdates();
-                }
-                catch (Exception ex)
-                {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Checking Updates");
-                    erw.ShowDialog();
-                }
+            try
+            {
+                UpdateMech.CheckForUpdates();
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Checking Updates");
+                erw.ShowDialog();
+            }
 
+            try
+            {
                 AVRProject newProject = new AVRProject();
 
                 if (args.Length > 0)
@@ -44,6 +53,8 @@ namespace AVRProjectIDE
                         SettingsManagement.AddFileAsMostRecent(fname);
                     }
                 }
+
+                KeywordScanner.Initialize();
 
                 if (newProject.IsReady == false)
                 {
@@ -68,7 +79,7 @@ namespace AVRProjectIDE
                         try
                         {
                             UpdateUpdater();
-                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + UpdateMech.NewBuildID + "), Run the Updater?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Run the Updater?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
                                 System.Diagnostics.Process updater = new System.Diagnostics.Process();
                                 updater.StartInfo = new System.Diagnostics.ProcessStartInfo("AVRProjectIDEUpdater.exe", UpdateMech.NewBuildID + " http://avr-project-ide.googlecode.com/files/" + UpdateMech.NewBuildID + ".exe" + " AVRProjectIDE.exe");
@@ -111,8 +122,7 @@ namespace AVRProjectIDE
             if (rewrite)
             {
                 File.WriteAllBytes(path, newBArr);
-
-                MessageBox.Show("Your Automatic Updater has been Updated");
+                MessageBox.Show("The Updater has been Updated");
             }
         }
 
@@ -207,6 +217,30 @@ namespace AVRProjectIDE
                 relPath += pathDirList[i] + Path.DirectorySeparatorChar;
             }
             return CleanFilePath(relPath);
+        }
+
+        public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            // Check if the target directory exists, if not, create it.
+            if (Directory.Exists(target.FullName) == false)
+            {
+                Directory.CreateDirectory(target.FullName);
+            }
+
+            // Copy each file into it’s new directory.
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                //Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+                fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
+            }
+
+            // Copy each subdirectory using recursion.
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                CopyAll(diSourceSubDir, nextTargetSubDir);
+            }
         }
     }
 }

@@ -56,7 +56,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScintillaNet, Version=2.0.3138.25704, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
+    <Reference Include="ScintillaNet, Version=2.0.3561.31684, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -81,11 +81,6 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="arduino_resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>arduino_resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="CodePreProcess.cs" />
     <Compile Include="DummyPanel.cs">
       <SubType>Form</SubType>
@@ -98,6 +93,12 @@
     </Compile>
     <Compile Include="ErrorReportWindow.Designer.cs">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HardwareExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HardwareExplorer.Designer.cs">
+      <DependentUpon>HardwareExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="IDEWindow.Designer.cs">
       <DependentUpon>IDEWindow.cs</DependentUpon>
@@ -118,6 +119,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EnumsAndStructs.cs" />
+    <Compile Include="KeywordScanner.cs" />
     <Compile Include="ProjTemplate.cs" />
     <Compile Include="SettingsManagement.cs" />
     <Compile Include="FileOptionsDialog.cs">
@@ -148,12 +150,11 @@
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="arduino_resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>arduino_resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="ErrorReportWindow.resx">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HardwareExplorer.resx">
+      <DependentUpon>HardwareExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MessagePanel.resx">
       <DependentUpon>MessagePanel.cs</DependentUpon>
@@ -458,6 +459,162 @@
     <Content Include="arduino\libraries\Wire\utility\twi.h" />
     <Content Include="arduino\libraries\Wire\Wire.cpp" />
     <Content Include="arduino\libraries\Wire\Wire.h" />
+    <Content Include="autocomplete.xml" />
+    <Content Include="chip_xml_files\at86rf401.xml" />
+    <Content Include="chip_xml_files\at89s51.xml" />
+    <Content Include="chip_xml_files\at89s52.xml" />
+    <Content Include="chip_xml_files\at90can128.xml" />
+    <Content Include="chip_xml_files\at90can32.xml" />
+    <Content Include="chip_xml_files\at90can64.xml" />
+    <Content Include="chip_xml_files\at90pwm2.xml" />
+    <Content Include="chip_xml_files\at90pwm216.xml" />
+    <Content Include="chip_xml_files\at90pwm2b.xml" />
+    <Content Include="chip_xml_files\at90pwm3.xml" />
+    <Content Include="chip_xml_files\at90pwm316.xml" />
+    <Content Include="chip_xml_files\at90pwm3b.xml" />
+    <Content Include="chip_xml_files\at90pwm81.xml" />
+    <Content Include="chip_xml_files\at90s1200.xml" />
+    <Content Include="chip_xml_files\at90s2313.xml" />
+    <Content Include="chip_xml_files\at90s2323.xml" />
+    <Content Include="chip_xml_files\at90s2343.xml" />
+    <Content Include="chip_xml_files\at90s4414.xml" />
+    <Content Include="chip_xml_files\at90s4433.xml" />
+    <Content Include="chip_xml_files\at90s4434.xml" />
+    <Content Include="chip_xml_files\at90s8515.xml" />
+    <Content Include="chip_xml_files\at90s8515comp.xml" />
+    <Content Include="chip_xml_files\at90s8535.xml" />
+    <Content Include="chip_xml_files\at90s8535comp.xml" />
+    <Content Include="chip_xml_files\at90scr100h.xml" />
+    <Content Include="chip_xml_files\at90usb1286.xml" />
+    <Content Include="chip_xml_files\at90usb1287.xml" />
+    <Content Include="chip_xml_files\at90usb162.xml" />
+    <Content Include="chip_xml_files\at90usb646.xml" />
+    <Content Include="chip_xml_files\at90usb647.xml" />
+    <Content Include="chip_xml_files\at90usb82.xml" />
+    <Content Include="chip_xml_files\atmega103.xml" />
+    <Content Include="chip_xml_files\atmega103comp.xml" />
+    <Content Include="chip_xml_files\atmega128.xml" />
+    <Content Include="chip_xml_files\atmega1280.xml" />
+    <Content Include="chip_xml_files\atmega1281.xml" />
+    <Content Include="chip_xml_files\atmega1284p.xml" />
+    <Content Include="chip_xml_files\atmega128a.xml" />
+    <Content Include="chip_xml_files\atmega128rfa1.xml" />
+    <Content Include="chip_xml_files\atmega16.xml" />
+    <Content Include="chip_xml_files\atmega161.xml" />
+    <Content Include="chip_xml_files\atmega161comp.xml" />
+    <Content Include="chip_xml_files\atmega162.xml" />
+    <Content Include="chip_xml_files\atmega163.xml" />
+    <Content Include="chip_xml_files\atmega164p.xml" />
+    <Content Include="chip_xml_files\atmega164pa.xml" />
+    <Content Include="chip_xml_files\atmega165.xml" />
+    <Content Include="chip_xml_files\atmega165p.xml" />
+    <Content Include="chip_xml_files\atmega168.xml" />
+    <Content Include="chip_xml_files\atmega168p.xml" />
+    <Content Include="chip_xml_files\atmega168pa.xml" />
+    <Content Include="chip_xml_files\atmega169.xml" />
+    <Content Include="chip_xml_files\atmega169p.xml" />
+    <Content Include="chip_xml_files\atmega16a.xml" />
+    <Content Include="chip_xml_files\atmega16hva.xml" />
+    <Content Include="chip_xml_files\atmega16hvb.xml" />
+    <Content Include="chip_xml_files\atmega16m1.xml" />
+    <Content Include="chip_xml_files\atmega16u2.xml" />
+    <Content Include="chip_xml_files\atmega16u4.xml" />
+    <Content Include="chip_xml_files\atmega2560.xml" />
+    <Content Include="chip_xml_files\atmega2561.xml" />
+    <Content Include="chip_xml_files\atmega32.xml" />
+    <Content Include="chip_xml_files\atmega323.xml" />
+    <Content Include="chip_xml_files\atmega324p.xml" />
+    <Content Include="chip_xml_files\atmega324pa.xml" />
+    <Content Include="chip_xml_files\atmega325.xml" />
+    <Content Include="chip_xml_files\atmega3250.xml" />
+    <Content Include="chip_xml_files\atmega3250p.xml" />
+    <Content Include="chip_xml_files\atmega325p.xml" />
+    <Content Include="chip_xml_files\atmega328p.xml" />
+    <Content Include="chip_xml_files\atmega329.xml" />
+    <Content Include="chip_xml_files\atmega3290.xml" />
+    <Content Include="chip_xml_files\atmega3290p.xml" />
+    <Content Include="chip_xml_files\atmega329p.xml" />
+    <Content Include="chip_xml_files\atmega32a.xml" />
+    <Content Include="chip_xml_files\atmega32c1.xml" />
+    <Content Include="chip_xml_files\atmega32hvb.xml" />
+    <Content Include="chip_xml_files\atmega32m1.xml" />
+    <Content Include="chip_xml_files\atmega32u2.xml" />
+    <Content Include="chip_xml_files\atmega32u4.xml" />
+    <Content Include="chip_xml_files\atmega32u6.xml" />
+    <Content Include="chip_xml_files\atmega406.xml" />
+    <Content Include="chip_xml_files\atmega48.xml" />
+    <Content Include="chip_xml_files\atmega48p.xml" />
+    <Content Include="chip_xml_files\atmega48pa.xml" />
+    <Content Include="chip_xml_files\atmega64.xml" />
+    <Content Include="chip_xml_files\atmega640.xml" />
+    <Content Include="chip_xml_files\atmega644.xml" />
+    <Content Include="chip_xml_files\atmega644p.xml" />
+    <Content Include="chip_xml_files\atmega644pa.xml" />
+    <Content Include="chip_xml_files\atmega645.xml" />
+    <Content Include="chip_xml_files\atmega6450.xml" />
+    <Content Include="chip_xml_files\atmega649.xml" />
+    <Content Include="chip_xml_files\atmega6490.xml" />
+    <Content Include="chip_xml_files\atmega64a.xml" />
+    <Content Include="chip_xml_files\atmega64c1.xml" />
+    <Content Include="chip_xml_files\atmega64m1.xml" />
+    <Content Include="chip_xml_files\atmega8.xml" />
+    <Content Include="chip_xml_files\atmega8515.xml" />
+    <Content Include="chip_xml_files\atmega8535.xml" />
+    <Content Include="chip_xml_files\atmega88.xml" />
+    <Content Include="chip_xml_files\atmega88p.xml" />
+    <Content Include="chip_xml_files\atmega88pa.xml" />
+    <Content Include="chip_xml_files\atmega8a.xml" />
+    <Content Include="chip_xml_files\atmega8hva.xml" />
+    <Content Include="chip_xml_files\atmega8u2.xml" />
+    <Content Include="chip_xml_files\attiny10.xml" />
+    <Content Include="chip_xml_files\attiny11.xml" />
+    <Content Include="chip_xml_files\attiny12.xml" />
+    <Content Include="chip_xml_files\attiny13.xml" />
+    <Content Include="chip_xml_files\attiny13a.xml" />
+    <Content Include="chip_xml_files\attiny15.xml" />
+    <Content Include="chip_xml_files\attiny167.xml" />
+    <Content Include="chip_xml_files\attiny22.xml" />
+    <Content Include="chip_xml_files\attiny2313.xml" />
+    <Content Include="chip_xml_files\attiny2313a.xml" />
+    <Content Include="chip_xml_files\attiny24.xml" />
+    <Content Include="chip_xml_files\attiny24a.xml" />
+    <Content Include="chip_xml_files\attiny25.xml" />
+    <Content Include="chip_xml_files\attiny26.xml" />
+    <Content Include="chip_xml_files\attiny261.xml" />
+    <Content Include="chip_xml_files\attiny261a.xml" />
+    <Content Include="chip_xml_files\attiny28.xml" />
+    <Content Include="chip_xml_files\attiny4.xml" />
+    <Content Include="chip_xml_files\attiny4313.xml" />
+    <Content Include="chip_xml_files\attiny43u.xml" />
+    <Content Include="chip_xml_files\attiny44.xml" />
+    <Content Include="chip_xml_files\attiny44a.xml" />
+    <Content Include="chip_xml_files\attiny45.xml" />
+    <Content Include="chip_xml_files\attiny461.xml" />
+    <Content Include="chip_xml_files\attiny48.xml" />
+    <Content Include="chip_xml_files\attiny5.xml" />
+    <Content Include="chip_xml_files\attiny84.xml" />
+    <Content Include="chip_xml_files\attiny85.xml" />
+    <Content Include="chip_xml_files\attiny861.xml" />
+    <Content Include="chip_xml_files\attiny861a.xml" />
+    <Content Include="chip_xml_files\attiny87.xml" />
+    <Content Include="chip_xml_files\attiny88.xml" />
+    <Content Include="chip_xml_files\attiny9.xml" />
+    <Content Include="chip_xml_files\atxmega128a1.xml" />
+    <Content Include="chip_xml_files\atxmega128a3.xml" />
+    <Content Include="chip_xml_files\atxmega128d3.xml" />
+    <Content Include="chip_xml_files\atxmega16a4.xml" />
+    <Content Include="chip_xml_files\atxmega16d4.xml" />
+    <Content Include="chip_xml_files\atxmega192a3.xml" />
+    <Content Include="chip_xml_files\atxmega192d3.xml" />
+    <Content Include="chip_xml_files\atxmega256a3.xml" />
+    <Content Include="chip_xml_files\atxmega256a3b.xml" />
+    <Content Include="chip_xml_files\atxmega256d3.xml" />
+    <Content Include="chip_xml_files\atxmega32a4.xml" />
+    <Content Include="chip_xml_files\atxmega32d4.xml" />
+    <Content Include="chip_xml_files\atxmega64a1.xml" />
+    <Content Include="chip_xml_files\atxmega64a3.xml" />
+    <Content Include="chip_xml_files\atxmega64d3.xml" />
+    <None Include="chip_xml_files\interruptvectors.xml" />
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />
     <None Include="packforupload.bat">
@@ -473,7 +630,7 @@
     <Content Include="ScintillaNet.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="template.xml" />
+    <Content Include="templates.xml" />
     <Content Include="WeifenLuo.WinFormsUI.Docking.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

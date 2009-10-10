@@ -23,23 +23,31 @@ namespace AVRProjectIDE
 
             for (int i = 1; i < originalLength; i++)
             {
-                if (content[i] == '"' && content[i - 1] != '\\' && inStreamComment == false && inLineComment == false && inChar == false)
+                char c = content[i];
+
+                if ((inString || inChar) && c == '\\' && content[i + 1] == '\\')
+                {
+                    content = content.Remove(i, 2);
+                    content = content.Insert(i, "  ");
+                }
+                else if (c == '"' && content[i - 1] != '\\' && inStreamComment == false && inLineComment == false && inChar == false)
                 {
                     inString = !inString;
                 }
-                else if (content[i] == '\'' && content[i - 1] != '\\' && inStreamComment == false && inLineComment == false && inString == false)
+                else if (c == '\'' && content[i - 1] != '\\' && inStreamComment == false && inLineComment == false && inString == false)
                 {
                     inChar = !inChar;
                 }
-                else if (content[i] == '/' && content[i + 1] == '/' && inString == false && inChar == false)
+                else if (c == '/' && content[i + 1] == '/' && inString == false && inChar == false)
                 {
                     inLineComment = true;
+                    i += 2;
                 }
-                else if (content[i] == '/' && content[i + 1] == '*' && inLineComment == false && inString == false && inChar == false)
+                else if (c == '/' && content[i + 1] == '*' && inLineComment == false && inString == false && inChar == false)
                 {
                     inStreamComment = true;
                 }
-                else if (content[i] == '*' && content[i + 1] == '/' && inString == false && inChar == false)
+                else if (c == '*' && content[i + 1] == '/' && inString == false && inChar == false)
                 {
                     inStreamComment = false;
                     if (inLineComment == false)
@@ -47,7 +55,7 @@ namespace AVRProjectIDE
                         i += 2;
                     }
                 }
-                else if (content[i] == '\n')
+                else if (c == '\n')
                 {
                     inLineComment = false;
                     inString = false;
@@ -56,7 +64,7 @@ namespace AVRProjectIDE
 
                 if (inStreamComment == false && inLineComment == false)
                 {
-                    result += content[i];
+                    result += c;
                 }
             }
 
@@ -89,7 +97,12 @@ namespace AVRProjectIDE
             {
                 bool printFirstBrace = false;
 
-                if (content[i] == '"' && content[i - 1] != '\\' && inChar == false)
+                if ((inString || inChar) && content[i] == '\\' && content[i + 1] == '\\')
+                {
+                    content = content.Remove(i, 2);
+                    content = content.Insert(i, "  ");
+                }
+                else if (content[i] == '"' && content[i - 1] != '\\' && inChar == false)
                 {
                     inString = !inString;
                 }
@@ -139,11 +152,11 @@ namespace AVRProjectIDE
 
             content = StripComments(content);
 
-            Regex r = new Regex("^\\s*#include\\s+[<\"](\\S+)[\">]", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            Regex r = new Regex("^\\s*#include\\s+((\"\\S+\")|(<\\S+>))", RegexOptions.IgnoreCase | RegexOptions.Multiline);
             Match m = r.Match(content);
             while (m.Success)
             {
-                string lib = m.Groups[1].Value.Trim();
+                string lib = m.Groups[1].Value.Trim(new char[] { ' ', '\t', '\r', '\n', '"', '<', '>', });
 
                 if (lib.Contains('.'))
                 {

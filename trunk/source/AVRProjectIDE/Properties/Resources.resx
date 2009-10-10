@@ -241,10 +241,16 @@
   <data name="arduinomain" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\arduino\core\main.cxx;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="template" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\template.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="AVRProjectIDEUpdater" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\AVRProjectIDEUpdater\bin\Debug\AVRProjectIDEUpdater.exe;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autocomplete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\autocomplete.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="templates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="interruptvectors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\chip_xml_files\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

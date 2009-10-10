@@ -135,6 +135,8 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -454,14 +456,14 @@
             // 
             this.mbtnHelpTopics.Image = global::AVRProjectIDE.Properties.Resources.help;
             this.mbtnHelpTopics.Name = "mbtnHelpTopics";
-            this.mbtnHelpTopics.Size = new System.Drawing.Size(152, 22);
+            this.mbtnHelpTopics.Size = new System.Drawing.Size(137, 22);
             this.mbtnHelpTopics.Text = "&Help Topics";
             this.mbtnHelpTopics.Click += new System.EventHandler(this.mbtnHelpTopics_Click);
             // 
             // mbtnAbout
             // 
             this.mbtnAbout.Name = "mbtnAbout";
-            this.mbtnAbout.Size = new System.Drawing.Size(152, 22);
+            this.mbtnAbout.Size = new System.Drawing.Size(137, 22);
             this.mbtnAbout.Text = "&About";
             this.mbtnAbout.Click += new System.EventHandler(this.mbtnAbout_Click);
             // 
@@ -894,11 +896,28 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(467, 175);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(882, 27);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(100, 18);
+            this.progressBar1.TabIndex = 4;
+            this.progressBar1.Visible = false;
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
+            // 
+            // timerScanner
+            // 
+            this.timerScanner.Enabled = true;
+            this.timerScanner.Interval = 30000;
+            this.timerScanner.Tick += new System.EventHandler(this.timerScanner_Tick);
+            // 
             // IDEWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 510);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.menuStripMain);
             this.Controls.Add(this.dockPanel1);
@@ -1001,6 +1020,8 @@
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
         private System.Windows.Forms.ToolStripMenuItem mbtnExportAPS;
         private System.Windows.Forms.ToolStripMenuItem mbtnRunMake;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Timer timerScanner;
 
 
     }

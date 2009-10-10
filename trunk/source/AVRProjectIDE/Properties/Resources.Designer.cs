@@ -88,6 +88,27 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;AutoComplete&gt;
+        ///  &lt;C&gt;
+        ///    &lt;Group type=&quot;statements&quot;&gt;
+        ///      if else do while for switch case default break goto continue return sizeof main
+        ///    &lt;/Group&gt;
+        ///    &lt;Group type=&quot;types&quot;&gt;
+        ///      void bool boolean byte char short int long word dword float double bool bit bitfield byte uchar ushort uint ulong uword struct union enum
+        ///    &lt;/Group&gt;
+        ///    &lt;Group type=&quot;modifiers&quot;&gt;
+        ///      signed unsigned static volatile const inline extern typedef
+        ///    &lt;/Group&gt;
+        ///    &lt;Group type=&quot;pre [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string autocomplete {
+            get {
+                return ResourceManager.GetString("autocomplete", resourceCulture);
+            }
+        }
+        
         internal static byte[] AVRProjectIDEUpdater {
             get {
                 object obj = ResourceManager.GetObject("AVRProjectIDEUpdater", resourceCulture);
@@ -206,6 +227,30 @@ namespace AVRProjectIDE.Properties {
             get {
                 object obj = ResourceManager.GetObject("indent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;us-ascii&quot;?&gt;
+        ///&lt;InterruptVectors&gt;
+        ///	&lt;ListOfVectors&gt;
+        ///		&lt;Vector Text=&quot;ADC Conversion Complete&quot;&gt;
+        ///			&lt;NewName&gt;ADC_vect&lt;/NewName&gt;
+        ///			&lt;OldName&gt;SIG_ADC&lt;/OldName&gt;
+        ///			&lt;Desc&gt;ADC Conversion Complete&lt;/Desc&gt;
+        ///		&lt;/Vector&gt;
+        ///		&lt;Vector Text=&quot;Analog Comparator 0&quot;&gt;
+        ///			&lt;NewName&gt;ANALOG_COMP_0_vect&lt;/NewName&gt;
+        ///			&lt;OldName&gt;SIG_COMPARATOR0&lt;/OldName&gt;
+        ///			&lt;Desc&gt;Analog Comparator 0&lt;/Desc&gt;
+        ///		&lt;/Vector&gt;
+        ///		&lt;Vector Text=&quot;Analog Comparator 1&quot;&gt;
+        ///			&lt;NewName&gt;ANALOG_COMP_1_vect&lt;/NewName&gt;
+        ///			&lt;OldName&gt;SIG_COMP [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string interruptvectors {
+            get {
+                return ResourceManager.GetString("interruptvectors", resourceCulture);
             }
         }
         
@@ -345,12 +390,12 @@ namespace AVRProjectIDE.Properties {
         ///    &lt;DataSections&gt;true&lt;/DataSections&gt;
         ///    &lt;LinkLibList&gt;
         ///      &lt;Lib&gt;libm.a&lt;/Lib&gt;
-        ///      &lt;Lib&gt;liba.a&lt;/Lib&gt;
+        ///      &lt;Lib&gt;libc.a&lt;/Lib&gt;
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string template {
+        internal static string templates {
             get {
-                return ResourceManager.GetString("template", resourceCulture);
+                return ResourceManager.GetString("templates", resourceCulture);
             }
         }
         
