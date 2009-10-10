@@ -20,13 +20,7 @@ Those are the same default compiler options that AVRStudio used. It means all wa
 
 ===What is the “Run Only Options” button for in the AVRDUDE command builder?===
 
-It'll run AVRDUDE but won't write the hex file to it, this is used to:
- * Check that your programmer is working
- * Burn fuses
-
-===How do I burn fuses?===
-
-Go to the fuse calculator provided in the help menu and the calculator should tell you the AVRDUDE command to burn the fuses you want, copy and paste that into the options text box along with any other options you need. Press “Run Only Options” after you are ready.
+It'll run AVRDUDE but won't write the hex file to it, this is used to check that your programmer is working
 
 ===How do I send special characters through the serial port?===
 
