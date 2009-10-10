@@ -7,3 +7,5 @@ The updating mechanism checks this webpage for the following string, so this pag
 `DOWNLOADURL:"http://avr-project-ide.googlecode.com/files/AVRProjectIDE_Alpha32.exe"`
 
 `NEWFILENAME:"AVRProjectIDE.exe"`
+
+`AUTOEXECUTE:"false"`
