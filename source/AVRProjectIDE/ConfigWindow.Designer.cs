@@ -48,6 +48,7 @@
             this.tabsMain = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkAutoReset = new System.Windows.Forms.CheckBox();
             this.btnBurnOnlyOpt = new System.Windows.Forms.Button();
             this.txtBurnOpt = new System.Windows.Forms.TextBox();
             this.dropBaud = new System.Windows.Forms.ComboBox();
@@ -121,7 +122,9 @@
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.dropTemplates = new System.Windows.Forms.ComboBox();
             this.btnGotoAppdata = new System.Windows.Forms.Button();
-            this.chkAutoReset = new System.Windows.Forms.CheckBox();
+            this.btnBurnFuseBox = new System.Windows.Forms.Button();
+            this.txtBurnFuseBox = new System.Windows.Forms.TextBox();
+            this.lnkFuse = new System.Windows.Forms.LinkLabel();
             this.tabsMain.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -186,8 +189,11 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.lnkFuse);
             this.groupBox1.Controls.Add(this.chkAutoReset);
+            this.groupBox1.Controls.Add(this.btnBurnFuseBox);
             this.groupBox1.Controls.Add(this.btnBurnOnlyOpt);
+            this.groupBox1.Controls.Add(this.txtBurnFuseBox);
             this.groupBox1.Controls.Add(this.txtBurnOpt);
             this.groupBox1.Controls.Add(this.dropBaud);
             this.groupBox1.Controls.Add(this.dropProg);
@@ -205,13 +211,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AVRDUDE Command Builder";
             // 
+            // chkAutoReset
+            // 
+            this.chkAutoReset.AutoSize = true;
+            this.chkAutoReset.Location = new System.Drawing.Point(218, 103);
+            this.chkAutoReset.Name = "chkAutoReset";
+            this.chkAutoReset.Size = new System.Drawing.Size(118, 17);
+            this.chkAutoReset.TabIndex = 11;
+            this.chkAutoReset.Text = "Arduino Auto Reset";
+            this.chkAutoReset.UseVisualStyleBackColor = true;
+            // 
             // btnBurnOnlyOpt
             // 
-            this.btnBurnOnlyOpt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBurnOnlyOpt.Location = new System.Drawing.Point(79, 99);
             this.btnBurnOnlyOpt.Name = "btnBurnOnlyOpt";
-            this.btnBurnOnlyOpt.Size = new System.Drawing.Size(278, 23);
+            this.btnBurnOnlyOpt.Size = new System.Drawing.Size(107, 23);
             this.btnBurnOnlyOpt.TabIndex = 10;
             this.btnBurnOnlyOpt.Text = "Run Only Options";
             this.btnBurnOnlyOpt.UseVisualStyleBackColor = true;
@@ -219,11 +233,9 @@
             // 
             // txtBurnOpt
             // 
-            this.txtBurnOpt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBurnOpt.Location = new System.Drawing.Point(79, 73);
             this.txtBurnOpt.Name = "txtBurnOpt";
-            this.txtBurnOpt.Size = new System.Drawing.Size(396, 20);
+            this.txtBurnOpt.Size = new System.Drawing.Size(107, 20);
             this.txtBurnOpt.TabIndex = 9;
             // 
             // dropBaud
@@ -1352,16 +1364,35 @@
             this.btnGotoAppdata.UseVisualStyleBackColor = true;
             this.btnGotoAppdata.Click += new System.EventHandler(this.btnGotoAppdata_Click);
             // 
-            // chkAutoReset
+            // btnBurnFuseBox
             // 
-            this.chkAutoReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkAutoReset.AutoSize = true;
-            this.chkAutoReset.Location = new System.Drawing.Point(363, 103);
-            this.chkAutoReset.Name = "chkAutoReset";
-            this.chkAutoReset.Size = new System.Drawing.Size(118, 17);
-            this.chkAutoReset.TabIndex = 11;
-            this.chkAutoReset.Text = "Arduino Auto Reset";
-            this.chkAutoReset.UseVisualStyleBackColor = true;
+            this.btnBurnFuseBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBurnFuseBox.Location = new System.Drawing.Point(368, 99);
+            this.btnBurnFuseBox.Name = "btnBurnFuseBox";
+            this.btnBurnFuseBox.Size = new System.Drawing.Size(107, 23);
+            this.btnBurnFuseBox.TabIndex = 10;
+            this.btnBurnFuseBox.Text = "Burn Fuses";
+            this.btnBurnFuseBox.UseVisualStyleBackColor = true;
+            this.btnBurnFuseBox.Click += new System.EventHandler(this.btnBurnFuseBox_Click);
+            // 
+            // txtBurnFuseBox
+            // 
+            this.txtBurnFuseBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBurnFuseBox.Location = new System.Drawing.Point(368, 73);
+            this.txtBurnFuseBox.Name = "txtBurnFuseBox";
+            this.txtBurnFuseBox.Size = new System.Drawing.Size(107, 20);
+            this.txtBurnFuseBox.TabIndex = 9;
+            // 
+            // lnkFuse
+            // 
+            this.lnkFuse.AutoSize = true;
+            this.lnkFuse.Location = new System.Drawing.Point(308, 76);
+            this.lnkFuse.Name = "lnkFuse";
+            this.lnkFuse.Size = new System.Drawing.Size(54, 13);
+            this.lnkFuse.TabIndex = 12;
+            this.lnkFuse.TabStop = true;
+            this.lnkFuse.Text = "Fuse Box:";
+            this.lnkFuse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkFuse_LinkClicked);
             // 
             // ConfigWindow
             // 
@@ -1486,6 +1517,9 @@
         private System.Windows.Forms.TextBox txtArduinoCore;
         private System.Windows.Forms.Button btnFindArduinoCore;
         private System.Windows.Forms.CheckBox chkAutoReset;
+        private System.Windows.Forms.Button btnBurnFuseBox;
+        private System.Windows.Forms.TextBox txtBurnFuseBox;
+        private System.Windows.Forms.LinkLabel lnkFuse;
     }
 }
 

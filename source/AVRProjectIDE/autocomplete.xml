@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AutoComplete>
+  <C>
+    <Group type="statements">
+      if else do while for switch case default break goto continue return sizeof main
+    </Group>
+    <Group type="types">
+      void bool boolean byte char short int long word dword float double bool bit bitfield byte uchar ushort uint ulong uword struct union enum
+    </Group>
+    <Group type="modifiers">
+      signed unsigned static volatile const inline extern typedef
+    </Group>
+    <Group type="preproc">
+      define elif endif error if ifdef ifndef include undef warning
+    </Group>
+  </C>
+  <CPP>
+    <Group type="statements">
+      using try catch throw
+    </Group>
+    <Group type="types">
+      class
+    </Group>
+    <Group type="modifiers">
+      public private protected new virtual explicit
+    </Group>
+  </CPP>
+  <Arduino>
+    <Group type="functs">
+      setup loop init
+      pinMode digitalWrite digitalRead analogReference analogRead analogWrite
+      shiftOut pulseIn millis micros delay delayMicroseconds min max abs constrain
+      map pow sqrt sin cos tan randomSeed random lowByte highByte bitRead bitWrite
+      bitSet bitClear bit attachInterrupt detachInterrupt interrupts noInterrupts
+      Serial print println begin available read write flush
+    </Group>
+    <Group type="consts">
+      HIGH LOW INPUT OUTPUT true false
+    </Group>
+  </Arduino>
+  <AVRLibc loadall="false">
+    <File name="avr/interrupt.h">
+      <Group type="functs">
+        cli sei reti
+      </Group>
+      <Group type="blocks">
+        ISR EMPTY_INTERRUPT ISR_ALIAS ISR_BLOCK ISR_NAKED ISR_NOBLOCK SIGNAL
+      </Group>
+    </File>
+    <File name="ctype">
+      <Group type="functs">
+        isalnum isalpha isascii isblank iscntrl isdigit isgraph islower isprint ispunct isspace
+        isupper isxdigit toascii tolower toupper
+      </Group>
+    </File>
+    <File name="stdint.h">
+      <Group type="types">
+        int8_t int16_t int32_t int64_t uint8_t uint16_t uint32_t uint64_t
+      </Group>
+    </File>
+    <File name="stdio.h">
+      <Group type="functs">
+        fclose vfprintf vfprintf_P fputc printf printf_P vprintf sprintf sprintf_P snprintf snprintf_P vsprintf vsprintf_P vsnprintf vsnprintf_P
+        fprintf fprintf_P fputs fputs_P puts puts_P fwrote fgetc ungetc fgets gets fread clearerr feof ferror
+        vfscanf vfscanf_P scanf scanf_P vscanf sscanf sscanf_P fflush fdevopen
+        fdev_close fdev_get_udata fdev_set_udata FDEV_SETUP_STREAM fdev_setup_stream
+        putchar putc getchar getc
+      </Group>
+      <Group type="types">
+        FILE
+      </Group>
+      <Group type="consts">
+        _FDEV_EOF _FDEV_ERR _FDEV_SETUP_READ _FDEV_SETUP_RW _FDEV_SETUP_WRITE EOF
+        stderr stdin stdout
+      </Group>
+    </File>
+    <File name="math.h">
+      <Group type="functs">
+        cos fabs fmod modf sin sqrt tan floor ceil frexp ldexp exp cosh sinh tanh acos asin atan atan2 log log10
+        pow isnan isinf square copysign fdim fma fmax fmin signbit trunc isfinite hypot round lround lrint
+      </Group>
+      <Group type="consts">
+        M_PI MSQRT2 NAN INFINITY
+      </Group>
+    </File>
+    <File name="assert.h">
+      <Group type="functs">
+        assert
+      </Group>
+      <Group type="consts">
+        __ASSERT_USE_STDERR NDEBUG
+      </Group>
+    </File>
+    <File name="errno.h">
+      <Group type="consts">
+        EDOM ERANGE errno
+      </Group>
+    </File>
+    <File name="setjmp.h">
+      <Group type="functs">
+        setjmp longjmp
+      </Group>
+    </File>
+    <File name="stdlib.h">
+      <Group type="types">
+        div_t ldiv_t
+      </Group>
+      <Group type="functs">
+        abort abs labs bsearch div ldiv qsort strtol strtoul atol atoi exit
+        malloc free calloc realloc strtod atof rand srand rand_r
+      </Group>
+      <Group type="vars">
+        __malloc_margin __malloc_heap_start __malloc_heap_end
+      </Group>
+      <Group type="consts">
+        RAND_MAX
+      </Group>
+    </File>
+    <File name="string.h">
+      <Group type="functs">
+        ffs ffsl ffsll memccpy memchr memcmp memcpy memmem memmove memrchr memset
+        strcasecmp strcasestr strcat strchr strchrnul strcmp strcpy strcspn strdup
+        strlcat strlcpy strlwr strncasecmp strncat strncmp strncpy strnlen strpbrk strrchr
+        strrev strsep strspn strstr strtok strtok_r strupr
+      </Group>
+    </File>
+    <File name="avr/boot.h">
+      <Include>avr_pgmspace</Include>
+      <Group type="functs">
+        boot_spm_interrupt_enable boot_spm_interrupt_disable boot_is_spm_interrupt
+        boot_rww_busy boot_spm_busy boot_spm_busy_wait
+        boot_lock_fuse_bits_get boot_signature_byte_get
+        boot_page_fill boot_page_erase boot_page_write boot_rww_enable boot_lock_bits_set
+        boot_page_fill_safe boot_page_erase_safe boot_page_write_safe boot_rww_enable_safe boot_lock_bits_set_safe
+      </Group>
+      <Group type="consts">
+        GET_LOW_FUSE_BITS GET_LOCK_BITS GET_EXTENDED_FUSE_BITS GET_HIGH_FUSE_BITS
+      </Group>
+    </File>
+    <File name="avr\eeprom.h">
+      <Group type="functs">
+        eeprom_is_ready eeprom_busy_wait
+        eeprom_read_byte eeprom_read_word eeprom_read_dword eeprom_read_block
+        eeprom_write_byte eeprom_write_word eeprom_write_dword eeprom_write_block
+      </Group>
+      <Group type="types">
+        EEMEM
+      </Group>
+    </File>
+    <File name="avr/io.h">
+      <Include>avr/sfr_defs.h</Include>
+      <Include>avr/portpins.h</Include>
+      <Group type="consts">
+        RAMEND XRAMEND E2END FLASHEND SPM_PAGESIZE E2PAGESIZE
+      </Group>
+    </File>
+    <File name="avr/sfr_defs.h">
+      <Group type="functs">
+        _BV bit_is_clear bit_is_set loop_until_bit_is_clear loop_until_bit_is_set
+      </Group>
+    </File>
+    <File name="avr/pgmspace.h">
+      <Group type="functs">
+        PSTR
+        pgm_read_byte pgm_read_word pgm_read_dword pgm_read_float
+        pgm_read_byte_near pgm_read_word_near pgm_read_dword_near pgm_read_float_near
+        pgm_read_byte_far pgm_read_word_far pgm_read_dword_far pgm_read_float_far
+
+        memchr_P memcmp_P memcpy_P memrchr_P
+        strcasecmp_P strcat_P strchr_P strchrnul_P strcmp_P strcpy_P strcspn_P
+        strlcat_P strlcpy_P strlen_P
+        strncasecmp_P strncat_P strncmp_P strncpy_P strnlen_P
+        strpbrk_P strrchr_P strsep_P strspn_P strstr_P memmem_P strcasestr_P
+      </Group>
+      <Group type="types">
+        PROGMEM prog_void prog_char prog_uchar
+        prog_int8_t prog_int16_t prog_int32_t prog_int64_t
+        prog_uint8_t prog_uint16_t prog_uint32_t prog_uint64_t
+      </Group>
+    </File>
+    <File name="avr/power.h">
+      <Group type="functs">
+        power_all_enable power_all_disable
+        power_adc_enable
+        power_lcd_enable
+        power_spi_enable
+        power_timerx_enable
+        power_pscx_enable
+        power_twi_enable
+        power_usart_enable
+        power_usartx_enable
+        power_usb_enable
+        power_usi_enable
+        power_vadc_enable
+        power_adc_disable
+        power_lcd_disable
+        power_spi_disable
+        power_timerx_disable
+        power_pscx_disable
+        power_twi_disable
+        power_usart_disable
+        power_usartx_disable
+        power_usb_disable
+        power_usi_disable
+        power_vadc_disable
+        clock_prescale_set
+        clock_prescale_get
+      </Group>
+      <Group type="types">
+        clock_div_t
+      </Group>
+      <Group type="consts">
+        clock_div_1
+        clock_div_2
+        clock_div_4
+        clock_div_8
+        clock_div_16
+        clock_div_32
+        clock_div_64
+        clock_div_128
+        clock_div_256
+      </Group>
+    </File>
+    <File name="avr/sleep.h">
+      <Group type="functs">
+        sleep_enable sleep_disable sleep_cpu set_sleep_mode sleep_mode
+      </Group>
+    </File>
+    <File name="avr/wdt.h">
+      <Group type="functs">
+        wdt_reset wdt_enable wdt_disable
+      </Group>
+      <Group type="consts">
+        WDTO_15MS WDTO_30MS WDTO_60MS WDTO_120MS WDTO_250MS WDTO_500MS
+        WDTO_1S WDTO_2S WDTO_4S WDTO_8S
+      </Group>
+    </File>
+    <File name="util/atomic.h">
+      <Group type="blocks">
+        ATOMIC_BLOCK NONATOMIC_BLOCK
+      </Group>
+      <Group type="consts">
+        ATOMIC_RESTORESTATE ATOMIC_FORCEON NONATOMIC_RESTORESTATE NONATOMIC_FORCEOFF
+      </Group>
+    </File>
+    <File name="util/delay.h">
+      <Include>util_delay_basic</Include>
+      <Group type="functs">
+        _delay_ms _delay_us
+      </Group>
+    </File>
+    <File name="util/delay_basic.h">
+      <Group type="functs">
+        _delay_loop_1 _delay_loop_2
+      </Group>
+    </File>
+    <File name="util/parity.h">
+      <Group type="functs">
+        parity_even_bit
+      </Group>
+    </File>
+    <File name="util/setbaud.h">
+      <Group type="consts">
+        BAUD BAUD_TOL UBRR_VALUE UBRRL_VALUE UBRRH_VALUE USE_2X
+      </Group>
+    </File>
+    <File name="util/twi.h">
+      <Group type="consts">
+        TW_BUS_ERROR
+        TW_MR_ARB_LOST TW_MR_DATA_ACK TW_MR_DATA_NACK TW_MR_SLA_ACK TW_MR_SLA_NACK
+        TW_MT_ARB_LOST TW_MT_DATA_ACK TW_MT_DATA_NACK TW_MT_SLA_ACK TW_MT_SLA_NACK
+        TW_NO_INTO TW_READ TW_REP_START
+        TW_SR_ARB_LOST_GCALL_ACK TW_SR_ARB_LOST_SLA_ACK TW_SR_DATA_ACK TW_SR_DATA_NACK TW_SR_GCALL_ACK TW_SR_GCALL_DATA_NACK TW_SR_SLA_ACK TW_SR_STOP
+        TW_ST_ARB_LOST_SLA_ACK TW_ST_DATA_ACK TW_ST_DATA_NACK TW_ST_LAST_DATA TW_ST_SLA_ACK
+        TW_START TW_STATUS TW_STATUS_MASK TW_WRITE
+      </Group>
+    </File>
+  </AVRLibc>
+</AutoComplete>

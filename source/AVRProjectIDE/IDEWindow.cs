@@ -21,6 +21,7 @@ namespace AVRProjectIDE
         private SearchPanel searchWin;
         private FileTreePanel fileTreeWin;
         private MessagePanel messageWin;
+        private HardwareExplorer hardwareExplorerWin;
 
         private EditorPanel lastEditor;
         
@@ -53,6 +54,9 @@ namespace AVRProjectIDE
             fileTreeWin = new FileTreePanel(project, editorList);
             fileTreeWin.OpenNode += new FileTreePanel.OpenFileEvent(fileTreeWin_OpenNode);
             fileTreeWin.PopulateList();
+
+            hardwareExplorerWin = new HardwareExplorer();
+            hardwareExplorerWin.LoadDataForChip(project.Device);
 
             searchWin = new SearchPanel(editorList);
             searchWin.GotoResult += new SearchPanel.SearchResultDoubleClickedEvent(searchWin_GotoResult);
@@ -87,6 +91,7 @@ namespace AVRProjectIDE
                 messageWin.Show(dockPanel1);
                 searchWin.Show(dockPanel1);
                 serialWin.Show(dockPanel1);
+                hardwareExplorerWin.Show(dockPanel1);
             }
             else
             {
@@ -95,6 +100,7 @@ namespace AVRProjectIDE
                 messageWin.Show(dockPanel1, DockState.DockBottom);
                 searchWin.Show(dockPanel1, DockState.DockBottom);
                 serialWin.Show(dockPanel1, DockState.DockBottom);
+                hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
             }
 
             searchWin.Activate();
@@ -116,6 +122,8 @@ namespace AVRProjectIDE
             FillRecentProjects();
 
             ReloadLastOpened();
+
+            KeywordScanner.LaunchScan(project, editorList);
         }
 
         private IDockContent GetPanelFromPersistString(string persistString)
@@ -128,6 +136,8 @@ namespace AVRProjectIDE
                 return messageWin;
             else if (persistString == typeof(FileTreePanel).ToString())
                 return fileTreeWin;
+            else if (persistString == typeof(HardwareExplorer).ToString())
+                return hardwareExplorerWin;
             else
             {
                 return null;
@@ -387,6 +397,8 @@ namespace AVRProjectIDE
             {
                 editorList.Remove(fileName);
             }
+
+            KeywordScanner.DoMoreWork();
         }
 
         void editor_OnRename(object sender, RenamedEventArgs e)
@@ -425,6 +437,50 @@ namespace AVRProjectIDE
         {
             dockPanel1.SaveAsXml(SettingsManagement.AppDataPath + "workspace.xml");
             SettingsManagement.SaveWindowState(this);
+        }
+
+        /// <summary>
+        /// This intercepts the form closing signal, so that the parent window receives the close signal before the childs (aka the editor tabs)
+        /// </summary>
+        /// <param name="m"></param>
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            // closing signal
+            if (m.Msg == 0x0010)
+            {
+                SaveProj();
+
+                if (HasChanged)
+                {
+                    // if changes have occured, ask to save everything
+
+                    DialogResult res = MessageBox.Show("You have unsaved changes. Do you want to save?", "Unsaved Project", MessageBoxButtons.YesNoCancel);
+                    if (res == DialogResult.Yes)
+                    {
+                        SaveAll();
+                    }
+                    else if (res == DialogResult.Cancel)
+                    {
+                        // cancelled, returning here won't call base.WndProc
+                        return;
+                    }
+                }
+
+                // try to close all editor panels
+                // new list because collections shouldn't be modified in foreach
+                List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
+                foreach (EditorPanel i in toClose)
+                {
+                    i.Close(false);
+                }
+
+                // this thread, if not killed, may cause the IDE to hang
+                serialWin.Disconnect();
+                serialWin.KillThread();
+            }
+
+            base.WndProc(ref m);
         }
 
         private void frmProjIDE_FormClosed(object sender, FormClosedEventArgs e)
@@ -653,6 +709,10 @@ namespace AVRProjectIDE
                 fileTreeWin.PopulateList(newProj, editorList);
 
                 ReloadLastOpened();
+
+                hardwareExplorerWin.LoadDataForChip(project.Device);
+
+                KeywordScanner.LaunchScan(project, editorList);
             }
         }
 
@@ -749,6 +809,10 @@ namespace AVRProjectIDE
                 fileTreeWin.PopulateList(newProj, editorList);
 
                 ReloadLastOpened();
+
+                hardwareExplorerWin.LoadDataForChip(project.Device);
+
+                KeywordScanner.LaunchScan(project, editorList);
             }
         }
 
@@ -973,12 +1037,14 @@ namespace AVRProjectIDE
         {
             ConfigWindow wnd = new ConfigWindow(project);
             wnd.ShowDialog();
+            hardwareExplorerWin.LoadDataForChip(project.Device);
         }
 
         private void tbtnConfig_Click(object sender, EventArgs e)
         {
             ConfigWindow wnd = new ConfigWindow(project);
             wnd.ShowDialog();
+            hardwareExplorerWin.LoadDataForChip(project.Device);
         }
 
         private void mbtnCompile_Click(object sender, EventArgs e)
@@ -1000,7 +1066,7 @@ namespace AVRProjectIDE
             if (serialWin.IsConnected && serialWin.CurrentPort == project.BurnPort)
                 serialWin.Disconnect();
 
-            projBurner.Burn(false);
+            projBurner.BurnCMD(false, false);
 
             if (serialWin.CurrentPort == project.BurnPort)
             {
@@ -1011,7 +1077,16 @@ namespace AVRProjectIDE
 
         private void mbtnBurn_Click(object sender, EventArgs e)
         {
-            projBurner.Burn(false);
+            if (serialWin.IsConnected && serialWin.CurrentPort == project.BurnPort)
+                serialWin.Disconnect();
+            
+            projBurner.BurnCMD(false, false);
+
+            if (serialWin.CurrentPort == project.BurnPort)
+            {
+                serialWin.Activate();
+                serialWin.BringToFront();
+            }
         }
 
         private void mbtnExportMakefile_Click(object sender, EventArgs e)
@@ -1046,53 +1121,21 @@ namespace AVRProjectIDE
 
         #endregion
 
-        /// <summary>
-        /// This intercepts the form closing signal, so that the parent window receives the close signal before the childs (aka the editor tabs)
-        /// </summary>
-        /// <param name="m"></param>
-        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name="FullTrust")]
-        protected override void WndProc(ref Message m)
-        {
-            // closing signal
-            if (m.Msg == 0x0010)
-            {
-                SaveProj();
-
-                if (HasChanged)
-                {
-                    // if changes have occured, ask to save everything
-
-                    DialogResult res = MessageBox.Show("You have unsaved changes. Do you want to save?", "Unsaved Project", MessageBoxButtons.YesNoCancel);
-                    if (res == DialogResult.Yes)
-                    {
-                        SaveAll();
-                    }
-                    else if (res == DialogResult.Cancel)
-                    {
-                        // cancelled, returning here won't call base.WndProc
-                        return;
-                    }
-                }
-
-                // try to close all editor panels
-                // new list because collections shouldn't be modified in foreach
-                List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
-                foreach (EditorPanel i in toClose)
-                {
-                    i.Close(false);
-                }
-
-                // this thread, if not killed, may cause the IDE to hang
-                serialWin.Disconnect();
-                serialWin.KillThread();
-            }
-            
-            base.WndProc(ref m);
-        }
-
         private void mbtnHelpTopics_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://code.google.com/p/avr-project-ide/wiki/Help");
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+            progressBar1.Style = ProgressBarStyle.Marquee;
+            //ProjScanner scanner = new ProjScanner(project, editorList);
+            progressBar1.Style = ProgressBarStyle.Blocks;
+        }
+
+        private void timerScanner_Tick(object sender, EventArgs e)
+        {
+            KeywordScanner.DoMoreWork();
         }
     }
 }

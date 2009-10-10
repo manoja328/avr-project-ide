@@ -415,6 +415,13 @@ namespace AVRProjectIDE
             set { burnAutoReset = value; }
         }
 
+        private string burnFuseBox;
+        public string BurnFuseBox
+        {
+            get { return burnFuseBox.Trim(); }
+            set { burnFuseBox = value.Trim(); }
+        }
+
         #endregion
 
         #region Lists
@@ -575,6 +582,7 @@ namespace AVRProjectIDE
                 xml.WriteElementString("BurnProgrammer", BurnProgrammer);
                 xml.WriteElementString("BurnOptions", BurnOptions);
                 xml.WriteElementString("BurnPort", BurnPort);
+                xml.WriteElementString("BurnFuseBox", BurnFuseBox);
                 xml.WriteElementString("BurnBaud", BurnBaud.ToString("0"));
                 xml.WriteElementString("BurnAutoReset", BurnAutoReset.ToString().ToLowerInvariant());
 
@@ -632,51 +640,42 @@ namespace AVRProjectIDE
 
                 XmlElement docx = doc.DocumentElement;
 
-                XmlElement param;
+                //XmlElement param;
                 string xDirPath = path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar));
-                if (docx.GetElementsByTagName("DirPath").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("DirPath"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("DirPath")[0];
                     xDirPath = Program.CleanFilePath(param.InnerText);
                 }
-                if (docx.GetElementsByTagName("ClockFreq").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("ClockFreq"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("ClockFreq")[0];
                     ClockFreq = decimal.Parse(param.InnerText);
                 }
-                if (docx.GetElementsByTagName("Device").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("Device"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("Device")[0];
                     Device = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("LinkerOpt").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("LinkerOpt"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("LinkerOpt")[0];
                     LinkerOptions = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("OtherOpt").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("OtherOpt"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("OtherOpt")[0];
                     OtherOptions = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("OutputDir").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("OutputDir"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("OutputDir")[0];
                     OutputDir = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("Optimization").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("Optimization"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("Optimization")[0];
                     Optimization = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("UseInitStack").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("UseInitStack"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("UseInitStack")[0];
                     UseInitStack = param.InnerText.ToLowerInvariant().Trim() == "true";
                 }
-                if (docx.GetElementsByTagName("InitStackAddr").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("InitStackAddr"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("InitStackAddr")[0];
                     try
                     {
                         if (param.InnerText.ToLowerInvariant().StartsWith("0x"))
@@ -690,122 +689,101 @@ namespace AVRProjectIDE
                     }
                     catch { }
                 }
-                if (docx.GetElementsByTagName("PackStructs").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("PackStructs"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("PackStructs")[0];
                     PackStructs = param.InnerText.ToLowerInvariant().Trim() == "true";
                 }
-                if (docx.GetElementsByTagName("ShortEnums").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("ShortEnums"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("ShortEnums")[0];
                     ShortEnums = param.InnerText.ToLowerInvariant().Trim() == "true";
                 }
-                if (docx.GetElementsByTagName("UnsignedBitfields").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("UnsignedBitfields"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("UnsignedBitfields")[0];
                     UnsignedBitfields = param.InnerText.ToLowerInvariant().Trim() == "true";
                 }
-                if (docx.GetElementsByTagName("UnsignedChars").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("UnsignedChars"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("UnsignedChars")[0];
                     UnsignedChars = param.InnerText.ToLowerInvariant().Trim() == "true";
                 }
-                if (docx.GetElementsByTagName("FunctionSections").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("FunctionSections"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("FunctionSections")[0];
                     FunctionSections = param.InnerText.ToLowerInvariant().Trim() == "true";
                 }
-                if (docx.GetElementsByTagName("DataSections").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("DataSections"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("DataSections")[0];
                     DataSections = param.InnerText.ToLowerInvariant().Trim() == "true";
                 }
 
-                if (docx.GetElementsByTagName("BurnPart").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("BurnPart"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("BurnPart")[0];
                     BurnPart = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("BurnProgrammer").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("BurnProgrammer"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("BurnProgrammer")[0];
                     BurnProgrammer = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("BurnOptions").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("BurnOptions"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("BurnOptions")[0];
                     BurnOptions = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("BurnPort").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("BurnPort"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("BurnPort")[0];
                     BurnPort = param.InnerText;
                 }
-                if (docx.GetElementsByTagName("BurnBaud").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("BurnBaud"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("BurnBaud")[0];
                     try { BurnBaud = int.Parse(param.InnerText); }
                     catch { }
                 }
-                if (docx.GetElementsByTagName("BurnAutoReset").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("BurnAutoReset"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("BurnAutoReset")[0];
                     BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == "true";
                 }
-
-                XmlElement container;
-                XmlNodeList list;
-
-                if (docx.GetElementsByTagName("IncludeDirList").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("BurnFuseBox"))
                 {
-                    IncludeDirList.Clear();
-                    container = (XmlElement)docx.GetElementsByTagName("IncludeDirList")[0];
-                    list = container.GetElementsByTagName("DirPath");
-                    foreach (XmlElement i in list)
+                    BurnFuseBox = param.InnerText;
+                }
+
+                IncludeDirList.Clear();
+                foreach (XmlElement container in docx.GetElementsByTagName("IncludeDirList"))
+                {
+                    foreach (XmlElement i in container.GetElementsByTagName("DirPath"))
                     {
                         IncludeDirList.Add(i.InnerText);
                     }
                 }
 
-                if (docx.GetElementsByTagName("LibraryDirList").Count > 0)
+                LibraryDirList.Clear();
+                foreach (XmlElement container in docx.GetElementsByTagName("LibraryDirList"))
                 {
-                    LibraryDirList.Clear();
-                    container = (XmlElement)docx.GetElementsByTagName("LibraryDirList")[0];
-                    list = container.GetElementsByTagName("DirPath");
-                    foreach (XmlElement i in list)
+                    foreach (XmlElement i in container.GetElementsByTagName("DirPath"))
                     {
                         LibraryDirList.Add(i.InnerText);
                     }
                 }
 
-                if (docx.GetElementsByTagName("LinkObjList").Count > 0)
+                LinkObjList.Clear();
+                foreach (XmlElement container in docx.GetElementsByTagName("LinkObjList"))
                 {
-                    LinkObjList.Clear();
-                    container = (XmlElement)docx.GetElementsByTagName("LinkObjList")[0];
-                    list = container.GetElementsByTagName("Obj");
-                    foreach (XmlElement i in list)
+                    foreach (XmlElement i in container.GetElementsByTagName("Obj"))
                     {
                         LinkObjList.Add(i.InnerText);
                     }
                 }
 
-                if (docx.GetElementsByTagName("LinkLibList").Count > 0)
+                LinkLibList.Clear();
+                foreach (XmlElement container in docx.GetElementsByTagName("LinkLibList"))
                 {
-                    LinkLibList.Clear();
-                    container = (XmlElement)docx.GetElementsByTagName("LinkLibList")[0];
-                    list = container.GetElementsByTagName("Lib");
-                    foreach (XmlElement i in list)
+                    foreach (XmlElement i in container.GetElementsByTagName("Lib"))
                     {
                         LinkLibList.Add(i.InnerText);
                     }
                 }
 
-                if (docx.GetElementsByTagName("MemorySegList").Count > 0)
+                MemorySegList.Clear();
+                foreach (XmlElement container in docx.GetElementsByTagName("MemorySegList"))
                 {
-                    MemorySegList.Clear();
-                    container = (XmlElement)docx.GetElementsByTagName("MemorySegList")[0];
-                    list = container.GetElementsByTagName("Segment");
-                    foreach (XmlElement i in list)
+                    foreach (XmlElement i in container.GetElementsByTagName("Segment"))
                     {
                         try
                         {
@@ -827,50 +805,41 @@ namespace AVRProjectIDE
                     }
                 }
 
-                if (docx.GetElementsByTagName("LastFile").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("LastFile"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("LastFile")[0];
                     LastFile = param.InnerText;
                 }
 
-                if (docx.GetElementsByTagName("FileList").Count > 0)
+                FileList.Clear();
+                foreach (XmlElement container in docx.GetElementsByTagName("FileList"))
                 {
-                    FileList.Clear();
-                    container = (XmlElement)docx.GetElementsByTagName("FileList")[0];
-                    list = container.GetElementsByTagName("File");
-
                     string dirPath = Program.CleanFilePath(path);
                     dirPath = dirPath.Substring(0, dirPath.LastIndexOf('\\'));
 
                     List<ProjectFile> flistOld = new List<ProjectFile>();
                     List<ProjectFile> flistNew = new List<ProjectFile>();
 
-                    foreach (XmlElement i in list)
+                    foreach (XmlElement i in container.GetElementsByTagName("File"))
                     {
-                        if (docx.GetElementsByTagName("RelPath").Count > 0)
+                        foreach (XmlElement relPath in i.GetElementsByTagName("RelPath"))
                         {
-                            XmlElement relPath = (XmlElement)i.GetElementsByTagName("RelPath")[0];
-
                             string newPath = dirPath + Path.DirectorySeparatorChar + Program.CleanFilePath(relPath.InnerText);
                             string oldPath = xDirPath + Path.DirectorySeparatorChar + Program.CleanFilePath(relPath.InnerText);
 
                             ProjectFile newFile = new ProjectFile(newPath);
 
-                            if (docx.GetElementsByTagName("ToCompile").Count > 0)
+                            foreach (XmlElement toComp in i.GetElementsByTagName("ToCompile"))
                             {
-                                XmlElement toComp = (XmlElement)i.GetElementsByTagName("ToCompile")[0];
                                 newFile.ToCompile = toComp.InnerText.ToLowerInvariant().Trim() == "true";
                             }
 
-                            if (docx.GetElementsByTagName("Options").Count > 0)
+                            foreach (XmlElement opt in i.GetElementsByTagName("Options"))
                             {
-                                XmlElement opt = (XmlElement)i.GetElementsByTagName("Options")[0];
                                 newFile.Options = opt.InnerText.Trim();
                             }
 
-                            if (docx.GetElementsByTagName("WasOpen").Count > 0)
+                            foreach (XmlElement wasOpen in i.GetElementsByTagName("WasOpen"))
                             {
-                                XmlElement wasOpen = (XmlElement)i.GetElementsByTagName("WasOpen")[0];
                                 newFile.IsOpen = wasOpen.InnerText.ToLowerInvariant().Trim() == "true";
                             }
 
@@ -886,6 +855,8 @@ namespace AVRProjectIDE
 
                                 flistOld.Add(oldFile);
                             }
+
+                            break;
                         }
                     }
 
@@ -912,7 +883,8 @@ namespace AVRProjectIDE
                     {
                         foreach (ProjectFile file in flistNew)
                         {
-                            fileList.Add(file.FileName, file);
+                            if (fileList.ContainsKey(file.FileName) == false)
+                                fileList.Add(file.FileName, file);
                         }
                         xDirPath = dirPath;
                     }
@@ -920,16 +892,16 @@ namespace AVRProjectIDE
                     {
                         foreach (ProjectFile file in flistOld)
                         {
-                            fileList.Add(file.FileName, file);
+                            if (fileList.ContainsKey(file.FileName) == false)
+                                fileList.Add(file.FileName, file);
                         }
                         dirPath = xDirPath;
                     }
                 }
 
-                if (docx.GetElementsByTagName("AVRStudioXMLStuff").Count > 0)
+                APSXmlElementList.Clear();
+                foreach (XmlElement container in docx.GetElementsByTagName("AVRStudioXMLStuff"))
                 {
-                    APSXmlElementList.Clear();
-                    container = (XmlElement)docx.GetElementsByTagName("AVRStudioXMLStuff")[0];
                     foreach (XmlElement i in container.ChildNodes)
                     {
                         APSXmlElementList.Add(i);
@@ -944,10 +916,8 @@ namespace AVRProjectIDE
                 isReady = true;
                 dirPath = filePath.Substring(0, filePath.LastIndexOf(Path.DirectorySeparatorChar));
 
-
                 if (string.IsNullOrEmpty(SettingsManagement.FavFolder))
                 {
-
                     SettingsManagement.FavFolder = dirPath.Substring(0, dirPath.LastIndexOf(Path.DirectorySeparatorChar));
                 }
             }
@@ -971,67 +941,54 @@ namespace AVRProjectIDE
 
                 XmlElement docx = doc.DocumentElement;
 
-                XmlElement param;
-
                 if (docx.GetElementsByTagName("AVRGCCPLUGIN").Count > 0)
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("PART")[0];
-                    Device = param.InnerText;
-                    BurnPart = Device;
-
-                    XmlElement container;
-                    XmlNodeList list;
-
-                    if (docx.GetElementsByTagName("INCDIRS").Count > 0)
+                    foreach (XmlElement param in docx.GetElementsByTagName("PART"))
                     {
-                        IncludeDirList.Clear();
-                        container = (XmlElement)docx.GetElementsByTagName("INCDIRS")[0];
-                        list = container.GetElementsByTagName("INCLUDE");
-                        foreach (XmlElement i in list)
+                        Device = param.InnerText;
+                        BurnPart = Device;
+                    }
+
+                    IncludeDirList.Clear();
+                    foreach (XmlElement container in docx.GetElementsByTagName("INCDIRS"))
+                    {
+                        foreach (XmlElement i in container.GetElementsByTagName("INCLUDE"))
                         {
                             IncludeDirList.Add(Program.AbsPathFromRel(pathDir, i.InnerText));
                         }
                     }
 
-                    if (docx.GetElementsByTagName("INCDIRS").Count > 0)
+                    LibraryDirList.Clear();
+                    foreach (XmlElement container in docx.GetElementsByTagName("LIBDIRS"))
                     {
-                        LibraryDirList.Clear();
-                        container = (XmlElement)docx.GetElementsByTagName("LIBDIRS")[0];
-                        list = container.GetElementsByTagName("LIBDIR");
-                        foreach (XmlElement i in list)
+                        foreach (XmlElement i in container.GetElementsByTagName("LIBDIR"))
                         {
                             LibraryDirList.Add(Program.AbsPathFromRel(pathDir, i.InnerText));
                         }
                     }
 
-                    if (docx.GetElementsByTagName("INCDIRS").Count > 0)
+                    LinkObjList.Clear();
+                    foreach (XmlElement container in docx.GetElementsByTagName("LINKOBJECTS"))
                     {
-                        LinkObjList.Clear();
-                        container = (XmlElement)docx.GetElementsByTagName("LINKOBJECTS")[0];
-                        list = container.GetElementsByTagName("LINKOBJECT");
-                        foreach (XmlElement i in list)
+                        foreach (XmlElement i in container.GetElementsByTagName("LINKOBJECT"))
                         {
                             LinkObjList.Add(Program.AbsPathFromRel(pathDir, i.InnerText));
                         }
                     }
 
-                    if (docx.GetElementsByTagName("INCDIRS").Count > 0)
+                    LinkLibList.Clear();
+                    foreach (XmlElement container in docx.GetElementsByTagName("LIBS"))
                     {
-                        LinkLibList.Clear();
-                        container = (XmlElement)docx.GetElementsByTagName("LIBS")[0];
-                        list = container.GetElementsByTagName("LIB");
-                        foreach (XmlElement i in list)
+                        foreach (XmlElement i in container.GetElementsByTagName("LIB"))
                         {
                             LinkLibList.Add(i.InnerText);
                         }
                     }
 
-                    if (docx.GetElementsByTagName("INCDIRS").Count > 0)
+                    MemorySegList.Clear();
+                    foreach (XmlElement container in docx.GetElementsByTagName("SEGMENTS"))
                     {
-                        MemorySegList.Clear();
-                        container = (XmlElement)docx.GetElementsByTagName("SEGMENTS")[0];
-                        list = container.GetElementsByTagName("SEGMENT");
-                        foreach (XmlElement i in list)
+                        foreach (XmlElement i in container.GetElementsByTagName("SEGMENT"))
                         {
                             if (i.HasChildNodes)
                             {
@@ -1063,7 +1020,7 @@ namespace AVRProjectIDE
                         PackStructs = false;
                         ShortEnums = false;
                         OtherOptions = "";
-                        param = (XmlElement)docx.GetElementsByTagName("OPTIONSFORALL")[0];
+                        XmlElement param = (XmlElement)docx.GetElementsByTagName("OPTIONSFORALL")[0];
                         string OPTIONSFORALL = param.InnerText.Trim();
                         string[] opts = OPTIONSFORALL.Split(new char[] { ' ', '\t', '\r', '\n', });
                         foreach (string o in opts)
@@ -1121,9 +1078,8 @@ namespace AVRProjectIDE
                         }
                     }
 
-                    if (docx.GetElementsByTagName("LINKEROPTIONS").Count > 0)
+                    foreach (XmlElement param in docx.GetElementsByTagName("LINKEROPTIONS"))
                     {
-                        param = (XmlElement)docx.GetElementsByTagName("LINKEROPTIONS")[0];
                         UseInitStack = false;
                         string[] linkerOptList = param.InnerText.Split(new char[] { ' ', '\t', '\r', '\n', });
                         foreach (string o in linkerOptList)
@@ -1141,29 +1097,23 @@ namespace AVRProjectIDE
                         }
                     }
 
-                    if (docx.GetElementsByTagName("OUTPUTDIR").Count > 0)
+                    foreach (XmlElement param in docx.GetElementsByTagName("OUTPUTDIR"))
                     {
-                        param = (XmlElement)docx.GetElementsByTagName("OUTPUTDIR")[0];
                         OutputDir = Program.CleanFilePath(param.InnerText);
                     }
                 }
 
-                if (docx.GetElementsByTagName("SaveFolder").Count > 0)
+                foreach (XmlElement param in docx.GetElementsByTagName("SaveFolder"))
                 {
-                    param = (XmlElement)docx.GetElementsByTagName("SaveFolder")[0];
                     dirPath = Program.CleanFilePath(param.InnerText);
                 }
 
                 fileList.Clear();
-
                 if (docx.GetElementsByTagName("ProjectFiles").Count > 0)
                 {
                     XmlElement xProjFilesContainer = (XmlElement)docx.GetElementsByTagName("ProjectFiles")[0];
 
-                    fileList.Clear();
-
-                    XmlNodeList list = xProjFilesContainer.GetElementsByTagName("Name");
-                    foreach (XmlElement i in list)
+                    foreach (XmlElement i in xProjFilesContainer.GetElementsByTagName("Name"))
                     {
                         ProjectFile file = new ProjectFile(i.InnerText);
                         fileList.Add(file.FileName, file);
@@ -1172,9 +1122,9 @@ namespace AVRProjectIDE
                 else if (docx.GetElementsByTagName("AVRGCCPLUGIN").Count > 0)
                 {
                     XmlElement pluginContainer = (XmlElement)docx.GetElementsByTagName("AVRGCCPLUGIN")[0];
-                    if (pluginContainer.GetElementsByTagName("FILES").Count > 0)
+
+                    foreach (XmlElement filesContainer in pluginContainer.GetElementsByTagName("FILES"))
                     {
-                        XmlElement filesContainer = (XmlElement)pluginContainer.GetElementsByTagName("FILES")[0];
                         foreach (XmlElement i in filesContainer.ChildNodes)
                         {
                             ProjectFile file = new ProjectFile(Program.AbsPathFromRel(dirPath, i.InnerText));
@@ -1183,18 +1133,15 @@ namespace AVRProjectIDE
                     }
                 }
 
-                if (docx.GetElementsByTagName("AVRGCCPLUGIN").Count > 0)
+                foreach (XmlElement pluginContainer in docx.GetElementsByTagName("AVRGCCPLUGIN"))
                 {
-                    XmlElement pluginContainer = (XmlElement)docx.GetElementsByTagName("AVRGCCPLUGIN")[0];
-
-                    if (pluginContainer.GetElementsByTagName("OPTIONS").Count > 0)
+                    foreach (XmlElement optionsContainer in pluginContainer.GetElementsByTagName("OPTIONS"))
                     {
-                        XmlElement optionsContainer = (XmlElement)pluginContainer.GetElementsByTagName("OPTIONS")[0];
                         foreach (XmlElement i in optionsContainer.GetElementsByTagName("OPTION"))
                         {
                             if (i.GetElementsByTagName("FILE").Count > 0 && i.GetElementsByTagName("OPTIONLIST").Count > 0)
                             {
-                                param = (XmlElement)i.GetElementsByTagName("FILE")[0];
+                                XmlElement param = (XmlElement)i.GetElementsByTagName("FILE")[0];
                                 string fileName = Program.CleanFilePath(param.InnerText);
                                 param = (XmlElement)i.GetElementsByTagName("OPTIONLIST")[0];
                                 string optionsForFile = param.InnerText;
@@ -1457,6 +1404,7 @@ namespace AVRProjectIDE
             burnOpt = "";
             burnBaud = 0;
             burnPort = "";
+            burnFuseBox = "";
             burnAutoReset = false;
 
             lastFile = "";
@@ -1510,6 +1458,7 @@ namespace AVRProjectIDE
             newObject.BurnProgrammer = this.BurnProgrammer;
             newObject.BurnBaud = this.BurnBaud;
             newObject.BurnPort = this.BurnPort;
+            newObject.BurnFuseBox = this.BurnFuseBox;
             newObject.BurnAutoReset = this.BurnAutoReset;
             newObject.ClockFreq = this.ClockFreq;
             newObject.Device = this.Device;

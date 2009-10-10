@@ -31,20 +31,12 @@ namespace AVRProjectIDE
 
             projBurner = new ProjectBurner(project);
 
-            for (int i = 0; i < dropPart.Items.Count; i++)
-            {
-                string str = (string)dropPart.Items[i];
-                str = str.Substring(str.IndexOf('=') + 2);
-                str = str.Substring(0, str.IndexOf(' '));
-                dropPart.Items[i] = str.Trim().ToLowerInvariant();
-            }
+            dropProg.Items.Clear();
+            dropProg.Items.AddRange(ProjectBurner.GetAvailProgrammers());
 
-            for (int i = 0; i < dropProg.Items.Count; i++)
-            {
-                string str = (string)dropProg.Items[i];
-                str = str.Substring(0, str.IndexOf('='));
-                dropProg.Items[i] = str.Trim().ToLowerInvariant();
-            }
+            dropPart.Items.Clear();
+            if (dropProg.Items.Count > 0)
+                dropPart.Items.AddRange(ProjectBurner.GetAvailParts((string)dropProg.Items[0]));
 
             dropPort.Items.Clear();
             dropPort.Items.Add("No Override");
@@ -154,6 +146,7 @@ namespace AVRProjectIDE
             project.InitStackAddr = Convert.ToUInt32("0x" + txtInitStackAddr.Text, 16);
 
             project.BurnOptions = txtBurnOpt.Text;
+            project.BurnFuseBox = txtBurnFuseBox.Text;
             project.BurnPart = (string)dropPart.Items[dropPart.SelectedIndex];
             project.BurnProgrammer = (string)dropProg.Items[dropProg.SelectedIndex];
             project.BurnAutoReset = chkAutoReset.Checked;
@@ -225,29 +218,53 @@ namespace AVRProjectIDE
         {
             txtOutputPath.Text = project.OutputDir;
 
-            dropDevices.SelectedIndex = 0;
-            if (dropDevices.Items.Contains(project.Device))
-                dropDevices.SelectedIndex = dropDevices.Items.IndexOf(project.Device);
-
-            dropPart.SelectedIndex = 0;
-            if (dropPart.Items.Contains(project.BurnPart))
-                dropPart.SelectedIndex = dropPart.Items.IndexOf(project.BurnPart);
-
-            dropProg.SelectedIndex = 0;
-            if (dropProg.Items.Contains(project.BurnProgrammer))
-                dropProg.SelectedIndex = dropProg.Items.IndexOf(project.BurnProgrammer);
-
-            dropPort.SelectedIndex = 0;
-            if (dropPort.Items.Contains(project.BurnPort))
+            if (dropDevices.Items.Count > 0)
             {
-                dropPort.SelectedIndex = dropPort.Items.IndexOf(project.BurnPort);
+                dropDevices.SelectedIndex = 0;
+                if (dropDevices.Items.Contains(project.Device))
+                    dropDevices.SelectedIndex = dropDevices.Items.IndexOf(project.Device);
+                else
+                    dropDevices.SelectedIndex = dropDevices.Items.Add(project.Device);
             }
             else
+                dropDevices.SelectedIndex = dropDevices.Items.Add(project.Device);
+
+            if (dropPart.Items.Count > 0)
             {
-                if (string.IsNullOrEmpty(project.BurnPort) == false)
+                dropPart.SelectedIndex = 0;
+                if (dropPart.Items.Contains(project.BurnPart))
+                    dropPart.SelectedIndex = dropPart.Items.IndexOf(project.BurnPart);
+                else
+                    dropPart.SelectedIndex = dropPart.Items.Add(project.BurnPart);
+            }
+            else
+                dropPart.SelectedIndex = dropPart.Items.Add(project.BurnPart);
+
+            if (dropProg.Items.Count > 0)
+            {
+                dropProg.SelectedIndex = 0;
+                if (dropProg.Items.Contains(project.BurnProgrammer))
+                    dropProg.SelectedIndex = dropProg.Items.IndexOf(project.BurnProgrammer);
+                else
+                    dropProg.SelectedIndex = dropProg.Items.Add(project.BurnProgrammer);
+            }
+            else
+                dropProg.SelectedIndex = dropProg.Items.Add(project.BurnProgrammer);
+
+            if (dropProg.Items.Count > 0)
+            {
+                dropPort.SelectedIndex = 0;
+                if (dropPort.Items.Contains(project.BurnPort))
                 {
-                    int i = dropPort.Items.Add(project.BurnPort);
-                    dropPort.SelectedIndex = i;
+                    dropPort.SelectedIndex = dropPort.Items.IndexOf(project.BurnPort);
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(project.BurnPort) == false)
+                    {
+                        int i = dropPort.Items.Add(project.BurnPort);
+                        dropPort.SelectedIndex = i;
+                    }
                 }
             }
 
@@ -273,6 +290,7 @@ namespace AVRProjectIDE
             listOptimization.SelectedIndex = listOptimization.Items.IndexOf(project.Optimization);
 
             txtBurnOpt.Text = project.BurnOptions;
+            txtBurnFuseBox.Text = project.BurnFuseBox;
             chkAutoReset.Checked = project.BurnAutoReset;
 
             chklistOptions.SetItemChecked(2, project.PackStructs);
@@ -637,7 +655,7 @@ namespace AVRProjectIDE
         private void btnBurnOnlyOpt_Click(object sender, EventArgs e)
         {
             FormToProj();
-            projBurner.Burn(true);
+            projBurner.BurnCMD(true, false);
         }
 
         #endregion
@@ -706,5 +724,16 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        private void lnkFuse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(SettingsManagement.FuseCalcLink);
+        }
+
+        private void btnBurnFuseBox_Click(object sender, EventArgs e)
+        {
+            FormToProj();
+            projBurner.BurnCMD(false, true);
+        }
     }
 }

@@ -192,19 +192,21 @@ namespace AVRProjectIDE
             headerNode.Nodes.Clear();
             otherNode.Nodes.Clear();
 
-            foreach (KeyValuePair<string, ProjectFile> f in project.FileList)
+            foreach (ProjectFile file in project.FileList.Values)
             {
-                string fn = f.Value.FileName;
+                KeywordScanner.FeedFileContent(file);
+
+                string fn = file.FileName;
 
                 TreeNode tn = new TreeNode(fn);
 
-                tn.ToolTipText = f.Value.FileRelPath(project.DirPath);
+                tn.ToolTipText = file.FileRelPath(project.DirPath);
 
                 // attach the menu
                 tn.ContextMenuStrip = nodeRClickMenu;
 
                 // set icon according to whether or not the file is missing on disk
-                if (f.Value.Exists == false)
+                if (file.Exists == false)
                 {
                     tn.ImageKey = "missing.ico";
                     tn.SelectedImageKey = "missing.ico";
@@ -222,7 +224,7 @@ namespace AVRProjectIDE
                 {
                     // only source files can be compiled
 
-                    if (f.Value.ToCompile)
+                    if (file.ToCompile)
                     {
                         tn.Checked = true;
                     }
@@ -249,6 +251,8 @@ namespace AVRProjectIDE
             treeView1.ExpandAll();
 
             treeView1.ResumeLayout();
+
+            KeywordScanner.DoMoreWork();
         }
 
         public SaveResult AddFile(out ProjectFile file)

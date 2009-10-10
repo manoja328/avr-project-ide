@@ -78,6 +78,8 @@
             this.scint.Name = "scint";
             this.scint.Size = new System.Drawing.Size(868, 377);
             this.scint.TabIndex = 0;
+            this.scint.CharAdded += new System.EventHandler<ScintillaNet.CharAddedEventArgs>(this.scint_CharAdded);
+            this.scint.AutoCompleteAccepted += new System.EventHandler<ScintillaNet.AutoCompleteAcceptedEventArgs>(this.scint_AutoCompleteAccepted);
             // 
             // rClickMenu
             // 

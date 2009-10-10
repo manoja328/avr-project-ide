@@ -83,6 +83,7 @@ namespace AVRProjectIDE
                 file.IsOpen = true;
 
                 scint = SettingsManagement.SetScintSettings(scint);
+                scint = KeywordImageGen.ApplyImageList(scint);
 
                 fileSystemWatcher1.Filter = file.FileName;
                 fileSystemWatcher1.Path = file.FileDir + Path.DirectorySeparatorChar;
@@ -107,21 +108,15 @@ namespace AVRProjectIDE
             path = Program.CleanFilePath(path);
 
             bool success = true;
-            StreamWriter writer = null;
 
             if (Program.MakeSurePathExists(path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar))) == false)
                 return false;
 
             try
             {
-                writer = new StreamWriter(path);
-                writer.Write(scint.Text.TrimEnd());
-            }
-            catch { success = false; }
-
-            try
-            {
-                writer.Close();
+                KeywordScanner.FeedFileContent(file, scint.Text);
+                KeywordScanner.DoMoreWork();
+                System.IO.File.WriteAllText(file.FileAbsPath, scint.Text);
             }
             catch { success = false; }
 
@@ -199,20 +194,15 @@ namespace AVRProjectIDE
             path = Program.CleanFilePath(path);
 
             bool success = true;
-            StreamReader reader = null;
 
             try
             {
-                reader = new StreamReader(path);
-                scint.Text = reader.ReadToEnd().TrimEnd();
+                scint.Text = System.IO.File.ReadAllText(file.FileAbsPath).TrimEnd();
             }
             catch { success = false; }
 
-            try
-            {
-                reader.Close();
-            }
-            catch { success = false; }
+            KeywordScanner.FeedFileContent(file, scint.Text);
+            KeywordScanner.DoMoreWork();
 
             scint.Modified = false;
             hasChanged = false;
@@ -387,6 +377,9 @@ namespace AVRProjectIDE
                 }
                 else if (res == DialogResult.Cancel)
                     e.Cancel = true;
+
+                if (e.Cancel == false)
+                    file.IsOpen = false;
             }
             if (e.Cancel == false)
             {
@@ -399,7 +392,6 @@ namespace AVRProjectIDE
 
         private void EditorPanelContent_FormClosed(object sender, FormClosedEventArgs e)
         {
-            file.IsOpen = false;
             EditorClosed(FileName, sender, e);
         }
 
@@ -601,6 +593,71 @@ namespace AVRProjectIDE
             }
 
             this.Close();
+        }
+
+        private void scint_CharAdded(object sender, CharAddedEventArgs e)
+        {
+            if (scint.AutoComplete.IsActive == false && "abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ#".Contains(e.Ch) && scint.PositionIsOnComment(scint.CurrentPos) == false)
+            {
+                string line = scint.Lines.Current.Text;
+                int lineLen = scint.Caret.Position - scint.Lines.Current.StartPosition;
+                line = "\r\n" + line + "\r\n";
+                bool inString = false;
+                bool inChar = false;
+                for (int i = 2; i < lineLen + 2; i++)
+                {
+                    if (line[i] == '\\' && line[i + 1] == '\\' && (inString || inChar))
+                    {
+                        line = line.Remove(i, 2);
+                        line = line.Insert(i, "  ");
+                    }
+                    else if (line[i] == '"' && line[i - 1] != '\\' && inChar == false)
+                    {
+                        inString = !inString;
+                    }
+                    else if (line[i] == '\'' && line[i - 1] != '\\' && inString == false)
+                    {
+                        inChar = !inChar;
+                    }
+                }
+
+                if (inString == false && inChar == false)
+                {
+                    if (e.Ch == '#')
+                    {
+                        scint.AutoComplete.Show(KeywordScanner.GetPreprocKeywords());
+                    }
+                    else
+                    {
+                        scint.AutoComplete.Show(KeywordScanner.GetKeywordsUpTo(file, scint.Text.Substring(0, scint.NativeInterface.WordStartPosition(scint.CurrentPos, true))));
+                    }
+                }
+            }
+            else if (scint.AutoComplete.IsActive && "abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".Contains(e.Ch))
+            {
+                scint.AutoComplete.Show();
+            }
+        }
+
+        private void scint_AutoCompleteAccepted(object sender, AutoCompleteAcceptedEventArgs e)
+        {
+            e.Cancel = true;
+
+            int start = scint.NativeInterface.WordStartPosition(scint.CurrentPos, true);
+            int backspace = scint.CurrentPos - start;
+            int delete = scint.NativeInterface.WordEndPosition(scint.CurrentPos, true) - scint.CurrentPos;
+
+            for (int i = 0; i < backspace; i++)
+            {
+                SendKeys.Send("{BKSP}");
+            }
+
+            for (int i = 0; i < delete; i++)
+            {
+                SendKeys.Send("{DEL}");
+            }
+
+            scint.InsertText(start, e.Text);
         }
     }
 }

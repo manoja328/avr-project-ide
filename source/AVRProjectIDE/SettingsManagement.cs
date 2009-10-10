@@ -23,6 +23,7 @@ namespace AVRProjectIDE
                 if (string.IsNullOrEmpty(id))
                 {
                     BuildID = Guid.NewGuid().ToString();
+                    id = BuildID;
                 }
                 return id;
             }
@@ -30,6 +31,25 @@ namespace AVRProjectIDE
             set
             {
                 iniFile.Write("Updater", "BuildID", value);
+            }
+        }
+
+        public static string FuseCalcLink
+        {
+            get
+            {
+                string lnk = iniFile.Read("Links", "FuseCalculator");
+                if (string.IsNullOrEmpty(lnk))
+                {
+                    FuseCalcLink = "http://www.engbedded.com/cgi-bin/fcx.cgi";
+                    lnk = FuseCalcLink;
+                }
+                return lnk;
+            }
+
+            set
+            {
+                iniFile.Write("Links", "FuseCalculator", value);
             }
         }
 
@@ -53,6 +73,11 @@ namespace AVRProjectIDE
         static public string AppDataPath
         {
             get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + AssemblyTitle + Path.DirectorySeparatorChar; }
+        }
+
+        static public string CurDirPath
+        {
+            get { return Directory.GetCurrentDirectory().Trim(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar; }
         }
 
         static private string settingsFilePath;
@@ -558,6 +583,11 @@ namespace AVRProjectIDE
                 scinti.LineWrap.Mode = WrapMode.None;
                 scinti.Scrolling.ScrollBars = ScrollBars.Both;
             }
+
+            //scinti.AutoComplete.ListString = "test doo uint8_t";
+            scinti.AutoComplete.AutomaticLengthEntered = true;
+            scinti.AutoComplete.FillUpCharacters = "";
+            scinti.AutoComplete.AutoHide = true;
 
             return scinti;
         }

@@ -1057,6 +1057,9 @@ namespace AVRProjectIDE
 
             while (line != null)
             {
+                if (line.ToLowerInvariant().Contains("cannot find"))
+                {
+                }
                 string re1 = "([a-z0-9_]+)";   // Variable Name 1
                 string re2 = "(\\.)";	// Any Single Character 1
                 string re3 = "([a-z0-9_]+)";	// Variable Name 2
@@ -1221,6 +1224,10 @@ namespace AVRProjectIDE
                     {
                         loc = "top level";
                     }
+                    else
+                    {
+                        TextBoxModify(outputTextbox, line, TextBoxChangeMode.AppendNewLine);
+                    }
 
                     line = reader.ReadLine();
                     continue;
@@ -1383,7 +1390,7 @@ namespace AVRProjectIDE
                 }
 
                 // since arduino sketches needs its core files, gather all the core files
-                GetCompilableFiles(SettingsManagement.ArduinoCorePath, ardExtList);
+                GetCompilableFiles(SettingsManagement.ArduinoCorePath, ardExtList, false);
 
                 try
                 {
@@ -1398,7 +1405,7 @@ namespace AVRProjectIDE
                 foreach (string lib in ardLibList)
                 {
                     string folderPath = SettingsManagement.ArduinoLibPath + Path.DirectorySeparatorChar + lib;
-                    GetCompilableFiles(folderPath, ardExtList);
+                    GetCompilableFiles(folderPath, ardExtList, true);
                 }
 
                 workingProject.IncludeDirList.Add(SettingsManagement.AppDataPath + "temp");
@@ -1454,7 +1461,7 @@ namespace AVRProjectIDE
             return resultList;
         }
 
-        private void GetCompilableFiles(string folder, List<ProjectFile> fileList)
+        private void GetCompilableFiles(string folder, List<ProjectFile> fileList, bool isLibrary)
         {
             Program.MakeSurePathExists(SettingsManagement.AppDataPath + "temp");
 
@@ -1489,7 +1496,24 @@ namespace AVRProjectIDE
                 // recursively find files within subdirectories
                 foreach (DirectoryInfo nextDir in dnfo.GetDirectories())
                 {
-                    GetCompilableFiles(nextDir.FullName, fileList);
+                    if (isLibrary)
+                    {
+                        if (nextDir.Name.ToLowerInvariant() == "utility")
+                            GetCompilableFiles(nextDir.FullName, fileList, true);
+                        else
+                        {
+                            try
+                            {
+                                Program.CopyAll(nextDir, new DirectoryInfo(SettingsManagement.AppDataPath + "temp" + Path.DirectorySeparatorChar + nextDir.Name));
+                            }
+                            catch (Exception ex)
+                            {
+                                TextBoxModify(outputTextbox, "####Error while copying " + nextDir.Name + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                            }
+                        }
+                    }
+                    else
+                        GetCompilableFiles(nextDir.FullName, fileList, false);
                 }
             }
         }
@@ -1631,7 +1655,7 @@ namespace AVRProjectIDE
             avrdude = new Process();
         }
 
-        public void Burn(bool onlyOptions)
+        public void BurnCMD(bool onlyOptions, bool burnFuses)
         {
             try
             {
@@ -1645,8 +1669,11 @@ namespace AVRProjectIDE
             // construct appropriate arguments
 
             string fileStr = "";
-            if (onlyOptions == false)
+            if (onlyOptions == false && burnFuses == false)
                 fileStr = String.Format("-U flash:w:\"{0}\\{1}\\{2}.hex\":a", project.DirPath, project.OutputDir, project.FileNameNoExt);
+
+            if (burnFuses)
+                fileStr = project.BurnFuseBox;
 
             string overrides = "";
 
@@ -1697,13 +1724,15 @@ namespace AVRProjectIDE
             }
         }
 
-        public string[] GetAvailParts()
+        public static string[] GetAvailParts(string progname)
         {
             List<string> res = new List<string>();
 
             Process avrdude = new Process();
             // trick avrdude to list supported parts by using a malformed argument
-            avrdude.StartInfo = new ProcessStartInfo("avrdude", "-c usbisp -p blarg");
+            avrdude.StartInfo = new ProcessStartInfo("avrdude", "-c " + progname + " -p " + Guid.NewGuid().ToString());
+            avrdude.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            avrdude.StartInfo.CreateNoWindow = true;
             avrdude.StartInfo.UseShellExecute = false;
             avrdude.StartInfo.RedirectStandardError = true;
             avrdude.StartInfo.RedirectStandardOutput = true;
@@ -1712,11 +1741,7 @@ namespace AVRProjectIDE
             {
                 if (avrdude.Start())
                 {
-                    StreamReader stdout = avrdude.StandardOutput;
-                    StreamReader stderr = avrdude.StandardError;
-
-                    res = GetFirstWords(stdout, res);
-                    res = GetFirstWords(stderr, res);
+                    res = GetPartWords(avrdude.StandardError.ReadToEnd(), res);
                 }
                 else
                 {
@@ -1732,13 +1757,29 @@ namespace AVRProjectIDE
             return res.ToArray();
         }
 
-        public string[] GetAvailProgrammers()
+        private static List<string> GetPartWords(string output, List<string> res)
+        {
+            if (res == null) res = new List<string>();
+            string[] lines = output.Split('\n');
+            Regex r = new Regex("([0-9a-zA-Z_]+)(\\s+)(=)(\\s+)(.*)(\\s+)(\\[.*\\])", RegexOptions.IgnoreCase);
+            foreach (string line in lines)
+            {
+                Match m = r.Match(line.Trim());
+                if (m.Success && m.Index == 0)
+                    res.Add(m.Groups[5].Value.Trim().ToLowerInvariant());
+            }
+            return res;
+        }
+
+        public static string[] GetAvailProgrammers()
         {
             List<string> res = new List<string>();
 
             Process avrdude = new Process();
             // trick avrdude to list supported programmers by using a malformed argument
             avrdude.StartInfo = new ProcessStartInfo("avrdude", "-c blarg");
+            avrdude.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            avrdude.StartInfo.CreateNoWindow = true;
             avrdude.StartInfo.UseShellExecute = false;
             avrdude.StartInfo.RedirectStandardError = true;
             avrdude.StartInfo.RedirectStandardOutput = true;
@@ -1747,11 +1788,7 @@ namespace AVRProjectIDE
             {
                 if (avrdude.Start())
                 {
-                    StreamReader stdout = avrdude.StandardOutput;
-                    StreamReader stderr = avrdude.StandardError;
-
-                    res = GetFirstWords(stdout, res);
-                    res = GetFirstWords(stderr, res);
+                    res = GetFirstWords(avrdude.StandardError.ReadToEnd(), res);
                 }
                 else
                 {
@@ -1767,26 +1804,17 @@ namespace AVRProjectIDE
             return res.ToArray();
         }
 
-        private List<string> GetFirstWords(StreamReader reader, List<string> res)
+        private static List<string> GetFirstWords(string output, List<string> res)
         {
-            // get the first word of a line split by =
-
-            string line = reader.ReadLine();
-
-            while (line != null)
+            if (res == null) res = new List<string>();
+            string[] lines = output.Split('\n');
+            Regex r = new Regex("([0-9a-zA-Z_]+)(\\s+)(=)(\\s+)(.*)(\\s+)(\\[.*\\])", RegexOptions.IgnoreCase);
+            foreach (string line in lines)
             {
-                if (line.Contains("="))
-                {
-                    string[] parts = line.Split('=');
-                    if (parts.Length >= 2)
-                    {
-                        res.Add(parts[0].Trim());
-                    }
-                }
-
-                line = reader.ReadLine();
+                Match m = r.Match(line.Trim());
+                if (m.Success && m.Index == 0)
+                    res.Add(m.Groups[1].Value.Trim().ToLowerInvariant());
             }
-
             return res;
         }
     }
