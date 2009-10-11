@@ -4,8 +4,8 @@ The updating mechanism checks this webpage for the following string, so this pag
 
 `BUILDID:"AVRProjectIDE_Alpha33"`
 
-`DOWNLOADURL:"http://avr-project-ide.googlecode.com/files/AVRProjectIDESetup33.exe"`
+`DOWNLOADURL:"http://avr-project-ide.googlecode.com/files/AVRProjectIDESetup33.msi"`
 
-`NEWFILENAME:"AVRProjectIDESetup.exe"`
+`NEWFILENAME:"AVRProjectIDESetup.msi"`
 
 `AUTOEXECUTE:"true"`
