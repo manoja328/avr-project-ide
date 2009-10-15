@@ -29,14 +29,16 @@ namespace AVRProjectIDE
 
             this.project = project;
 
+            project.HasBeenConfigged = true;
+
             projBurner = new ProjectBurner(project);
 
             dropProg.Items.Clear();
-            dropProg.Items.AddRange(ProjectBurner.GetAvailProgrammers());
+            dropProg.Items.AddRange(ProjectBurner.GetAvailProgrammers(true));
 
             dropPart.Items.Clear();
             if (dropProg.Items.Count > 0)
-                dropPart.Items.AddRange(ProjectBurner.GetAvailParts((string)dropProg.Items[0]));
+                dropPart.Items.AddRange(ProjectBurner.GetAvailParts((string)dropProg.Items[0], true));
 
             dropPort.Items.Clear();
             dropPort.Items.Add("No Override");

@@ -43,25 +43,39 @@ namespace AVRProjectIDE
             {
                 //ResourceManager resxMan = new ResourceManager(SettingsManagement.AssemblyTitle + ".chip_xml", System.Reflection.Assembly.GetExecutingAssembly());
 
-                if (Program.MakeSurePathExists(SettingsManagement.CurDirPath + "chip_xml"))
+                if (Program.MakeSurePathExists(SettingsManagement.AppDataPath + "chip_xml"))
                 {
-                    string xmlFilePath;
+                    string xmlFilePathA;
+                    string xmlFilePathB;
                     int cnt = chipName.Length;
                     do
                     {
-                        xmlFilePath = SettingsManagement.CurDirPath + "chip_xml" + Path.DirectorySeparatorChar + chipName.Substring(0, cnt) + ".xml";
+                        xmlFilePathA = SettingsManagement.AppInstallPath + "chip_xml" + Path.DirectorySeparatorChar + chipName.Substring(0, cnt) + ".xml";
+                        xmlFilePathB = SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + chipName.Substring(0, cnt) + ".xml";
 
                         if (cnt == 0)
-                            throw new Exception("chip data xml (" + chipName + ".xml) was not found in " + xmlFilePath.Substring(0, xmlFilePath.LastIndexOf(Path.DirectorySeparatorChar)));
+                            throw new Exception("chip data xml (" + chipName + ".xml) was not found in " + SettingsManagement.AppInstallPath + "chip_xml or " + SettingsManagement.AppDataPath + "chip_xml");
 
-                        if (File.Exists(xmlFilePath) == false)
-                            cnt--;
+                        if (File.Exists(xmlFilePathB) == false)
+                        {
+                            if (File.Exists(xmlFilePathA))
+                            {
+                                File.Copy(xmlFilePathA, xmlFilePathB, true);
+                                break;
+                            }
+                            else
+                            {
+                                cnt--;
+                            }
+                        }
                         else
+                        {
                             break;
+                        }
                     }
                     while (true);
 
-                    xDoc.Load(xmlFilePath);
+                    xDoc.Load(xmlFilePathB);
                 }
             }
             catch (Exception ex)
@@ -404,7 +418,7 @@ namespace AVRProjectIDE
                                 int cnt = 0;
                                 if (int.TryParse(nmb_pin.InnerText, out cnt))
                                 {
-                                    for (int pinNum = 0; pinNum < cnt; pinNum++)
+                                    for (int pinNum = 0; pinNum <= cnt; pinNum++)
                                     {
                                         foreach (XmlElement pin in k.GetElementsByTagName("PIN" + pinNum.ToString("0")))
                                         {

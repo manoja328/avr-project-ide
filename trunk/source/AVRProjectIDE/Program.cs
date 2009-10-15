@@ -22,7 +22,9 @@ namespace AVRProjectIDE
 
                 SettingsManagement.Load();
                 ProjTemplate.Load();
-                KeywordImageGen.GenerateKeywordImages();
+
+                if (SettingsManagement.AutocompleteEnable)
+                    KeywordImageGen.GenerateKeywordImages();
             }
             catch (Exception ex)
             {
@@ -52,17 +54,15 @@ namespace AVRProjectIDE
                     {
                         SettingsManagement.AddFileAsMostRecent(fname);
                     }
+                    else
+                    {
+                        MessageBox.Show("Error, failed to open file");
+                    }
                 }
 
                 KeywordScanner.Initialize();
 
-                if (newProject.IsReady == false)
-                {
-                    Application.Run(new WelcomeWindow(newProject));
-                }
-
-                if (newProject.IsReady)
-                    Application.Run(new IDEWindow(newProject));
+                Application.Run(new IDEWindow(newProject));
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace AVRProjectIDE
                             if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Run the Updater?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
                                 System.Diagnostics.Process updater = new System.Diagnostics.Process();
-                                updater.StartInfo = new System.Diagnostics.ProcessStartInfo("AVRProjectIDEUpdater.exe", UpdateMech.NewBuildID + " http://avr-project-ide.googlecode.com/files/" + UpdateMech.NewBuildID + ".exe" + " AVRProjectIDE.exe");
+                                updater.StartInfo = new System.Diagnostics.ProcessStartInfo(SettingsManagement.AppInstallPath + "AVRProjectIDEUpdater.exe", UpdateMech.NewBuildID + " " + UpdateMech.DownloadURL + " " + UpdateMech.NewFileName + " yes");
                                 updater.Start();
                             }
                         }
@@ -105,7 +105,7 @@ namespace AVRProjectIDE
         {
             bool rewrite = false;
             byte[] newBArr = Properties.Resources.AVRProjectIDEUpdater;
-            string path = Program.CleanFilePath(Directory.GetCurrentDirectory()) + Path.DirectorySeparatorChar + "AVRProjectIDEUpdater.exe";
+            string path = SettingsManagement.AppInstallPath + "AVRProjectIDEUpdater.exe";
             if (File.Exists(path))
             {
                 byte[] oldBArr = File.ReadAllBytes(path);
@@ -122,7 +122,7 @@ namespace AVRProjectIDE
             if (rewrite)
             {
                 File.WriteAllBytes(path, newBArr);
-                MessageBox.Show("The Updater has been Updated");
+                MessageBox.Show("The Updater has been Installed or Updated");
             }
         }
 

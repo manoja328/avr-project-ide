@@ -25,21 +25,23 @@ namespace AVRProjectIDEUpdater
 
         static public string CurDirPath
         {
-            get { return Directory.GetCurrentDirectory().Trim().TrimEnd(Path.DirectorySeparatorChar).Trim() + Path.DirectorySeparatorChar; }
+            get { return Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf(Path.DirectorySeparatorChar)) + Path.DirectorySeparatorChar; }
         }
 
         private string buildID;
         private string url;
-        private string fileName;
+        private string localFileName;
         private IniFile ini;
+        private bool execute;
 
-        public Form1(string buildID, string url, string fileName)
+        public Form1(string buildID, string url, string localFileName, bool execute)
         {
             InitializeComponent();
 
             this.buildID = buildID;
             this.url = url;
-            this.fileName = fileName;
+            this.localFileName = localFileName;
+            this.execute = execute;
 
             if (Program.MakeSurePathExists(AppDataPath) == false)
             {
@@ -80,10 +82,14 @@ namespace AVRProjectIDEUpdater
                     {
                         if (File.Exists(CurDirPath + "updatedtemp.bin"))
                         {
-                            File.Copy(CurDirPath + "updatedtemp.bin", CurDirPath + fileName, true);
+                            File.Copy(CurDirPath + "updatedtemp.bin", CurDirPath + localFileName, true);
                             ini.Write("Updater", "BuildID", buildID);
-                            MessageBox.Show("Update of " + fileName + " Complete!");
+                            MessageBox.Show("Update of " + localFileName + " Complete!");
                             File.Delete(CurDirPath + "updatedtemp.bin");
+
+                            if (execute)
+                                Process.Start(CurDirPath + localFileName);
+
                             this.Close();
                         }
                         else
@@ -137,9 +143,10 @@ namespace AVRProjectIDEUpdater
                 }
             }
 
+            System.Threading.Thread.Sleep(250);
+
             if (start)
             {
-                Program.CheckForDLLs();
                 timer1.Enabled = false;
                 progressBar1.Style = ProgressBarStyle.Blocks;
                 WebClient wc = new WebClient();

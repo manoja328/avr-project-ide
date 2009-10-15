@@ -44,19 +44,12 @@ namespace AVRProjectIDE
 
             InitializeComponent();
 
-            SettingsManagement.LoadWindowState(this);
-
-            // set title
-            this.Text = project.FileNameNoExt + " - AVRProjectIDE";
-
             // create panel windows, attach events, etc etc
 
-            fileTreeWin = new FileTreePanel(project, editorList);
+            fileTreeWin = new FileTreePanel();
             fileTreeWin.OpenNode += new FileTreePanel.OpenFileEvent(fileTreeWin_OpenNode);
-            fileTreeWin.PopulateList();
 
             hardwareExplorerWin = new HardwareExplorer();
-            hardwareExplorerWin.LoadDataForChip(project.Device);
 
             searchWin = new SearchPanel(editorList);
             searchWin.GotoResult += new SearchPanel.SearchResultDoubleClickedEvent(searchWin_GotoResult);
@@ -72,39 +65,6 @@ namespace AVRProjectIDE
 
             projBurner = new ProjectBurner(project);
 
-            bool useSavedDockSettings = false;
-            // if workspace setting exists, load it
-            if (File.Exists(SettingsManagement.AppDataPath + "workspace.xml"))
-            {
-                DeserializeDockContent deserDockCont = new DeserializeDockContent(GetPanelFromPersistString);
-                try
-                {
-                    dockPanel1.LoadFromXml(SettingsManagement.AppDataPath + "workspace.xml", deserDockCont);
-                    useSavedDockSettings = true;
-                }
-                catch { }
-            }
-
-            if (useSavedDockSettings)
-            {
-                fileTreeWin.Show(dockPanel1);
-                messageWin.Show(dockPanel1);
-                searchWin.Show(dockPanel1);
-                serialWin.Show(dockPanel1);
-                hardwareExplorerWin.Show(dockPanel1);
-            }
-            else
-            {
-                // if an xml was not loaded, do the default config
-                fileTreeWin.Show(dockPanel1, DockState.DockLeft);
-                messageWin.Show(dockPanel1, DockState.DockBottom);
-                searchWin.Show(dockPanel1, DockState.DockBottom);
-                serialWin.Show(dockPanel1, DockState.DockBottom);
-                hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
-            }
-
-            searchWin.Activate();
-
             // fill help menu with a list of bookmarks to websites
             try
             {
@@ -117,13 +77,10 @@ namespace AVRProjectIDE
 
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Arduino Core Path: " + SettingsManagement.ArduinoCorePath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Arduino Library Path: " + SettingsManagement.ArduinoLibPath);
-            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Appdata Path: " + SettingsManagement.AppDataPath);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppData Path: " + SettingsManagement.AppDataPath);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppInstall Path: " + SettingsManagement.AppInstallPath);
 
             FillRecentProjects();
-
-            ReloadLastOpened();
-
-            KeywordScanner.LaunchScan(project, editorList);
         }
 
         private IDockContent GetPanelFromPersistString(string persistString)
@@ -213,6 +170,9 @@ namespace AVRProjectIDE
 
         public void ReloadLastOpened()
         {
+            if (project.IsReady == false)
+                return;
+
             string lastFileName = project.LastFile;
             foreach (KeyValuePair<string, ProjectFile> i in project.FileList)
             {
@@ -228,6 +188,9 @@ namespace AVRProjectIDE
 
         public bool SaveAll()
         {
+            if (project.IsReady == false)
+                return true;
+
             bool success = true;
 
             // save each window
@@ -243,6 +206,9 @@ namespace AVRProjectIDE
 
         public bool SaveProj()
         {
+            if (project.IsReady == false)
+                return true;
+
             if (lastEditor != null)
             {
                 project.LastFile = lastEditor.FileName;
@@ -426,7 +392,7 @@ namespace AVRProjectIDE
             }
 
             // make sure the file tree displays right
-            fileTreeWin.PopulateList();
+            fileTreeWin.PopulateList(project, editorList);
         }
 
         #endregion
@@ -500,10 +466,17 @@ namespace AVRProjectIDE
 
         private void tbtnNewOrig_Click(object sender, EventArgs e)
         {
-            ProjectFile file;
-            if (fileTreeWin.AddFile(out file) == SaveResult.Successful)
+            if (project.IsReady == false)
             {
-                GotoEditor(file.FileName);
+                mbtnOpenProject_Click(sender, e);
+            }
+            else
+            {
+                ProjectFile file;
+                if (fileTreeWin.AddFile(out file) == SaveResult.Successful)
+                {
+                    GotoEditor(file.FileName);
+                }
             }
         }
 
@@ -698,7 +671,7 @@ namespace AVRProjectIDE
                 projBurner = new ProjectBurner(project);
 
                 // set title
-                this.Text = project.FileNameNoExt + " - AVRProjectIDE";
+                this.Text = project.FileNameNoExt + " - AVR Project IDE";
 
                 editorList.Clear();
 
@@ -709,6 +682,12 @@ namespace AVRProjectIDE
                 fileTreeWin.PopulateList(newProj, editorList);
 
                 ReloadLastOpened();
+
+                if (project.HasBeenConfigged == false)
+                {
+                    ConfigWindow wnd = new ConfigWindow(project);
+                    wnd.ShowDialog();
+                }
 
                 hardwareExplorerWin.LoadDataForChip(project.Device);
 
@@ -798,7 +777,7 @@ namespace AVRProjectIDE
                 projBurner = new ProjectBurner(project);
 
                 // set title
-                this.Text = project.FileNameNoExt + " - AVRProjectIDE";
+                this.Text = project.FileNameNoExt + " - AVR Project IDE";
 
                 editorList.Clear();
 
@@ -809,6 +788,12 @@ namespace AVRProjectIDE
                 fileTreeWin.PopulateList(newProj, editorList);
 
                 ReloadLastOpened();
+
+                if (project.HasBeenConfigged == false)
+                {
+                    ConfigWindow wnd = new ConfigWindow(project);
+                    wnd.ShowDialog();
+                }
 
                 hardwareExplorerWin.LoadDataForChip(project.Device);
 
@@ -1035,6 +1020,9 @@ namespace AVRProjectIDE
 
         private void mbtnConfig_Click(object sender, EventArgs e)
         {
+            if (project.IsReady == false)
+                return;
+
             ConfigWindow wnd = new ConfigWindow(project);
             wnd.ShowDialog();
             hardwareExplorerWin.LoadDataForChip(project.Device);
@@ -1042,6 +1030,9 @@ namespace AVRProjectIDE
 
         private void tbtnConfig_Click(object sender, EventArgs e)
         {
+            if (project.IsReady == false)
+                return;
+
             ConfigWindow wnd = new ConfigWindow(project);
             wnd.ShowDialog();
             hardwareExplorerWin.LoadDataForChip(project.Device);
@@ -1049,20 +1040,56 @@ namespace AVRProjectIDE
 
         private void mbtnCompile_Click(object sender, EventArgs e)
         {
-            messageWin.Activate();
-            SaveAll();
-            projBuilder.StartBuild();
+            if (project.IsReady == false)
+                return;
+
+            if (ProjectBuilder.CheckForWinAVR())
+            {
+                messageWin.Activate();
+                SaveAll();
+                projBuilder.StartBuild();
+            }
+            else
+            {
+                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
+            }
         }
 
         private void tbtnCompile_Click(object sender, EventArgs e)
         {
-            messageWin.Activate();
-            SaveAll();
-            projBuilder.StartBuild();
+            if (project.IsReady == false)
+                return;
+
+            if (ProjectBuilder.CheckForWinAVR())
+            {
+                messageWin.Activate();
+                SaveAll();
+                projBuilder.StartBuild();
+            }
+            else
+            {
+                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
+            }
         }
 
         private void tbtnBurn_Click(object sender, EventArgs e)
         {
+            if (project.IsReady == false)
+                return;
+
+            if (ProjectBuilder.CheckForWinAVR() == false)
+            {
+                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
+
+                return;
+            }
+
             if (serialWin.IsConnected && serialWin.CurrentPort == project.BurnPort)
                 serialWin.Disconnect();
 
@@ -1077,6 +1104,18 @@ namespace AVRProjectIDE
 
         private void mbtnBurn_Click(object sender, EventArgs e)
         {
+            if (project.IsReady == false)
+                return;
+
+            if (ProjectBuilder.CheckForWinAVR() == false)
+            {
+                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
+
+                return;
+            }
+
             if (serialWin.IsConnected && serialWin.CurrentPort == project.BurnPort)
                 serialWin.Disconnect();
             
@@ -1091,6 +1130,9 @@ namespace AVRProjectIDE
 
         private void mbtnExportMakefile_Click(object sender, EventArgs e)
         {
+            if (project.IsReady == false)
+                return;
+
             if (Makefile.Generate(project))
             {
                 MessageBox.Show("Makefile Generated in Your Project Directory");
@@ -1103,6 +1145,9 @@ namespace AVRProjectIDE
 
         private void mbtnExportAPS_Click(object sender, EventArgs e)
         {
+            if (project.IsReady == false)
+                return;
+
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "AVRStudio Project (*.aps)|*.aps";
             if (sfd.ShowDialog() == DialogResult.OK)
@@ -1116,7 +1161,19 @@ namespace AVRProjectIDE
 
         private void mbtnRunMake_Click(object sender, EventArgs e)
         {
-            projBuilder.StartMake();
+            if (project.IsReady)
+            {
+                if (ProjectBuilder.CheckForWinAVR())
+                {
+                    projBuilder.StartMake();
+                }
+                else
+                {
+                    DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
+                    if (res == DialogResult.Yes)
+                        System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
+                }
+            }
         }
 
         #endregion
@@ -1136,6 +1193,77 @@ namespace AVRProjectIDE
         private void timerScanner_Tick(object sender, EventArgs e)
         {
             KeywordScanner.DoMoreWork();
+        }
+
+        private void IDEWindow_Load(object sender, EventArgs e)
+        {
+            SettingsManagement.LoadWindowState(this);
+
+            bool useSavedDockSettings = false;
+            // if workspace setting exists, load it
+            if (File.Exists(SettingsManagement.AppDataPath + "workspace.xml"))
+            {
+                DeserializeDockContent deserDockCont = new DeserializeDockContent(GetPanelFromPersistString);
+                try
+                {
+                    dockPanel1.LoadFromXml(SettingsManagement.AppDataPath + "workspace.xml", deserDockCont);
+                    useSavedDockSettings = true;
+                }
+                catch { }
+            }
+
+            if (useSavedDockSettings)
+            {
+                fileTreeWin.Show(dockPanel1);
+                messageWin.Show(dockPanel1);
+                searchWin.Show(dockPanel1);
+                serialWin.Show(dockPanel1);
+                hardwareExplorerWin.Show(dockPanel1);
+            }
+            else
+            {
+                // if an xml was not loaded, do the default config
+                fileTreeWin.Show(dockPanel1, DockState.DockLeft);
+                messageWin.Show(dockPanel1, DockState.DockBottom);
+                searchWin.Show(dockPanel1, DockState.DockBottom);
+                serialWin.Show(dockPanel1, DockState.DockBottom);
+                hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
+            }
+
+            searchWin.Activate();
+
+            if (project.IsReady == false && SettingsManagement.WelcomeWindowAtStart)
+            {
+                WelcomeWindow ww = new WelcomeWindow(project);
+                ww.ShowDialog();
+            }
+
+            if (project.IsReady)
+            {
+                ReloadLastOpened();
+
+                KeywordScanner.LaunchScan(project, editorList);
+
+                // set title
+                this.Text = project.FileNameNoExt + " - AVR Project IDE";
+
+                fileTreeWin.PopulateList(project, editorList);
+
+                hardwareExplorerWin.LoadDataForChip(project.Device);
+
+                if (project.HasBeenConfigged == false)
+                {
+                    ConfigWindow wnd = new ConfigWindow(project);
+                    wnd.ShowDialog();
+                    hardwareExplorerWin.LoadDataForChip(project.Device);
+                }
+            }
+        }
+
+        private void mbtnEditorSettings_Click(object sender, EventArgs e)
+        {
+            SettingsWindow w = new SettingsWindow();
+            w.Show();
         }
     }
 }

@@ -151,7 +151,14 @@ namespace AVRProjectIDE
     public class AVRProject : ICloneable
     {
         #region Project File Fields and Properties
-        
+
+        private bool hasBeenConfigged = false;
+        public bool HasBeenConfigged
+        {
+            get { return hasBeenConfigged; }
+            set { hasBeenConfigged = value; }
+        }
+
         private string filePath;
         public string FilePath
         {
@@ -522,8 +529,12 @@ namespace AVRProjectIDE
 
                 xml.WriteElementString("DirPath", DirPath);
 
+                xml.WriteElementString("HasBeenConfigged", HasBeenConfigged.ToString().ToLowerInvariant().Trim());
+
                 xml.WriteElementString("Device", Device);
-                xml.WriteElementString("ClockFreq", ClockFreq.ToString());
+                SettingsManagement.LastChipChoosen = Device;
+                xml.WriteElementString("ClockFreq", ClockFreq.ToString("0.00"));
+                SettingsManagement.LastClockChoosen = ClockFreq;
                 xml.WriteElementString("LinkerOpt", LinkerOptions);
                 xml.WriteElementString("OtherOpt", OtherOptions);
                 xml.WriteElementString("OutputDir", OutputDir);
@@ -580,11 +591,15 @@ namespace AVRProjectIDE
 
                 xml.WriteElementString("BurnPart", BurnPart);
                 xml.WriteElementString("BurnProgrammer", BurnProgrammer);
+                SettingsManagement.LastProgChoosen = BurnProgrammer;
                 xml.WriteElementString("BurnOptions", BurnOptions);
                 xml.WriteElementString("BurnPort", BurnPort);
+                SettingsManagement.LastProgPortChoosen = BurnPort;
                 xml.WriteElementString("BurnFuseBox", BurnFuseBox);
                 xml.WriteElementString("BurnBaud", BurnBaud.ToString("0"));
+                SettingsManagement.LastProgBaud = BurnBaud;
                 xml.WriteElementString("BurnAutoReset", BurnAutoReset.ToString().ToLowerInvariant());
+                SettingsManagement.LastProgAutoReset = BurnAutoReset;
 
                 xml.WriteElementString("LastFile", LastFile);
 
@@ -640,12 +655,17 @@ namespace AVRProjectIDE
 
                 XmlElement docx = doc.DocumentElement;
 
-                //XmlElement param;
                 string xDirPath = path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar));
                 foreach (XmlElement param in docx.GetElementsByTagName("DirPath"))
                 {
                     xDirPath = Program.CleanFilePath(param.InnerText);
                 }
+
+                foreach (XmlElement param in docx.GetElementsByTagName("HasBeenConfigged"))
+                {
+                    HasBeenConfigged = param.InnerText.ToLowerInvariant().Trim() == "true";
+                }
+
                 foreach (XmlElement param in docx.GetElementsByTagName("ClockFreq"))
                 {
                     ClockFreq = decimal.Parse(param.InnerText);
@@ -1384,8 +1404,9 @@ namespace AVRProjectIDE
 
         public void Reset()
         {
-            clkFreq = 8000000;
-            device = "atmega168";
+            hasBeenConfigged = false;
+            clkFreq = SettingsManagement.LastClockChoosen;
+            device = SettingsManagement.LastChipChoosen;
             packStructs = true;
             shortEnums = true;
             unsignedBitfields = true;
@@ -1400,12 +1421,15 @@ namespace AVRProjectIDE
             optimization = "-Os";
 
             burnPart = device;
-            burnProg = "avrisp";
+            burnProg = SettingsManagement.LastProgChoosen;
             burnOpt = "";
-            burnBaud = 0;
-            burnPort = "";
+            burnBaud = SettingsManagement.LastProgBaud;
+            if (SettingsManagement.LastProgPortChoosen.Trim().ToLowerInvariant() == "nooverride")
+                burnPort = "";
+            else
+                burnPort = SettingsManagement.LastProgPortChoosen.Trim();
             burnFuseBox = "";
-            burnAutoReset = false;
+            burnAutoReset = SettingsManagement.LastProgAutoReset;
 
             lastFile = "";
 
@@ -1477,6 +1501,8 @@ namespace AVRProjectIDE
             newObject.DataSections= this.DataSections;
             newObject.UseInitStack = this.UseInitStack;
             newObject.LastFile = this.LastFile;
+
+            newObject.HasBeenConfigged = this.HasBeenConfigged;
 
             newObject.fileList = new Dictionary<string, ProjectFile>();
             newObject.fileList.Clear();

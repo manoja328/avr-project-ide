@@ -70,6 +70,8 @@ namespace AVRProjectIDE
 
         static public bool ApplyTemplate(string name, AVRProject proj)
         {
+            int appCnt = 0;
+
             XmlElement template;
             if (templates.TryGetValue(name, out template))
             {
@@ -102,10 +104,12 @@ namespace AVRProjectIDE
                 foreach (XmlElement param in docx.GetElementsByTagName("ClockFreq"))
                 {
                     proj.ClockFreq = decimal.Parse(param.InnerText);
+                    appCnt++;
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("Device"))
                 {
                     proj.Device = param.InnerText;
+                    appCnt++;
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("LinkerOpt"))
                 {
@@ -251,6 +255,9 @@ namespace AVRProjectIDE
                         catch { }
                     }
                 }
+
+                if (appCnt >= 2)
+                    proj.HasBeenConfigged = true;
 
                 return true;
             }
