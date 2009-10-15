@@ -2,9 +2,9 @@ BuildID is a build identifier used by the updating mechanism. This page will ser
 
 The updating mechanism checks this webpage for the following string, so this page is pretty important.
 
-`BUILDID:"AVRProjectIDE_Alpha34"`
+`BUILDID:"AVRProjectIDE_Alpha35"`
 
-`DOWNLOADURL:"http://avr-project-ide.googlecode.com/files/AVRProjectIDESetup34.msi"`
+`DOWNLOADURL:"http://avr-project-ide.googlecode.com/files/AVRProjectIDESetup35.msi"`
 
 `NEWFILENAME:"AVRProjectIDESetup.msi"`
 
