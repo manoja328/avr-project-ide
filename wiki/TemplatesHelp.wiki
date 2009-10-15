@@ -24,3 +24,9 @@ The XML for a template looks like:
 The each template is stored in its own "template" tag, with a "name" attribute.
 
 The easiest way to write your own template is to save a project with the desired settings, and then open the .avrproj file with a text editor. Copy and paste in the tags that you want the template to set.
+
+A template can inherit from other templates by doing something like this:
+
+{{{
+<Inherit>Arduino ATMega8 8MHz</Inherit>
+}}}
