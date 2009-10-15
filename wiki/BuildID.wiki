@@ -4,7 +4,7 @@ The updating mechanism checks this webpage for the following string, so this pag
 
 `BUILDID:"AVRProjectIDE_Alpha36"`
 
-`DOWNLOADURL:"http://avr-project-ide.googlecode.com/files/AVRProjectIDE_Installer.exe"`
+`DOWNLOADURL:"http://avr-project-ide.googlecode.com/files/AVRProjectIDE_Installer36.exe"`
 
 `NEWFILENAME:"AVRProjectIDE_Installer.exe"`
 
