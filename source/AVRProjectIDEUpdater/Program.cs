@@ -21,9 +21,17 @@ namespace AVRProjectIDEUpdater
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                if (args.Length == 3)
+                if (args.Length >= 3)
                 {
-                    Application.Run(new Form1(args[0], args[1], args[2]));
+                    bool execute = false;
+                    if (args.Length == 4)
+                    {
+                        string yes = args[3].ToLowerInvariant().Trim();
+                        if (yes.Contains("y") || yes.Contains("true"))
+                            execute = true;
+                    }
+
+                    Application.Run(new Form1(args[0], args[1], args[2], execute));
                 }
                 else
                 {
@@ -75,38 +83,6 @@ namespace AVRProjectIDEUpdater
             catch { return null; }
 
             return res;
-        }
-
-        static public void CheckForDLLs()
-        {
-            string curdir = CleanFilePath(Directory.GetCurrentDirectory()) + Path.DirectorySeparatorChar;
-
-            try
-            {
-                File.WriteAllBytes(curdir + "SciLexer.dll", Properties.Resources.SciLexer);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error, SciLexer.dll could not be unpacked, " + ex.Message + ", program may not run");
-            }
-
-            try
-            {
-                File.WriteAllBytes(curdir + "ScintillaNet.dll", Properties.Resources.ScintillaNet);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error, ScintillaNet.dll could not be unpacked, " + ex.Message + ", program may not run");
-            }
-
-            try
-            {
-                File.WriteAllBytes(curdir + "WeifenLuo.WinFormsUI.Docking.dll", Properties.Resources.WeifenLuo_WinFormsUI_Docking);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error, WeifenLuo.WinFormsUI.Docking.dll could not be unpacked, " + ex.Message + ", program may not run");
-            }
         }
     }
 }

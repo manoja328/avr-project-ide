@@ -1504,7 +1504,8 @@ namespace AVRProjectIDE
                         {
                             try
                             {
-                                Program.CopyAll(nextDir, new DirectoryInfo(SettingsManagement.AppDataPath + "temp" + Path.DirectorySeparatorChar + nextDir.Name));
+                                if (nextDir.Name != "examples")
+                                    Program.CopyAll(nextDir, new DirectoryInfo(SettingsManagement.AppDataPath + "temp" + Path.DirectorySeparatorChar + nextDir.Name));
                             }
                             catch (Exception ex)
                             {
@@ -1640,6 +1641,31 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        public static bool CheckForWinAVR()
+        {
+            Process avrgcc = new Process();
+            // trick avrdude to list supported parts by using a malformed argument
+            avrgcc.StartInfo = new ProcessStartInfo("avr-gcc");
+            avrgcc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            avrgcc.StartInfo.CreateNoWindow = true;
+            avrgcc.StartInfo.UseShellExecute = false;
+            try
+            {
+                if (avrgcc.Start())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     public class ProjectBurner
@@ -1724,7 +1750,7 @@ namespace AVRProjectIDE
             }
         }
 
-        public static string[] GetAvailParts(string progname)
+        public static string[] GetAvailParts(string progname, bool suppressErr)
         {
             List<string> res = new List<string>();
 
@@ -1745,13 +1771,19 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    MessageBox.Show("Error, Unable to Start AVRDUDE");
+                    if (suppressErr == false)
+                    {
+                        MessageBox.Show("Error, Unable to Start AVRDUDE");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error: Unable to start AVRDUDE");
-                erw.ShowDialog();
+                if (suppressErr == false)
+                {
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error: Unable to start AVRDUDE");
+                    erw.ShowDialog();
+                }
             }
 
             return res.ToArray();
@@ -1771,7 +1803,7 @@ namespace AVRProjectIDE
             return res;
         }
 
-        public static string[] GetAvailProgrammers()
+        public static string[] GetAvailProgrammers(bool suppressErr)
         {
             List<string> res = new List<string>();
 
@@ -1792,13 +1824,19 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    MessageBox.Show("Error, Unable to Start AVRDUDE");
+                    if (suppressErr == false)
+                    {
+                        MessageBox.Show("Error, Unable to Start AVRDUDE");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error, Unable to Start AVRDUDE");
-                erw.ShowDialog();
+                if (suppressErr == false)
+                {
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error, Unable to Start AVRDUDE");
+                    erw.ShowDialog();
+                }
             }
 
             return res.ToArray();

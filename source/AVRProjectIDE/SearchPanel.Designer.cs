@@ -95,7 +95,7 @@
             // chkMatchCase
             // 
             this.chkMatchCase.AutoSize = true;
-            this.chkMatchCase.Location = new System.Drawing.Point(124, 32);
+            this.chkMatchCase.Location = new System.Drawing.Point(114, 32);
             this.chkMatchCase.Name = "chkMatchCase";
             this.chkMatchCase.Size = new System.Drawing.Size(83, 17);
             this.chkMatchCase.TabIndex = 8;

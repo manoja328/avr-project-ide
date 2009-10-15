@@ -123,6 +123,15 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to AVRProjectIDE_Alpha35.
+        /// </summary>
+        internal static string BuildID {
+            get {
+                return ResourceManager.GetString("BuildID", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap burn {
             get {
                 object obj = ResourceManager.GetObject("burn", resourceCulture);
@@ -459,6 +468,15 @@ namespace AVRProjectIDE.Properties {
             get {
                 object obj = ResourceManager.GetObject("web", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://sourceforge.net/projects/winavr/files/.
+        /// </summary>
+        internal static string WinAVRURL {
+            get {
+                return ResourceManager.GetString("WinAVRURL", resourceCulture);
             }
         }
     }

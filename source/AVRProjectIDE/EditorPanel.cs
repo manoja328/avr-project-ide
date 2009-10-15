@@ -23,6 +23,8 @@ namespace AVRProjectIDE
             set { file.FileName = value; }
         }
 
+        List<string> lastAutocompleteList;
+
         private AVRProject project;
 
         private ProjectFile file;
@@ -383,6 +385,7 @@ namespace AVRProjectIDE
             }
             if (e.Cancel == false)
             {
+                WatchingForChange = false;
                 File.DeleteBackup();
             }
         }
@@ -597,6 +600,9 @@ namespace AVRProjectIDE
 
         private void scint_CharAdded(object sender, CharAddedEventArgs e)
         {
+            if (SettingsManagement.AutocompleteEnable == false)
+                return;
+
             if (scint.AutoComplete.IsActive == false && "abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ#".Contains(e.Ch) && scint.PositionIsOnComment(scint.CurrentPos) == false)
             {
                 string line = scint.Lines.Current.Text;
@@ -625,39 +631,89 @@ namespace AVRProjectIDE
                 {
                     if (e.Ch == '#')
                     {
-                        scint.AutoComplete.Show(KeywordScanner.GetPreprocKeywords());
+                        lastAutocompleteList = KeywordScanner.GetPreprocKeywords();
+
+                        string w = scint.GetWordFromPosition(scint.CurrentPos);
+
+                        bool found = false;
+                        foreach (string i in lastAutocompleteList)
+                        {
+                            if (i.StartsWith(w))
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (found)
+                            scint.AutoComplete.Show(lastAutocompleteList);
                     }
                     else
                     {
-                        scint.AutoComplete.Show(KeywordScanner.GetKeywordsUpTo(file, scint.Text.Substring(0, scint.NativeInterface.WordStartPosition(scint.CurrentPos, true))));
+                        lastAutocompleteList = KeywordScanner.GetKeywordsUpTo(file, scint.Text.Substring(0, scint.NativeInterface.WordStartPosition(scint.CurrentPos, true)));
+
+                        string w = scint.GetWordFromPosition(scint.CurrentPos);
+
+                        bool found = false;
+                        foreach (string i in lastAutocompleteList)
+                        {
+                            if (i.StartsWith(w))
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (found)
+                            scint.AutoComplete.Show(lastAutocompleteList);
                     }
                 }
-            }
-            else if (scint.AutoComplete.IsActive && "abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".Contains(e.Ch))
-            {
-                scint.AutoComplete.Show();
             }
         }
 
         private void scint_AutoCompleteAccepted(object sender, AutoCompleteAcceptedEventArgs e)
         {
+            return;
             e.Cancel = true;
 
             int start = scint.NativeInterface.WordStartPosition(scint.CurrentPos, true);
             int backspace = scint.CurrentPos - start;
-            int delete = scint.NativeInterface.WordEndPosition(scint.CurrentPos, true) - scint.CurrentPos;
+            int end = scint.NativeInterface.WordEndPosition(scint.CurrentPos, true);
+            int delete = end - scint.CurrentPos;
 
-            for (int i = 0; i < backspace; i++)
+            string word = scint.GetWordFromPosition(start);
+
+            if (e.Text.StartsWith(word) == false)
             {
-                SendKeys.Send("{BKSP}");
+                for (int i = 0; i < delete; i++)
+                {
+                    SendKeys.Send("{RIGHT}");
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                }
+
+                for (int i = 0; i < backspace + delete; i++)
+                {
+                    SendKeys.Send("{BKSP}");
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
+                }
+
+                scint.InsertText(start, e.Text);
+            }
+            else
+            {
+                scint.InsertText(end, e.Text.Substring(word.Length));
             }
 
-            for (int i = 0; i < delete; i++)
-            {
-                SendKeys.Send("{DEL}");
-            }
-
-            scint.InsertText(start, e.Text);
+            scint.Selection.Start = start + e.Text.Length;
+            scint.Selection.End = scint.Selection.Start;
         }
     }
 }

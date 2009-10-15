@@ -38,6 +38,9 @@ namespace AVRProjectIDE
 
         private static void BackgroundScan()
         {
+            if (SettingsManagement.AutocompleteEnable == false)
+                return;
+
             readyForFeed.Reset();
             fileContents.Clear();
 
@@ -100,6 +103,9 @@ namespace AVRProjectIDE
 
         public static void Initialize()
         {
+            if (SettingsManagement.AutocompleteEnable == false)
+                return;
+
             LoadDefaultKeywords();
         }
 
@@ -118,6 +124,9 @@ namespace AVRProjectIDE
 
         public static void DoMoreWork()
         {
+            if (SettingsManagement.AutocompleteEnable == false)
+                return;
+
             moreWorkRequired.Set();
         }
 
@@ -128,6 +137,9 @@ namespace AVRProjectIDE
 
         public static void LaunchScan(AVRProject project_, Dictionary<string, EditorPanel> editorList_)
         {
+            if (SettingsManagement.AutocompleteEnable == false)
+                return;
+
             if (bgScanner == null)
                 bgScanner = new Thread(new ThreadStart(BackgroundScan));
 
@@ -153,6 +165,9 @@ namespace AVRProjectIDE
 
         public static void FeedFileContent(ProjectFile file)
         {
+            if (SettingsManagement.AutocompleteEnable == false)
+                return;
+
             try
             {
                 FeedFileContent(file, File.ReadAllText(file.FileAbsPath));
@@ -162,6 +177,9 @@ namespace AVRProjectIDE
 
         public static void FeedFileContent(ProjectFile file, string content)
         {
+            if (SettingsManagement.AutocompleteEnable == false)
+                return;
+
             if (bgScanner.IsAlive)
                 readyForFeed.WaitOne();
 

@@ -19,18 +19,7 @@ namespace AVRProjectIDE
         {
             get
             {
-                string id = iniFile.Read("Updater", "BuildID");
-                if (string.IsNullOrEmpty(id))
-                {
-                    BuildID = Guid.NewGuid().ToString();
-                    id = BuildID;
-                }
-                return id;
-            }
-
-            set
-            {
-                iniFile.Write("Updater", "BuildID", value);
+                return Properties.Resources.BuildID;
             }
         }
 
@@ -39,6 +28,10 @@ namespace AVRProjectIDE
             get
             {
                 string lnk = iniFile.Read("Links", "FuseCalculator");
+
+                if (lnk != null)
+                    lnk.Trim().ToLowerInvariant();
+
                 if (string.IsNullOrEmpty(lnk))
                 {
                     FuseCalcLink = "http://www.engbedded.com/cgi-bin/fcx.cgi";
@@ -49,9 +42,200 @@ namespace AVRProjectIDE
 
             set
             {
-                iniFile.Write("Links", "FuseCalculator", value);
+                iniFile.Write("Links", "FuseCalculator", value.Trim());
             }
         }
+
+        public static bool WelcomeWindowAtStart
+        {
+            get
+            {
+                bool res = true;
+                string str = iniFile.Read("Editor", "WelcomeWindowAtStart");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    WelcomeWindowAtStart = res;
+                    res = WelcomeWindowAtStart;
+                    return true;
+                }
+
+                res = str == "true";
+
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Editor", "WelcomeWindowAtStart", value.ToString().Trim().ToLowerInvariant());
+            }
+        }
+
+        #region Last Used Preferences
+
+        public static string LastChipChoosen
+        {
+            get
+            {
+                string str = iniFile.Read("Project", "LastChipChoosen");
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastChipChoosen = "atmega168";
+                    str = LastChipChoosen;
+                }
+                return str;
+            }
+
+            set
+            {
+                iniFile.Write("Project", "LastChipChoosen", value.Trim().ToLowerInvariant());
+            }
+        }
+
+        public static string LastProgChoosen
+        {
+            get
+            {
+                string str = iniFile.Read("Project", "LastProgChoosen");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastProgChoosen = "usbasp";
+                    str = LastProgChoosen;
+                }
+                return str;
+            }
+
+            set
+            {
+                iniFile.Write("Project", "LastProgChoosen", value.Trim());
+            }
+        }
+
+        public static int LastProgBaud
+        {
+            get
+            {
+                int res = 0;
+                string str = iniFile.Read("Project", "LastProgBaud");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastProgBaud = res;
+                    res = LastProgBaud;
+                }
+                else if (int.TryParse(str, out res) == false)
+                {
+                    res = 0;
+                    LastProgBaud = res;
+                    res = LastProgBaud;
+                }
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Project", "LastProgBaud", value.ToString("0"));
+            }
+        }
+
+        public static string LastProgPortChoosen
+        {
+            get
+            {
+                string str = iniFile.Read("Project", "LastProgPortChoosen");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastProgPortChoosen = "NoOverride";
+                    str = LastProgPortChoosen;
+                }
+                return str;
+            }
+
+            set
+            {
+                string v = value.Trim();
+                if (string.IsNullOrEmpty(v))
+                    v = "NoOverride";
+
+                iniFile.Write("Project", "LastProgPortChoosen", v);
+            }
+        }
+
+        public static bool LastProgAutoReset
+        {
+            get
+            {
+                bool res = false;
+                string str = iniFile.Read("Project", "LastProgAutoReset");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastProgAutoReset = res;
+                    res = LastProgAutoReset;
+                    return false;
+                }
+
+                res = str == "true";
+
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Project", "LastProgAutoReset", value.ToString().Trim().ToLowerInvariant());
+            }
+        }
+
+        public static decimal LastClockChoosen
+        {
+            get
+            {
+                decimal res = 8000000;
+                string str = iniFile.Read("Project", "LastClockChoosen");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastClockChoosen = res;
+                    res = LastClockChoosen;
+                }
+                else if (decimal.TryParse(str, out res) == false)
+                {
+                    res = 8000000;
+                    LastClockChoosen = res;
+                    res = LastClockChoosen;
+                }
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Project", "LastClockChoosen", value.ToString("0.00"));
+            }
+        }
+
+        #endregion
 
         static public string AssemblyTitle
         {
@@ -70,6 +254,8 @@ namespace AVRProjectIDE
             }
         }
 
+        #region Paths
+
         static public string AppDataPath
         {
             get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + AssemblyTitle + Path.DirectorySeparatorChar; }
@@ -79,6 +265,13 @@ namespace AVRProjectIDE
         {
             get { return Directory.GetCurrentDirectory().Trim(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar; }
         }
+
+        static public string AppInstallPath
+        {
+            get { return Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf(Path.DirectorySeparatorChar)) + Path.DirectorySeparatorChar; }
+        }
+
+        #endregion
 
         static private string settingsFilePath;
 
@@ -359,6 +552,16 @@ namespace AVRProjectIDE
             }
         }
 
+        static bool autocompleteEnable = true;
+        public static bool AutocompleteEnable
+        {
+            get { return autocompleteEnable; }
+            set
+            {
+                iniFile.Write("Editor", "AutocompleteEnable", value.ToString().ToLowerInvariant().Trim());
+            }
+        }
+
         /// <summary>
         /// load editor settings from configuration file
         /// </summary>
@@ -506,6 +709,16 @@ namespace AVRProjectIDE
                 scint.Dispose(); // dispose of the scint, it causes an exception if it is not disposed manually
             }
             catch { return false; }
+
+            string acStr = iniFile.Read("Editor", "AutocompleteEnable");
+            if (string.IsNullOrEmpty(acStr))
+            {
+                autocompleteEnable = true;
+            }
+            else
+            {
+                autocompleteEnable = acStr.Trim().ToLowerInvariant() == "true";
+            }
 
             return true;
         }
@@ -723,7 +936,7 @@ namespace AVRProjectIDE
             string path = iniFile.Read("Arduino", "CorePath");
             if (string.IsNullOrEmpty(path))
             {
-                arduinoCorePath = Directory.GetCurrentDirectory().TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + "arduino\\core";
+                arduinoCorePath = SettingsManagement.AppInstallPath + "arduino\\core";
             }
             else
             {
@@ -737,7 +950,7 @@ namespace AVRProjectIDE
             path = iniFile.Read("Arduino", "LibPath");
             if (string.IsNullOrEmpty(path))
             {
-                arduinoLibPath = Directory.GetCurrentDirectory().TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + "arduino\\libraries";
+                arduinoLibPath = SettingsManagement.AppInstallPath + "arduino\\libraries";
             }
             else
             {

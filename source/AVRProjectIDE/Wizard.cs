@@ -172,11 +172,11 @@ namespace AVRProjectIDE
 
             string projFilePath = folderPath + Path.DirectorySeparatorChar + projFilename + ".avrproj";
             string ext = "c";
-            if (((string)dropFileType.Items[dropFileType.SelectedIndex]) == "C++")
-                ext = "c";
-            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]) == "C")
+            if (((string)dropFileType.Items[dropFileType.SelectedIndex]).Contains("C++"))
                 ext = "cpp";
-            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]) == "Arduino")
+            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]).Contains("C"))
+                ext = "c";
+            else if (((string)dropFileType.Items[dropFileType.SelectedIndex]).Contains("Arduino"))
                 ext = "pde";
 
             string iniFilePath = folderPath + Path.DirectorySeparatorChar + iniFilename + "." + ext;
@@ -189,9 +189,15 @@ namespace AVRProjectIDE
                 }
             }
 
+            bool merge = false;
+
             if (hasIniFile && File.Exists(iniFilePath))
             {
-                if (MessageBox.Show("Initial File Already Exists at the Location, Overwrite it?", "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show("Initial File Already Exists at the Location, Merge it with your project?", "Merge File?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    merge = true;
+                }
+                else if (MessageBox.Show("Maybe you'd rather overwrite it with a blank file?", "Overwrite File?", MessageBoxButtons.YesNo) == DialogResult.No)
                 {
                     return;
                 }
@@ -199,28 +205,32 @@ namespace AVRProjectIDE
 
             if (hasIniFile)
             {
-                try
+                if (merge == false)
                 {
-                    StreamWriter writer = new StreamWriter(iniFilePath);
-                    if (ext != "pde")
+                    try
                     {
-                        writer.Write("\r\n\r\nint main()\r\n{\r\n\t\r\n\treturn 0;\r\n}\r\n");
+                        StreamWriter writer = new StreamWriter(iniFilePath);
+                        if (ext != "pde")
+                        {
+                            writer.Write("\r\n\r\nint main()\r\n{\r\n\t\r\n\treturn 0;\r\n}\r\n");
+                        }
+                        else
+                        {
+                            writer.Write("\r\n\r\nvoid setup()\r\n{\r\n\t\r\n}\r\n\r\nvoid loop()\r\n{\r\n\t\r\n}\r\n");
+                        }
+                        writer.WriteLine();
+                        writer.Close();
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        writer.Write("\r\n\r\nvoid setup()\r\n{\r\n\t\r\n}\r\n\r\nvoid loop()\r\n{\r\n\t\r\n}\r\n");
+                        ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while creating initial file");
+                        erw.ShowDialog();
                     }
-                    writer.WriteLine();
-                    writer.Close();
-                    ProjectFile newFile = new ProjectFile(iniFilePath);
-                    newFile.IsOpen = true;
-                    project.FileList.Add(newFile.FileName, newFile);
                 }
-                catch (Exception ex)
-                {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while creating initial file");
-                    erw.ShowDialog();
-                }
+
+                ProjectFile newFile = new ProjectFile(iniFilePath);
+                newFile.IsOpen = true;
+                project.FileList.Add(newFile.FileName, newFile);
             }
 
             ProjTemplate.ApplyTemplate((string)dropTemplates.Items[dropTemplates.SelectedIndex], project);

@@ -26,12 +26,9 @@ namespace AVRProjectIDE
 
         #endregion
 
-        public FileTreePanel(AVRProject project, Dictionary<string, EditorPanel> editorList)
+        public FileTreePanel()
         {
             InitializeComponent();
-
-            this.project = project;
-            this.editorList = editorList;
 
             InitializeTree();
         }
@@ -136,7 +133,7 @@ namespace AVRProjectIDE
 
         public void InitializeTree()
         {
-            rootNode = new TreeNode(project.FileName);
+            rootNode = new TreeNode("Project");
             sourceNode = new TreeNode("Source Files (c, cpp, cxx, S, pde)");
             headerNode = new TreeNode("Header Files (h, hpp)");
             otherNode = new TreeNode("Other Files");
@@ -184,7 +181,7 @@ namespace AVRProjectIDE
             PopulateList();
         }
 
-        public void PopulateList()
+        private void PopulateList()
         {
             rootNode.Text = project.FileName;
 
@@ -426,6 +423,12 @@ namespace AVRProjectIDE
 
         private void mbtnAddFile_Click(object sender, EventArgs e)
         {
+            if (project == null)
+                return;
+
+            if (project.IsReady == false)
+                return;
+
             ProjectFile file;
             if (AddFile(out file) == SaveResult.Successful)
                 OpenNode(new TreeNode(file.FileName)); // this is cheating, but i don't want to write another open event

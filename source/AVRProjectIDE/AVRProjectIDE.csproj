@@ -30,16 +30,17 @@
     <InstallUrl>http://code.google.com/p/avr-project-ide/downloads/list/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>mainicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -134,6 +135,12 @@
     <Compile Include="ConfigWindow.Designer.cs">
       <DependentUpon>ConfigWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsWindow.Designer.cs">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpdateMech.cs" />
     <Compile Include="WelcomeWindow.cs">
       <SubType>Form</SubType>
@@ -173,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SerialPortPanel.resx">
       <DependentUpon>SerialPortPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsWindow.resx">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeWindow.resx">
       <DependentUpon>WelcomeWindow.cs</DependentUpon>
@@ -615,12 +625,16 @@
     <Content Include="chip_xml_files\atxmega64a3.xml" />
     <Content Include="chip_xml_files\atxmega64d3.xml" />
     <None Include="chip_xml_files\interruptvectors.xml" />
+    <Content Include="graphics\mainicon.ico" />
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />
     <None Include="packforupload.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="helplinks.xml">
+    </Content>
+    <Content Include="mainicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SciLexer.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

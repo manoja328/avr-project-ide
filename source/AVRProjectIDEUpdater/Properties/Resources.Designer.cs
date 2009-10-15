@@ -59,26 +59,5 @@ namespace AVRProjectIDEUpdater.Properties {
                 resourceCulture = value;
             }
         }
-        
-        internal static byte[] SciLexer {
-            get {
-                object obj = ResourceManager.GetObject("SciLexer", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        internal static byte[] ScintillaNet {
-            get {
-                object obj = ResourceManager.GetObject("ScintillaNet", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        internal static byte[] WeifenLuo_WinFormsUI_Docking {
-            get {
-                object obj = ResourceManager.GetObject("WeifenLuo_WinFormsUI_Docking", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

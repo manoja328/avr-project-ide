@@ -14,16 +14,18 @@ namespace AVRProjectIDE
         private static bool updateAvail = false;
         private static string oldBuildID = "";
         private static string newBuildID = "";
+        private static string downloadURL = "";
+        private static string newFileName = "";
+        private static bool autoExe = true;
         private static Thread checkerThread;
 
         public static void CheckForUpdates()
         {
             oldBuildID = SettingsManagement.BuildID;
 
-            if (string.IsNullOrEmpty(oldBuildID))
-                oldBuildID = Guid.NewGuid().ToString();
-
             checkerThread = new Thread(new ThreadStart(GetBuildID));
+            checkerThread.IsBackground = true;
+            checkerThread.Priority = ThreadPriority.Lowest;
             checkerThread.Start();
         }
 
@@ -37,6 +39,9 @@ namespace AVRProjectIDE
                 Stream wStream = wResp.GetResponseStream();
                 StreamReader reader = new StreamReader(wStream);
                 string content = reader.ReadToEnd().Replace("&quot;", "\"");
+                reader.Close();
+                wStream.Close();
+                wResp.Close();
 
                 Regex r = new Regex("(BUILDID:)(\".*?\")");
                 Match m = r.Match(content);
@@ -47,9 +52,26 @@ namespace AVRProjectIDE
                         updateAvail = true;
                 }
 
-                reader.Close();
-                wStream.Close();
-                wResp.Close();
+                r = new Regex("(DOWNLOADURL:)(\"((?:http|https)(?::\\/{2}[\\w]+)(?:[\\/|\\.]?)(?:[^\\s\"]*))\")");
+                m = r.Match(content);
+                if (m.Success)
+                {
+                    downloadURL = m.Groups[2].Value.Trim('"');
+                }
+
+                r = new Regex("(NEWFILENAME:)(\".*?\")");
+                m = r.Match(content);
+                if (m.Success)
+                {
+                    newFileName = m.Groups[2].Value.Trim('"');
+                }
+
+                r = new Regex("(AUTOEXECUTE:)(\".*?\")");
+                m = r.Match(content);
+                if (m.Success)
+                {
+                    autoExe = m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains("y") || m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains("true");
+                }
             }
             catch
             {
@@ -76,6 +98,21 @@ namespace AVRProjectIDE
         public static string NewBuildID
         {
             get { return newBuildID; }
+        }
+
+        public static string DownloadURL
+        {
+            get { return downloadURL; }
+        }
+
+        public static string NewFileName
+        {
+            get { return newFileName; }
+        }
+
+        public bool AutoExe
+        {
+            get { return autoExe; }
         }
     }
 }

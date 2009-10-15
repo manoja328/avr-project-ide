@@ -36,6 +36,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WelcomeWindow));
             this.btnNew = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             this.btnWizard = new System.Windows.Forms.Button();
             this.txtNews = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.chkShowWelcomeAtStart = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,6 +88,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.chkShowWelcomeAtStart);
             this.groupBox1.Controls.Add(this.listRecentFiles);
             this.groupBox1.Controls.Add(this.btnOpen);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -103,7 +106,7 @@
             this.listRecentFiles.FormattingEnabled = true;
             this.listRecentFiles.Location = new System.Drawing.Point(87, 19);
             this.listRecentFiles.Name = "listRecentFiles";
-            this.listRecentFiles.Size = new System.Drawing.Size(455, 238);
+            this.listRecentFiles.Size = new System.Drawing.Size(455, 212);
             this.listRecentFiles.TabIndex = 0;
             this.listRecentFiles.DoubleClick += new System.EventHandler(this.listRecentFiles_DoubleClick);
             // 
@@ -155,6 +158,16 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // chkShowWelcomeAtStart
+            // 
+            this.chkShowWelcomeAtStart.AutoSize = true;
+            this.chkShowWelcomeAtStart.Location = new System.Drawing.Point(87, 256);
+            this.chkShowWelcomeAtStart.Name = "chkShowWelcomeAtStart";
+            this.chkShowWelcomeAtStart.Size = new System.Drawing.Size(203, 17);
+            this.chkShowWelcomeAtStart.TabIndex = 2;
+            this.chkShowWelcomeAtStart.Text = "Show This Welcome Window at Start";
+            this.chkShowWelcomeAtStart.UseVisualStyleBackColor = true;
+            // 
             // WelcomeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,11 +179,13 @@
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.btnWizard);
             this.Controls.Add(this.btnNew);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WelcomeWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AVR Project IDE - Welcome";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmWelcome_FormClosed);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,5 +204,6 @@
         private System.Windows.Forms.Button btnWizard;
         private System.Windows.Forms.TextBox txtNews;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.CheckBox chkShowWelcomeAtStart;
     }
 }

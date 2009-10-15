@@ -24,6 +24,8 @@ namespace AVRProjectIDE
 
             this.project = project;
 
+            chkShowWelcomeAtStart.Checked = SettingsManagement.WelcomeWindowAtStart;
+
             backgroundWorker1.RunWorkerAsync();
         }
 
@@ -142,6 +144,8 @@ namespace AVRProjectIDE
                     MessageBox.Show("Error, Could Not Save Recent File List");
                 }
             }
+
+            SettingsManagement.WelcomeWindowAtStart = chkShowWelcomeAtStart.Checked;
         }
 
         private void btnWizard_Click(object sender, EventArgs e)

@@ -44,7 +44,7 @@ namespace AVRProjectIDE
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return SettingsManagement.BuildID;
             }
         }
 
