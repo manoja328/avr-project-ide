@@ -251,10 +251,10 @@
     <value>..\templates.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="interruptvectors" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\chip_xml_files\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\chip_xml\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="BuildID" xml:space="preserve">
-    <value>AVRProjectIDE_Alpha35</value>
+    <value>AVRProjectIDE_Alpha36</value>
   </data>
   <data name="WinAVRURL" xml:space="preserve">
     <value>https://sourceforge.net/projects/winavr/files/</value>
