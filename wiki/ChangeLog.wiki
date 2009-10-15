@@ -1,10 +1,25 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 35==
+
+ * Wizard can merge initial file with existing file
+ * Autocomplete can be disabled
+ * New editor settings window
+ * New projects use default settings from last project
+ * Welcome window now launches after IDE, like how AVR Studio does it
+ * Tells you that you need WinAVR if you don't have it
+ * Fix for autocomplete undo behaviour
+ * Fixed wrong file extension from wizard
+ * Fixed opening .avrproj files from explorer
+ * Welcome window can be disabled
+ * Config window autolaunches for unconfigured projects
+
 ==Alpha 33==
 
  * Installer
  * Atmel part descriptor files used to implement Hardware Explorer
  * Working autocomplete
+ * FuseBox for burning fuses
 
 ==Alpha 22==
 
