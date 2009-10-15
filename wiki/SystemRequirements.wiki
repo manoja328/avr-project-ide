@@ -1,6 +1,6 @@
 #summary System Requirements
 
-= SystemRequirements =
+= System Requirements =
 
  * [http://www.microsoft.com/downloads/details.aspx?FamilyId=333325FD-AE52-4E35-B531-508D977D32A6 .NET Framework 3.5]
  * [http://winavr.sourceforge.net/ WinAVR]
