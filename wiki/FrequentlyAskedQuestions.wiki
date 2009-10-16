@@ -1,5 +1,9 @@
 #summary Frequently Asked Questions
 
+===I found a bug or I have a feature request===
+
+Please check the issue list, and create an issue if it does not already exist.
+
 ===What are those checkboxes for beside my files?===
 
 Unchecked files are ignored during the build process.
