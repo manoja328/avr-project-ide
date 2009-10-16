@@ -118,7 +118,7 @@ namespace AVRProjectIDE
             {
                 KeywordScanner.FeedFileContent(file, scint.Text);
                 KeywordScanner.DoMoreWork();
-                System.IO.File.WriteAllText(file.FileAbsPath, scint.Text);
+                System.IO.File.WriteAllText(path, scint.Text.TrimEnd());
             }
             catch { success = false; }
 
@@ -490,7 +490,14 @@ namespace AVRProjectIDE
 
         public void Find()
         {
-            scint.FindReplace.Find(scint.Selection.Text);
+            if (string.IsNullOrEmpty(scint.Selection.Text))
+                FindNext();
+            else
+            {
+                Range r = scint.FindReplace.Find(scint.Selection.Text);
+                if (r != null)
+                    scint.Selection.Range = r;
+            }
         }
 
         public void FindWindow()
@@ -505,7 +512,23 @@ namespace AVRProjectIDE
 
         public void FindNext()
         {
-            scint.FindReplace.FindNext(scint.FindReplace.LastFindString, true);
+            if (string.IsNullOrEmpty(scint.FindReplace.LastFindString))
+            {
+                if (string.IsNullOrEmpty(scint.Selection.Text))
+                    FindWindow();
+                else
+                {
+                    Range r = scint.FindReplace.FindNext(scint.Selection.Text, true);
+                    if (r != null)
+                        scint.Selection.Range = r;
+                }
+            }
+            else
+            {
+                Range r = scint.FindReplace.FindNext(scint.FindReplace.LastFindString, true);
+                if (r != null)
+                    scint.Selection.Range = r;
+            }
         }
 
         public List<Range> FindAll(string needle, SearchFlags flags)

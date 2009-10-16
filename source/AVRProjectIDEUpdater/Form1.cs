@@ -68,7 +68,7 @@ namespace AVRProjectIDEUpdater
             ini = new IniFile(AppDataPath + "settings.ini");
         }
 
-        void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        private void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (this.InvokeRequired)
             {
@@ -80,15 +80,15 @@ namespace AVRProjectIDEUpdater
                 {
                     try
                     {
-                        if (File.Exists(CurDirPath + "updatedtemp.bin"))
+                        if (File.Exists(AppDataPath + "updatedtemp.bin"))
                         {
-                            File.Copy(CurDirPath + "updatedtemp.bin", CurDirPath + localFileName, true);
+                            File.Copy(AppDataPath + "updatedtemp.bin", AppDataPath + localFileName, true);
                             ini.Write("Updater", "BuildID", buildID);
                             MessageBox.Show("Update of " + localFileName + " Complete!");
-                            File.Delete(CurDirPath + "updatedtemp.bin");
+                            File.Delete(AppDataPath + "updatedtemp.bin");
 
                             if (execute)
-                                Process.Start(CurDirPath + localFileName);
+                                Process.Start(AppDataPath + localFileName);
 
                             this.Close();
                         }
@@ -150,7 +150,7 @@ namespace AVRProjectIDEUpdater
                 timer1.Enabled = false;
                 progressBar1.Style = ProgressBarStyle.Blocks;
                 WebClient wc = new WebClient();
-                wc.DownloadFileAsync(new Uri(url), CurDirPath + "updatedtemp.bin");
+                wc.DownloadFileAsync(new Uri(url), AppDataPath + "updatedtemp.bin");
                 wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
                 wc.DownloadFileCompleted += new AsyncCompletedEventHandler(wc_DownloadFileCompleted);
             }
