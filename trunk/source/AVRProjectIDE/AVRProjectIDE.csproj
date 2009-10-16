@@ -57,7 +57,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScintillaNet, Version=2.0.3561.31684, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
+    <Reference Include="ScintillaNet, Version=2.0.3575.33829, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -277,60 +277,6 @@
     <None Include="arduino\core\Makefile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="arduino\libraries\EEPROM\EEPROM.o" />
-    <None Include="arduino\libraries\EEPROM\examples\eeprom_clear\eeprom_clear.pde" />
-    <None Include="arduino\libraries\EEPROM\examples\eeprom_read\eeprom_read.pde" />
-    <None Include="arduino\libraries\EEPROM\examples\eeprom_write\eeprom_write.pde" />
-    <None Include="arduino\libraries\Ethernet\Client.o" />
-    <None Include="arduino\libraries\Ethernet\Ethernet.o" />
-    <None Include="arduino\libraries\Ethernet\examples\ChatServer\ChatServer.pde" />
-    <None Include="arduino\libraries\Ethernet\examples\WebClient\WebClient.pde" />
-    <None Include="arduino\libraries\Ethernet\examples\WebServer\WebServer.pde" />
-    <None Include="arduino\libraries\Ethernet\Server.o" />
-    <None Include="arduino\libraries\Ethernet\utility\socket.o" />
-    <None Include="arduino\libraries\Ethernet\utility\w5100.o" />
-    <None Include="arduino\libraries\Firmata\examples\AnalogFirmata\AnalogFirmata.pde" />
-    <None Include="arduino\libraries\Firmata\examples\AnalogFirmata\Makefile" />
-    <None Include="arduino\libraries\Firmata\examples\EchoString\EchoString.pde" />
-    <None Include="arduino\libraries\Firmata\examples\EchoString\Makefile" />
-    <None Include="arduino\libraries\Firmata\examples\I2CFirmata\I2CFirmata.pde" />
-    <None Include="arduino\libraries\Firmata\examples\ServoFirmata\Makefile" />
-    <None Include="arduino\libraries\Firmata\examples\ServoFirmata\ServoFirmata.pde" />
-    <None Include="arduino\libraries\Firmata\examples\SimpleAnalogFirmata\Makefile" />
-    <None Include="arduino\libraries\Firmata\examples\SimpleAnalogFirmata\SimpleAnalogFirmata.pde" />
-    <None Include="arduino\libraries\Firmata\examples\SimpleDigitalFirmata\Makefile" />
-    <None Include="arduino\libraries\Firmata\examples\SimpleDigitalFirmata\SimpleDigitalFirmata.pde" />
-    <None Include="arduino\libraries\Firmata\examples\StandardFirmata\Makefile" />
-    <None Include="arduino\libraries\Firmata\examples\StandardFirmata\StandardFirmata.pde" />
-    <None Include="arduino\libraries\Firmata\Firmata.o" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\Autoscroll\Autoscroll.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\Blink\Blink.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\Cursor\Cursor.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\Display\Display.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\HelloWorld\HelloWorld.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\Scroll\Scroll.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\SerialDisplay\SerialDisplay.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\setCursor\setCursor.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\examples\TextDirection\TextDirection.pde" />
-    <None Include="arduino\libraries\LiquidCrystal\LiquidCrystal.o" />
-    <None Include="arduino\libraries\Matrix\examples\hello_matrix\hello_matrix.pde" />
-    <None Include="arduino\libraries\Matrix\examples\sprite_animation\sprite_animation.pde" />
-    <None Include="arduino\libraries\Matrix\Matrix.o" />
-    <None Include="arduino\libraries\Servo\examples\Knob\Knob.pde" />
-    <None Include="arduino\libraries\Servo\examples\Sweep\Sweep.pde" />
-    <None Include="arduino\libraries\Servo\Servo.o" />
-    <None Include="arduino\libraries\SoftwareSerial\SoftwareSerial.o" />
-    <None Include="arduino\libraries\Sprite\Sprite.o" />
-    <None Include="arduino\libraries\Stepper\examples\MotorKnob\MotorKnob.pde" />
-    <None Include="arduino\libraries\Stepper\Stepper.o" />
-    <None Include="arduino\libraries\Wire\examples\digital_potentiometer\digital_potentiometer.pde" />
-    <None Include="arduino\libraries\Wire\examples\master_reader\master_reader.pde" />
-    <None Include="arduino\libraries\Wire\examples\master_writer\master_writer.pde" />
-    <None Include="arduino\libraries\Wire\examples\SFRRanger_reader\SFRRanger_reader.pde" />
-    <None Include="arduino\libraries\Wire\examples\slave_receiver\slave_receiver.pde" />
-    <None Include="arduino\libraries\Wire\examples\slave_sender\slave_sender.pde" />
-    <None Include="arduino\libraries\Wire\utility\twi.o" />
-    <None Include="arduino\libraries\Wire\Wire.o" />
     <None Include="graphics\find.png" />
     <None Include="graphics\paste.png" />
     <None Include="graphics\copy.png" />
@@ -423,52 +369,6 @@
     <Content Include="arduino\core\WProgram.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="arduino\libraries\EEPROM\EEPROM.cpp" />
-    <Content Include="arduino\libraries\EEPROM\EEPROM.h" />
-    <Content Include="arduino\libraries\EEPROM\keywords.txt" />
-    <Content Include="arduino\libraries\Ethernet\Client.cpp" />
-    <Content Include="arduino\libraries\Ethernet\Client.h" />
-    <Content Include="arduino\libraries\Ethernet\Ethernet.cpp" />
-    <Content Include="arduino\libraries\Ethernet\Ethernet.h" />
-    <Content Include="arduino\libraries\Ethernet\keywords.txt" />
-    <Content Include="arduino\libraries\Ethernet\Server.cpp" />
-    <Content Include="arduino\libraries\Ethernet\Server.h" />
-    <Content Include="arduino\libraries\Ethernet\utility\socket.c" />
-    <Content Include="arduino\libraries\Ethernet\utility\socket.h" />
-    <Content Include="arduino\libraries\Ethernet\utility\spi.h" />
-    <Content Include="arduino\libraries\Ethernet\utility\types.h" />
-    <Content Include="arduino\libraries\Ethernet\utility\w5100.c" />
-    <Content Include="arduino\libraries\Ethernet\utility\w5100.h" />
-    <Content Include="arduino\libraries\Firmata\examples\StandardFirmata\LICENSE.txt" />
-    <Content Include="arduino\libraries\Firmata\Firmata.cpp" />
-    <Content Include="arduino\libraries\Firmata\Firmata.h" />
-    <Content Include="arduino\libraries\Firmata\keywords.txt" />
-    <Content Include="arduino\libraries\Firmata\LICENSE.txt" />
-    <Content Include="arduino\libraries\Firmata\TODO.txt" />
-    <Content Include="arduino\libraries\LiquidCrystal\keywords.txt" />
-    <Content Include="arduino\libraries\LiquidCrystal\LiquidCrystal.cpp" />
-    <Content Include="arduino\libraries\LiquidCrystal\LiquidCrystal.h" />
-    <Content Include="arduino\libraries\Matrix\keywords.txt" />
-    <Content Include="arduino\libraries\Matrix\Matrix.cpp" />
-    <Content Include="arduino\libraries\Matrix\Matrix.h" />
-    <Content Include="arduino\libraries\Servo\keywords.txt" />
-    <Content Include="arduino\libraries\Servo\Servo.cpp" />
-    <Content Include="arduino\libraries\Servo\Servo.h" />
-    <Content Include="arduino\libraries\SoftwareSerial\keywords.txt" />
-    <Content Include="arduino\libraries\SoftwareSerial\SoftwareSerial.cpp" />
-    <Content Include="arduino\libraries\SoftwareSerial\SoftwareSerial.h" />
-    <Content Include="arduino\libraries\Sprite\binary.h" />
-    <Content Include="arduino\libraries\Sprite\keywords.txt" />
-    <Content Include="arduino\libraries\Sprite\Sprite.cpp" />
-    <Content Include="arduino\libraries\Sprite\Sprite.h" />
-    <Content Include="arduino\libraries\Stepper\keywords.txt" />
-    <Content Include="arduino\libraries\Stepper\Stepper.cpp" />
-    <Content Include="arduino\libraries\Stepper\Stepper.h" />
-    <Content Include="arduino\libraries\Wire\keywords.txt" />
-    <Content Include="arduino\libraries\Wire\utility\twi.c" />
-    <Content Include="arduino\libraries\Wire\utility\twi.h" />
-    <Content Include="arduino\libraries\Wire\Wire.cpp" />
-    <Content Include="arduino\libraries\Wire\Wire.h" />
     <Content Include="autocomplete.xml" />
     <Content Include="chip_xml\at86rf401.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -964,9 +864,6 @@
     <Content Include="WeifenLuo.WinFormsUI.Docking.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="arduino\libraries\SoftwareSerial\examples\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

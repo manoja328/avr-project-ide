@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVRProjectIDEUpdater", "AVR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetInterruptVectorsFromHTML", "GetInterruptVectorsFromHTML\GetInterruptVectorsFromHTML.csproj", "{528438BB-1B4D-407B-8D60-28D601D32BBF}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AVRProjectIDESetup", "AVRProjectIDESetup\AVRProjectIDESetup.vdproj", "{88855182-CBCF-4944-817A-124516FE2ACF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatorTest1", "SimulatorTest1\SimulatorTest1.csproj", "{9AC3518B-BFAA-40FF-986C-8A368C2724A2}"
 EndProject
 Global
@@ -32,8 +30,6 @@ Global
 		{528438BB-1B4D-407B-8D60-28D601D32BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{528438BB-1B4D-407B-8D60-28D601D32BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{528438BB-1B4D-407B-8D60-28D601D32BBF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88855182-CBCF-4944-817A-124516FE2ACF}.Debug|Any CPU.ActiveCfg = Debug
-		{88855182-CBCF-4944-817A-124516FE2ACF}.Release|Any CPU.ActiveCfg = Release
 		{9AC3518B-BFAA-40FF-986C-8A368C2724A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9AC3518B-BFAA-40FF-986C-8A368C2724A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AC3518B-BFAA-40FF-986C-8A368C2724A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
