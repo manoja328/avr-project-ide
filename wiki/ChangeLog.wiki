@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 39==
+
+ * Updated Editor Settings window, everything is configurable now
+ * Zoom level is preserved
+
 ==Alpha 37==
 
  * Fixed critical Find Next bug
