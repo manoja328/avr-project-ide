@@ -12,7 +12,7 @@ For help with project templates, see TemplatesHelp
 
 ===Editor Customization===
 
-scintconfig.xml handles customization options for the editor. Please do not actually remove any styles, or change style names. Adding styles will not work. The colours available to use are [http://msdn.microsoft.com/en-us/library/system.drawing.color_properties.aspx found here]. You can also change the settings for the indentation and line wrapping. Use the word "true" for things you want enabled. 
+scintconfig.xml handles customization options for the editor. Please do not actually remove any styles, or change style names. Adding styles will not work. The colours available to use are [http://msdn.microsoft.com/en-us/library/system.drawing.color_properties.aspx found here].
 
 Available attributes are:
  * Font
@@ -27,7 +27,7 @@ To customize the keyword lists, remember that only list 0 and 1 actually work. A
 
 ===The .ini File===
 
-The only thing in the settings.ini file that is not configurable through the editor's GUI is the backup interval. The serial port settings are actually the settings which was last used.
+Go ahead and take a look at settings.ini, but all of the settings inside are configurable through the editor.
 
 ===Custom Help Menu===
 
