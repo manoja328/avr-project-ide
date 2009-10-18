@@ -7,6 +7,8 @@
  * Added ability to compile single files
  * Fixed issue regarding packages not being displayed in Hardware Explorer
  * Added button to launch AVRDUDE in interactive mode
+ * Updater searches the main project webpage instead of the BuildID wiki page
+ * Installer requests highest permission level instead of user
 
 ==Alpha 39==
 
