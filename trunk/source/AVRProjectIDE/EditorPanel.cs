@@ -74,8 +74,6 @@ namespace AVRProjectIDE
 
             this.file = file;
             this.project = project;
-
-            this.timerBackupMaker.Interval = SettingsManagement.BackupInterval * 1000;
         }
 
         private void EditorPanelContent_Shown(object sender, EventArgs e)
@@ -292,6 +290,12 @@ namespace AVRProjectIDE
             }
         }
 
+        public void SaveBackup()
+        {
+            if (string.IsNullOrEmpty(file.FileAbsPath) == false && HasChanged)
+                WriteToFile(file.BackupPath);
+        }
+
         #endregion
 
         #region Events Handlers
@@ -359,12 +363,6 @@ namespace AVRProjectIDE
                     OnRename(this, e);
                 }
             }
-        }
-
-        private void timerBackupMaker_Tick(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(file.FileAbsPath) == false && HasChanged)
-                WriteToFile(file.BackupPath);
         }
 
         private void EditorPanelContent_FormClosing(object sender, FormClosingEventArgs e)
@@ -697,46 +695,11 @@ namespace AVRProjectIDE
         private void scint_AutoCompleteAccepted(object sender, AutoCompleteAcceptedEventArgs e)
         {
             return;
-            e.Cancel = true;
+        }
 
-            int start = scint.NativeInterface.WordStartPosition(scint.CurrentPos, true);
-            int backspace = scint.CurrentPos - start;
-            int end = scint.NativeInterface.WordEndPosition(scint.CurrentPos, true);
-            int delete = end - scint.CurrentPos;
-
-            string word = scint.GetWordFromPosition(start);
-
-            if (e.Text.StartsWith(word) == false)
-            {
-                for (int i = 0; i < delete; i++)
-                {
-                    SendKeys.Send("{RIGHT}");
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                }
-
-                for (int i = 0; i < backspace + delete; i++)
-                {
-                    SendKeys.Send("{BKSP}");
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                    System.Threading.Thread.Sleep(0);
-                }
-
-                scint.InsertText(start, e.Text);
-            }
-            else
-            {
-                scint.InsertText(end, e.Text.Substring(word.Length));
-            }
-
-            scint.Selection.Start = start + e.Text.Length;
-            scint.Selection.End = scint.Selection.Start;
+        private void scint_ZoomChanged(object sender, EventArgs e)
+        {
+            SettingsManagement.ZoomLevel = scint.Zoom;
         }
     }
 }

@@ -81,6 +81,9 @@ namespace AVRProjectIDE
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppInstall Path: " + SettingsManagement.AppInstallPath);
 
             FillRecentProjects();
+
+            timerBackup.Interval = SettingsManagement.BackupInterval * 1000;
+            timerBackup.Enabled = true;
         }
 
         private IDockContent GetPanelFromPersistString(string persistString)
@@ -401,7 +404,6 @@ namespace AVRProjectIDE
 
         private void frmProjIDE_FormClosing(object sender, FormClosingEventArgs e)
         {
-            dockPanel1.SaveAsXml(SettingsManagement.AppDataPath + "workspace.xml");
             SettingsManagement.SaveWindowState(this);
         }
 
@@ -451,6 +453,8 @@ namespace AVRProjectIDE
 
         private void frmProjIDE_FormClosed(object sender, FormClosedEventArgs e)
         {
+            SettingsManagement.SaveZoomLevel();
+            dockPanel1.SaveAsXml(SettingsManagement.AppDataPath + "workspace.xml");
         }
 
         private void mbtnAbout_Click(object sender, EventArgs e)
@@ -1263,7 +1267,22 @@ namespace AVRProjectIDE
         private void mbtnEditorSettings_Click(object sender, EventArgs e)
         {
             SettingsWindow w = new SettingsWindow();
-            w.Show();
+            w.ShowDialog();
+            timerBackup.Interval = SettingsManagement.BackupInterval * 1000;
+            List<EditorPanel> tmpList = new List<EditorPanel>(editorList.Values);
+            foreach (EditorPanel i in tmpList)
+            {
+                SettingsManagement.SetScintSettings(i.Scint);
+            }
+        }
+
+        private void timerBackup_Tick(object sender, EventArgs e)
+        {
+            List<EditorPanel> tmpList = new List<EditorPanel>(editorList.Values);
+            foreach (EditorPanel i in tmpList)
+            {
+                i.SaveBackup();
+            }
         }
     }
 }

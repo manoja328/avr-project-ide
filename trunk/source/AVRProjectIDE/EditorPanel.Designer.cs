@@ -54,7 +54,6 @@
             this.timerChangeMonitor = new System.Windows.Forms.Timer(this.components);
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.timerBackupMaker = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mbtnCloseMe = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +76,16 @@
             this.scint.Margins.Margin2.Width = 10;
             this.scint.Name = "scint";
             this.scint.Size = new System.Drawing.Size(868, 377);
+            this.scint.Styles.BraceBad.FontName = "Verdana";
+            this.scint.Styles.BraceLight.FontName = "Verdana";
+            this.scint.Styles.ControlChar.FontName = "Verdana";
+            this.scint.Styles.Default.FontName = "Verdana";
+            this.scint.Styles.IndentGuide.FontName = "Verdana";
+            this.scint.Styles.LastPredefined.FontName = "Verdana";
+            this.scint.Styles.LineNumber.FontName = "Verdana";
+            this.scint.Styles.Max.FontName = "Verdana";
             this.scint.TabIndex = 0;
+            this.scint.ZoomChanged += new System.EventHandler(this.scint_ZoomChanged);
             this.scint.CharAdded += new System.EventHandler<ScintillaNet.CharAddedEventArgs>(this.scint_CharAdded);
             this.scint.AutoCompleteAccepted += new System.EventHandler<ScintillaNet.AutoCompleteAcceptedEventArgs>(this.scint_AutoCompleteAccepted);
             // 
@@ -204,12 +212,6 @@
             this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
             this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
             // 
-            // timerBackupMaker
-            // 
-            this.timerBackupMaker.Enabled = true;
-            this.timerBackupMaker.Interval = 30000;
-            this.timerBackupMaker.Tick += new System.EventHandler(this.timerBackupMaker_Tick);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -268,7 +270,6 @@
         private System.Windows.Forms.Timer timerChangeMonitor;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Timer timerBackupMaker;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ContextMenuStrip rClickMenu;
         private System.Windows.Forms.ToolStripMenuItem mbtnCut;

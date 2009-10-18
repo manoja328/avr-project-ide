@@ -663,7 +663,7 @@ namespace AVRProjectIDE
 
                 foreach (XmlElement param in docx.GetElementsByTagName("HasBeenConfigged"))
                 {
-                    HasBeenConfigged = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    HasBeenConfigged = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
 
                 foreach (XmlElement param in docx.GetElementsByTagName("ClockFreq"))
@@ -692,7 +692,7 @@ namespace AVRProjectIDE
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("UseInitStack"))
                 {
-                    UseInitStack = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    UseInitStack = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("InitStackAddr"))
                 {
@@ -711,27 +711,27 @@ namespace AVRProjectIDE
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("PackStructs"))
                 {
-                    PackStructs = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    PackStructs = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("ShortEnums"))
                 {
-                    ShortEnums = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    ShortEnums = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("UnsignedBitfields"))
                 {
-                    UnsignedBitfields = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    UnsignedBitfields = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("UnsignedChars"))
                 {
-                    UnsignedChars = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    UnsignedChars = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("FunctionSections"))
                 {
-                    FunctionSections = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    FunctionSections = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("DataSections"))
                 {
-                    DataSections = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    DataSections = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
 
                 foreach (XmlElement param in docx.GetElementsByTagName("BurnPart"))
@@ -757,7 +757,7 @@ namespace AVRProjectIDE
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("BurnAutoReset"))
                 {
-                    BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == "true";
+                    BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("BurnFuseBox"))
                 {
@@ -850,7 +850,7 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement toComp in i.GetElementsByTagName("ToCompile"))
                             {
-                                newFile.ToCompile = toComp.InnerText.ToLowerInvariant().Trim() == "true";
+                                newFile.ToCompile = toComp.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                             }
 
                             foreach (XmlElement opt in i.GetElementsByTagName("Options"))
@@ -860,7 +860,7 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement wasOpen in i.GetElementsByTagName("WasOpen"))
                             {
-                                newFile.IsOpen = wasOpen.InnerText.ToLowerInvariant().Trim() == "true";
+                                newFile.IsOpen = wasOpen.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                             }
 
                             flistNew.Add(newFile);

@@ -11,14 +11,139 @@ namespace AVRProjectIDE
 {
     public partial class SettingsWindow : Form
     {
+        bool backspaceUnindents = true;
+        bool tabIndents = true;
+        bool useTabs = true;
+        int tabWidth = 4;
+        int indentWidth = 4;
+        int smartIndent = 3;
+
+        bool indentGuide = true;
+        bool lineWrap = true;
+
         public SettingsWindow()
         {
             InitializeComponent();
 
-            chkAutocomplete.Checked = SettingsManagement.AutocompleteEnable;
             txtFavoriteDir.Text = SettingsManagement.FavFolder;
             txtArduinoCore.Text = SettingsManagement.ArduinoCorePath;
             txtArduinoLibs.Text = SettingsManagement.ArduinoLibPath;
+
+            string tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentWidth");
+            int i = 0;
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentWidth", indentWidth.ToString("0"));
+            }
+            else if (int.TryParse(tmpStr, out i))
+            {
+                indentWidth = i;
+            }
+            else
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentWidth", indentWidth.ToString("0"));
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentTabWidth");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentTabWidth", tabWidth.ToString("0"));
+            }
+            else if (int.TryParse(tmpStr, out i))
+            {
+                tabWidth = i;
+            }
+            else
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentTabWidth", tabWidth.ToString("0"));
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentUseTab");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentUseTab", useTabs.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                useTabs = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentBackspaceUnindents");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentBackspaceUnindents", backspaceUnindents.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                backspaceUnindents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentTabIndents");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentTabIndents", tabIndents.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                tabIndents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentGuide");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentGuide", indentGuide.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                indentGuide = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentSmartness");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentSmartness", smartIndent.ToString("0"));
+            }
+            else if (int.TryParse(tmpStr, out i))
+            {
+                smartIndent = i;
+            }
+            else
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "IndentSmartness", smartIndent.ToString("0"));
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "LineWrap");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "LineWrap", lineWrap.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                lineWrap = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "AutocompleteEnable");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "AutocompleteEnable", chkAutocomplete.Checked.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                chkAutocomplete.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            chkUseTabs.Checked = useTabs;
+            chkWordWrap.Checked = lineWrap;
+            chkTabIndents.Checked = tabIndents;
+            chkIndentGuide.Checked = indentGuide;
+            chkBackspaceUnindents.Checked = backspaceUnindents;
+
+            numIndentWidth.Value = Math.Max(numIndentWidth.Minimum, Math.Min(indentWidth, numIndentWidth.Maximum));
+            numTabWidth.Value = Math.Max(numTabWidth.Minimum, Math.Min(tabWidth, numTabWidth.Maximum));
+
+            numBackupInterval.Value = Math.Max(numBackupInterval.Minimum, Math.Min(SettingsManagement.BackupInterval, numBackupInterval.Maximum));
+
+            dropSmartIndent.SelectedIndex = Math.Max(0, Math.Min(smartIndent, 3));
         }
 
         private void btnFavoriteBrowse_Click(object sender, EventArgs e)
@@ -68,9 +193,44 @@ namespace AVRProjectIDE
             System.Diagnostics.Process.Start(SettingsManagement.AppDataPath);
         }
 
+        private void btnOpenInstallationFolder_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(SettingsManagement.AppInstallPath);
+        }
+
         private void chkAutocomplete_CheckedChanged(object sender, EventArgs e)
         {
             SettingsManagement.AutocompleteEnable = chkAutocomplete.Checked;
+        }
+
+        private void lnkFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtFavoriteDir.Text);
+        }
+
+        private void lnkCoreFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtArduinoCore.Text);
+        }
+
+        private void lnkLibFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtArduinoLibs.Text);
+        }
+
+        private void SettingsWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SettingsManagement.SettingsFile.Write("Editor", "AutocompleteEnable", chkAutocomplete.Checked.ToString().ToLowerInvariant().Trim());
+            SettingsManagement.SettingsFile.Write("Editor", "IndentWidth", numIndentWidth.Value.ToString("0"));
+            SettingsManagement.SettingsFile.Write("Editor", "IndentTabWidth", numTabWidth.Value.ToString("0"));
+            SettingsManagement.SettingsFile.Write("Editor", "IndentUseTab", chkUseTabs.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "IndentBackspaceUnindents", chkBackspaceUnindents.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "IndentTabIndents", chkTabIndents.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "IndentGuide", chkIndentGuide.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "IndentSmartness", dropSmartIndent.SelectedIndex.ToString("0"));
+            SettingsManagement.SettingsFile.Write("Editor", "LineWrap", chkWordWrap.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "BackupInterval", numBackupInterval.Value.ToString("0"));
+            SettingsManagement.LoadScintSettings();
         }
     }
 }
