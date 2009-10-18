@@ -125,7 +125,7 @@ namespace AVRProjectIDE
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("UseInitStack"))
                 {
-                    proj.UseInitStack = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    proj.UseInitStack = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("InitStackAddr"))
                 {
@@ -144,27 +144,27 @@ namespace AVRProjectIDE
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("PackStructs"))
                 {
-                    proj.PackStructs = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    proj.PackStructs = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("ShortEnums"))
                 {
-                    proj.ShortEnums = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    proj.ShortEnums = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("UnsignedBitfields"))
                 {
-                    proj.UnsignedBitfields = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    proj.UnsignedBitfields = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("UnsignedChars"))
                 {
-                    proj.UnsignedChars = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    proj.UnsignedChars = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("FunctionSections"))
                 {
-                    proj.FunctionSections = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    proj.FunctionSections = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("DataSections"))
                 {
-                    proj.DataSections = param.InnerText.ToLowerInvariant().Trim() == "true";
+                    proj.DataSections = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                 }
 
                 foreach (XmlElement param in docx.GetElementsByTagName("BurnPart"))
@@ -190,7 +190,7 @@ namespace AVRProjectIDE
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("BurnAutoReset"))
                 {
-                    proj.BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == "true";
+                    proj.BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == true.ToString().Trim().ToLowerInvariant();
                 }
 
                 foreach (XmlElement container in docx.GetElementsByTagName("IncludeDirList"))

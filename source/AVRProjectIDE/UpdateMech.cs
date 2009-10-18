@@ -70,7 +70,7 @@ namespace AVRProjectIDE
                 m = r.Match(content);
                 if (m.Success)
                 {
-                    autoExe = m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains("y") || m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains("true");
+                    autoExe = m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains("y") || m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains(true.ToString().Trim().ToLowerInvariant());
                 }
             }
             catch

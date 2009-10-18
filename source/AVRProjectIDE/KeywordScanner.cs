@@ -329,7 +329,8 @@ namespace AVRProjectIDE
 
         private static void LoadFileKeywords()
         {
-            foreach (ProjectFile file in project.FileList.Values)
+            List<ProjectFile> tmpList = new List<ProjectFile>(project.FileList.Values);
+            foreach (ProjectFile file in tmpList)
             {
                 if (fileKeywords.ContainsKey(file) == false)
                 {
@@ -342,7 +343,8 @@ namespace AVRProjectIDE
         {
             try
             {
-                foreach (ProjectFile file in project.FileList.Values)
+                List<ProjectFile> tmpList = new List<ProjectFile>(project.FileList.Values);
+                foreach (ProjectFile file in tmpList)
                 {
                     if (fileLibs.ContainsKey(file) == false)
                     {
@@ -389,7 +391,8 @@ namespace AVRProjectIDE
                                 GetAllLibraries(nextfile, fileLibs[nextfile]);
                             }
 
-                            foreach (string s in fileLibs[nextfile])
+                            string[] tmpList = fileLibs[nextfile].ToArray();
+                            foreach (string s in tmpList)
                             {
                                 if (libList.Contains(s) == false && s != file.FileName)
                                     libList.Add(s);

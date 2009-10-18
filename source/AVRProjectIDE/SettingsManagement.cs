@@ -63,7 +63,7 @@ namespace AVRProjectIDE
                     return true;
                 }
 
-                res = str == "true";
+                res = str == true.ToString().Trim().ToLowerInvariant();
 
                 return res;
             }
@@ -194,7 +194,7 @@ namespace AVRProjectIDE
                     return false;
                 }
 
-                res = str == "true";
+                res = str == true.ToString().Trim().ToLowerInvariant();
 
                 return res;
             }
@@ -277,6 +277,11 @@ namespace AVRProjectIDE
 
         static private IniFile iniFile;
 
+        public static IniFile SettingsFile
+        {
+            get { return iniFile; }
+        }
+
         /// <summary>
         /// Load all settings into static memory
         /// Create files if not already existing
@@ -311,6 +316,7 @@ namespace AVRProjectIDE
             {
                 MessageBox.Show("Error Loading Editor Settings");
             }
+            LoadAutocompleteOnce();
 
             if (iniFile.Exists == false)
             {
@@ -529,6 +535,13 @@ namespace AVRProjectIDE
         static int indentWidth = 4;
         static int smartIndent = 3;
 
+        static int zoomLevel = int.MinValue;
+        public static int ZoomLevel
+        {
+            get { return zoomLevel; }
+            set { zoomLevel = value; }
+        }
+
         static bool indentGuide = true;
         static bool lineWrap = true;
 
@@ -566,7 +579,7 @@ namespace AVRProjectIDE
         /// load editor settings from configuration file
         /// </summary>
         /// <returns>true if successful</returns>
-        static private bool LoadScintSettings()
+        static public bool LoadScintSettings()
         {
             // first load a built in configuration
             scint.ConfigurationManager.Language = "cs";
@@ -588,6 +601,16 @@ namespace AVRProjectIDE
                 XmlNodeList xStyles = xDocEle.GetElementsByTagName("Style");
 
                 // match styles with the style names used by the scintilla
+
+                styleForeColour.Clear();
+                styleBackColour.Clear();
+                styleFont.Clear();
+                styleFontSize.Clear();
+                styleBold.Clear();
+                styleItalic.Clear();
+                styleUnderline.Clear();
+                styleKeywords.Clear();
+
                 foreach (XmlElement xStyle in xStyles)
                 {
                     string name = xStyle.GetAttribute("Name");
@@ -616,15 +639,15 @@ namespace AVRProjectIDE
                             }
                             else if (xAttrib.Name == "Bold")
                             {
-                                styleBold.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == "true");
+                                styleBold.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant());
                             }
                             else if (xAttrib.Name == "Italic")
                             {
-                                styleItalic.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == "true");
+                                styleItalic.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant());
                             }
                             else if (xAttrib.Name == "Underline")
                             {
-                                styleUnderline.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == "true");
+                                styleUnderline.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant());
                             }
                         }
                     }
@@ -650,77 +673,125 @@ namespace AVRProjectIDE
                     }
                 }
 
-                // find indentation settings
-                XmlNodeList xIndentSettings = xDocEle.GetElementsByTagName("Indentation");
-                foreach (XmlElement x in xIndentSettings)
+                string tmpStr = iniFile.Read("Editor", "IndentWidth");
+                int i = 0;
+                if (string.IsNullOrEmpty(tmpStr))
                 {
-                    foreach (XmlAttribute i in x.Attributes)
-                    {
-                        if (i.Name.ToLowerInvariant() == "backspaceunindents")
-                        {
-                            backspaceUnindents = i.Value.ToLowerInvariant().Trim() == "true";
-                        }
-                        else if (i.Name.ToLowerInvariant() == "usetabs")
-                        {
-                            useTabs = i.Value.ToLowerInvariant().Trim() == "true";
-                        }
-                        else if (i.Name.ToLowerInvariant() == "tabindents")
-                        {
-                            tabIndents = i.Value.ToLowerInvariant().Trim() == "true";
-                        }
-                        else if (i.Name.ToLowerInvariant() == "indentguide")
-                        {
-                            indentGuide = i.Value.ToLowerInvariant().Trim() == "true";
-                        }
-                        else if (i.Name.ToLowerInvariant() == "tabwidth")
-                        {
-                            int width = 4;
-                            if (int.TryParse(i.Value, out width))
-                                tabWidth = width;
-                        }
-                        else if (i.Name.ToLowerInvariant() == "indentwidth")
-                        {
-                            int width = 4;
-                            if (int.TryParse(i.Value, out width))
-                                indentWidth = width;
-                        }
-                        else if (i.Name.ToLowerInvariant() == "smartindentlevel")
-                        {
-                            int width = 3;
-                            if (int.TryParse(i.Value, out width))
-                                smartIndent = width;
-                        }
-                    }
+                    iniFile.Write("Editor", "IndentWidth", indentWidth.ToString("0"));
+                }
+                else if (int.TryParse(tmpStr, out i))
+                {
+                    indentWidth = i;
+                }
+                else
+                {
+                    iniFile.Write("Editor", "IndentWidth", indentWidth.ToString("0"));
                 }
 
-                // other settings, duh
-                XmlNodeList xOtherSettings = xDocEle.GetElementsByTagName("OtherSettings");
-                foreach (XmlElement x in xOtherSettings)
+                tmpStr = iniFile.Read("Editor", "IndentTabWidth");
+                if (string.IsNullOrEmpty(tmpStr))
                 {
-                    foreach (XmlAttribute i in x.Attributes)
-                    {
-                        if (i.Name.ToLowerInvariant() == "linewrap")
-                        {
-                            lineWrap = i.Value.ToLowerInvariant().Trim() == "true";
-                        }
-                    }
+                    iniFile.Write("Editor", "IndentTabWidth", tabWidth.ToString("0"));
+                }
+                else if (int.TryParse(tmpStr, out i))
+                {
+                    tabWidth = i;
+                }
+                else
+                {
+                    iniFile.Write("Editor", "IndentTabWidth", tabWidth.ToString("0"));
+                }
+
+                tmpStr = iniFile.Read("Editor", "IndentUseTab");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "IndentUseTab", useTabs.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    useTabs = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }
+
+                tmpStr = iniFile.Read("Editor", "IndentBackspaceUnindents");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "IndentBackspaceUnindents", backspaceUnindents.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    backspaceUnindents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }
+
+                tmpStr = iniFile.Read("Editor", "IndentTabIndents");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "IndentTabIndents", tabIndents.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    tabIndents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }
+
+                tmpStr = iniFile.Read("Editor", "IndentGuide");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "IndentGuide", indentGuide.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    indentGuide = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }
+
+                tmpStr = iniFile.Read("Editor", "IndentSmartness");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "IndentSmartness", smartIndent.ToString("0"));
+                }
+                else if (int.TryParse(tmpStr, out i))
+                {
+                    smartIndent = i;
+                }
+                else
+                {
+                    iniFile.Write("Editor", "IndentSmartness", smartIndent.ToString("0"));
+                }
+
+                tmpStr = iniFile.Read("Editor", "LineWrap");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "LineWrap", lineWrap.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    lineWrap = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }
+
+                zoomLevel = scint.Zoom;
+
+                tmpStr = iniFile.Read("Editor", "ZoomLevel");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "ZoomLevel", zoomLevel.ToString("0"));
+                }
+                else if (int.TryParse(tmpStr, out i))
+                {
+                    zoomLevel = Math.Min(3, Math.Max(i, 0));
+                }
+                else
+                {
+                    iniFile.Write("Editor", "ZoomLevel", zoomLevel.ToString("0"));
                 }
 
                 scint.Dispose(); // dispose of the scint, it causes an exception if it is not disposed manually
             }
             catch { return false; }
 
-            string acStr = iniFile.Read("Editor", "AutocompleteEnable");
-            if (string.IsNullOrEmpty(acStr))
-            {
-                autocompleteEnable = true;
-            }
-            else
-            {
-                autocompleteEnable = acStr.Trim().ToLowerInvariant() == "true";
-            }
-
             return true;
+        }
+
+        public static void SaveZoomLevel()
+        {
+            iniFile.Write("Editor", "ZoomLevel", zoomLevel.ToString("0"));
         }
 
         /// <summary>
@@ -797,7 +868,8 @@ namespace AVRProjectIDE
                 scinti.Scrolling.ScrollBars = ScrollBars.Both;
             }
 
-            //scinti.AutoComplete.ListString = "test doo uint8_t";
+            scinti.Zoom = zoomLevel;
+
             scinti.AutoComplete.AutomaticLengthEntered = true;
             scinti.AutoComplete.FillUpCharacters = "";
             scinti.AutoComplete.AutoHide = true;
@@ -817,6 +889,19 @@ namespace AVRProjectIDE
                 writer.Close();
             }
             catch { }
+        }
+
+        private static void LoadAutocompleteOnce()
+        {
+            string acStr = iniFile.Read("Editor", "AutocompleteEnable");
+            if (string.IsNullOrEmpty(acStr))
+            {
+                autocompleteEnable = true;
+            }
+            else
+            {
+                autocompleteEnable = acStr.Trim().ToLowerInvariant() == true.ToString().Trim().ToLowerInvariant();
+            }
         }
 
         #endregion
@@ -1021,6 +1106,8 @@ namespace AVRProjectIDE
 
         #endregion
 
+        #region Window State
+
         public static void LoadWindowState(Form form)
         {
             try
@@ -1034,7 +1121,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    if (winMax.ToLowerInvariant().Trim() == "true")
+                    if (winMax.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant())
                     {
                         form.WindowState = FormWindowState.Maximized;
                     }
@@ -1076,5 +1163,7 @@ namespace AVRProjectIDE
                 erw.ShowDialog();
             }
         }
+
+        #endregion
     }
 }

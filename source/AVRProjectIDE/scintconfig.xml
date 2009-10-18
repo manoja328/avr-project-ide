@@ -85,16 +85,4 @@
   <Keywords List="1">
     void signed unsigned union struct enum byte char short int long word dword float double bool bit bitfield byte uchar ushort uint ulong uword uint8_t uint16_t uint32_t uint64_t int8_t int16_t int32_t int64_t
   </Keywords>
-  <Indentation
-    BackspaceUnindents="true"
-    TabIndents="true"
-    UseTabs="true"
-    IndentGuide="true"
-    TabWidth="4"
-    IndentWidth="4"
-    SmartIndentLevel="3"
-    />
-  <OtherSettings
-    LineWrap="true"
-    />
 </Styles>
