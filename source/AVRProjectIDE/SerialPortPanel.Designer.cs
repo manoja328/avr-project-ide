@@ -61,7 +61,7 @@
             this.dropPorts.Name = "dropPorts";
             this.dropPorts.Size = new System.Drawing.Size(75, 21);
             this.dropPorts.TabIndex = 1;
-            this.dropPorts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dropPorts_MouseDoubleClick);
+            this.dropPorts.SelectedIndexChanged += new System.EventHandler(this.dropPorts_SelectedIndexChanged);
             // 
             // dropBaud
             // 
@@ -109,7 +109,7 @@
             this.txtTx.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTx.BackColor = System.Drawing.Color.Black;
-            this.txtTx.Font = new System.Drawing.Font(System.Drawing.FontFamily.GenericMonospace, 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.txtTx.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
             this.txtTx.ForeColor = System.Drawing.Color.White;
             this.txtTx.Location = new System.Drawing.Point(243, 2);
             this.txtTx.Name = "txtTx";
@@ -156,7 +156,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRx.BackColor = System.Drawing.Color.Black;
-            this.txtRx.Font = new System.Drawing.Font(System.Drawing.FontFamily.GenericMonospace, 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.txtRx.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
             this.txtRx.ForeColor = System.Drawing.Color.White;
             this.txtRx.Location = new System.Drawing.Point(0, 23);
             this.txtRx.Multiline = true;

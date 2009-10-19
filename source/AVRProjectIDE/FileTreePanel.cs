@@ -103,10 +103,13 @@ namespace AVRProjectIDE
                             }
                             File.Move(f.FileAbsPath, newPath);
 
+                            f.FileAbsPath = newPath;
+
                             if (editor != null)
                             {
                                 editorList.Remove(node.Text);
                                 editorList.Add(newName, editor);
+                                editor.File.FileAbsPath = newPath;
                                 editor.Text = newName;
                                 editor.TabText = newName;
                                 editor.WatchingForChange = true;
@@ -265,13 +268,13 @@ namespace AVRProjectIDE
             string filter = "";
             filter += "C Source Code (*.c)|*.c" + "|";
             filter += "CPP Source Code (*.cpp)|*.cpp" + "|";
-            //filter += "CXX Source Code (*.cxx)|*.cxx" + "|";
             filter += "ASM Source Code (*.S)|*.S" + "|";
             filter += "Arduino Source Code (*.pde)|*.pde" + "|";
             filter += "H Header File (*.h)|*.h" + "|";
             filter += "HPP Header File (*.hpp)|*.hpp" + "|";
             filter += "Any File (*.*)|*.*";
             sfd.Filter = filter;
+            sfd.FilterIndex = SettingsManagement.LastFileTypeFilter;
 
             sfd.AddExtension = true;
 
@@ -279,6 +282,7 @@ namespace AVRProjectIDE
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
+                SettingsManagement.LastFileTypeFilter = sfd.FilterIndex;
                 return AddFile(out file, sfd.FileName);
             }
             else
@@ -329,15 +333,14 @@ namespace AVRProjectIDE
 
                         if (file.FileExt == "h" || file.FileExt == "hpp")
                         {
-                            // template for new header files
-                            newFile.WriteLine("#ifndef " + file.FileNameNoExt + "_inc");
-                            newFile.WriteLine("#define " + file.FileNameNoExt + "_inc");
-                            newFile.WriteLine();
-                            newFile.WriteLine();
-                            newFile.WriteLine("#endif");
+                            newFile.WriteLine(FileTemplate.CreateFile(file.FileName, project.FileNameNoExt, "defaultheader.txt"));
+                        }
+                        else if (file.FileExt == "c" || file.FileExt == "cpp")
+                        {
+                            newFile.WriteLine(FileTemplate.CreateFile(file.FileName, project.FileNameNoExt, "defaultcode.txt"));
                         }
                         else
-                            newFile.WriteLine();
+                            newFile.WriteLine(FileTemplate.CreateFile(file.FileName, project.FileNameNoExt, "default_" + file.FileExt + ".txt"));
 
                         newFile.Close();
                     }

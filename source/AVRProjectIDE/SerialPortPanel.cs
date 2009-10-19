@@ -35,21 +35,14 @@ namespace AVRProjectIDE
             // get a list of available ports and populate the list
             string[] portList = SerialPort.GetPortNames();
             dropPorts.Items.Clear();
+            dropPorts.Items.Add("None");
+            dropPorts.Items.Add("Search for Ports");
             foreach (string portName in portList)
             {
                 dropPorts.Items.Add(portName);
             }
 
-            // no ports available, disable everything
-            if (dropPorts.Items.Count <= 0)
-            {
-                this.Enabled = false;
-            }
-            else
-            {
-                dropPorts.SelectedIndex = 0;
-            }
-
+            dropPorts.SelectedIndex = 0;
             dropBaud.SelectedIndex = 5;
 
             Disconnect();
@@ -57,6 +50,7 @@ namespace AVRProjectIDE
             txtTx.MaxLength = serialPort1.WriteBufferSize;
 
             textboxBuffer = "";
+            textChanged = true;
 
             StartThread();
         }
@@ -65,7 +59,13 @@ namespace AVRProjectIDE
 
         public string CurrentPort
         {
-            get { return (string)dropPorts.Items[dropPorts.SelectedIndex]; }
+            get
+            {
+                if (dropPorts.SelectedIndex >= 0)
+                    return (string)dropPorts.Items[dropPorts.SelectedIndex];
+                else
+                    return lastUsedPort;
+            }
         }
 
         public int CurrentBaud
@@ -151,7 +151,11 @@ namespace AVRProjectIDE
         {
             try
             {
-                serialPort1.PortName = (string)dropPorts.Items[dropPorts.SelectedIndex];
+                if (dropPorts.SelectedIndex >= 0)
+                    serialPort1.PortName = (string)dropPorts.Items[dropPorts.SelectedIndex];
+                else
+                    serialPort1.PortName = lastUsedPort;
+
                 serialPort1.BaudRate = int.Parse((string)dropBaud.Items[dropBaud.SelectedIndex]);
                 serialPort1.Open();
                 barRxStatus.Maximum = serialPort1.ReadBufferSize;
@@ -254,7 +258,8 @@ namespace AVRProjectIDE
             }
         }
 
-        private string textboxBuffer; // calling textBox.Text all the time has a high overhead, so this is used instead
+        private string textboxBuffer = ""; // calling textBox.Text all the time has a high overhead, so this is used instead
+        private bool textChanged = true;
 
         private delegate void AppendToRxCallback(string text);
 
@@ -268,6 +273,7 @@ namespace AVRProjectIDE
             else
             {
                 textboxBuffer += text;
+                textChanged = true;
             }
         }
 
@@ -275,11 +281,16 @@ namespace AVRProjectIDE
         {
             // calling textBox.Text all the time has a high overhead, so this is used instead
 
-            txtRx.Text = textboxBuffer;
-            if (txtRx.SelectionLength < 2)
+            if (textChanged)
             {
-                txtRx.Select(textboxBuffer.Length, 0);
-                txtRx.ScrollToCaret();
+                bool scroll = txtRx.SelectionLength < 2;
+                txtRx.Text = textboxBuffer;
+                if (scroll)
+                {
+                    txtRx.Select(textboxBuffer.Length, 0);
+                    txtRx.ScrollToCaret();
+                }
+                textChanged = false;
             }
         }
 
@@ -291,7 +302,9 @@ namespace AVRProjectIDE
             }
             else
             {
-                SerialPortException(ex);
+                //SerialPortException(ex);
+                txtRx.Text = ex.Message + "\r\n" + textboxBuffer;
+                textChanged = false;
             }
         }
 
@@ -420,43 +433,6 @@ namespace AVRProjectIDE
         {
             if (e.KeyCode == Keys.Enter && pendingDisconnect == false && serialPort1.IsOpen && btnSend.Enabled)
                 Send(txtTx.Text);
-        }
-
-        private void dropPorts_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            // double click the port list to refresh it
-
-            string oldPort = (string)dropPorts.Items[dropPorts.SelectedIndex];
-
-            // get a list of available ports and populate the list
-            string[] portList = SerialPort.GetPortNames();
-            dropPorts.Items.Clear();
-            foreach (string portName in portList)
-            {
-                dropPorts.Items.Add(portName);
-            }
-
-            // no ports available, disable everything
-            if (dropPorts.Items.Count <= 0)
-            {
-                this.Enabled = false;
-            }
-            else if (oldPort != null)
-            {
-                // if previous exists, reselect it
-                if (dropPorts.Items.Contains(oldPort))
-                {
-                    dropPorts.SelectedIndex = dropPorts.Items.IndexOf(oldPort);
-                }
-                else
-                {
-                    dropPorts.SelectedIndex = 0;
-                }
-            }
-            else
-            {
-                dropPorts.SelectedIndex = 0;
-            }
         }
 
         #endregion
@@ -637,5 +613,68 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        private string lastUsedPort = "";
+
+        private bool blockReselect = false;
+
+        private void dropPorts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (blockReselect)
+                return;
+
+            blockReselect = true;
+
+            if (dropPorts.SelectedIndex >= 0)
+            {
+                string s = (string)dropPorts.Items[dropPorts.SelectedIndex];
+
+                string oldPort = s;
+
+                if (oldPort.StartsWith("COM") == false)
+                    oldPort = lastUsedPort;
+                else
+                    lastUsedPort = oldPort;
+
+                if (s == "Search for Ports")
+                {
+                    // get a list of available ports and populate the list
+                    string[] portList = SerialPort.GetPortNames();
+                    dropPorts.Items.Clear();
+
+                    dropPorts.Items.Add("None");
+                    dropPorts.Items.Add("Search for Ports");
+
+                    foreach (string portName in portList)
+                    {
+                        dropPorts.Items.Add(portName);
+                    }
+
+                    // no ports available, disable everything
+                    if (dropPorts.Items.Count <= 0)
+                    {
+                        this.Enabled = false;
+                    }
+                    else if (oldPort != null)
+                    {
+                        // if previous exists, reselect it
+                        if (dropPorts.Items.Contains(oldPort))
+                        {
+                            dropPorts.SelectedIndex = dropPorts.Items.IndexOf(oldPort);
+                        }
+                        else
+                        {
+                            dropPorts.SelectedIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        dropPorts.SelectedIndex = 0;
+                    }
+                }
+            }
+
+            blockReselect = false;
+        }
     }
 }

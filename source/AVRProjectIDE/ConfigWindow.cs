@@ -27,6 +27,16 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
+            List<string> orderedDevices = new List<string>();
+            foreach (string s in dropDevices.Items)
+                orderedDevices.Add(s);
+
+            orderedDevices.Sort((x, y) => string.Compare(x, y));
+
+            dropDevices.Items.Clear();
+            foreach (string s in orderedDevices)
+                dropDevices.Items.Add(s);
+
             this.project = project;
 
             project.HasBeenConfigged = true;
@@ -132,7 +142,13 @@ namespace AVRProjectIDE
         private void FormToProj()
         {
             project.OutputDir = txtOutputPath.Text;
-            project.Device = (string)dropDevices.Items[dropDevices.SelectedIndex];
+
+            string newDev = (string)dropDevices.Items[dropDevices.SelectedIndex];
+
+            if (project.Device != newDev)
+                project.ShouldReloadDevice = true;
+
+            project.Device = newDev;
             project.ClockFreq = numClockFreq.Value;
             project.LinkerOptions = txtLinkerOptions.Text;
             project.OtherOptions = txtOtherOptions.Text;
@@ -657,7 +673,7 @@ namespace AVRProjectIDE
         private void btnBurnOnlyOpt_Click(object sender, EventArgs e)
         {
             FormToProj();
-            projBurner.BurnCMD(true, false);
+            projBurner.BurnCMD(true, false, this);
         }
 
         #endregion
@@ -735,7 +751,7 @@ namespace AVRProjectIDE
         private void btnBurnFuseBox_Click(object sender, EventArgs e)
         {
             FormToProj();
-            projBurner.BurnCMD(false, true);
+            projBurner.BurnCMD(false, true, this);
         }
     }
 }

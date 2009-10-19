@@ -171,6 +171,9 @@ namespace AVRProjectIDE
             }
 
             string projFilePath = folderPath + Path.DirectorySeparatorChar + projFilename + ".avrproj";
+
+            project.FilePath = projFilePath;
+
             string ext = "c";
             if (((string)dropFileType.Items[dropFileType.SelectedIndex]).Contains("C++"))
                 ext = "cpp";
@@ -212,11 +215,11 @@ namespace AVRProjectIDE
                         StreamWriter writer = new StreamWriter(iniFilePath);
                         if (ext != "pde")
                         {
-                            writer.Write("\r\n\r\nint main()\r\n{\r\n\t\r\n\treturn 0;\r\n}\r\n");
+                            writer.Write(FileTemplate.CreateFile(iniFilename + "." + ext, projFilename, "initialpde.txt"));
                         }
                         else
                         {
-                            writer.Write("\r\n\r\nvoid setup()\r\n{\r\n\t\r\n}\r\n\r\nvoid loop()\r\n{\r\n\t\r\n}\r\n");
+                            writer.Write(FileTemplate.CreateFile(iniFilename + "." + ext, projFilename, "initialmain.txt"));
                         }
                         writer.WriteLine();
                         writer.Close();

@@ -60,10 +60,12 @@ namespace AVRProjectIDE
             messageWin = new MessagePanel();
             messageWin.GotoError += new MessagePanel.OnClickError(messageWin_GotoError);
 
-            projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
-            projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
-
-            projBurner = new ProjectBurner(project);
+            if (project.IsReady)
+            {
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
+                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
+                projBurner = new ProjectBurner(project);
+            }
 
             // fill help menu with a list of bookmarks to websites
             try
@@ -1029,17 +1031,20 @@ namespace AVRProjectIDE
 
             ConfigWindow wnd = new ConfigWindow(project);
             wnd.ShowDialog();
-            hardwareExplorerWin.LoadDataForChip(project.Device);
+
+            if (project.ShouldReloadDevice)
+                hardwareExplorerWin.LoadDataForChip(project.Device);
+
+            if (project.ShouldReloadFiles)
+                fileTreeWin.PopulateList(project, editorList);
+
+            project.ShouldReloadFiles = false;
+            project.ShouldReloadDevice = false;
         }
 
         private void tbtnConfig_Click(object sender, EventArgs e)
         {
-            if (project.IsReady == false)
-                return;
-
-            ConfigWindow wnd = new ConfigWindow(project);
-            wnd.ShowDialog();
-            hardwareExplorerWin.LoadDataForChip(project.Device);
+            mbtnConfig_Click(sender, e);
         }
 
         private void mbtnCompile_Click(object sender, EventArgs e)
@@ -1052,12 +1057,6 @@ namespace AVRProjectIDE
                 messageWin.Activate();
                 SaveAll();
                 projBuilder.StartBuild();
-            }
-            else
-            {
-                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
-                if (res == DialogResult.Yes)
-                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
             }
         }
 
@@ -1072,12 +1071,6 @@ namespace AVRProjectIDE
                 SaveAll();
                 projBuilder.StartBuild();
             }
-            else
-            {
-                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
-                if (res == DialogResult.Yes)
-                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
-            }
         }
 
         private void tbtnBurn_Click(object sender, EventArgs e)
@@ -1086,18 +1079,12 @@ namespace AVRProjectIDE
                 return;
 
             if (ProjectBuilder.CheckForWinAVR() == false)
-            {
-                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
-                if (res == DialogResult.Yes)
-                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
-
                 return;
-            }
 
             if (serialWin.IsConnected && serialWin.CurrentPort == project.BurnPort)
                 serialWin.Disconnect();
 
-            projBurner.BurnCMD(false, false);
+            projBurner.BurnCMD(false, false, messageWin);
 
             if (serialWin.CurrentPort == project.BurnPort)
             {
@@ -1112,18 +1099,12 @@ namespace AVRProjectIDE
                 return;
 
             if (ProjectBuilder.CheckForWinAVR() == false)
-            {
-                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
-                if (res == DialogResult.Yes)
-                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
-
                 return;
-            }
 
             if (serialWin.IsConnected && serialWin.CurrentPort == project.BurnPort)
                 serialWin.Disconnect();
-            
-            projBurner.BurnCMD(false, false);
+
+            projBurner.BurnCMD(false, false, messageWin);
 
             if (serialWin.CurrentPort == project.BurnPort)
             {
@@ -1170,12 +1151,6 @@ namespace AVRProjectIDE
                 if (ProjectBuilder.CheckForWinAVR())
                 {
                     projBuilder.StartMake();
-                }
-                else
-                {
-                    DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
-                    if (res == DialogResult.Yes)
-                        System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
                 }
             }
         }
@@ -1248,6 +1223,10 @@ namespace AVRProjectIDE
 
                 KeywordScanner.LaunchScan(project, editorList);
 
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
+                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
+                projBurner = new ProjectBurner(project);
+
                 // set title
                 this.Text = project.FileNameNoExt + " - AVR Project IDE";
 
@@ -1282,6 +1261,57 @@ namespace AVRProjectIDE
             foreach (EditorPanel i in tmpList)
             {
                 i.SaveBackup();
+            }
+        }
+
+        private void mbtnAvrdudeInteractive_Click(object sender, EventArgs e)
+        {
+            if (ProjectBuilder.CheckForWinAVR())
+            {
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo.FileName = "cmd";
+                p.StartInfo.Arguments = "/k avrdude ";
+                p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} -t", project.BurnProgrammer, project.BurnPart, project.BurnOptions);
+                p.Start();
+            }
+        }
+
+        private void mbtnCompileCurrent_Click(object sender, EventArgs e)
+        {
+            if (project.IsReady == false)
+                return;
+
+            ProjectFile file = null;
+
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+            {
+                ((EditorPanel)dockPanel1.ActiveContent).Save();
+                file = ((EditorPanel)dockPanel1.ActiveContent).File;
+            }
+            else if (lastEditor != null)
+            {
+                lastEditor.Save();
+                file = lastEditor.File;
+            }
+
+            if (file != null)
+            {
+                if (file.FileExt == "c" || file.FileExt == "cpp")
+                {
+                    if (projBuilder.Compile(file))
+                    {
+                        messageWin.MyTextBox.Text += "\r\n" + "Compilation Successful";
+                    }
+                    else
+                    {
+                        messageWin.MyTextBox.Text += "\r\n" + "Compilation Failed";
+                    }
+
+                    messageWin.BringToFront();
+                    messageWin.Activate();
+                }
+                else
+                    MessageBox.Show("You can only compile C or C++ files");
             }
         }
     }

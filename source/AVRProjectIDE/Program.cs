@@ -21,6 +21,7 @@ namespace AVRProjectIDE
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 SettingsManagement.Load();
+                FileTemplate.Unpack();
                 ProjTemplate.Load();
 
                 if (SettingsManagement.AutocompleteEnable)
@@ -78,12 +79,9 @@ namespace AVRProjectIDE
                     {
                         try
                         {
-                            UpdateUpdater();
-                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Run the Updater?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
-                                System.Diagnostics.Process updater = new System.Diagnostics.Process();
-                                updater.StartInfo = new System.Diagnostics.ProcessStartInfo(SettingsManagement.AppInstallPath + "AVRProjectIDEUpdater.exe", UpdateMech.NewBuildID + " " + UpdateMech.DownloadURL + " " + UpdateMech.NewFileName + " yes");
-                                updater.Start();
+                                System.Diagnostics.Process.Start(UpdateMech.DownloadURL);
                             }
                         }
                         catch (Exception ex)
@@ -98,31 +96,6 @@ namespace AVRProjectIDE
             {
                 ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Checking Updates");
                 erw.ShowDialog();
-            }
-        }
-
-        private static void UpdateUpdater()
-        {
-            bool rewrite = false;
-            byte[] newBArr = Properties.Resources.AVRProjectIDEUpdater;
-            string path = SettingsManagement.AppInstallPath + "AVRProjectIDEUpdater.exe";
-            if (File.Exists(path))
-            {
-                byte[] oldBArr = File.ReadAllBytes(path);
-                for (int i = 0; i < oldBArr.Length && i < newBArr.Length; i += 16)
-                    if (oldBArr[i] != newBArr[i])
-                    {
-                        rewrite = true;
-                        break;
-                    }
-            }
-            else
-                rewrite = true;
-
-            if (rewrite)
-            {
-                File.WriteAllBytes(path, newBArr);
-                MessageBox.Show("The Updater has been Installed or Updated");
             }
         }
 

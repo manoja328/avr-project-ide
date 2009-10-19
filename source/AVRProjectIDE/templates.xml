@@ -5,6 +5,15 @@
 
   </template>
 
+  <template name="Pin Definitions and Macros">
+    <CreateFile name="pindefs.h">
+      <Template>defaultheader.txt</Template>
+    </CreateFile>
+    <CreateFile name="macros.h">
+      <Template>defaultheader.txt</Template>
+    </CreateFile>
+  </template>
+
   <template name="Maximum Optimization">
     <Optimization>-Os</Optimization>
     <PackStructs>true</PackStructs>

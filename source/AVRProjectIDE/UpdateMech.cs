@@ -33,7 +33,7 @@ namespace AVRProjectIDE
         {
             try
             {
-                WebRequest wReq = WebRequest.Create("http://code.google.com/p/avr-project-ide/wiki/BuildID");
+                WebRequest wReq = WebRequest.Create(Properties.Resources.WebsiteURL);
                 wReq.Credentials = CredentialCache.DefaultCredentials;
                 HttpWebResponse wResp = (HttpWebResponse)wReq.GetResponse();
                 Stream wStream = wResp.GetResponseStream();

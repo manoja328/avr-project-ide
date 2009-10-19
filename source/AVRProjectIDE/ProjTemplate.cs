@@ -259,6 +259,43 @@ namespace AVRProjectIDE
                 if (appCnt >= 2)
                     proj.HasBeenConfigged = true;
 
+                try
+                {
+                    foreach (XmlElement i in docx.GetElementsByTagName("CreateFile"))
+                    {
+                        string fname = i.GetAttribute("name");
+                        if (string.IsNullOrEmpty(fname) == false)
+                        {
+                            try
+                            {
+                                ProjectFile f = new ProjectFile(Program.AbsPathFromRel(proj.DirPath, fname));
+                                if (proj.FileList.ContainsKey(fname) == false)
+                                {
+                                    proj.FileList.Add(fname, f);
+                                    proj.ShouldReloadFiles = true;
+
+                                    if (f.Exists == false)
+                                    {
+                                        Program.MakeSurePathExists(f.FileDir);
+                                        File.WriteAllText(f.FileAbsPath, " ");
+
+                                        foreach (XmlElement k in i.GetElementsByTagName("Template"))
+                                        {
+                                            File.WriteAllText(f.FileAbsPath, FileTemplate.CreateFile(f.FileName, proj.FileNameNoExt, k.InnerText));
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+
                 return true;
             }
             else

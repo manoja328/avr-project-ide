@@ -32,7 +32,7 @@ namespace AVRProjectIDE
                 this.url = url;
                 if (url.ToLowerInvariant().StartsWith("http://") || url.ToLowerInvariant().StartsWith("https://"))
                 {
-                    menuItem.Image = global::AVRProjectIDE.Properties.Resources.web;
+                    menuItem.Image = Properties.Resources.web;
                 }
                 menuItem.Click += new EventHandler(menuItem_Click);
             }
@@ -81,7 +81,7 @@ namespace AVRProjectIDE
         public static ToolStripMenuItem GetMenuLinkRoot(string text)
         {
             ToolStripMenuItem item = new ToolStripMenuItem(text);
-            item.Image = global::AVRProjectIDE.Properties.Resources.web;
+            item.Image = Properties.Resources.web;
 
             XmlDocument xDoc = new XmlDocument();
 

@@ -28,7 +28,6 @@ namespace AVRProjectIDE
         private ListView errorList;
         private BackgroundWorker worker;
         private BackgroundWorker makefileWorker;
-        private string insertionGUID;
 
         #endregion
 
@@ -53,7 +52,7 @@ namespace AVRProjectIDE
             this.makefileWorker = new BackgroundWorker();
             this.makefileWorker.DoWork += new DoWorkEventHandler(makefileWorker_DoWork);
 
-            this.insertionGUID = Guid.NewGuid().ToString();
+            PrepProject();
         }
 
         #region Background Worker
@@ -265,6 +264,10 @@ namespace AVRProjectIDE
 
             PrepProject();
 
+            // clear the relevent form elements
+            TextBoxModify(outputTextbox, "", TextBoxChangeMode.Set);
+            ListViewModify(errorList, null, ListViewChangeMode.Clear);
+
             // start the build
             worker.RunWorkerAsync();
         }
@@ -473,7 +476,7 @@ namespace AVRProjectIDE
             return false;
         }
 
-        private bool Compile(ProjectFile file)
+        public bool Compile(ProjectFile file)
         {
             string outputAbsPath = workingProject.DirPath + Path.DirectorySeparatorChar + workingProject.OutputDir;
 
@@ -1634,10 +1637,7 @@ namespace AVRProjectIDE
 
             // all this cloning is to make sure the background worker thread used for the build
             // doesn't access the same resources as the main thread
-
-            // clear the relevent form elements
-            TextBoxModify(outputTextbox, "", TextBoxChangeMode.Set);
-            ListViewModify(errorList, null, ListViewChangeMode.Clear);
+            return;
         }
 
         #endregion
@@ -1658,11 +1658,19 @@ namespace AVRProjectIDE
                 }
                 else
                 {
+                    DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
+                    if (res == DialogResult.Yes)
+                        System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
+
                     return false;
                 }
             }
             catch
             {
+                DialogResult res = MessageBox.Show("I don't think you have WinAVR installed, do you want to go download it?", "WinAVR Not Found", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                    System.Diagnostics.Process.Start(Properties.Resources.WinAVRURL);
+
                 return false;
             }
         }
@@ -1670,6 +1678,9 @@ namespace AVRProjectIDE
 
     public class ProjectBurner
     {
+        [DllImport("User32.dll", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        private static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
+
         private AVRProject project;
         private Process avrdude;
 
@@ -1681,7 +1692,7 @@ namespace AVRProjectIDE
             avrdude = new Process();
         }
 
-        public void BurnCMD(bool onlyOptions, bool burnFuses)
+        public void BurnCMD(bool onlyOptions, bool burnFuses, Control formObj)
         {
             try
             {
@@ -1722,6 +1733,12 @@ namespace AVRProjectIDE
                 if (avrdude.Start() == false)
                 {
                     MessageBox.Show("Error, Unable to Start AVRDUDE");
+                }
+                else if (formObj != null)
+                {
+                    //System.Drawing.Rectangle r = formObj.RectangleToScreen(new System.Drawing.Rectangle(0, 0, formObj.Width, formObj.Height));
+
+                    //MoveWindow(avrdude.MainWindowHandle, r.X, r.Y, r.Width, r.Height, true);
                 }
             }
             catch (Exception ex)
@@ -1800,6 +1817,9 @@ namespace AVRProjectIDE
                 if (m.Success && m.Index == 0)
                     res.Add(m.Groups[5].Value.Trim().ToLowerInvariant());
             }
+
+            res.Sort((x, y) => string.Compare(x, y));
+
             return res;
         }
 
@@ -1838,6 +1858,8 @@ namespace AVRProjectIDE
                     erw.ShowDialog();
                 }
             }
+
+            res.Sort((x, y) => string.Compare(x, y));
 
             return res.ToArray();
         }

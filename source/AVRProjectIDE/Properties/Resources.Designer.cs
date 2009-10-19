@@ -109,13 +109,6 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
-        internal static byte[] AVRProjectIDEUpdater {
-            get {
-                object obj = ResourceManager.GetObject("AVRProjectIDEUpdater", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap build {
             get {
                 object obj = ResourceManager.GetObject("build", resourceCulture);
@@ -124,7 +117,7 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_Alpha39.
+        ///   Looks up a localized string similar to AVRProjectIDE_Alpha40.
         /// </summary>
         internal static string BuildID {
             get {
@@ -389,18 +382,19 @@ namespace AVRProjectIDE.Properties {
         ///
         ///  &lt;/template&gt;
         ///
+        ///  &lt;template name=&quot;Pin Definitions and Macros&quot;&gt;
+        ///    &lt;CreateFile name=&quot;pindefs.h&quot;&gt;
+        ///      &lt;Template&gt;defaultheader.txt&lt;/Template&gt;
+        ///    &lt;/CreateFile&gt;
+        ///    &lt;CreateFile name=&quot;macros.h&quot;&gt;
+        ///      &lt;Template&gt;defaultheader.txt&lt;/Template&gt;
+        ///    &lt;/CreateFile&gt;
+        ///  &lt;/template&gt;
+        ///
         ///  &lt;template name=&quot;Maximum Optimization&quot;&gt;
         ///    &lt;Optimization&gt;-Os&lt;/Optimization&gt;
         ///    &lt;PackStructs&gt;true&lt;/PackStructs&gt;
-        ///    &lt;ShortEnums&gt;true&lt;/ShortEnums&gt;
-        ///    &lt;UnsignedBitfields&gt;true&lt;/UnsignedBitfields&gt;
-        ///    &lt;UnsignedChars&gt;true&lt;/UnsignedChars&gt;
-        ///    &lt;FunctionSections&gt;true&lt;/FunctionSections&gt;
-        ///    &lt;DataSections&gt;true&lt;/DataSections&gt;
-        ///    &lt;LinkLibList&gt;
-        ///      &lt;Lib&gt;libm.a&lt;/Lib&gt;
-        ///      &lt;Lib&gt;libc.a&lt;/Lib&gt;
-        /// [rest of string was truncated]&quot;;.
+        ///    &lt;ShortEnums&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string templates {
             get {
@@ -468,6 +462,15 @@ namespace AVRProjectIDE.Properties {
             get {
                 object obj = ResourceManager.GetObject("web", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://code.google.com/p/avr-project-ide/.
+        /// </summary>
+        internal static string WebsiteURL {
+            get {
+                return ResourceManager.GetString("WebsiteURL", resourceCulture);
             }
         }
         
