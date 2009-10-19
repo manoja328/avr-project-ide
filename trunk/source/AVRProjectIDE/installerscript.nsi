@@ -7,12 +7,12 @@ SetCompressor /SOLID /FINAL lzma
 
 Name "AVR Project IDE"
 
+RequestExecutionLevel highest
+
 OutFile "AVRProjectIDE_Installer.exe"
 
 InstallDir $PROGRAMFILES\AVRProjectIDE
 InstallDirRegKey HKCU "Software\AVRProjectIDE" ""
-
-RequestExecutionLevel user
 
 ;Page directory
 ;Page components
@@ -39,7 +39,6 @@ Section ;"Main Editor"
 	
 	FILE AVRProjectIDE.exe
 	File mainicon.ico
-	File AVRProjectIDEUpdater.exe
 	File SciLexer.dll
 	File ScintillaNet.dll
 	File WeifenLuo.WinFormsUI.Docking.dll

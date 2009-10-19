@@ -313,32 +313,122 @@ namespace AVRProjectIDE
 
         private void LoadChipInfo(TextBox textbox, XmlElement docEle)
         {
-            string result = chipName.ToUpperInvariant() + "\r\n";
+            string result = chipName.ToUpperInvariant();
 
             foreach (XmlElement i in docEle.GetElementsByTagName("MEMORY"))
             {
+                result += "\r\n";
+
                 foreach (XmlElement j in i.GetElementsByTagName("PROG_FLASH"))
                 {
-                    result += String.Format("Flash Memory: {0} bytes\r\n", j.InnerText);
+                    int num = 0;
+                    if (TryParseText(j.InnerText, out num))
+                        result += String.Format("Flash Memory: {0} bytes ( 0x{0:X} )\r\n", num);
                 }
 
                 foreach (XmlElement j in i.GetElementsByTagName("EEPROM"))
                 {
-                    result += String.Format("EEPROM Memory: {0} bytes\r\n", j.InnerText);
+                    int num = 0;
+                    if (TryParseText(j.InnerText, out num))
+                        result += String.Format("EEPROM Memory: {0} bytes ( 0x{0:X} )\r\n", num);
                 }
 
                 foreach (XmlElement j in i.GetElementsByTagName("INT_SRAM"))
                 {
+                    result += "\r\n";
+
                     foreach (XmlElement k in j.GetElementsByTagName("SIZE"))
                     {
-                        result += String.Format("SRAM Size: {0} bytes\r\n", k.InnerText);
+                        int num = 0;
+                        if (TryParseText(k.InnerText, out num))
+                            result += String.Format("SRAM Size: {0} bytes ( 0x{0:X} )\r\n", num);
                     }
 
                     foreach (XmlElement k in j.GetElementsByTagName("START_ADDR"))
                     {
-                        result += String.Format("SRAM Starting Address: {0}\r\n", k.InnerText.Replace("$", "0x"));
+                        int num = 0;
+                        if (TryParseText(k.InnerText, out num))
+                            result += String.Format("SRAM Starting Address: {0} ( 0x{0:X} )\r\n", num);
                     }
                 }
+
+                foreach (XmlElement j in i.GetElementsByTagName("BOOT_CONFIG"))
+                {
+                    result += "\r\n";
+
+                    string startAddrStr = null;
+                    string endAddrStr = null;
+                    foreach (XmlElement k in j.GetElementsByTagName("NRWW_START_ADDR"))
+                        startAddrStr = k.InnerText;
+                    foreach (XmlElement k in j.GetElementsByTagName("NRWW_STOP_ADDR"))
+                        endAddrStr = k.InnerText;
+
+                    int startAddr = 0;
+                    int endAddr = 0;
+
+                    if (TryParseText(startAddrStr, out startAddr) && TryParseText(endAddrStr, out endAddr))
+                        result += String.Format("NRWW Addr: {0} ( 0x{0:X} ) to {1} ( 0x{1:X} )\r\n", startAddr, endAddr);
+
+                    foreach (XmlElement k in j.GetElementsByTagName("RWW_START_ADDR"))
+                        startAddrStr = k.InnerText;
+                    foreach (XmlElement k in j.GetElementsByTagName("RWW_STOP_ADDR"))
+                        endAddrStr = k.InnerText;
+
+                    if (TryParseText(startAddrStr, out startAddr) && TryParseText(endAddrStr, out endAddr))
+                        result += String.Format("RWW Addr: {0} ( 0x{0:X} ) to {1} ( 0x{1:X} )\r\n", startAddr, endAddr);
+                    
+
+                    foreach (XmlElement k in j.GetElementsByTagName("PAGESIZE"))
+                    {
+                        int num = 0;
+                        if (TryParseText(k.InnerText, out num))
+                            result += String.Format("Page Size: {0} ( 0x{0:X} )\r\n", num);
+                    }
+
+                    for (int k = 0; k < 16; k++)
+                    {
+                        foreach (XmlElement l in j.GetElementsByTagName("BOOTSZMODE" + k.ToString("0")))
+                        {
+                            result += "\r\n";
+
+                            foreach (XmlElement m in l.GetElementsByTagName("BOOTSIZE"))
+                            {
+                                int num = 0;
+                                if (TryParseText(m.InnerText, out num))
+                                    result += String.Format("Boot Mode {0} Boot Size: {1} bytes ( 0x{1:X} )\r\n", k, num);
+                            }
+
+                            foreach (XmlElement m in l.GetElementsByTagName("PAGES"))
+                            {
+                                int num = 0;
+                                if (TryParseText(m.InnerText, out num))
+                                    result += String.Format("Boot Mode {0} Pages: {1}\r\n", k, num);
+                            }
+
+                            foreach (XmlElement m in l.GetElementsByTagName("APPSTART"))
+                            {
+                                int num = 0;
+                                if (TryParseText(m.InnerText, out num))
+                                    result += String.Format("Boot Mode {0} App Start Addr: {1} ( 0x{1:X} )\r\n", k, num);
+                            }
+
+                            foreach (XmlElement m in l.GetElementsByTagName("BOOTSTART"))
+                            {
+                                int num = 0;
+                                if (TryParseText(m.InnerText, out num))
+                                    result += String.Format("Boot Mode {0} Boot Start Addr: {1} ( 0x{1:X} )\r\n", k, num);
+                            }
+
+                            foreach (XmlElement m in l.GetElementsByTagName("BOOTRESET"))
+                            {
+                                int num = 0;
+                                if (TryParseText(m.InnerText, out num))
+                                    result += String.Format("Boot Mode {0} Boot Reset Addr: {1} ( 0x{1:X} )\r\n", k, num);
+                            }
+                        }
+                    }
+                }
+
             }
 
             textbox.Text = result;
@@ -388,8 +478,9 @@ namespace AVRProjectIDE
 
                 foreach (XmlElement j in i.GetElementsByTagName("PACKAGES"))
                 {
-                    string txt = j.InnerText.Trim(new char[] { '[', ']', });
-                    string[] packages = txt.Split(':');
+                    //string txt = j.InnerText.Trim().Trim(new char[] { '[', ']', });
+                    //string[] packages = txt.Split(':');
+                    string[] packages = new string[] { "PDIP", "DIP", "MLF", "QFN", "SOIC", "TQFP", "VQFN", "BGA", "CBGA", };
 
                     foreach (string pkg_ in packages)
                     {
@@ -489,6 +580,40 @@ namespace AVRProjectIDE
         private void treeIOModules_AfterSelect(object sender, TreeViewEventArgs e)
         {
             txtIOModuleInfo.Text = e.Node.ToolTipText;
+        }
+
+        private bool TryParseText(string text, out int num)
+        {
+            num = 0;
+            try
+            {
+                text = text.Trim().ToLowerInvariant();
+
+                bool isHex = false;
+                if (text.Contains("$") || text.Contains("0x"))
+                    isHex = true;
+
+                foreach (char c in text)
+                {
+                    if ("abcdef".Contains(c))
+                    {
+                        isHex = true;
+                    }
+                }
+
+                if (isHex)
+                {
+                    text = text.Replace("$", "0x");
+                    num = Convert.ToInt32(text, 16);
+                }
+                else
+                {
+                    num = Convert.ToInt32(text);
+                }
+
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

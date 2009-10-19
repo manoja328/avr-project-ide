@@ -95,6 +95,12 @@
     <Compile Include="ErrorReportWindow.Designer.cs">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileTemplate.cs" />
+    <Compile Include="filetemplates.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>filetemplates.resx</DependentUpon>
+    </Compile>
     <Compile Include="HardwareExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorReportWindow.resx">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="filetemplates.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>filetemplates.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="HardwareExplorer.resx">
       <DependentUpon>HardwareExplorer.cs</DependentUpon>
@@ -308,10 +318,6 @@
     <None Include="graphics\unknown.ico" />
     <None Include="graphics\warning.ico" />
     <None Include="graphics\exit.png" />
-    <Content Include="..\AVRProjectIDEUpdater\bin\Debug\AVRProjectIDEUpdater.exe">
-      <Link>AVRProjectIDEUpdater.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="arduino\core\binary.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -835,6 +841,11 @@
     <Content Include="chip_xml\interruptvectors.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="file_templates\copyright.txt" />
+    <None Include="file_templates\defaultcode.txt" />
+    <None Include="file_templates\defaultheader.txt" />
+    <None Include="file_templates\initialmain.txt" />
+    <None Include="file_templates\initialpde.txt" />
     <Content Include="graphics\mainicon.ico" />
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />
@@ -842,9 +853,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="nsiscompile.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packforupload.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="helplinks.xml">

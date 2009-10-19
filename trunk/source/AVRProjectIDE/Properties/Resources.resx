@@ -241,9 +241,6 @@
   <data name="arduinomain" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\arduino\core\main.cxx;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="AVRProjectIDEUpdater" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\AVRProjectIDEUpdater\bin\Debug\AVRProjectIDEUpdater.exe;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="autocomplete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\autocomplete.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -254,9 +251,12 @@
     <value>..\chip_xml\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="BuildID" xml:space="preserve">
-    <value>AVRProjectIDE_Alpha39</value>
+    <value>AVRProjectIDE_Alpha40</value>
   </data>
   <data name="WinAVRURL" xml:space="preserve">
     <value>https://sourceforge.net/projects/winavr/files/</value>
+  </data>
+  <data name="WebsiteURL" xml:space="preserve">
+    <value>http://code.google.com/p/avr-project-ide/</value>
   </data>
 </root>

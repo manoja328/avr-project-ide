@@ -152,6 +152,20 @@ namespace AVRProjectIDE
     {
         #region Project File Fields and Properties
 
+        private bool shouldReloadFiles = false;
+        public bool ShouldReloadFiles
+        {
+            get { return shouldReloadFiles; }
+            set { shouldReloadFiles = value; }
+        }
+
+        private bool shouldReloadDevice = false;
+        public bool ShouldReloadDevice
+        {
+            get { return shouldReloadDevice; }
+            set { shouldReloadDevice = value; }
+        }
+
         private bool hasBeenConfigged = false;
         public bool HasBeenConfigged
         {
@@ -169,7 +183,12 @@ namespace AVRProjectIDE
                 else
                     return Program.CleanFilePath(filePath);
             }
-            set { filePath = Program.CleanFilePath(value); }
+
+            set
+            {
+                filePath = Program.CleanFilePath(value);
+                dirPath = filePath.Substring(0, filePath.LastIndexOf(Path.DirectorySeparatorChar));
+            }
         }
 
         private string dirPath;
@@ -1477,6 +1496,7 @@ namespace AVRProjectIDE
         public object Clone()
         {
             AVRProject newObject = new AVRProject();
+            newObject.FilePath = this.FilePath;
             newObject.BurnOptions = this.BurnOptions;
             newObject.BurnPart = this.BurnPart;
             newObject.BurnProgrammer = this.BurnProgrammer;

@@ -103,7 +103,7 @@ namespace AVRProjectIDE
 
         private void lnkButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://code.google.com/p/avr-project-ide/");
+            System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
         }
     }
 }

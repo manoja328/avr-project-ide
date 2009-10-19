@@ -235,6 +235,36 @@ namespace AVRProjectIDE
             }
         }
 
+        public static int LastFileTypeFilter
+        {
+            get
+            {
+                int res = 0;
+                string str = iniFile.Read("Wizard", "LastFileTypeFilter");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastFileTypeFilter = res;
+                    res = LastFileTypeFilter;
+                }
+                else if (int.TryParse(str, out res) == false)
+                {
+                    res = 0;
+                    LastFileTypeFilter = res;
+                    res = LastFileTypeFilter;
+                }
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Wizard", "LastFileTypeFilter", value.ToString("0"));
+            }
+        }
+
         #endregion
 
         static public string AssemblyTitle
@@ -317,15 +347,6 @@ namespace AVRProjectIDE
                 MessageBox.Show("Error Loading Editor Settings");
             }
             LoadAutocompleteOnce();
-
-            if (iniFile.Exists == false)
-            {
-                SaveSerialPortPrefs();
-            }
-            if (LoadSerialPortPrefs() == false)
-            {
-                MessageBox.Show("Error Loading Serial Port Prefs");
-            }
 
             LoadFavFolder();
 
@@ -908,63 +929,56 @@ namespace AVRProjectIDE
 
         #region Serial Port Preferences Related
 
-        static private string portName = "COM1";
-        static public string PortName
-        {
-            get { return portName.Trim(); }
-            set { portName = value.Trim(); }
-        }
-
-        static private string baudRateStr = "9600";
-        static public int BaudRate
+        public static string PortName
         {
             get
             {
-                int res;
-                if (int.TryParse(baudRateStr, out res))
+                string str = iniFile.Read("SerialPort", "PortName");
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(str))
                 {
-                    return res;
+                    PortName = "COM1";
+                    str = LastChipChoosen;
                 }
-                else
-                {
-                    return 9600;
-                }
+                return str;
             }
 
             set
             {
-                baudRateStr = value.ToString();
+                if (value.ToUpperInvariant().Trim().StartsWith("COM"))
+                    iniFile.Write("SerialPort", "PortName", value.Trim().ToUpperInvariant());
             }
         }
 
-        /// <summary>
-        /// load preferences from ini file
-        /// </summary>
-        /// <returns>true if successful</returns>
-        static public bool LoadSerialPortPrefs()
+        static public int BaudRate
         {
-            try
+            get
             {
-                PortName = iniFile.Read("SerialPort", "PortName").Trim();
-                baudRateStr = iniFile.Read("SerialPort", "BaudRate").Trim();
-                return true;
-            }
-            catch { return false; }
-        }
+                int res = 9600;
+                string str = iniFile.Read("SerialPort", "BaudRate");
 
-        /// <summary>
-        /// save preferences to ini file
-        /// </summary>
-        /// <returns>true if successful</returns>
-        static public bool SaveSerialPortPrefs()
-        {
-            try
-            {
-                iniFile.Write("SerialPort", "PortName", PortName);
-                iniFile.Write("SerialPort", "BaudRate", baudRateStr);
-                return true;
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    BaudRate = res;
+                    res = BaudRate;
+                }
+                else if (int.TryParse(str, out res) == false)
+                {
+                    res = 9600;
+                    BaudRate = res;
+                    res = BaudRate;
+                }
+                return res;
             }
-            catch { return false; }
+
+            set
+            {
+                iniFile.Write("SerialPort", "BaudRate", value.ToString("0"));
+            }
         }
 
         /// <summary>
@@ -978,9 +992,7 @@ namespace AVRProjectIDE
             try
             {
                 PortName = port;
-                baudRateStr = baud.ToString();
-                iniFile.Write("SerialPort", "PortName", PortName);
-                iniFile.Write("SerialPort", "BaudRate", baudRateStr);
+                BaudRate = baud;
                 return true;
             }
             catch { return false; }

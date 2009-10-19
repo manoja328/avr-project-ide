@@ -1,0 +1,4 @@
+// %FILENAME% created for project %PROJNAME% on %DATETIME:MM/dd/yyyy hh:mm:ss%
+
+%INCTEMPLATEFILE:copyright.txt%
+

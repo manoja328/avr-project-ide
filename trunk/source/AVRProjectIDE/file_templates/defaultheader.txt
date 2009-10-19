@@ -1,0 +1,10 @@
+// %FILENAME% created for project %PROJNAME% on %DATETIME:MM/dd/yyyy hh:mm:ss%
+
+%INCTEMPLATEFILE:copyright.txt%
+
+#ifndef %FILENAMENOEXT%_%FILEEXT%
+#define %FILENAMENOEXT%_%FILEEXT%
+
+
+
+#endif
