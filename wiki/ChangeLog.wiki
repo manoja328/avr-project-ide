@@ -1,5 +1,12 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 44==
+
+ * Added option to disable update checking
+ * Redid some tab ordering
+ * Fixed wrong file template being used when creating from wizard
+ * Minor changes to Hardware Explorer's chip info display
+
 ==Alpha 43==
 
  * Fixed bug regarding infinitly including files in template
