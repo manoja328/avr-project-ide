@@ -15,8 +15,13 @@ namespace AVRProjectIDE
 
         private static string PrepFinalTemplate(string template)
         {
-            while (true)
+            List<string> alreadyIncluded = new List<string>();
+            bool doneWork = true;
+
+            while (doneWork)
             {
+                doneWork = false;
+
                 Regex r = new Regex("%INCTEMPLATEFILE:(.*)%", RegexOptions.Multiline);
                 Match m = r.Match(template);
 
@@ -26,34 +31,41 @@ namespace AVRProjectIDE
                     {
                         string fileName = m.Groups[1].Value;
                         string filePath = TemplateFolderPath + fileName;
-                        string fileContents = File.ReadAllText(filePath);
+                        if (alreadyIncluded.Contains(filePath) == false)
+                        {
+                            doneWork = true;
 
-                        template = template.Replace(m.Value, fileContents);
+                            alreadyIncluded.Add(filePath);
+
+                            string fileContents = File.ReadAllText(filePath);
+
+                            template = template.Replace(m.Value, fileContents);
+                        }
                     }
                     catch { }
                 }
-                else
-                    break;
-            }
 
-            while (true)
-            {
-                Regex r = new Regex("%INCFILE:(.*)%", RegexOptions.Multiline);
-                Match m = r.Match(template);
+                r = new Regex("%INCFILE:(.*)%", RegexOptions.Multiline);
+                m = r.Match(template);
 
                 if (m.Success)
                 {
                     try
                     {
                         string filePath = m.Groups[1].Value;
-                        string fileContents = File.ReadAllText(filePath);
+                        if (alreadyIncluded.Contains(filePath) == false)
+                        {
+                            doneWork = true;
 
-                        template = template.Replace(m.Value, fileContents);
+                            alreadyIncluded.Add(filePath);
+
+                            string fileContents = File.ReadAllText(filePath);
+
+                            template = template.Replace(m.Value, fileContents);
+                        }
                     }
                     catch { }
                 }
-                else
-                    break;
             }
 
             while (true)
