@@ -33,7 +33,8 @@ A template can inherit from other templates by doing something like this:
 
 Starting from Alpha 41, file templates are implemented
 
-to make a project template create a file
+to make a project template create a blank file
+
 {{{
 <CreateFile name="filename.ext" />
 }}}
@@ -46,13 +47,15 @@ or if you want to include a file from the file_templates folder (inside your app
 </CreateFile>
 }}}
 
-please note that this will only work when the file does not already exist
+Please note that this will only work when the file does not already exist.
 
 ===Editing File Templates===
 
 File templates are stores inside the app data path, under the file_templates folder
 
 The following text (*.txt) files: defaultcode, defaultheader, initialmain, and initialpde, are used by the editor, and will be unpacked if missing. copyright will be unpacked if missing but is not required.
+
+If those files are not missing, you are free to edit them, if they are missing, the editor will recreate them.
 
 You may add your own files here if you want the project template to be able to find them
 
