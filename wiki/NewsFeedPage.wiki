@@ -1,6 +1,6 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
-===I forgot to increment the version number to 43, version 43 will think it is still version 40, will fix when I get home===
+===I forgot to increment the version number to 43, version 43 will think it is still version 40, I will fix it when I get home. Just say no to the updater if you already downloaded 43===
 
 ===Alpha build 41 is out with plenty of good changes===
 
