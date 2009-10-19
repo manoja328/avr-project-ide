@@ -3,6 +3,7 @@
 ==Alpha 41==
 
  * File templates implemented, with macros, see wiki for details
+ * No more updater needed as now you just download a installer file
 
 ==Alpha 40==
 
