@@ -1,9 +1,3 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
-===I forgot to increment the version number to 43, version 43 will think it is still version 40, I will fix it when I get home. Just say no to the updater if you already downloaded 43===
-
-===Sorry about the frequent screw ups===
-
-===Alpha build 41 is out with plenty of good changes===
-
-===2 mb download for a 50+ mb install, LZMA compression is awesome, so I hope the frequent updates are not that annoying===
+===Blarg, slow day at work, bored===
