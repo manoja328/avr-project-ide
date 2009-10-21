@@ -21,6 +21,12 @@ namespace AVRProjectIDE
 
         public static void CheckForUpdates()
         {
+            if (SettingsManagement.CheckForUpdates == false)
+            {
+
+                return;
+            }
+
             oldBuildID = SettingsManagement.BuildID;
 
             checkerThread = new Thread(new ThreadStart(GetBuildID));
@@ -51,27 +57,6 @@ namespace AVRProjectIDE
                     if (newBuildID != oldBuildID)
                         updateAvail = true;
                 }
-
-                r = new Regex("(DOWNLOADURL:)(\"((?:http|https)(?::\\/{2}[\\w]+)(?:[\\/|\\.]?)(?:[^\\s\"]*))\")");
-                m = r.Match(content);
-                if (m.Success)
-                {
-                    downloadURL = m.Groups[2].Value.Trim('"');
-                }
-
-                r = new Regex("(NEWFILENAME:)(\".*?\")");
-                m = r.Match(content);
-                if (m.Success)
-                {
-                    newFileName = m.Groups[2].Value.Trim('"');
-                }
-
-                r = new Regex("(AUTOEXECUTE:)(\".*?\")");
-                m = r.Match(content);
-                if (m.Success)
-                {
-                    autoExe = m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains("y") || m.Groups[2].Value.Trim('"').ToLowerInvariant().Contains(true.ToString().Trim().ToLowerInvariant());
-                }
             }
             catch
             {
@@ -81,7 +66,13 @@ namespace AVRProjectIDE
 
         public static bool HasFinishedChecking
         {
-            get { return checkerThread.ThreadState != ThreadState.Running; }
+            get
+            {
+                if (checkerThread == null)
+                    return true;
+
+                return checkerThread.ThreadState != ThreadState.Running;
+            }
         }
 
         public static bool UpdateAvailable

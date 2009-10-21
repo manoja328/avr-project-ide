@@ -81,7 +81,7 @@ namespace AVRProjectIDE
                         {
                             if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
-                                System.Diagnostics.Process.Start(UpdateMech.DownloadURL);
+                                System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
                             }
                         }
                         catch (Exception ex)
@@ -214,6 +214,43 @@ namespace AVRProjectIDE
                     target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyAll(diSourceSubDir, nextTargetSubDir);
             }
+        }
+
+        public static bool TryParseText(string text, out int num)
+        {
+            num = 0;
+            try
+            {
+                text = text.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(text))
+                    return false;
+
+                bool isHex = false;
+                if (text.Contains("$") || text.Contains("0x"))
+                    isHex = true;
+
+                foreach (char c in text)
+                {
+                    if ("abcdef".Contains(char.ToString(c)))
+                    {
+                        isHex = true;
+                    }
+                }
+
+                if (isHex)
+                {
+                    text = text.Replace("$", "0x");
+                    num = Convert.ToInt32(text, 16);
+                }
+                else
+                {
+                    num = Convert.ToInt32(text);
+                }
+
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

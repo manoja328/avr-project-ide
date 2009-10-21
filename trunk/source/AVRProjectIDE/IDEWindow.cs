@@ -1164,9 +1164,7 @@ namespace AVRProjectIDE
 
         private void progressBar1_Click(object sender, EventArgs e)
         {
-            progressBar1.Style = ProgressBarStyle.Marquee;
-            //ProjScanner scanner = new ProjScanner(project, editorList);
-            progressBar1.Style = ProgressBarStyle.Blocks;
+            new FuseCalculator(project).ShowDialog();
         }
 
         private void timerScanner_Tick(object sender, EventArgs e)

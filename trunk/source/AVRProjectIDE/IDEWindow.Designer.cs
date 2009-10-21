@@ -84,6 +84,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnCompile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnCompileCurrent = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnBurn = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportMakefile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportAPS = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,7 +141,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
-            this.mbtnCompileCurrent = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -419,6 +419,13 @@
             this.mbtnCompile.Size = new System.Drawing.Size(218, 22);
             this.mbtnCompile.Text = "&Compile All";
             this.mbtnCompile.Click += new System.EventHandler(this.mbtnCompile_Click);
+            // 
+            // mbtnCompileCurrent
+            // 
+            this.mbtnCompileCurrent.Name = "mbtnCompileCurrent";
+            this.mbtnCompileCurrent.Size = new System.Drawing.Size(218, 22);
+            this.mbtnCompileCurrent.Text = "Compile Current File";
+            this.mbtnCompileCurrent.Click += new System.EventHandler(this.mbtnCompileCurrent_Click);
             // 
             // mbtnBurn
             // 
@@ -924,7 +931,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 18);
             this.progressBar1.TabIndex = 4;
-            this.progressBar1.Visible = false;
             this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // timerScanner
@@ -936,13 +942,6 @@
             // timerBackup
             // 
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
-            // 
-            // mbtnCompileCurrent
-            // 
-            this.mbtnCompileCurrent.Name = "mbtnCompileCurrent";
-            this.mbtnCompileCurrent.Size = new System.Drawing.Size(218, 22);
-            this.mbtnCompileCurrent.Text = "Compile Current File";
-            this.mbtnCompileCurrent.Click += new System.EventHandler(this.mbtnCompileCurrent_Click);
             // 
             // IDEWindow
             // 
