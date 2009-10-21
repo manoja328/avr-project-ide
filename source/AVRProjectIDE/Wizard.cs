@@ -213,7 +213,7 @@ namespace AVRProjectIDE
                     try
                     {
                         StreamWriter writer = new StreamWriter(iniFilePath);
-                        if (ext != "pde")
+                        if (ext == "pde")
                         {
                             writer.Write(FileTemplate.CreateFile(iniFilename + "." + ext, projFilename, "initialpde.txt"));
                         }

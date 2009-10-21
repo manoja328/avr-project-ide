@@ -50,7 +50,7 @@
             this.btnCancel.Location = new System.Drawing.Point(416, 91);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 21);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -61,7 +61,7 @@
             this.btnCreate.Location = new System.Drawing.Point(416, 12);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(100, 73);
-            this.btnCreate.TabIndex = 7;
+            this.btnCreate.TabIndex = 6;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -102,7 +102,7 @@
             this.txtFolderPath.Name = "txtFolderPath";
             this.txtFolderPath.ReadOnly = true;
             this.txtFolderPath.Size = new System.Drawing.Size(207, 20);
-            this.txtFolderPath.TabIndex = 2;
+            this.txtFolderPath.TabIndex = 8;
             this.txtFolderPath.TextChanged += new System.EventHandler(this.txtFolderPath_TextChanged);
             // 
             // btnFindFolder
@@ -111,7 +111,7 @@
             this.btnFindFolder.Location = new System.Drawing.Point(310, 36);
             this.btnFindFolder.Name = "btnFindFolder";
             this.btnFindFolder.Size = new System.Drawing.Size(100, 23);
-            this.btnFindFolder.TabIndex = 3;
+            this.btnFindFolder.TabIndex = 2;
             this.btnFindFolder.Text = "Find / Create";
             this.btnFindFolder.UseVisualStyleBackColor = true;
             this.btnFindFolder.Click += new System.EventHandler(this.btnFindFolder_Click);
@@ -132,7 +132,7 @@
             this.txtInitialFilename.Location = new System.Drawing.Point(97, 64);
             this.txtInitialFilename.Name = "txtInitialFilename";
             this.txtInitialFilename.Size = new System.Drawing.Size(121, 20);
-            this.txtInitialFilename.TabIndex = 4;
+            this.txtInitialFilename.TabIndex = 3;
             this.txtInitialFilename.TextChanged += new System.EventHandler(this.txtInitialFilename_TextChanged);
             // 
             // label4
@@ -157,7 +157,7 @@
             this.dropFileType.Location = new System.Drawing.Point(310, 64);
             this.dropFileType.Name = "dropFileType";
             this.dropFileType.Size = new System.Drawing.Size(100, 21);
-            this.dropFileType.TabIndex = 5;
+            this.dropFileType.TabIndex = 4;
             this.dropFileType.SelectedIndexChanged += new System.EventHandler(this.dropFileType_SelectedIndexChanged);
             // 
             // label5
@@ -178,7 +178,7 @@
             this.dropTemplates.Location = new System.Drawing.Point(97, 91);
             this.dropTemplates.Name = "dropTemplates";
             this.dropTemplates.Size = new System.Drawing.Size(313, 21);
-            this.dropTemplates.TabIndex = 6;
+            this.dropTemplates.TabIndex = 5;
             this.dropTemplates.SelectedIndexChanged += new System.EventHandler(this.dropTemplates_SelectedIndexChanged);
             // 
             // Wizard

@@ -88,7 +88,7 @@
             this.chkEscape.Location = new System.Drawing.Point(552, 33);
             this.chkEscape.Name = "chkEscape";
             this.chkEscape.Size = new System.Drawing.Size(246, 17);
-            this.chkEscape.TabIndex = 10;
+            this.chkEscape.TabIndex = 6;
             this.chkEscape.Text = "Use Escape Sequence ( \\\\ \\t \\r \\n Supported)";
             this.chkEscape.UseVisualStyleBackColor = true;
             // 
@@ -98,7 +98,7 @@
             this.chkMatchCase.Location = new System.Drawing.Point(114, 32);
             this.chkMatchCase.Name = "chkMatchCase";
             this.chkMatchCase.Size = new System.Drawing.Size(83, 17);
-            this.chkMatchCase.TabIndex = 8;
+            this.chkMatchCase.TabIndex = 4;
             this.chkMatchCase.Text = "Match Case";
             this.chkMatchCase.UseVisualStyleBackColor = true;
             // 
@@ -109,7 +109,7 @@
             this.txtSearch.Location = new System.Drawing.Point(8, 6);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(709, 20);
-            this.txtSearch.TabIndex = 5;
+            this.txtSearch.TabIndex = 1;
             this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
             // 
             // chkWordStart
@@ -118,7 +118,7 @@
             this.chkWordStart.Location = new System.Drawing.Point(230, 33);
             this.chkWordStart.Name = "chkWordStart";
             this.chkWordStart.Size = new System.Drawing.Size(77, 17);
-            this.chkWordStart.TabIndex = 9;
+            this.chkWordStart.TabIndex = 5;
             this.chkWordStart.Text = "Word Start";
             this.chkWordStart.UseVisualStyleBackColor = true;
             // 
@@ -128,7 +128,7 @@
             this.btnSearch.Location = new System.Drawing.Point(723, 4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 6;
+            this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -139,7 +139,7 @@
             this.chkWholeWord.Location = new System.Drawing.Point(8, 32);
             this.chkWholeWord.Name = "chkWholeWord";
             this.chkWholeWord.Size = new System.Drawing.Size(86, 17);
-            this.chkWholeWord.TabIndex = 7;
+            this.chkWholeWord.TabIndex = 3;
             this.chkWholeWord.Text = "Whole Word";
             this.chkWholeWord.UseVisualStyleBackColor = true;
             // 
@@ -169,7 +169,7 @@
             this.listSearchResults.Name = "listSearchResults";
             this.listSearchResults.ShowItemToolTips = true;
             this.listSearchResults.Size = new System.Drawing.Size(800, 286);
-            this.listSearchResults.TabIndex = 2;
+            this.listSearchResults.TabIndex = 7;
             this.listSearchResults.UseCompatibleStateImageBehavior = false;
             this.listSearchResults.View = System.Windows.Forms.View.Details;
             this.listSearchResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listSearchResults_MouseDoubleClick);

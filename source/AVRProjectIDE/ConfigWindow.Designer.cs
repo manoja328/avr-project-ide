@@ -161,7 +161,7 @@
             this.tabsMain.Name = "tabsMain";
             this.tabsMain.SelectedIndex = 0;
             this.tabsMain.Size = new System.Drawing.Size(712, 353);
-            this.tabsMain.TabIndex = 11;
+            this.tabsMain.TabIndex = 0;
             // 
             // tabGeneral
             // 
@@ -228,7 +228,7 @@
             this.chkAutoReset.Location = new System.Drawing.Point(218, 103);
             this.chkAutoReset.Name = "chkAutoReset";
             this.chkAutoReset.Size = new System.Drawing.Size(118, 17);
-            this.chkAutoReset.TabIndex = 11;
+            this.chkAutoReset.TabIndex = 15;
             this.chkAutoReset.Text = "Arduino Auto Reset";
             this.chkAutoReset.UseVisualStyleBackColor = true;
             // 
@@ -238,7 +238,7 @@
             this.btnBurnFuseBox.Location = new System.Drawing.Point(368, 99);
             this.btnBurnFuseBox.Name = "btnBurnFuseBox";
             this.btnBurnFuseBox.Size = new System.Drawing.Size(107, 23);
-            this.btnBurnFuseBox.TabIndex = 10;
+            this.btnBurnFuseBox.TabIndex = 16;
             this.btnBurnFuseBox.Text = "Burn Fuses";
             this.btnBurnFuseBox.UseVisualStyleBackColor = true;
             this.btnBurnFuseBox.Click += new System.EventHandler(this.btnBurnFuseBox_Click);
@@ -248,7 +248,7 @@
             this.btnBurnOnlyOpt.Location = new System.Drawing.Point(79, 99);
             this.btnBurnOnlyOpt.Name = "btnBurnOnlyOpt";
             this.btnBurnOnlyOpt.Size = new System.Drawing.Size(107, 23);
-            this.btnBurnOnlyOpt.TabIndex = 10;
+            this.btnBurnOnlyOpt.TabIndex = 14;
             this.btnBurnOnlyOpt.Text = "Run Only Options";
             this.btnBurnOnlyOpt.UseVisualStyleBackColor = true;
             this.btnBurnOnlyOpt.Click += new System.EventHandler(this.btnBurnOnlyOpt_Click);
@@ -259,14 +259,14 @@
             this.txtBurnFuseBox.Location = new System.Drawing.Point(368, 73);
             this.txtBurnFuseBox.Name = "txtBurnFuseBox";
             this.txtBurnFuseBox.Size = new System.Drawing.Size(107, 20);
-            this.txtBurnFuseBox.TabIndex = 9;
+            this.txtBurnFuseBox.TabIndex = 13;
             // 
             // txtBurnOpt
             // 
             this.txtBurnOpt.Location = new System.Drawing.Point(79, 73);
             this.txtBurnOpt.Name = "txtBurnOpt";
             this.txtBurnOpt.Size = new System.Drawing.Size(107, 20);
-            this.txtBurnOpt.TabIndex = 9;
+            this.txtBurnOpt.TabIndex = 11;
             // 
             // dropBaud
             // 
@@ -292,7 +292,7 @@
             this.dropBaud.Location = new System.Drawing.Point(368, 46);
             this.dropBaud.Name = "dropBaud";
             this.dropBaud.Size = new System.Drawing.Size(107, 21);
-            this.dropBaud.TabIndex = 8;
+            this.dropBaud.TabIndex = 10;
             // 
             // dropProg
             // 
@@ -359,7 +359,7 @@
             this.dropProg.Location = new System.Drawing.Point(79, 46);
             this.dropProg.Name = "dropProg";
             this.dropProg.Size = new System.Drawing.Size(107, 21);
-            this.dropProg.TabIndex = 8;
+            this.dropProg.TabIndex = 9;
             // 
             // dropPort
             // 
@@ -369,7 +369,7 @@
             this.dropPort.Location = new System.Drawing.Point(368, 19);
             this.dropPort.Name = "dropPort";
             this.dropPort.Size = new System.Drawing.Size(107, 21);
-            this.dropPort.TabIndex = 7;
+            this.dropPort.TabIndex = 8;
             // 
             // dropPart
             // 
@@ -521,7 +521,7 @@
             0});
             this.numClockFreq.Name = "numClockFreq";
             this.numClockFreq.Size = new System.Drawing.Size(100, 20);
-            this.numClockFreq.TabIndex = 2;
+            this.numClockFreq.TabIndex = 3;
             // 
             // label7
             // 
@@ -556,7 +556,7 @@
             this.chklistOptions.Location = new System.Drawing.Point(275, 6);
             this.chklistOptions.Name = "chklistOptions";
             this.chklistOptions.Size = new System.Drawing.Size(220, 90);
-            this.chklistOptions.TabIndex = 5;
+            this.chklistOptions.TabIndex = 6;
             // 
             // dropDevices
             // 
@@ -692,7 +692,7 @@
             this.dropDevices.Location = new System.Drawing.Point(94, 32);
             this.dropDevices.Name = "dropDevices";
             this.dropDevices.Size = new System.Drawing.Size(100, 21);
-            this.dropDevices.TabIndex = 1;
+            this.dropDevices.TabIndex = 2;
             // 
             // listOptimization
             // 
@@ -707,21 +707,21 @@
             this.listOptimization.Location = new System.Drawing.Point(94, 87);
             this.listOptimization.Name = "listOptimization";
             this.listOptimization.Size = new System.Drawing.Size(100, 21);
-            this.listOptimization.TabIndex = 3;
+            this.listOptimization.TabIndex = 4;
             // 
             // txtOtherOptions
             // 
             this.txtOtherOptions.Location = new System.Drawing.Point(94, 114);
             this.txtOtherOptions.Name = "txtOtherOptions";
             this.txtOtherOptions.Size = new System.Drawing.Size(401, 20);
-            this.txtOtherOptions.TabIndex = 4;
+            this.txtOtherOptions.TabIndex = 5;
             // 
             // txtOutputPath
             // 
             this.txtOutputPath.Location = new System.Drawing.Point(94, 6);
             this.txtOutputPath.Name = "txtOutputPath";
             this.txtOutputPath.Size = new System.Drawing.Size(100, 20);
-            this.txtOutputPath.TabIndex = 0;
+            this.txtOutputPath.TabIndex = 1;
             this.txtOutputPath.Validating += new System.ComponentModel.CancelEventHandler(this.txtOutputPath_Validating);
             // 
             // label5
@@ -802,7 +802,7 @@
             this.btnIncPathMoveDown.Location = new System.Drawing.Point(168, 266);
             this.btnIncPathMoveDown.Name = "btnIncPathMoveDown";
             this.btnIncPathMoveDown.Size = new System.Drawing.Size(75, 23);
-            this.btnIncPathMoveDown.TabIndex = 3;
+            this.btnIncPathMoveDown.TabIndex = 19;
             this.btnIncPathMoveDown.Text = "Move Down";
             this.btnIncPathMoveDown.UseVisualStyleBackColor = true;
             this.btnIncPathMoveDown.Click += new System.EventHandler(this.btnIncPathMoveDown_Click);
@@ -813,7 +813,7 @@
             this.btnIncPathMoveUp.Location = new System.Drawing.Point(87, 266);
             this.btnIncPathMoveUp.Name = "btnIncPathMoveUp";
             this.btnIncPathMoveUp.Size = new System.Drawing.Size(75, 23);
-            this.btnIncPathMoveUp.TabIndex = 2;
+            this.btnIncPathMoveUp.TabIndex = 18;
             this.btnIncPathMoveUp.Text = "Move Up";
             this.btnIncPathMoveUp.UseVisualStyleBackColor = true;
             this.btnIncPathMoveUp.Click += new System.EventHandler(this.btnIncPathMoveUp_Click);
@@ -824,7 +824,7 @@
             this.btnIncDirAdd.Location = new System.Drawing.Point(6, 266);
             this.btnIncDirAdd.Name = "btnIncDirAdd";
             this.btnIncDirAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnIncDirAdd.TabIndex = 0;
+            this.btnIncDirAdd.TabIndex = 17;
             this.btnIncDirAdd.Text = "Find";
             this.btnIncDirAdd.UseVisualStyleBackColor = true;
             this.btnIncDirAdd.Click += new System.EventHandler(this.btnIncDirAdd_Click);
@@ -893,7 +893,7 @@
             this.btnLibPathMoveDown.Location = new System.Drawing.Point(168, 266);
             this.btnLibPathMoveDown.Name = "btnLibPathMoveDown";
             this.btnLibPathMoveDown.Size = new System.Drawing.Size(75, 23);
-            this.btnLibPathMoveDown.TabIndex = 2;
+            this.btnLibPathMoveDown.TabIndex = 22;
             this.btnLibPathMoveDown.Text = "Move Down";
             this.btnLibPathMoveDown.UseVisualStyleBackColor = true;
             this.btnLibPathMoveDown.Click += new System.EventHandler(this.btnLibPathMoveDown_Click);
@@ -904,7 +904,7 @@
             this.btnLibPathMoveUp.Location = new System.Drawing.Point(87, 266);
             this.btnLibPathMoveUp.Name = "btnLibPathMoveUp";
             this.btnLibPathMoveUp.Size = new System.Drawing.Size(75, 23);
-            this.btnLibPathMoveUp.TabIndex = 1;
+            this.btnLibPathMoveUp.TabIndex = 21;
             this.btnLibPathMoveUp.Text = "Move Up";
             this.btnLibPathMoveUp.UseVisualStyleBackColor = true;
             this.btnLibPathMoveUp.Click += new System.EventHandler(this.btnLibPathMoveUp_Click);
@@ -915,7 +915,7 @@
             this.btnLibDirAdd.Location = new System.Drawing.Point(6, 266);
             this.btnLibDirAdd.Name = "btnLibDirAdd";
             this.btnLibDirAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnLibDirAdd.TabIndex = 0;
+            this.btnLibDirAdd.TabIndex = 20;
             this.btnLibDirAdd.Text = "Find";
             this.btnLibDirAdd.UseVisualStyleBackColor = true;
             this.btnLibDirAdd.Click += new System.EventHandler(this.btnLibDirAdd_Click);
@@ -1282,7 +1282,7 @@
             this.txtArduinoLibs.Name = "txtArduinoLibs";
             this.txtArduinoLibs.ReadOnly = true;
             this.txtArduinoLibs.Size = new System.Drawing.Size(524, 20);
-            this.txtArduinoLibs.TabIndex = 1;
+            this.txtArduinoLibs.TabIndex = 8;
             // 
             // btnFindArduinoLibs
             // 
@@ -1290,7 +1290,7 @@
             this.btnFindArduinoLibs.Location = new System.Drawing.Point(607, 43);
             this.btnFindArduinoLibs.Name = "btnFindArduinoLibs";
             this.btnFindArduinoLibs.Size = new System.Drawing.Size(75, 23);
-            this.btnFindArduinoLibs.TabIndex = 0;
+            this.btnFindArduinoLibs.TabIndex = 5;
             this.btnFindArduinoLibs.Text = "Find";
             this.btnFindArduinoLibs.UseVisualStyleBackColor = true;
             this.btnFindArduinoLibs.Click += new System.EventHandler(this.btnFindArduinoLibs_Click);
@@ -1303,7 +1303,7 @@
             this.txtArduinoCore.Name = "txtArduinoCore";
             this.txtArduinoCore.ReadOnly = true;
             this.txtArduinoCore.Size = new System.Drawing.Size(524, 20);
-            this.txtArduinoCore.TabIndex = 1;
+            this.txtArduinoCore.TabIndex = 7;
             // 
             // btnFindArduinoCore
             // 
@@ -1311,7 +1311,7 @@
             this.btnFindArduinoCore.Location = new System.Drawing.Point(607, 17);
             this.btnFindArduinoCore.Name = "btnFindArduinoCore";
             this.btnFindArduinoCore.Size = new System.Drawing.Size(75, 23);
-            this.btnFindArduinoCore.TabIndex = 0;
+            this.btnFindArduinoCore.TabIndex = 4;
             this.btnFindArduinoCore.Text = "Find";
             this.btnFindArduinoCore.UseVisualStyleBackColor = true;
             this.btnFindArduinoCore.Click += new System.EventHandler(this.btnFindArduinoCore_Click);
@@ -1338,7 +1338,7 @@
             this.txtFavoriteDir.Name = "txtFavoriteDir";
             this.txtFavoriteDir.ReadOnly = true;
             this.txtFavoriteDir.Size = new System.Drawing.Size(595, 20);
-            this.txtFavoriteDir.TabIndex = 1;
+            this.txtFavoriteDir.TabIndex = 6;
             // 
             // btnFavoriteBrowse
             // 
@@ -1346,7 +1346,7 @@
             this.btnFavoriteBrowse.Location = new System.Drawing.Point(607, 17);
             this.btnFavoriteBrowse.Name = "btnFavoriteBrowse";
             this.btnFavoriteBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnFavoriteBrowse.TabIndex = 0;
+            this.btnFavoriteBrowse.TabIndex = 3;
             this.btnFavoriteBrowse.Text = "Find";
             this.btnFavoriteBrowse.UseVisualStyleBackColor = true;
             this.btnFavoriteBrowse.Click += new System.EventHandler(this.btnFavoriteBrowse_Click);
@@ -1370,7 +1370,7 @@
             this.btnApplyTemplate.Location = new System.Drawing.Point(607, 18);
             this.btnApplyTemplate.Name = "btnApplyTemplate";
             this.btnApplyTemplate.Size = new System.Drawing.Size(75, 23);
-            this.btnApplyTemplate.TabIndex = 1;
+            this.btnApplyTemplate.TabIndex = 2;
             this.btnApplyTemplate.Text = "Apply";
             this.btnApplyTemplate.UseVisualStyleBackColor = true;
             this.btnApplyTemplate.Click += new System.EventHandler(this.btnApplyTemplate_Click);
@@ -1384,7 +1384,7 @@
             this.dropTemplates.Location = new System.Drawing.Point(6, 19);
             this.dropTemplates.Name = "dropTemplates";
             this.dropTemplates.Size = new System.Drawing.Size(596, 21);
-            this.dropTemplates.TabIndex = 0;
+            this.dropTemplates.TabIndex = 1;
             // 
             // btnGotoAppdata
             // 

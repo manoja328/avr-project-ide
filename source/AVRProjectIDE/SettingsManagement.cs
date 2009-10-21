@@ -1177,5 +1177,37 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        #region Updater
+
+        public static bool CheckForUpdates
+        {
+            get
+            {
+                bool res = false;
+                string str = iniFile.Read("Stuff", "CheckForUpdates");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    CheckForUpdates = res;
+                    res = CheckForUpdates;
+                    return false;
+                }
+
+                res = str == true.ToString().Trim().ToLowerInvariant();
+
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Stuff", "CheckForUpdates", value.ToString().Trim().ToLowerInvariant());
+            }
+        }
+
+        #endregion
     }
 }

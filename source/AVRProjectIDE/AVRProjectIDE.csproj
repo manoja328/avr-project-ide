@@ -89,6 +89,12 @@
     <Compile Include="DummyPanel.Designer.cs">
       <DependentUpon>DummyPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="EEPROMWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EEPROMWindow.Designer.cs">
+      <DependentUpon>EEPROMWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ErrorReportWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>filetemplates.resx</DependentUpon>
+    </Compile>
+    <Compile Include="FuseCalculator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuseCalculator.Designer.cs">
+      <DependentUpon>FuseCalculator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FusePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FusePanel.Designer.cs">
+      <DependentUpon>FusePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="HardwareExplorer.cs">
       <SubType>Form</SubType>
@@ -163,12 +181,21 @@
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EEPROMWindow.resx">
+      <DependentUpon>EEPROMWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ErrorReportWindow.resx">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="filetemplates.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>filetemplates.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuseCalculator.resx">
+      <DependentUpon>FuseCalculator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FusePanel.resx">
+      <DependentUpon>FusePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HardwareExplorer.resx">
       <DependentUpon>HardwareExplorer.cs</DependentUpon>

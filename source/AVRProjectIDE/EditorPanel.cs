@@ -14,6 +14,8 @@ namespace AVRProjectIDE
 {
     public partial class EditorPanel : DockContent
     {
+        private const int SAVERETRY = 5;
+        private const int SAVERETRYDELAY = 100;
 
         #region Fields and Properties
 
@@ -99,7 +101,7 @@ namespace AVRProjectIDE
 
         #region Saving and Loading
 
-        private bool WriteToFile(string path)
+        private bool WriteToFile(string path, bool backup)
         {
             // obviously the filesystem watcher will know if you rewrite the file, so disable it
             bool wasWatching = WatchingForChange;
@@ -112,13 +114,66 @@ namespace AVRProjectIDE
             if (Program.MakeSurePathExists(path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar))) == false)
                 return false;
 
+            string content = scint.Text.TrimEnd();
+
             try
             {
-                KeywordScanner.FeedFileContent(file, scint.Text);
+                KeywordScanner.FeedFileContent(file, content);
                 KeywordScanner.DoMoreWork();
-                System.IO.File.WriteAllText(path, scint.Text.TrimEnd());
             }
-            catch { success = false; }
+            catch { }
+
+            if (backup)
+            {
+                for (int i = 0; i <= SAVERETRY; i++)
+                {
+                    try
+                    {
+                        System.IO.File.WriteAllText(path + ".bk", content);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (i == SAVERETRY)
+                        {
+                            success = false;
+                            //ErrorReportWindow erw = new ErrorReportWindow(ex, "Save Error");
+                            //erw.ShowDialog();
+                            break;
+                        }
+                        System.Threading.Thread.Sleep(SAVERETRYDELAY);
+                    }
+                }
+            }
+
+            for (int i = 0; i <= SAVERETRY; i++)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(path, content);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    if (i == SAVERETRY)
+                    {
+                        success = false;
+                        ErrorReportWindow erw = new ErrorReportWindow(ex, "Save Error");
+                        erw.ShowDialog();
+                        break;
+                    }
+                    System.Threading.Thread.Sleep(SAVERETRYDELAY);
+                }
+            }
+
+            if (backup && success)
+            {
+                try
+                {
+                    System.IO.File.Delete(path + ".bk");
+                }
+                catch { }
+            }
 
             WatchingForChange = wasWatching;
 
@@ -154,7 +209,7 @@ namespace AVRProjectIDE
         {
             fileSystemWatcher1.EnableRaisingEvents = false;
 
-            if (WriteToFile(path))
+            if (WriteToFile(path, true))
             {
                 DeleteBackup();
 
@@ -293,7 +348,7 @@ namespace AVRProjectIDE
         public void SaveBackup()
         {
             if (string.IsNullOrEmpty(file.FileAbsPath) == false && HasChanged)
-                WriteToFile(file.BackupPath);
+                WriteToFile(file.BackupPath, false);
         }
 
         #endregion

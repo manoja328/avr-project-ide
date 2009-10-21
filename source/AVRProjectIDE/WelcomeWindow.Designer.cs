@@ -41,6 +41,7 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkShowWelcomeAtStart = new System.Windows.Forms.CheckBox();
             this.listRecentFiles = new System.Windows.Forms.ListBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -48,7 +49,6 @@
             this.btnWizard = new System.Windows.Forms.Button();
             this.txtNews = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.chkShowWelcomeAtStart = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             this.btnNew.Location = new System.Drawing.Point(566, 260);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 31);
-            this.btnNew.TabIndex = 2;
+            this.btnNew.TabIndex = 6;
             this.btnNew.Text = "New Blank";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
@@ -79,7 +79,7 @@
             this.btnFind.Location = new System.Drawing.Point(566, 98);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(75, 75);
-            this.btnFind.TabIndex = 3;
+            this.btnFind.TabIndex = 4;
             this.btnFind.Text = "Find";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
@@ -98,6 +98,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recent Projects";
             // 
+            // chkShowWelcomeAtStart
+            // 
+            this.chkShowWelcomeAtStart.AutoSize = true;
+            this.chkShowWelcomeAtStart.Location = new System.Drawing.Point(87, 256);
+            this.chkShowWelcomeAtStart.Name = "chkShowWelcomeAtStart";
+            this.chkShowWelcomeAtStart.Size = new System.Drawing.Size(203, 17);
+            this.chkShowWelcomeAtStart.TabIndex = 7;
+            this.chkShowWelcomeAtStart.Text = "Show This Welcome Window at Start";
+            this.chkShowWelcomeAtStart.UseVisualStyleBackColor = true;
+            // 
             // listRecentFiles
             // 
             this.listRecentFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -107,7 +117,7 @@
             this.listRecentFiles.Location = new System.Drawing.Point(87, 19);
             this.listRecentFiles.Name = "listRecentFiles";
             this.listRecentFiles.Size = new System.Drawing.Size(455, 212);
-            this.listRecentFiles.TabIndex = 0;
+            this.listRecentFiles.TabIndex = 2;
             this.listRecentFiles.DoubleClick += new System.EventHandler(this.listRecentFiles_DoubleClick);
             // 
             // openFileDialog1
@@ -124,7 +134,7 @@
             this.btnImportAPS.Location = new System.Drawing.Point(566, 179);
             this.btnImportAPS.Name = "btnImportAPS";
             this.btnImportAPS.Size = new System.Drawing.Size(75, 75);
-            this.btnImportAPS.TabIndex = 3;
+            this.btnImportAPS.TabIndex = 5;
             this.btnImportAPS.Text = "Import APS";
             this.btnImportAPS.UseVisualStyleBackColor = true;
             this.btnImportAPS.Click += new System.EventHandler(this.btnImportAPS_Click);
@@ -135,7 +145,7 @@
             this.btnWizard.Location = new System.Drawing.Point(566, 17);
             this.btnWizard.Name = "btnWizard";
             this.btnWizard.Size = new System.Drawing.Size(75, 76);
-            this.btnWizard.TabIndex = 2;
+            this.btnWizard.TabIndex = 3;
             this.btnWizard.Text = "New Wizard";
             this.btnWizard.UseVisualStyleBackColor = true;
             this.btnWizard.Click += new System.EventHandler(this.btnWizard_Click);
@@ -151,22 +161,12 @@
             this.txtNews.ReadOnly = true;
             this.txtNews.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtNews.Size = new System.Drawing.Size(629, 61);
-            this.txtNews.TabIndex = 4;
+            this.txtNews.TabIndex = 8;
             // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // chkShowWelcomeAtStart
-            // 
-            this.chkShowWelcomeAtStart.AutoSize = true;
-            this.chkShowWelcomeAtStart.Location = new System.Drawing.Point(87, 256);
-            this.chkShowWelcomeAtStart.Name = "chkShowWelcomeAtStart";
-            this.chkShowWelcomeAtStart.Size = new System.Drawing.Size(203, 17);
-            this.chkShowWelcomeAtStart.TabIndex = 2;
-            this.chkShowWelcomeAtStart.Text = "Show This Welcome Window at Start";
-            this.chkShowWelcomeAtStart.UseVisualStyleBackColor = true;
             // 
             // WelcomeWindow
             // 

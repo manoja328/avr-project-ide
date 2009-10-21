@@ -28,6 +28,7 @@ namespace AVRProjectIDE
             txtFavoriteDir.Text = SettingsManagement.FavFolder;
             txtArduinoCore.Text = SettingsManagement.ArduinoCorePath;
             txtArduinoLibs.Text = SettingsManagement.ArduinoLibPath;
+            chkCheckUpdates.Checked = SettingsManagement.CheckForUpdates;
 
             string tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentWidth");
             int i = 0;
@@ -230,6 +231,7 @@ namespace AVRProjectIDE
             SettingsManagement.SettingsFile.Write("Editor", "IndentSmartness", dropSmartIndent.SelectedIndex.ToString("0"));
             SettingsManagement.SettingsFile.Write("Editor", "LineWrap", chkWordWrap.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "BackupInterval", numBackupInterval.Value.ToString("0"));
+            SettingsManagement.CheckForUpdates = chkCheckUpdates.Checked;
             SettingsManagement.LoadScintSettings();
         }
     }

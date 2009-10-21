@@ -42,26 +42,27 @@
             this.btnOpenAppData = new System.Windows.Forms.Button();
             this.chkAutocomplete = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dropSmartIndent = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numIndentWidth = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numBackupInterval = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numTabWidth = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkBackspaceUnindents = new System.Windows.Forms.CheckBox();
+            this.chkTabIndents = new System.Windows.Forms.CheckBox();
+            this.chkUseTabs = new System.Windows.Forms.CheckBox();
             this.chkWordWrap = new System.Windows.Forms.CheckBox();
             this.chkIndentGuide = new System.Windows.Forms.CheckBox();
             this.btnOpenInstallationFolder = new System.Windows.Forms.Button();
-            this.chkUseTabs = new System.Windows.Forms.CheckBox();
-            this.chkTabIndents = new System.Windows.Forms.CheckBox();
-            this.chkBackspaceUnindents = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numTabWidth = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numIndentWidth = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dropSmartIndent = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numBackupInterval = new System.Windows.Forms.NumericUpDown();
+            this.chkCheckUpdates = new System.Windows.Forms.CheckBox();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTabWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numIndentWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBackupInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTabWidth)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox9
@@ -87,7 +88,7 @@
             this.lnkLibFiles.Location = new System.Drawing.Point(6, 48);
             this.lnkLibFiles.Name = "lnkLibFiles";
             this.lnkLibFiles.Size = new System.Drawing.Size(65, 13);
-            this.lnkLibFiles.TabIndex = 2;
+            this.lnkLibFiles.TabIndex = 5;
             this.lnkLibFiles.TabStop = true;
             this.lnkLibFiles.Text = "Library Files:";
             this.lnkLibFiles.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLibFiles_LinkClicked);
@@ -98,7 +99,7 @@
             this.lnkCoreFiles.Location = new System.Drawing.Point(15, 22);
             this.lnkCoreFiles.Name = "lnkCoreFiles";
             this.lnkCoreFiles.Size = new System.Drawing.Size(56, 13);
-            this.lnkCoreFiles.TabIndex = 2;
+            this.lnkCoreFiles.TabIndex = 3;
             this.lnkCoreFiles.TabStop = true;
             this.lnkCoreFiles.Text = "Core Files:";
             this.lnkCoreFiles.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCoreFiles_LinkClicked);
@@ -111,7 +112,7 @@
             this.txtArduinoLibs.Name = "txtArduinoLibs";
             this.txtArduinoLibs.ReadOnly = true;
             this.txtArduinoLibs.Size = new System.Drawing.Size(463, 20);
-            this.txtArduinoLibs.TabIndex = 1;
+            this.txtArduinoLibs.TabIndex = 22;
             // 
             // btnFindArduinoLibs
             // 
@@ -119,7 +120,7 @@
             this.btnFindArduinoLibs.Location = new System.Drawing.Point(546, 43);
             this.btnFindArduinoLibs.Name = "btnFindArduinoLibs";
             this.btnFindArduinoLibs.Size = new System.Drawing.Size(75, 23);
-            this.btnFindArduinoLibs.TabIndex = 0;
+            this.btnFindArduinoLibs.TabIndex = 6;
             this.btnFindArduinoLibs.Text = "Find";
             this.btnFindArduinoLibs.UseVisualStyleBackColor = true;
             this.btnFindArduinoLibs.Click += new System.EventHandler(this.btnFindArduinoLibs_Click);
@@ -132,7 +133,7 @@
             this.txtArduinoCore.Name = "txtArduinoCore";
             this.txtArduinoCore.ReadOnly = true;
             this.txtArduinoCore.Size = new System.Drawing.Size(463, 20);
-            this.txtArduinoCore.TabIndex = 1;
+            this.txtArduinoCore.TabIndex = 21;
             // 
             // btnFindArduinoCore
             // 
@@ -140,7 +141,7 @@
             this.btnFindArduinoCore.Location = new System.Drawing.Point(546, 17);
             this.btnFindArduinoCore.Name = "btnFindArduinoCore";
             this.btnFindArduinoCore.Size = new System.Drawing.Size(75, 23);
-            this.btnFindArduinoCore.TabIndex = 0;
+            this.btnFindArduinoCore.TabIndex = 4;
             this.btnFindArduinoCore.Text = "Find";
             this.btnFindArduinoCore.UseVisualStyleBackColor = true;
             this.btnFindArduinoCore.Click += new System.EventHandler(this.btnFindArduinoCore_Click);
@@ -165,7 +166,7 @@
             this.lnkFolder.Location = new System.Drawing.Point(32, 22);
             this.lnkFolder.Name = "lnkFolder";
             this.lnkFolder.Size = new System.Drawing.Size(39, 13);
-            this.lnkFolder.TabIndex = 2;
+            this.lnkFolder.TabIndex = 1;
             this.lnkFolder.TabStop = true;
             this.lnkFolder.Text = "Folder:";
             this.lnkFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkFolder_LinkClicked);
@@ -178,7 +179,7 @@
             this.txtFavoriteDir.Name = "txtFavoriteDir";
             this.txtFavoriteDir.ReadOnly = true;
             this.txtFavoriteDir.Size = new System.Drawing.Size(463, 20);
-            this.txtFavoriteDir.TabIndex = 1;
+            this.txtFavoriteDir.TabIndex = 20;
             // 
             // btnFavoriteBrowse
             // 
@@ -186,7 +187,7 @@
             this.btnFavoriteBrowse.Location = new System.Drawing.Point(546, 17);
             this.btnFavoriteBrowse.Name = "btnFavoriteBrowse";
             this.btnFavoriteBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnFavoriteBrowse.TabIndex = 0;
+            this.btnFavoriteBrowse.TabIndex = 2;
             this.btnFavoriteBrowse.Text = "Find";
             this.btnFavoriteBrowse.UseVisualStyleBackColor = true;
             this.btnFavoriteBrowse.Click += new System.EventHandler(this.btnFavoriteBrowse_Click);
@@ -197,8 +198,8 @@
             this.btnOpenAppData.Location = new System.Drawing.Point(12, 285);
             this.btnOpenAppData.Name = "btnOpenAppData";
             this.btnOpenAppData.Size = new System.Drawing.Size(130, 23);
-            this.btnOpenAppData.TabIndex = 5;
-            this.btnOpenAppData.Text = "Visit AppData Folder";
+            this.btnOpenAppData.TabIndex = 17;
+            this.btnOpenAppData.Text = "Open App Data Folder";
             this.btnOpenAppData.UseVisualStyleBackColor = true;
             this.btnOpenAppData.Click += new System.EventHandler(this.btnGotoAppdata_Click);
             // 
@@ -208,7 +209,7 @@
             this.chkAutocomplete.Location = new System.Drawing.Point(6, 19);
             this.chkAutocomplete.Name = "chkAutocomplete";
             this.chkAutocomplete.Size = new System.Drawing.Size(127, 17);
-            this.chkAutocomplete.TabIndex = 6;
+            this.chkAutocomplete.TabIndex = 7;
             this.chkAutocomplete.Text = "Enable Autocomplete";
             this.chkAutocomplete.UseVisualStyleBackColor = true;
             this.chkAutocomplete.CheckedChanged += new System.EventHandler(this.chkAutocomplete_CheckedChanged);
@@ -239,75 +240,95 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editor Settings (may require restarting the editor to make changes take effect)";
             // 
-            // chkWordWrap
+            // dropSmartIndent
             // 
-            this.chkWordWrap.AutoSize = true;
-            this.chkWordWrap.Location = new System.Drawing.Point(6, 42);
-            this.chkWordWrap.Name = "chkWordWrap";
-            this.chkWordWrap.Size = new System.Drawing.Size(137, 17);
-            this.chkWordWrap.TabIndex = 10;
-            this.chkWordWrap.Text = "Enable Word Wrapping";
-            this.chkWordWrap.UseVisualStyleBackColor = true;
+            this.dropSmartIndent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropSmartIndent.FormattingEnabled = true;
+            this.dropSmartIndent.Items.AddRange(new object[] {
+            "Disabled",
+            "Simple",
+            "Smart Type 1",
+            "Smart Type 2"});
+            this.dropSmartIndent.Location = new System.Drawing.Point(416, 71);
+            this.dropSmartIndent.Name = "dropSmartIndent";
+            this.dropSmartIndent.Size = new System.Drawing.Size(108, 21);
+            this.dropSmartIndent.TabIndex = 15;
             // 
-            // chkIndentGuide
+            // label3
             // 
-            this.chkIndentGuide.AutoSize = true;
-            this.chkIndentGuide.Location = new System.Drawing.Point(6, 65);
-            this.chkIndentGuide.Name = "chkIndentGuide";
-            this.chkIndentGuide.Size = new System.Drawing.Size(168, 17);
-            this.chkIndentGuide.TabIndex = 9;
-            this.chkIndentGuide.Text = "Show Indentation Guide Lines";
-            this.chkIndentGuide.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(340, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Smart Indent:";
             // 
-            // btnOpenInstallationFolder
+            // numIndentWidth
             // 
-            this.btnOpenInstallationFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 285);
-            this.btnOpenInstallationFolder.Name = "btnOpenInstallationFolder";
-            this.btnOpenInstallationFolder.Size = new System.Drawing.Size(132, 23);
-            this.btnOpenInstallationFolder.TabIndex = 5;
-            this.btnOpenInstallationFolder.Text = "Visit Installation Folder";
-            this.btnOpenInstallationFolder.UseVisualStyleBackColor = true;
-            this.btnOpenInstallationFolder.Click += new System.EventHandler(this.btnOpenInstallationFolder_Click);
+            this.numIndentWidth.Location = new System.Drawing.Point(416, 44);
+            this.numIndentWidth.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numIndentWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numIndentWidth.Name = "numIndentWidth";
+            this.numIndentWidth.Size = new System.Drawing.Size(57, 20);
+            this.numIndentWidth.TabIndex = 14;
+            this.numIndentWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // chkUseTabs
+            // label2
             // 
-            this.chkUseTabs.AutoSize = true;
-            this.chkUseTabs.Location = new System.Drawing.Point(188, 19);
-            this.chkUseTabs.Name = "chkUseTabs";
-            this.chkUseTabs.Size = new System.Drawing.Size(72, 17);
-            this.chkUseTabs.TabIndex = 11;
-            this.chkUseTabs.Text = "Use Tabs";
-            this.chkUseTabs.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(339, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Indent Width:";
             // 
-            // chkTabIndents
+            // numBackupInterval
             // 
-            this.chkTabIndents.AutoSize = true;
-            this.chkTabIndents.Location = new System.Drawing.Point(188, 42);
-            this.chkTabIndents.Name = "chkTabIndents";
-            this.chkTabIndents.Size = new System.Drawing.Size(83, 17);
-            this.chkTabIndents.TabIndex = 11;
-            this.chkTabIndents.Text = "Tab Indents";
-            this.chkTabIndents.UseVisualStyleBackColor = true;
+            this.numBackupInterval.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numBackupInterval.Location = new System.Drawing.Point(416, 98);
+            this.numBackupInterval.Maximum = new decimal(new int[] {
+            60000,
+            0,
+            0,
+            0});
+            this.numBackupInterval.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numBackupInterval.Name = "numBackupInterval";
+            this.numBackupInterval.Size = new System.Drawing.Size(57, 20);
+            this.numBackupInterval.TabIndex = 16;
+            this.numBackupInterval.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             // 
-            // chkBackspaceUnindents
+            // label4
             // 
-            this.chkBackspaceUnindents.AutoSize = true;
-            this.chkBackspaceUnindents.Location = new System.Drawing.Point(188, 65);
-            this.chkBackspaceUnindents.Name = "chkBackspaceUnindents";
-            this.chkBackspaceUnindents.Size = new System.Drawing.Size(131, 17);
-            this.chkBackspaceUnindents.TabIndex = 11;
-            this.chkBackspaceUnindents.Text = "Backspace Unindents";
-            this.chkBackspaceUnindents.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(350, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Tab Width:";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(325, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Backup Interval:";
             // 
             // numTabWidth
             // 
@@ -331,107 +352,102 @@
             0,
             0});
             // 
-            // label2
+            // label1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(339, 46);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Indent Width:";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(350, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Tab Width:";
             // 
-            // numIndentWidth
+            // chkBackspaceUnindents
             // 
-            this.numIndentWidth.Location = new System.Drawing.Point(416, 44);
-            this.numIndentWidth.Maximum = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numIndentWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numIndentWidth.Name = "numIndentWidth";
-            this.numIndentWidth.Size = new System.Drawing.Size(57, 20);
-            this.numIndentWidth.TabIndex = 13;
-            this.numIndentWidth.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.chkBackspaceUnindents.AutoSize = true;
+            this.chkBackspaceUnindents.Location = new System.Drawing.Point(188, 65);
+            this.chkBackspaceUnindents.Name = "chkBackspaceUnindents";
+            this.chkBackspaceUnindents.Size = new System.Drawing.Size(131, 17);
+            this.chkBackspaceUnindents.TabIndex = 12;
+            this.chkBackspaceUnindents.Text = "Backspace Unindents";
+            this.chkBackspaceUnindents.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // chkTabIndents
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(340, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Smart Indent:";
+            this.chkTabIndents.AutoSize = true;
+            this.chkTabIndents.Location = new System.Drawing.Point(188, 42);
+            this.chkTabIndents.Name = "chkTabIndents";
+            this.chkTabIndents.Size = new System.Drawing.Size(83, 17);
+            this.chkTabIndents.TabIndex = 11;
+            this.chkTabIndents.Text = "Tab Indents";
+            this.chkTabIndents.UseVisualStyleBackColor = true;
             // 
-            // dropSmartIndent
+            // chkUseTabs
             // 
-            this.dropSmartIndent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropSmartIndent.FormattingEnabled = true;
-            this.dropSmartIndent.Items.AddRange(new object[] {
-            "Disabled",
-            "Simple",
-            "Smart Type 1",
-            "Smart Type 2"});
-            this.dropSmartIndent.Location = new System.Drawing.Point(416, 71);
-            this.dropSmartIndent.Name = "dropSmartIndent";
-            this.dropSmartIndent.Size = new System.Drawing.Size(108, 21);
-            this.dropSmartIndent.TabIndex = 15;
+            this.chkUseTabs.AutoSize = true;
+            this.chkUseTabs.Location = new System.Drawing.Point(188, 19);
+            this.chkUseTabs.Name = "chkUseTabs";
+            this.chkUseTabs.Size = new System.Drawing.Size(72, 17);
+            this.chkUseTabs.TabIndex = 10;
+            this.chkUseTabs.Text = "Use Tabs";
+            this.chkUseTabs.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // chkWordWrap
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(325, 100);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Backup Interval:";
+            this.chkWordWrap.AutoSize = true;
+            this.chkWordWrap.Location = new System.Drawing.Point(6, 42);
+            this.chkWordWrap.Name = "chkWordWrap";
+            this.chkWordWrap.Size = new System.Drawing.Size(137, 17);
+            this.chkWordWrap.TabIndex = 8;
+            this.chkWordWrap.Text = "Enable Word Wrapping";
+            this.chkWordWrap.UseVisualStyleBackColor = true;
             // 
-            // numBackupInterval
+            // chkIndentGuide
             // 
-            this.numBackupInterval.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numBackupInterval.Location = new System.Drawing.Point(416, 98);
-            this.numBackupInterval.Maximum = new decimal(new int[] {
-            60000,
-            0,
-            0,
-            0});
-            this.numBackupInterval.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numBackupInterval.Name = "numBackupInterval";
-            this.numBackupInterval.Size = new System.Drawing.Size(57, 20);
-            this.numBackupInterval.TabIndex = 13;
-            this.numBackupInterval.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
+            this.chkIndentGuide.AutoSize = true;
+            this.chkIndentGuide.Location = new System.Drawing.Point(6, 65);
+            this.chkIndentGuide.Name = "chkIndentGuide";
+            this.chkIndentGuide.Size = new System.Drawing.Size(168, 17);
+            this.chkIndentGuide.TabIndex = 9;
+            this.chkIndentGuide.Text = "Show Indentation Guide Lines";
+            this.chkIndentGuide.UseVisualStyleBackColor = true;
+            // 
+            // btnOpenInstallationFolder
+            // 
+            this.btnOpenInstallationFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 285);
+            this.btnOpenInstallationFolder.Name = "btnOpenInstallationFolder";
+            this.btnOpenInstallationFolder.Size = new System.Drawing.Size(132, 23);
+            this.btnOpenInstallationFolder.TabIndex = 18;
+            this.btnOpenInstallationFolder.Text = "Open Installation Folder";
+            this.btnOpenInstallationFolder.UseVisualStyleBackColor = true;
+            this.btnOpenInstallationFolder.Click += new System.EventHandler(this.btnOpenInstallationFolder_Click);
+            // 
+            // chkCheckUpdates
+            // 
+            this.chkCheckUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkCheckUpdates.AutoSize = true;
+            this.chkCheckUpdates.Location = new System.Drawing.Point(340, 289);
+            this.chkCheckUpdates.Name = "chkCheckUpdates";
+            this.chkCheckUpdates.Size = new System.Drawing.Size(115, 17);
+            this.chkCheckUpdates.TabIndex = 19;
+            this.chkCheckUpdates.Text = "Check for Updates";
+            this.chkCheckUpdates.UseVisualStyleBackColor = true;
             // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(649, 320);
+            this.Controls.Add(this.chkCheckUpdates);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnOpenInstallationFolder);
             this.Controls.Add(this.btnOpenAppData);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SettingsWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsWindow_FormClosing);
             this.groupBox9.ResumeLayout(false);
@@ -440,10 +456,11 @@
             this.groupBox8.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTabWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numIndentWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBackupInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTabWidth)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -477,5 +494,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numBackupInterval;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chkCheckUpdates;
     }
 }
