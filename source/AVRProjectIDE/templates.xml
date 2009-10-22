@@ -161,14 +161,12 @@
 
   <template name="Arduino Bootloader 19200 Baud">
     <BurnProgrammer>stk500</BurnProgrammer>
-    <BurnOptions>-F</BurnOptions>
     <BurnBaud>19200</BurnBaud>
     <BurnAutoReset>true</BurnAutoReset>
   </template>
 
   <template name="Arduino Bootloader 57600 Baud">
     <BurnProgrammer>stk500</BurnProgrammer>
-    <BurnOptions>-F</BurnOptions>
     <BurnBaud>57600</BurnBaud>
     <BurnAutoReset>true</BurnAutoReset>
   </template>

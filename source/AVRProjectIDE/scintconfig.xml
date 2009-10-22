@@ -67,6 +67,8 @@
   <Style Name="WORD6" />
   <Style Name="WORD7" />
   <Style Name="WORD8" />
+  <Style Name="SelectionHighlighting" ForeColor="White" BackColor="Black" />
+  <Style Name="EditorBackground">White</Style>
   <Keywords List="0">
     if else for do while switch case default goto break continue return
   </Keywords>

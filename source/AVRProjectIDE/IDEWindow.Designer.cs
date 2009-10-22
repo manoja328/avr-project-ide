@@ -141,6 +141,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
+            this.mbtnFuseTool = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -394,11 +395,12 @@
             this.mbtnCompile,
             this.mbtnCompileCurrent,
             this.mbtnBurn,
+            this.mbtnFuseTool,
+            this.mbtnAvrdudeInteractive,
             this.mbtnExportMakefile,
             this.mbtnExportAPS,
             this.mbtnRunMake,
-            this.mbtnEditorSettings,
-            this.mbtnAvrdudeInteractive});
+            this.mbtnEditorSettings});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -931,6 +933,7 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 18);
             this.progressBar1.TabIndex = 4;
+            this.progressBar1.Visible = false;
             this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // timerScanner
@@ -942,6 +945,13 @@
             // timerBackup
             // 
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
+            // 
+            // mbtnFuseTool
+            // 
+            this.mbtnFuseTool.Name = "mbtnFuseTool";
+            this.mbtnFuseTool.Size = new System.Drawing.Size(218, 22);
+            this.mbtnFuseTool.Text = "Fuse Tool";
+            this.mbtnFuseTool.Click += new System.EventHandler(this.mbtnFuseTool_Click);
             // 
             // IDEWindow
             // 
@@ -1059,6 +1069,7 @@
         private System.Windows.Forms.Timer timerBackup;
         private System.Windows.Forms.ToolStripMenuItem mbtnAvrdudeInteractive;
         private System.Windows.Forms.ToolStripMenuItem mbtnCompileCurrent;
+        private System.Windows.Forms.ToolStripMenuItem mbtnFuseTool;
 
 
     }

@@ -45,7 +45,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(782, 437);
+            this.tabControl1.Size = new System.Drawing.Size(965, 437);
             this.tabControl1.TabIndex = 0;
             // 
             // groupBox1
@@ -55,7 +55,7 @@
             this.groupBox1.Controls.Add(this.txtSuggestedFusebox);
             this.groupBox1.Location = new System.Drawing.Point(12, 455);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(782, 47);
+            this.groupBox1.Size = new System.Drawing.Size(965, 47);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Suggested Fusebox";
@@ -67,7 +67,7 @@
             this.txtSuggestedFusebox.Location = new System.Drawing.Point(6, 19);
             this.txtSuggestedFusebox.Name = "txtSuggestedFusebox";
             this.txtSuggestedFusebox.ReadOnly = true;
-            this.txtSuggestedFusebox.Size = new System.Drawing.Size(770, 20);
+            this.txtSuggestedFusebox.Size = new System.Drawing.Size(953, 20);
             this.txtSuggestedFusebox.TabIndex = 0;
             // 
             // groupBox2
@@ -77,7 +77,7 @@
             this.groupBox2.Controls.Add(this.txtYourFusebox);
             this.groupBox2.Location = new System.Drawing.Point(12, 508);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(782, 47);
+            this.groupBox2.Size = new System.Drawing.Size(965, 47);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Your Fusebox";
@@ -88,14 +88,14 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtYourFusebox.Location = new System.Drawing.Point(6, 19);
             this.txtYourFusebox.Name = "txtYourFusebox";
-            this.txtYourFusebox.Size = new System.Drawing.Size(770, 20);
+            this.txtYourFusebox.Size = new System.Drawing.Size(953, 20);
             this.txtYourFusebox.TabIndex = 0;
             // 
             // FuseCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 567);
+            this.ClientSize = new System.Drawing.Size(989, 567);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabControl1);
@@ -104,6 +104,7 @@
             this.Name = "FuseCalculator";
             this.Text = "Fuse Calculator";
             this.Load += new System.EventHandler(this.FuseCalculator_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FuseCalculator_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

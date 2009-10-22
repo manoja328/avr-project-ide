@@ -743,11 +743,6 @@ namespace AVRProjectIDE
 
         #endregion
 
-        private void lnkFuse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(SettingsManagement.FuseCalcLink);
-        }
-
         private void btnBurnFuseBox_Click(object sender, EventArgs e)
         {
             FormToProj();
