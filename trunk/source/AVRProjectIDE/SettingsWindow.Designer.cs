@@ -54,9 +54,12 @@
             this.chkTabIndents = new System.Windows.Forms.CheckBox();
             this.chkUseTabs = new System.Windows.Forms.CheckBox();
             this.chkWordWrap = new System.Windows.Forms.CheckBox();
+            this.chkTrimSpaceOnSave = new System.Windows.Forms.CheckBox();
+            this.chkShowLineNum = new System.Windows.Forms.CheckBox();
             this.chkIndentGuide = new System.Windows.Forms.CheckBox();
             this.btnOpenInstallationFolder = new System.Windows.Forms.Button();
             this.chkCheckUpdates = new System.Windows.Forms.CheckBox();
+            this.chkShowWS = new System.Windows.Forms.CheckBox();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -195,7 +198,7 @@
             // btnOpenAppData
             // 
             this.btnOpenAppData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenAppData.Location = new System.Drawing.Point(12, 285);
+            this.btnOpenAppData.Location = new System.Drawing.Point(12, 312);
             this.btnOpenAppData.Name = "btnOpenAppData";
             this.btnOpenAppData.Size = new System.Drawing.Size(130, 23);
             this.btnOpenAppData.TabIndex = 17;
@@ -206,6 +209,8 @@
             // chkAutocomplete
             // 
             this.chkAutocomplete.AutoSize = true;
+            this.chkAutocomplete.Checked = true;
+            this.chkAutocomplete.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAutocomplete.Location = new System.Drawing.Point(6, 19);
             this.chkAutocomplete.Name = "chkAutocomplete";
             this.chkAutocomplete.Size = new System.Drawing.Size(127, 17);
@@ -227,15 +232,17 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.numTabWidth);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.chkShowWS);
             this.groupBox1.Controls.Add(this.chkBackspaceUnindents);
             this.groupBox1.Controls.Add(this.chkTabIndents);
             this.groupBox1.Controls.Add(this.chkUseTabs);
             this.groupBox1.Controls.Add(this.chkWordWrap);
+            this.groupBox1.Controls.Add(this.chkShowLineNum);
             this.groupBox1.Controls.Add(this.chkIndentGuide);
             this.groupBox1.Controls.Add(this.chkAutocomplete);
             this.groupBox1.Location = new System.Drawing.Point(12, 144);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(627, 135);
+            this.groupBox1.Size = new System.Drawing.Size(627, 162);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editor Settings (may require restarting the editor to make changes take effect)";
@@ -394,6 +401,8 @@
             // chkWordWrap
             // 
             this.chkWordWrap.AutoSize = true;
+            this.chkWordWrap.Checked = true;
+            this.chkWordWrap.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkWordWrap.Location = new System.Drawing.Point(6, 42);
             this.chkWordWrap.Name = "chkWordWrap";
             this.chkWordWrap.Size = new System.Drawing.Size(137, 17);
@@ -401,9 +410,34 @@
             this.chkWordWrap.Text = "Enable Word Wrapping";
             this.chkWordWrap.UseVisualStyleBackColor = true;
             // 
+            // chkTrimSpaceOnSave
+            // 
+            this.chkTrimSpaceOnSave.AutoSize = true;
+            this.chkTrimSpaceOnSave.Location = new System.Drawing.Point(461, 318);
+            this.chkTrimSpaceOnSave.Name = "chkTrimSpaceOnSave";
+            this.chkTrimSpaceOnSave.Size = new System.Drawing.Size(149, 17);
+            this.chkTrimSpaceOnSave.TabIndex = 9;
+            this.chkTrimSpaceOnSave.Text = "Trim Whitespace on Save";
+            this.chkTrimSpaceOnSave.UseVisualStyleBackColor = true;
+            this.chkTrimSpaceOnSave.Visible = false;
+            // 
+            // chkShowLineNum
+            // 
+            this.chkShowLineNum.AutoSize = true;
+            this.chkShowLineNum.Checked = true;
+            this.chkShowLineNum.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkShowLineNum.Location = new System.Drawing.Point(6, 88);
+            this.chkShowLineNum.Name = "chkShowLineNum";
+            this.chkShowLineNum.Size = new System.Drawing.Size(121, 17);
+            this.chkShowLineNum.TabIndex = 9;
+            this.chkShowLineNum.Text = "Show Line Numbers";
+            this.chkShowLineNum.UseVisualStyleBackColor = true;
+            // 
             // chkIndentGuide
             // 
             this.chkIndentGuide.AutoSize = true;
+            this.chkIndentGuide.Checked = true;
+            this.chkIndentGuide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkIndentGuide.Location = new System.Drawing.Point(6, 65);
             this.chkIndentGuide.Name = "chkIndentGuide";
             this.chkIndentGuide.Size = new System.Drawing.Size(168, 17);
@@ -414,7 +448,7 @@
             // btnOpenInstallationFolder
             // 
             this.btnOpenInstallationFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 285);
+            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 312);
             this.btnOpenInstallationFolder.Name = "btnOpenInstallationFolder";
             this.btnOpenInstallationFolder.Size = new System.Drawing.Size(132, 23);
             this.btnOpenInstallationFolder.TabIndex = 18;
@@ -426,24 +460,35 @@
             // 
             this.chkCheckUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkCheckUpdates.AutoSize = true;
-            this.chkCheckUpdates.Location = new System.Drawing.Point(340, 289);
+            this.chkCheckUpdates.Location = new System.Drawing.Point(340, 316);
             this.chkCheckUpdates.Name = "chkCheckUpdates";
             this.chkCheckUpdates.Size = new System.Drawing.Size(115, 17);
             this.chkCheckUpdates.TabIndex = 19;
             this.chkCheckUpdates.Text = "Check for Updates";
             this.chkCheckUpdates.UseVisualStyleBackColor = true;
             // 
+            // chkShowWS
+            // 
+            this.chkShowWS.AutoSize = true;
+            this.chkShowWS.Location = new System.Drawing.Point(188, 88);
+            this.chkShowWS.Name = "chkShowWS";
+            this.chkShowWS.Size = new System.Drawing.Size(113, 17);
+            this.chkShowWS.TabIndex = 12;
+            this.chkShowWS.Text = "Show Whitespace";
+            this.chkShowWS.UseVisualStyleBackColor = true;
+            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 320);
+            this.ClientSize = new System.Drawing.Size(649, 347);
             this.Controls.Add(this.chkCheckUpdates);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnOpenInstallationFolder);
             this.Controls.Add(this.btnOpenAppData);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.chkTrimSpaceOnSave);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsWindow";
@@ -495,5 +540,8 @@
         private System.Windows.Forms.NumericUpDown numBackupInterval;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkCheckUpdates;
+        private System.Windows.Forms.CheckBox chkShowLineNum;
+        private System.Windows.Forms.CheckBox chkTrimSpaceOnSave;
+        private System.Windows.Forms.CheckBox chkShowWS;
     }
 }

@@ -17,7 +17,7 @@ namespace AVRProjectIDE
 
         private const int LEFT_MARGIN = 10;
         private const int RIGHT_MARGIN = 10;
-        private const int TOP_MARGIN = 10;
+        private const int TOP_MARGIN = 25;
         private const int ROW_SPACE = 25;
 
         private Size CreateSize(int height)
@@ -93,20 +93,26 @@ namespace AVRProjectIDE
 
             fuseReset = 0xFF;
 
-            FillCheckListAndGetReset(typeOfFuse, xEle, chkListBits, out fuseReset);
+            fuseReset = FillCheckListAndGetReset(typeOfFuse, xEle);
 
             FillDictionaries(xEle);
+
+            FillControls();
 
             fuseVal = MatchAVRDUDEArgs(fuseBox, typeOfFuse, fuseReset);
 
             SetCheckListWithInt(fuseVal);
 
             txtManualHex.Text = fuseVal.ToString("X2");
+
+            disablePresetChangeEvent = false;
+
+            ManualEvent(null, null);
         }
 
         #endregion
 
-        #region Static Utilities
+        #region Utilities
 
         private static int MatchAVRDUDEArgs(string fuseBox, FuseType typeOfFuse, int fuseReset)
         {
@@ -143,9 +149,35 @@ namespace AVRProjectIDE
                 return "fuse";
         }
 
-        private static void FillCheckListAndGetReset(FuseType typeOfFuse, XmlElement xEle, CheckedListBox chkListBits, out int fuseReset)
+        private static string GetInfoXMLText(XmlElement xEle)
         {
-            fuseReset = 0xFF;
+            foreach (XmlNode xText in xEle.ChildNodes)
+            {
+                if (xText.NodeType == XmlNodeType.Element)
+                    if (xText.Name == "TEXT")
+                        return xText.InnerText.Trim() + "\r\n";
+            }
+
+            return "\r\n";
+        }
+
+        private static FuseType GetTypeOfFuseFromName(string fuseName)
+        {
+            if (fuseName.StartsWith("low"))
+                return FuseType.Low;
+            else if (fuseName.StartsWith("high"))
+                return FuseType.High;
+            else if (fuseName.StartsWith("ext"))
+                return FuseType.Extended;
+            else if (fuseName.StartsWith("lock"))
+                return FuseType.LockBits;
+            else
+                return FuseType.Unspecified;
+        }
+
+        private int FillCheckListAndGetReset(FuseType typeOfFuse, XmlElement xEle)
+        {
+            int fuseReset = 0xFF;
 
             string fuseOrLock = typeOfFuse == FuseType.LockBits ? "LOCKBIT" : "FUSE";
 
@@ -176,36 +208,12 @@ namespace AVRProjectIDE
                             }
                         }
                     }
-
-                    chkListBits.Items[i] = chkText;
                 }
-            }
-        }
 
-        private static string GetInfoXMLText(XmlElement xEle)
-        {
-            foreach (XmlNode xText in xEle.ChildNodes)
-            {
-                if (xText.NodeType == XmlNodeType.Element)
-                    if (xText.Name == "TEXT")
-                        return xText.InnerText.Trim() + "\r\n";
+                chkListBits.Items[i] = chkText;
             }
 
-            return "\r\n";
-        }
-
-        private static FuseType GetTypeOfFuseFromName(string fuseName)
-        {
-            if (fuseName.StartsWith("low"))
-                return FuseType.Low;
-            else if (fuseName.StartsWith("high"))
-                return FuseType.High;
-            else if (fuseName.StartsWith("ext"))
-                return FuseType.Extended;
-            else if (fuseName.StartsWith("lock"))
-                return FuseType.LockBits;
-            else
-                return FuseType.Unspecified;
+            return fuseReset;
         }
 
         #endregion
@@ -253,6 +261,52 @@ namespace AVRProjectIDE
 
                         break;
                     }
+                }
+            }
+        }
+
+        private void FillControls()
+        {
+            int ctrlCnt = 0;
+            int possibilities = 0;
+            foreach (KeyValuePair<int, Dictionary<string, int>> i in presets)
+            {
+                if (i.Value.Count == 1)
+                {
+                    CheckBox cb = new CheckBox();
+                    foreach (KeyValuePair<string, int> j in i.Value)
+                        cb.Text = j.Key;
+                    cb.Location = CreatePoint(ctrlCnt);
+                    ctrlCnt++;
+                    possibilities += 2;
+                    cb.Size = CreateSize(25);
+                    cb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+                    cb.CheckStateChanged += new EventHandler(PresetEvent);
+
+                    checkboxes.Add(i.Key, cb);
+                    grpPresetBox.Controls.Add(cb);
+                }
+                else if (i.Value.Count > 1)
+                {
+                    ComboBox cb = new ComboBox();
+                    cb.DropDownStyle = ComboBoxStyle.DropDownList;
+                    foreach (KeyValuePair<string, int> j in i.Value)
+                    {
+                        cb.Items.Add(j.Key);
+                        possibilities++;
+                    }
+                    cb.SelectedIndex = 0;
+
+                    cb.SelectedIndexChanged += new EventHandler(PresetEvent);
+
+                    cb.Location = CreatePoint(ctrlCnt);
+                    ctrlCnt++;
+                    cb.Size = CreateSize(20);
+                    cb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+                    dropdowns.Add(i.Key, cb);
+                    grpPresetBox.Controls.Add(cb);
                 }
             }
         }
@@ -344,19 +398,306 @@ namespace AVRProjectIDE
 
         private void ManualEvent(object sender, EventArgs e)
         {
+            bool oldDisable = disablePresetChangeEvent;
+            disablePresetChangeEvent = true;
 
+            foreach (KeyValuePair<int, CheckBox> i in checkboxes)
+            {
+                string str = i.Value.Text;
+
+                if (presets.ContainsKey(i.Key) == false)
+                    continue;
+
+                if ((presets[i.Key]).ContainsKey(str) == false)
+                    continue;
+
+                int val = (presets[i.Key])[str];
+
+                int compare = fuseVal & i.Key;
+
+                if (compare == val)
+                    i.Value.CheckState = CheckState.Checked;
+                else
+                    i.Value.CheckState = CheckState.Unchecked;
+            }
+
+            foreach (KeyValuePair<int, ComboBox> i in dropdowns)
+            {
+                if (presets.ContainsKey(i.Key) == false)
+                    continue;
+
+                foreach (KeyValuePair<string, int> j in presets[i.Key])
+                {
+                    int val = j.Value;
+
+                    int compare = fuseVal & i.Key;
+
+                    if (compare == val && i.Value.Items.Contains(j.Key))
+                    {
+                        i.Value.SelectedIndex = i.Value.Items.IndexOf(j.Key);
+                    }
+                }
+            }
+
+            disablePresetChangeEvent = oldDisable;
+
+            OutputToTextbox(fuseVal);
         }
 
         #endregion
 
         #region Preset Settings Related
 
+        private bool disablePresetChangeEvent = false;
         private void PresetEvent(object sender, EventArgs e)
         {
+            if (disablePresetChangeEvent)
+                return;
 
+            foreach (KeyValuePair<int, CheckBox> i in checkboxes)
+            {
+                string str = i.Value.Text;
+
+                if (presets.ContainsKey(i.Key) == false)
+                    continue;
+
+                if ((presets[i.Key]).ContainsKey(str) == false)
+                    continue;
+
+                int val = (presets[i.Key])[str];
+
+                if (i.Value.CheckState == CheckState.Unchecked)
+                {
+                    val = val ^ 0xFF;
+                }
+
+                int m = 0xFF ^ i.Key;
+                val = val | m;
+
+                fuseVal = fuseVal | i.Key;
+                fuseVal = fuseVal & val;
+            }
+
+            foreach (KeyValuePair<int, ComboBox> i in dropdowns)
+            {
+                if (presets.ContainsKey(i.Key) == false)
+                    continue;
+
+                string str = (string)i.Value.Items[i.Value.SelectedIndex];
+
+                foreach (KeyValuePair<string, int> j in presets[i.Key])
+                {
+                    if (j.Key != str)
+                        continue;
+
+                    int val = j.Value;
+
+                    int m = 0xFF ^ i.Key;
+                    val = val | m;
+
+                    fuseVal = fuseVal | i.Key;
+                    fuseVal = fuseVal & val;
+                }
+            }
+
+            txtManualHex.Text = fuseVal.ToString("X2");
+            SetCheckListWithInt(fuseVal);
+            OutputToTextbox(fuseVal);
         }
 
         #endregion
+
+        #region Button Events
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            fuseVal = fuseReset;
+
+            txtManualHex.Text = fuseVal.ToString("X2");
+            SetCheckListWithInt(fuseVal);
+
+            ManualEvent(sender, e);
+        }
+
+        private int ReadFuse()
+        {
+            if (ProjectBuilder.CheckForWinAVR())
+            {
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo.FileName = "avrdude";
+                p.StartInfo.Arguments = "";
+                //p.StartInfo.FileName = "cmd";
+                //p.StartInfo.Arguments = "/k avrdude";
+
+                string overrides = "";
+
+                if (string.IsNullOrEmpty(owner.Project.BurnPort) == false)
+                    overrides += "-P " + owner.Project.BurnPort;
+
+                if (owner.Project.BurnBaud != 0)
+                    overrides += " -b " + owner.Project.BurnBaud.ToString("0");
+
+                string avrdudeFuseStr = GetAVRDUDEFuseStringFromType(typeOfFuse);
+
+                string action = String.Format("-U {0}:r:\"{1}\":h", avrdudeFuseStr, TempFuseFilePath);
+
+                p.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.WorkingDirectory = SettingsManagement.AppDataPath;
+                p.StartInfo.Arguments += String.Format(" -c {0} -p {1} -n {2} {3} {4}", owner.Project.BurnProgrammer, owner.Project.BurnPart, overrides, owner.Project.BurnOptions, action);
+
+                try
+                {
+                    File.Delete(TempFuseFilePath);
+                }
+                catch { }
+
+                try
+                {
+                    p.Start();
+                    p.WaitForExit(1000);
+
+                    if (File.Exists(TempFuseFilePath) == false)
+                    {
+                        MessageBox.Show("Failed to Read Fuse, temporary file not found, please check your programmer settings. Here is the error message:\r\n\r\n" + p.StandardError.ReadToEnd() + "\r\n" + p.StandardOutput.ReadToEnd());
+                    }
+                    else
+                    {
+                        string fuseStr = File.ReadAllText(TempFuseFilePath);
+                        try
+                        {
+                            File.Delete(TempFuseFilePath);
+                        }
+                        catch { }
+
+                        if (string.IsNullOrEmpty(fuseStr))
+                        {
+                            MessageBox.Show("Temporary Fuse File is Empty");
+                            return -1;
+                        }
+
+                        fuseStr = fuseStr.Trim();
+                        if (string.IsNullOrEmpty(fuseStr))
+                        {
+                            MessageBox.Show("Temporary Fuse File is Empty");
+                            return -1;
+                        }
+
+                        return Convert.ToInt32(fuseStr, 16);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error While Reading Fuse");
+                    erw.ShowDialog();
+                }
+            }
+
+            return -1;
+        }
+
+        private void btnRead_Click(object sender, EventArgs e)
+        {
+            int v = ReadFuse();
+
+            if (v >= 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Fuse Read Back as 0x" + v.ToString("X2") + ", place it in the calculator?", "Fuse Read", MessageBoxButtons.YesNo))
+                {
+                    fuseVal = v;
+
+                    txtManualHex.Text = fuseVal.ToString("X2");
+                    SetCheckListWithInt(fuseVal);
+
+                    ManualEvent(sender, e);
+                }
+            }
+        }
+
+        private void btnBurn_Click(object sender, EventArgs e)
+        {
+            if (ProjectBuilder.CheckForWinAVR())
+            {
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo.FileName = "cmd";
+                p.StartInfo.Arguments = "/k avrdude ";
+
+                string overrides = "";
+
+                if (string.IsNullOrEmpty(owner.Project.BurnPort) == false)
+                    overrides += "-P " + owner.Project.BurnPort;
+
+                if (owner.Project.BurnBaud != 0)
+                    overrides += " -b " + owner.Project.BurnBaud.ToString("0");
+
+                p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} {3} {4}", owner.Project.BurnProgrammer, owner.Project.BurnPart, overrides, owner.Project.BurnOptions, GetArgString(fuseVal));
+
+                try
+                {
+                    p.Start();
+                }
+                catch (Exception ex)
+                {
+                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error While Writing Fuse");
+                    erw.ShowDialog();
+                }
+            }
+        }
+
+        private void btnVerify_Click(object sender, EventArgs e)
+        {
+            int v = ReadFuse();
+
+            if (v == -1)
+                return;
+
+            if (v == fuseVal)
+                MessageBox.Show("Fuse Verified Successfully");
+            else
+                MessageBox.Show("Fuse Is Mismatched, Read 0x" + v.ToString("X2") + " , Current: 0x" + fuseVal.ToString("X2"));
+        }
+
+        #endregion
+
+        private string GetArgString(int fuseVal)
+        {
+            string avrdudeFuseStr = GetAVRDUDEFuseStringFromType(typeOfFuse);
+
+            return String.Format("-U {0}:w:0x{1:X2}:m", avrdudeFuseStr, fuseVal);
+        }
+
+        private void OutputToTextbox(int fuseVal)
+        {
+            string str = owner.txtSuggestedFusebox.Text;
+
+            string avrdudeFuseStr = GetAVRDUDEFuseStringFromType(typeOfFuse);
+
+            string newStr = GetArgString(fuseVal);
+
+            Regex r = new Regex("-U\\s*" + avrdudeFuseStr + ":[wrv]:0[xX]([0-9a-fA-F]+):m");
+            Match match = r.Match(str);
+            if (match.Success)
+            {
+                while (match.Success)
+                {
+                    str = str.Replace(match.Value, newStr);
+
+                    match = match.NextMatch();
+                }
+            }
+            else
+            {
+                str += " " + newStr;
+            }
+
+            while (str.Contains("  "))
+                str.Replace("  ", " ");
+
+            owner.txtSuggestedFusebox.Text = str;
+        }
     }
 
     public enum FuseType

@@ -101,6 +101,7 @@
             this.btnVerify.TabIndex = 7;
             this.btnVerify.Text = "Verify";
             this.btnVerify.UseVisualStyleBackColor = true;
+            this.btnVerify.Click += new System.EventHandler(this.btnVerify_Click);
             // 
             // btnBurn
             // 
@@ -111,6 +112,7 @@
             this.btnBurn.TabIndex = 6;
             this.btnBurn.Text = "Burn";
             this.btnBurn.UseVisualStyleBackColor = true;
+            this.btnBurn.Click += new System.EventHandler(this.btnBurn_Click);
             // 
             // btnRead
             // 
@@ -121,6 +123,7 @@
             this.btnRead.TabIndex = 5;
             this.btnRead.Text = "Read";
             this.btnRead.UseVisualStyleBackColor = true;
+            this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
             // btnReset
             // 
@@ -131,6 +134,7 @@
             this.btnReset.TabIndex = 4;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // grpPresetBox
             // 

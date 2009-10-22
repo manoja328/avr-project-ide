@@ -133,6 +133,26 @@ namespace AVRProjectIDE
                 chkAutocomplete.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
             }
 
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "ShowLineNumbers");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "ShowLineNumbers", chkShowLineNum.Checked.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                chkShowLineNum.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "ShowWhiteSpace");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "ShowWhiteSpace", chkShowWS.Checked.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                chkShowWS.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
             chkUseTabs.Checked = useTabs;
             chkWordWrap.Checked = lineWrap;
             chkTabIndents.Checked = tabIndents;
@@ -230,6 +250,9 @@ namespace AVRProjectIDE
             SettingsManagement.SettingsFile.Write("Editor", "IndentGuide", chkIndentGuide.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "IndentSmartness", dropSmartIndent.SelectedIndex.ToString("0"));
             SettingsManagement.SettingsFile.Write("Editor", "LineWrap", chkWordWrap.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "ShowLineNumbers", chkShowLineNum.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "ShowWhiteSpace", chkShowWS.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "TrimOnSave", chkTrimSpaceOnSave.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "BackupInterval", numBackupInterval.Value.ToString("0"));
             SettingsManagement.CheckForUpdates = chkCheckUpdates.Checked;
             SettingsManagement.LoadScintSettings();

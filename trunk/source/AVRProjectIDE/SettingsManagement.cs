@@ -549,12 +549,19 @@ namespace AVRProjectIDE
         static Dictionary<int, bool> styleUnderline = new Dictionary<int, bool>();
         static Dictionary<int, string> styleKeywords = new Dictionary<int, string>();
 
+        static Color selForeColour;
+        static Color selBackColour;
+        static Color editorBackColour;
+
         static bool backspaceUnindents = true;
         static bool tabIndents = true;
         static bool useTabs = true;
         static int tabWidth = 4;
         static int indentWidth = 4;
         static int smartIndent = 3;
+
+        static bool showLineNumber = true;
+        static bool showWS = false;
 
         static int zoomLevel = int.MinValue;
         public static int ZoomLevel
@@ -596,6 +603,34 @@ namespace AVRProjectIDE
             }
         }
 
+        public static bool TrimOnSave
+        {
+            get
+            {
+                bool res = false;
+                string str = iniFile.Read("Editor", "TrimOnSave");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    TrimOnSave = res;
+                    res = TrimOnSave;
+                    return false;
+                }
+
+                res = str == true.ToString().Trim().ToLowerInvariant();
+
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Editor", "TrimOnSave", value.ToString().Trim().ToLowerInvariant());
+            }
+        }
+
         /// <summary>
         /// load editor settings from configuration file
         /// </summary>
@@ -620,6 +655,10 @@ namespace AVRProjectIDE
             {
                 XmlElement xDocEle = xDoc.DocumentElement;
                 XmlNodeList xStyles = xDocEle.GetElementsByTagName("Style");
+
+                selForeColour = scint.Selection.ForeColor;
+                selBackColour = scint.Selection.BackColor;
+                editorBackColour = scint.BackColor;
 
                 // match styles with the style names used by the scintilla
 
@@ -671,6 +710,25 @@ namespace AVRProjectIDE
                                 styleUnderline.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant());
                             }
                         }
+                    }
+
+                    if (name == "SelectionHighlighting")
+                    {
+                        foreach (XmlAttribute xAttrib in xStyle.Attributes)
+                        {
+                            if (xAttrib.Name == "ForeColor")
+                            {
+                                selForeColour = Color.FromName(xAttrib.Value);
+                            }
+                            else if (xAttrib.Name == "BackColor")
+                            {
+                                selBackColour = Color.FromName(xAttrib.Value);
+                            }
+                        }
+                    }
+                    else if (name == "EditorBackground")
+                    {
+                        editorBackColour = Color.FromName(xStyle.InnerText);
                     }
                 }
 
@@ -803,6 +861,28 @@ namespace AVRProjectIDE
                     iniFile.Write("Editor", "ZoomLevel", zoomLevel.ToString("0"));
                 }
 
+                tmpStr = iniFile.Read("Editor", "ShowLineNumbers");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "ShowLineNumbers", showLineNumber.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    showLineNumber = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }
+
+                tmpStr = iniFile.Read("Editor", "ShowWhiteSpace");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "ShowWhiteSpace", showWS.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    showWS = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }
+
+                
+
                 scint.Dispose(); // dispose of the scint, it causes an exception if it is not disposed manually
             }
             catch { return false; }
@@ -861,6 +941,17 @@ namespace AVRProjectIDE
             {
                 scinti.Styles[i.Key].Underline = i.Value;
             }
+
+            scinti.Selection.BackColor = selBackColour;
+            scinti.Selection.ForeColor = selForeColour;
+            scinti.BackColor = editorBackColour;
+
+            if (showWS)
+                scinti.Whitespace.Mode = WhitespaceMode.VisibleAlways;
+            else
+                scinti.Whitespace.Mode = WhitespaceMode.Invisible;
+
+            scinti.Margins[0].Width = showLineNumber ? 35 : 0;
 
             scinti.Indentation.BackspaceUnindents = backspaceUnindents;
             scinti.Indentation.ShowGuides = indentGuide;

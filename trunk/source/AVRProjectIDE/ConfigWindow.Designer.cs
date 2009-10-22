@@ -48,7 +48,6 @@
             this.tabsMain = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lnkFuse = new System.Windows.Forms.LinkLabel();
             this.chkAutoReset = new System.Windows.Forms.CheckBox();
             this.btnBurnFuseBox = new System.Windows.Forms.Button();
             this.btnBurnOnlyOpt = new System.Windows.Forms.Button();
@@ -125,6 +124,7 @@
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.dropTemplates = new System.Windows.Forms.ComboBox();
             this.btnGotoAppdata = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabsMain.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -189,7 +189,7 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.lnkFuse);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.chkAutoReset);
             this.groupBox1.Controls.Add(this.btnBurnFuseBox);
             this.groupBox1.Controls.Add(this.btnBurnOnlyOpt);
@@ -210,17 +210,6 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AVRDUDE Command Builder";
-            // 
-            // lnkFuse
-            // 
-            this.lnkFuse.AutoSize = true;
-            this.lnkFuse.Location = new System.Drawing.Point(308, 76);
-            this.lnkFuse.Name = "lnkFuse";
-            this.lnkFuse.Size = new System.Drawing.Size(54, 13);
-            this.lnkFuse.TabIndex = 12;
-            this.lnkFuse.TabStop = true;
-            this.lnkFuse.Text = "Fuse Box:";
-            this.lnkFuse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkFuse_LinkClicked);
             // 
             // chkAutoReset
             // 
@@ -1397,6 +1386,15 @@
             this.btnGotoAppdata.Visible = false;
             this.btnGotoAppdata.Click += new System.EventHandler(this.btnGotoAppdata_Click);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(308, 76);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(54, 13);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "Fuse Box:";
+            // 
             // ConfigWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1522,7 +1520,7 @@
         private System.Windows.Forms.CheckBox chkAutoReset;
         private System.Windows.Forms.Button btnBurnFuseBox;
         private System.Windows.Forms.TextBox txtBurnFuseBox;
-        private System.Windows.Forms.LinkLabel lnkFuse;
+        private System.Windows.Forms.Label label14;
     }
 }
 

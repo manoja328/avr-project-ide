@@ -86,6 +86,9 @@ namespace AVRProjectIDE
 
             timerBackup.Interval = SettingsManagement.BackupInterval * 1000;
             timerBackup.Enabled = true;
+
+            if (System.Net.Dns.GetHostName().ToUpperInvariant().Contains("FRANK"))
+                progressBar1.Visible = true;
         }
 
         private IDockContent GetPanelFromPersistString(string persistString)
@@ -1164,7 +1167,7 @@ namespace AVRProjectIDE
 
         private void progressBar1_Click(object sender, EventArgs e)
         {
-            new FuseCalculator(project).ShowDialog();
+            
         }
 
         private void timerScanner_Tick(object sender, EventArgs e)
@@ -1269,7 +1272,16 @@ namespace AVRProjectIDE
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 p.StartInfo.FileName = "cmd";
                 p.StartInfo.Arguments = "/k avrdude ";
-                p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} -t", project.BurnProgrammer, project.BurnPart, project.BurnOptions);
+
+                string overrides = "";
+
+                if (string.IsNullOrEmpty(project.BurnPort) == false)
+                    overrides += "-P " + project.BurnPort;
+
+                if (project.BurnBaud != 0)
+                    overrides += " -b " + project.BurnBaud.ToString("0");
+
+                p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} {3} -t", project.BurnProgrammer, project.BurnPart, overrides, project.BurnOptions);
                 p.Start();
             }
         }
@@ -1311,6 +1323,12 @@ namespace AVRProjectIDE
                 else
                     MessageBox.Show("You can only compile C or C++ files");
             }
+        }
+
+        private void mbtnFuseTool_Click(object sender, EventArgs e)
+        {
+            if (project.IsReady)
+                new FuseCalculator(project).ShowDialog();
         }
     }
 }

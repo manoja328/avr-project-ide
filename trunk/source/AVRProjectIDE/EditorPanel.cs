@@ -363,6 +363,8 @@ namespace AVRProjectIDE
                 this.Text = FileName + " *";
                 this.TabText = FileName + " *";
             }
+
+            lblLineNum.Text = (scint.Lines.Current.Number + 1).ToString("0");
         }
 
         private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)

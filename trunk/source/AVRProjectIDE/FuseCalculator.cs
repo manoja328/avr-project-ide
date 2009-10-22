@@ -16,13 +16,17 @@ namespace AVRProjectIDE
         private Dictionary<int, Dictionary<string, int>> maskList = new Dictionary<int, Dictionary<string, int>>();
         private AVRProject project;
 
+        public AVRProject Project
+        {
+            get { return project; }
+        }
+
         public FuseCalculator(AVRProject project)
         {
             InitializeComponent();
 
             this.project = project;
-
-            txtSuggestedFusebox.Text = project.BurnFuseBox;
+            this.Text = "Fuse Calculator for " + project.Device.ToUpperInvariant();
             txtYourFusebox.Text = project.BurnFuseBox;
         }
 
@@ -116,6 +120,11 @@ namespace AVRProjectIDE
 
                 break;
             }
+        }
+
+        private void FuseCalculator_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            project.BurnFuseBox = txtYourFusebox.Text.Trim();
         }
     }
 }
