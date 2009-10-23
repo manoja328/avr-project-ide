@@ -117,7 +117,7 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_Alpha46.
+        ///   Looks up a localized string similar to AVRProjectIDE_Alpha47.
         /// </summary>
         internal static string BuildID {
             get {

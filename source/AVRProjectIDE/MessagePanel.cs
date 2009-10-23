@@ -40,18 +40,40 @@ namespace AVRProjectIDE
             }
             else
             {
+                TextBox box = txtMessages;
+
                 if (mode == TextBoxChangeMode.Append)
-                    txtMessages.Text += text;
+                {
+                    box.Text += text;
+                    box.SelectionStart = box.Text.Length;
+                    box.SelectionLength = 0;
+                    box.ScrollToCaret();
+                }
                 else if (mode == TextBoxChangeMode.AppendNewLine)
-                    txtMessages.Text += "\r\n" + text;
+                {
+                    box.Text += "\r\n" + text;
+                    box.SelectionStart = box.Text.Length;
+                    box.SelectionLength = 0;
+                    box.ScrollToCaret();
+                }
                 else if (mode == TextBoxChangeMode.Prepend)
-                    txtMessages.Text = text + txtMessages.Text;
+                {
+                    box.Text = text + box.Text;
+                    box.SelectionStart = 0;
+                    box.SelectionLength = 0;
+                    box.ScrollToCaret();
+                }
                 else if (mode == TextBoxChangeMode.PrependNewLine)
-                    txtMessages.Text = text + "\r\n" + txtMessages.Text;
+                {
+                    box.Text = text + "\r\n" + box.Text;
+                    box.SelectionStart = 0;
+                    box.SelectionLength = 0;
+                    box.ScrollToCaret();
+                }
                 else if (mode == TextBoxChangeMode.Set)
-                    txtMessages.Text = text;
+                    box.Text = text;
                 else if (mode == TextBoxChangeMode.SetNewLine)
-                    txtMessages.Text = text + "\r\n";
+                    box.Text = text + "\r\n";
             }
         }
 
@@ -70,7 +92,7 @@ namespace AVRProjectIDE
             }
 
             ListViewItem lvi = new ListViewItem(new string[] { fileName, line.ToString(), location, type, message, });
-            listErrorsWarnings.Items.Add(lvi);
+            listErrorsWarnings.Items.Insert(0, lvi);
         }
 
         public event OnClickError GotoError;
