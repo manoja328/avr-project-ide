@@ -5,6 +5,7 @@
  * AVRDUDE Tool: write any file, dump file, verify against file, interactive mode, fuse tool
  * AVRDUDE options moved to a panel so that it can appear in many winforms
  * May have found and fixed a bug regarding port overrides
+ * Build output now outputted "upside-down"
 
 ==Alpha 45==
 
