@@ -86,11 +86,11 @@
             this.mbtnCompile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnCompileCurrent = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnBurn = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnFuseTool = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportMakefile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportAPS = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnRunMake = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnEditorSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.mbtnAvrdudeInteractive = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnHelpTopics = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,7 +141,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
-            this.mbtnFuseTool = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnAVRDUDE = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -395,8 +395,8 @@
             this.mbtnCompile,
             this.mbtnCompileCurrent,
             this.mbtnBurn,
+            this.mbtnAVRDUDE,
             this.mbtnFuseTool,
-            this.mbtnAvrdudeInteractive,
             this.mbtnExportMakefile,
             this.mbtnExportAPS,
             this.mbtnRunMake,
@@ -409,7 +409,7 @@
             // 
             this.mbtnConfig.Image = global::AVRProjectIDE.Properties.Resources.configure;
             this.mbtnConfig.Name = "mbtnConfig";
-            this.mbtnConfig.Size = new System.Drawing.Size(218, 22);
+            this.mbtnConfig.Size = new System.Drawing.Size(190, 22);
             this.mbtnConfig.Text = "Con&figure Project";
             this.mbtnConfig.Click += new System.EventHandler(this.mbtnConfig_Click);
             // 
@@ -418,14 +418,14 @@
             this.mbtnCompile.Image = global::AVRProjectIDE.Properties.Resources.build;
             this.mbtnCompile.Name = "mbtnCompile";
             this.mbtnCompile.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.mbtnCompile.Size = new System.Drawing.Size(218, 22);
+            this.mbtnCompile.Size = new System.Drawing.Size(190, 22);
             this.mbtnCompile.Text = "&Compile All";
             this.mbtnCompile.Click += new System.EventHandler(this.mbtnCompile_Click);
             // 
             // mbtnCompileCurrent
             // 
             this.mbtnCompileCurrent.Name = "mbtnCompileCurrent";
-            this.mbtnCompileCurrent.Size = new System.Drawing.Size(218, 22);
+            this.mbtnCompileCurrent.Size = new System.Drawing.Size(190, 22);
             this.mbtnCompileCurrent.Text = "Compile Current File";
             this.mbtnCompileCurrent.Click += new System.EventHandler(this.mbtnCompileCurrent_Click);
             // 
@@ -434,44 +434,44 @@
             this.mbtnBurn.Image = global::AVRProjectIDE.Properties.Resources.burn;
             this.mbtnBurn.Name = "mbtnBurn";
             this.mbtnBurn.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.mbtnBurn.Size = new System.Drawing.Size(218, 22);
-            this.mbtnBurn.Text = "&Program";
+            this.mbtnBurn.Size = new System.Drawing.Size(190, 22);
+            this.mbtnBurn.Text = "&Program Chip";
             this.mbtnBurn.Click += new System.EventHandler(this.mbtnBurn_Click);
+            // 
+            // mbtnFuseTool
+            // 
+            this.mbtnFuseTool.Name = "mbtnFuseTool";
+            this.mbtnFuseTool.Size = new System.Drawing.Size(190, 22);
+            this.mbtnFuseTool.Text = "Fuse Tool";
+            this.mbtnFuseTool.Click += new System.EventHandler(this.mbtnFuseTool_Click);
             // 
             // mbtnExportMakefile
             // 
             this.mbtnExportMakefile.Name = "mbtnExportMakefile";
-            this.mbtnExportMakefile.Size = new System.Drawing.Size(218, 22);
+            this.mbtnExportMakefile.Size = new System.Drawing.Size(190, 22);
             this.mbtnExportMakefile.Text = "Export Makefile";
             this.mbtnExportMakefile.Click += new System.EventHandler(this.mbtnExportMakefile_Click);
             // 
             // mbtnExportAPS
             // 
             this.mbtnExportAPS.Name = "mbtnExportAPS";
-            this.mbtnExportAPS.Size = new System.Drawing.Size(218, 22);
+            this.mbtnExportAPS.Size = new System.Drawing.Size(190, 22);
             this.mbtnExportAPS.Text = "Export AVRStudio .aps";
             this.mbtnExportAPS.Click += new System.EventHandler(this.mbtnExportAPS_Click);
             // 
             // mbtnRunMake
             // 
             this.mbtnRunMake.Name = "mbtnRunMake";
-            this.mbtnRunMake.Size = new System.Drawing.Size(218, 22);
+            this.mbtnRunMake.Size = new System.Drawing.Size(190, 22);
             this.mbtnRunMake.Text = "Run \"Make\"";
             this.mbtnRunMake.Click += new System.EventHandler(this.mbtnRunMake_Click);
             // 
             // mbtnEditorSettings
             // 
             this.mbtnEditorSettings.Name = "mbtnEditorSettings";
-            this.mbtnEditorSettings.Size = new System.Drawing.Size(218, 22);
+            this.mbtnEditorSettings.Size = new System.Drawing.Size(190, 22);
             this.mbtnEditorSettings.Text = "Editor Settings";
             this.mbtnEditorSettings.Click += new System.EventHandler(this.mbtnEditorSettings_Click);
-            // 
-            // mbtnAvrdudeInteractive
-            // 
-            this.mbtnAvrdudeInteractive.Name = "mbtnAvrdudeInteractive";
-            this.mbtnAvrdudeInteractive.Size = new System.Drawing.Size(218, 22);
-            this.mbtnAvrdudeInteractive.Text = "AVRDUDE Interactive Mode";
-            this.mbtnAvrdudeInteractive.Click += new System.EventHandler(this.mbtnAvrdudeInteractive_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -946,12 +946,12 @@
             // 
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
             // 
-            // mbtnFuseTool
+            // mbtnAVRDUDE
             // 
-            this.mbtnFuseTool.Name = "mbtnFuseTool";
-            this.mbtnFuseTool.Size = new System.Drawing.Size(218, 22);
-            this.mbtnFuseTool.Text = "Fuse Tool";
-            this.mbtnFuseTool.Click += new System.EventHandler(this.mbtnFuseTool_Click);
+            this.mbtnAVRDUDE.Name = "mbtnAVRDUDE";
+            this.mbtnAVRDUDE.Size = new System.Drawing.Size(190, 22);
+            this.mbtnAVRDUDE.Text = "AVRDUDE Tool";
+            this.mbtnAVRDUDE.Click += new System.EventHandler(this.mbtnAVRDUDE_Click);
             // 
             // IDEWindow
             // 
@@ -1067,9 +1067,9 @@
         private System.Windows.Forms.Timer timerScanner;
         private System.Windows.Forms.ToolStripMenuItem mbtnEditorSettings;
         private System.Windows.Forms.Timer timerBackup;
-        private System.Windows.Forms.ToolStripMenuItem mbtnAvrdudeInteractive;
         private System.Windows.Forms.ToolStripMenuItem mbtnCompileCurrent;
         private System.Windows.Forms.ToolStripMenuItem mbtnFuseTool;
+        private System.Windows.Forms.ToolStripMenuItem mbtnAVRDUDE;
 
 
     }

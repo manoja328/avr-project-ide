@@ -71,7 +71,7 @@ namespace AVRProjectIDE
         {
             if (File.Exists(workingProject.DirPath + Path.DirectorySeparatorChar + "Makefile") == false && File.Exists(workingProject.DirPath + Path.DirectorySeparatorChar + "makefile") == false)
             {
-                TextBoxModify(outputTextbox, "####Error: Makefile not found in " + workingProject.DirPath, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: Makefile not found in " + workingProject.DirPath, TextBoxChangeMode.PrependNewLine);
                 return;
             }
 
@@ -85,7 +85,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to create dry run batch file, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to create dry run batch file, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return;
             }
 
@@ -111,18 +111,18 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to dry run make", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to dry run make", TextBoxChangeMode.PrependNewLine);
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to dry run make, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to dry run make, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return;
             }
 
             if (File.Exists(batchPath) == false)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to create dry run batch file at " + batchPath, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to create dry run batch file at " + batchPath, TextBoxChangeMode.PrependNewLine);
                 return;
             }
 
@@ -142,7 +142,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to read dry run, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to read dry run, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return;
             }
 
@@ -166,7 +166,7 @@ namespace AVRProjectIDE
                 psi.CreateNoWindow = true;
                 makedryrun = new Process();
                 makedryrun.StartInfo = psi;
-                TextBoxModify(outputTextbox, "Execute: " + command, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "Execute: " + command, TextBoxChangeMode.PrependNewLine);
                 try
                 {
                     if (makedryrun.Start())
@@ -179,12 +179,12 @@ namespace AVRProjectIDE
                     }
                     else
                     {
-                        TextBoxModify(outputTextbox, "####Error: unable to execute command", TextBoxChangeMode.AppendNewLine);
+                        TextBoxModify(outputTextbox, "####Error: unable to execute command", TextBoxChangeMode.PrependNewLine);
                     }
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to execute command, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to execute command, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
 
             }
@@ -208,24 +208,28 @@ namespace AVRProjectIDE
                 {
                     box.Text += text;
                     box.SelectionStart = box.Text.Length;
+                    box.SelectionLength = 0;
                     box.ScrollToCaret();
                 }
                 else if (mode == TextBoxChangeMode.AppendNewLine)
                 {
                     box.Text += "\r\n" + text;
                     box.SelectionStart = box.Text.Length;
+                    box.SelectionLength = 0;
                     box.ScrollToCaret();
                 }
                 else if (mode == TextBoxChangeMode.Prepend)
                 {
                     box.Text = text + box.Text;
                     box.SelectionStart = 0;
+                    box.SelectionLength = 0;
                     box.ScrollToCaret();
                 }
                 else if (mode == TextBoxChangeMode.PrependNewLine)
                 {
                     box.Text = text + "\r\n" + box.Text;
                     box.SelectionStart = 0;
+                    box.SelectionLength = 0;
                     box.ScrollToCaret();
                 }
                 else if (mode == TextBoxChangeMode.Set)
@@ -245,8 +249,10 @@ namespace AVRProjectIDE
             }
             else
             {
-                if (mode == ListViewChangeMode.Add)
+                if (mode == ListViewChangeMode.AddToBottom)
                     box.Items.Add(item);
+                else if (mode == ListViewChangeMode.AddToTop)
+                    box.Items.Insert(0, item);
                 else if (mode == ListViewChangeMode.Clear)
                     box.Items.Clear();
             }
@@ -390,14 +396,14 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: library file could not be deleted at " + libFilePath + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: library file could not be deleted at " + libFilePath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
             // construct options and arguments for avr-gcc
 
             string args = "rcs lib" + workingProject.FileNameNoExt + ".a " + avr_ar_targets;
-            TextBoxModify(outputTextbox, "Execute: avr-ar " + args, TextBoxChangeMode.AppendNewLine);
+            TextBoxModify(outputTextbox, "Execute: avr-ar " + args, TextBoxChangeMode.PrependNewLine);
             ProcessStartInfo psi = new ProcessStartInfo("avr-ar", args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
             psi.UseShellExecute = false;
@@ -420,13 +426,13 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to start avr-ar", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to start avr-ar", TextBoxChangeMode.PrependNewLine);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to start avr-ar," + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to start avr-ar," + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
 
@@ -436,7 +442,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                TextBoxModify(outputTextbox, "####Error: library file not created at " + libFilePath, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: library file not created at " + libFilePath, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
         }
@@ -451,7 +457,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: could not strip comments from " + file.FileName + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: could not strip comments from " + file.FileName + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
             }
 
             fileContents = fileContents.Replace('\r', ' ').Replace('\n', ' ');
@@ -495,7 +501,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: object file could not be deleted at " + objectFileAbsPath + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: object file could not be deleted at " + objectFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
@@ -551,12 +557,12 @@ namespace AVRProjectIDE
             // c++ uses avr-g++ while c uses avr-gcc, duh
             if (file.FileExt == "cpp" || file.FileExt == "cxx")
             {
-                TextBoxModify(outputTextbox, "Execute: avr-g++ " + args, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "Execute: avr-g++ " + args, TextBoxChangeMode.PrependNewLine);
                 psi = new ProcessStartInfo("avr-g++", args);
             }
             else
             {
-                TextBoxModify(outputTextbox, "Execute: avr-gcc " + args, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "Execute: avr-gcc " + args, TextBoxChangeMode.PrependNewLine);
                 psi = new ProcessStartInfo("avr-gcc", args);
             }
 
@@ -581,13 +587,13 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc", TextBoxChangeMode.PrependNewLine);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
 
@@ -597,7 +603,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                TextBoxModify(outputTextbox, "####Error: object file not created at " + objectFileAbsPath, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: object file not created at " + objectFileAbsPath, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
         }
@@ -621,7 +627,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: ELF file could not be deleted at " + elfFileAbsPath + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: ELF file could not be deleted at " + elfFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
@@ -635,7 +641,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: MAP file could not be deleted at " + mapFileAbsPath + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: MAP file could not be deleted at " + mapFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
@@ -709,7 +715,7 @@ namespace AVRProjectIDE
                 workingProject.FileNameNoExt
             );
 
-            TextBoxModify(outputTextbox, "Execute: avr-gcc " + args, TextBoxChangeMode.AppendNewLine);
+            TextBoxModify(outputTextbox, "Execute: avr-gcc " + args, TextBoxChangeMode.PrependNewLine);
 
             // link object files together to get .elf file
 
@@ -737,13 +743,13 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc", TextBoxChangeMode.PrependNewLine);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to start avr-gcc, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
 
@@ -752,7 +758,7 @@ namespace AVRProjectIDE
                 if (File.Exists(mapFileAbsPath) == false)
                 {
                     if (suppressErrors == false)
-                        TextBoxModify(outputTextbox, "####Error: MAP file not created at " + elfFileAbsPath, TextBoxChangeMode.AppendNewLine);
+                        TextBoxModify(outputTextbox, "####Error: MAP file not created at " + elfFileAbsPath, TextBoxChangeMode.PrependNewLine);
                 }
 
                 return true;
@@ -760,7 +766,7 @@ namespace AVRProjectIDE
             else
             {
                 if (suppressErrors == false)
-                    TextBoxModify(outputTextbox, "####Error: ELF file not created at " + elfFileAbsPath, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: ELF file not created at " + elfFileAbsPath, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
         }
@@ -772,7 +778,7 @@ namespace AVRProjectIDE
             // .d files are also generated by avr-gcc, so delete those too
             string args = "-rf " + OBJECTS + " " + (OBJECTS + " ").Replace(".o ", ".d ");
 
-            TextBoxModify(outputTextbox, "Execute: rm " + args, TextBoxChangeMode.AppendNewLine);
+            TextBoxModify(outputTextbox, "Execute: rm " + args, TextBoxChangeMode.PrependNewLine);
 
             ProcessStartInfo psi = new ProcessStartInfo("rm", args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
@@ -792,12 +798,12 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to clean .o and .d files", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to clean .o and .d files", TextBoxChangeMode.PrependNewLine);
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to clean .o and .d files, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to clean .o and .d files, " + ex.Message, TextBoxChangeMode.PrependNewLine);
             }
         }
 
@@ -818,14 +824,14 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: HEX file could not be deleted at " + hexFileAbsPath + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: HEX file could not be deleted at " + hexFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
             string HEX_FLASH_FLAGS = "-R .eeprom -R .fuse -R .lock -R .signature ";
             string args = HEX_FLASH_FLAGS + "-O ihex " + workingProject.FileNameNoExt + ".elf " + workingProject.FileNameNoExt + ".hex";
 
-            TextBoxModify(outputTextbox, "Execute: avr-objcopy " + args, TextBoxChangeMode.AppendNewLine);
+            TextBoxModify(outputTextbox, "Execute: avr-objcopy " + args, TextBoxChangeMode.PrependNewLine);
 
             ProcessStartInfo psi = new ProcessStartInfo("avr-objcopy", args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
@@ -849,13 +855,13 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy", TextBoxChangeMode.PrependNewLine);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
 
@@ -865,7 +871,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                TextBoxModify(outputTextbox, "####Error: HEX file not created at " + hexFileAbsPath, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: HEX file not created at " + hexFileAbsPath, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
         }
@@ -887,7 +893,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: EEP file could not be deleted at " + eepFileAbsPath + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: EEP file could not be deleted at " + eepFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
@@ -901,7 +907,7 @@ namespace AVRProjectIDE
 
             string args = HEX_EEPROM_FLAGS + " -O ihex " + workingProject.FileNameNoExt + ".elf " + workingProject.FileNameNoExt + ".eep";
 
-            TextBoxModify(outputTextbox, "Execute: avr-objcopy " + args, TextBoxChangeMode.AppendNewLine);
+            TextBoxModify(outputTextbox, "Execute: avr-objcopy " + args, TextBoxChangeMode.PrependNewLine);
 
             ProcessStartInfo psi = new ProcessStartInfo("avr-objcopy", args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
@@ -925,13 +931,13 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy", TextBoxChangeMode.PrependNewLine);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to start avr-objcopy, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
 
@@ -941,7 +947,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                TextBoxModify(outputTextbox, "####Error: EEP file not created at " + eepFileAbsPath, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: EEP file not created at " + eepFileAbsPath, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
         }
@@ -963,13 +969,13 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: LSS file could not be deleted at " + lssFileAbsPath + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: LSS file could not be deleted at " + lssFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
             string args = "-h -S " + workingProject.FileNameNoExt + ".elf >> " + workingProject.FileNameNoExt + ".lss";
 
-            TextBoxModify(outputTextbox, "Execute: avr-objdump " + args, TextBoxChangeMode.AppendNewLine);
+            TextBoxModify(outputTextbox, "Execute: avr-objdump " + args, TextBoxChangeMode.PrependNewLine);
 
             ProcessStartInfo psi = new ProcessStartInfo("avr-objdump", args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
@@ -989,13 +995,13 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to start avr-objdump", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to start avr-objdump", TextBoxChangeMode.PrependNewLine);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to start avr-objdump, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to start avr-objdump, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
 
@@ -1005,7 +1011,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                TextBoxModify(outputTextbox, "####Error: LSS file not created at " + lssFileAbsPath, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: LSS file not created at " + lssFileAbsPath, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
         }
@@ -1016,7 +1022,7 @@ namespace AVRProjectIDE
 
             string args = "-C --mcu=" + workingProject.Device + " " + workingProject.FileNameNoExt + ".elf";
 
-            TextBoxModify(outputTextbox, "Execute: avr-size " + args, TextBoxChangeMode.AppendNewLine);
+            TextBoxModify(outputTextbox, "Execute: avr-size " + args, TextBoxChangeMode.PrependNewLine);
 
             ProcessStartInfo psi = new ProcessStartInfo("avr-size", args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
@@ -1040,12 +1046,12 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    TextBoxModify(outputTextbox, "####Error: unable to get the memory usage info", TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error: unable to get the memory usage info", TextBoxChangeMode.PrependNewLine);
                 }
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error: unable to get the memory usage info, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error: unable to get the memory usage info, " + ex.Message, TextBoxChangeMode.PrependNewLine);
             }
         }
 
@@ -1093,7 +1099,7 @@ namespace AVRProjectIDE
                         }
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
-                        ListViewModify(errorList, lvi, ListViewChangeMode.Add);
+                        ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
 
                         lastLoc = loc;
 
@@ -1143,7 +1149,7 @@ namespace AVRProjectIDE
                         }
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
-                        ListViewModify(errorList, lvi, ListViewChangeMode.Add);
+                        ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
 
                         lastLoc = loc;
 
@@ -1188,7 +1194,7 @@ namespace AVRProjectIDE
                         }
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
-                        ListViewModify(errorList, lvi, ListViewChangeMode.Add);
+                        ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
 
                         lastLoc = loc;
 
@@ -1229,7 +1235,7 @@ namespace AVRProjectIDE
                     }
                     else
                     {
-                        TextBoxModify(outputTextbox, line, TextBoxChangeMode.AppendNewLine);
+                        TextBoxModify(outputTextbox, line, TextBoxChangeMode.PrependNewLine);
                     }
 
                     line = reader.ReadLine();
@@ -1260,7 +1266,7 @@ namespace AVRProjectIDE
                     if (string.IsNullOrEmpty(msg) == false)
                     {
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
-                        ListViewModify(errorList, lvi, ListViewChangeMode.Add);
+                        ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
                     }
 
                     line = reader.ReadLine();
@@ -1293,7 +1299,7 @@ namespace AVRProjectIDE
                     if (string.IsNullOrEmpty(msg) == false)
                     {
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
-                        ListViewModify(errorList, lvi, ListViewChangeMode.Add);
+                        ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
                     }
 
                     line = reader.ReadLine();
@@ -1303,12 +1309,12 @@ namespace AVRProjectIDE
                 if (outputElse)
                 {
                     if (string.IsNullOrEmpty(line) == false)
-                        TextBoxModify(outputTextbox, line, TextBoxChangeMode.AppendNewLine);
+                        TextBoxModify(outputTextbox, line, TextBoxChangeMode.PrependNewLine);
                 }
                 else
                 {
                     ListViewItem lvi = new ListViewItem(new string[] { "", "", "", "", line });
-                    ListViewModify(errorList, lvi, ListViewChangeMode.Add);
+                    ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
                 }
 
                 line = reader.ReadLine();
@@ -1366,7 +1372,7 @@ namespace AVRProjectIDE
                         }
                         catch (Exception ex)
                         {
-                            TextBoxModify(outputTextbox, "####Error while writing " + ardFile.FileName + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                            TextBoxModify(outputTextbox, "####Error while writing " + ardFile.FileName + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                         }
                     }
 
@@ -1389,7 +1395,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error while writing " + ardFile.FileName + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error while writing " + ardFile.FileName + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
 
                 // since arduino sketches needs its core files, gather all the core files
@@ -1402,7 +1408,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error while geting list of libraries, " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error while geting list of libraries, " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
 
                 foreach (string lib in ardLibList)
@@ -1456,7 +1462,7 @@ namespace AVRProjectIDE
                     }
                     catch (Exception ex)
                     {
-                        TextBoxModify(outputTextbox, "####Error getting prototypes from " + file.FileName + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                        TextBoxModify(outputTextbox, "####Error getting prototypes from " + file.FileName + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                     }
                 }
             }
@@ -1485,7 +1491,7 @@ namespace AVRProjectIDE
                         }
                         catch (Exception ex)
                         {
-                            TextBoxModify(outputTextbox, "####Error while copying " + fnfo.Name + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                            TextBoxModify(outputTextbox, "####Error while copying " + fnfo.Name + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                         }
 
                         if (ext.EndsWith(".h") == false && ext.EndsWith(".hpp") == false)
@@ -1512,7 +1518,7 @@ namespace AVRProjectIDE
                             }
                             catch (Exception ex)
                             {
-                                TextBoxModify(outputTextbox, "####Error while copying " + nextDir.Name + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                                TextBoxModify(outputTextbox, "####Error while copying " + nextDir.Name + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                             }
                         }
                     }
@@ -1539,7 +1545,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error while reading arduino\\core\\main.cxx , embedded version used instead., " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                    TextBoxModify(outputTextbox, "####Error while reading arduino\\core\\main.cxx , embedded version used instead., " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
             return contents;
@@ -1563,7 +1569,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error while joining " + file.FileName + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error while joining " + file.FileName + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
             }
         }
 
@@ -1616,7 +1622,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error while retrieving file contents of " + file.FileName + ", " + ex.Message, TextBoxChangeMode.AppendNewLine);
+                TextBoxModify(outputTextbox, "####Error while retrieving file contents of " + file.FileName + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
             }
             return res;
         }

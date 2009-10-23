@@ -15,6 +15,7 @@ namespace AVRProjectIDE
     {
         private Dictionary<int, Dictionary<string, int>> maskList = new Dictionary<int, Dictionary<string, int>>();
         private AVRProject project;
+        private BurnerPanel burnerPanel;
 
         public AVRProject Project
         {
@@ -26,12 +27,18 @@ namespace AVRProjectIDE
             InitializeComponent();
 
             this.project = project;
+            burnerPanel = new BurnerPanel(project);
+
+            tabAVRDUDE.Controls.Add(burnerPanel);
+
             this.Text = "Fuse Calculator for " + project.Device.ToUpperInvariant();
             txtYourFusebox.Text = project.BurnFuseBox;
         }
 
         private void FuseCalculator_Load(object sender, EventArgs e)
         {
+            burnerPanel.ProjToForm();
+
             XmlDocument xDoc = new XmlDocument();
 
             try
@@ -124,6 +131,7 @@ namespace AVRProjectIDE
 
         private void FuseCalculator_FormClosed(object sender, FormClosedEventArgs e)
         {
+            burnerPanel.FormToProj();
             project.BurnFuseBox = txtYourFusebox.Text.Trim();
         }
     }

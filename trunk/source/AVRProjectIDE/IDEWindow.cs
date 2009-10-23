@@ -128,22 +128,19 @@ namespace AVRProjectIDE
 
         private void serialWin_SerialPortException(Exception ex)
         {
-            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Serial Port Error:, " + ex.Message);
+            messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Serial Port Error:, " + ex.Message);
         }
 
         private void projBuilder_DoneWork(bool success)
         {
             if (success)
             {
-                messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Build Succeeded");
+                messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Build Succeeded");
             }
             else
             {
-                messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Build Failed");
+                messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Build Failed");
             }
-
-            messageWin.MyTextBox.Select(messageWin.MyTextBox.TextLength - 1, 0);
-            messageWin.MyTextBox.ScrollToCaret();
 
             messageWin.Activate();
         }
@@ -1265,27 +1262,6 @@ namespace AVRProjectIDE
             }
         }
 
-        private void mbtnAvrdudeInteractive_Click(object sender, EventArgs e)
-        {
-            if (ProjectBuilder.CheckForWinAVR())
-            {
-                System.Diagnostics.Process p = new System.Diagnostics.Process();
-                p.StartInfo.FileName = "cmd";
-                p.StartInfo.Arguments = "/k avrdude ";
-
-                string overrides = "";
-
-                if (string.IsNullOrEmpty(project.BurnPort) == false)
-                    overrides += "-P " + project.BurnPort;
-
-                if (project.BurnBaud != 0)
-                    overrides += " -b " + project.BurnBaud.ToString("0");
-
-                p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} {3} -t", project.BurnProgrammer, project.BurnPart, overrides, project.BurnOptions);
-                p.Start();
-            }
-        }
-
         private void mbtnCompileCurrent_Click(object sender, EventArgs e)
         {
             if (project.IsReady == false)
@@ -1328,7 +1304,16 @@ namespace AVRProjectIDE
         private void mbtnFuseTool_Click(object sender, EventArgs e)
         {
             if (project.IsReady)
-                new FuseCalculator(project).ShowDialog();
+                new FuseCalculator(project).Show();
+        }
+
+        private void mbtnAVRDUDE_Click(object sender, EventArgs e)
+        {
+            if (project.IsReady)
+            {
+                AvrDudeWindow adw = new AvrDudeWindow(project);
+                adw.Show();
+            }
         }
     }
 }

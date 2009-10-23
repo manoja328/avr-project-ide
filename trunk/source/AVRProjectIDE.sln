@@ -2,11 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVRProjectIDE", "AVRProjectIDE\AVRProjectIDE.csproj", "{AB21876B-FE2C-48D4-A5F4-3EB344272950}"
-	ProjectSection(ProjectDependencies) = postProject
-		{020CC7CC-2A73-4CEB-AFFC-3E2D24E6E7BA} = {020CC7CC-2A73-4CEB-AFFC-3E2D24E6E7BA}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVRProjectIDEUpdater", "AVRProjectIDEUpdater\AVRProjectIDEUpdater.csproj", "{020CC7CC-2A73-4CEB-AFFC-3E2D24E6E7BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetInterruptVectorsFromHTML", "GetInterruptVectorsFromHTML\GetInterruptVectorsFromHTML.csproj", "{528438BB-1B4D-407B-8D60-28D601D32BBF}"
 EndProject
@@ -22,10 +17,6 @@ Global
 		{AB21876B-FE2C-48D4-A5F4-3EB344272950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB21876B-FE2C-48D4-A5F4-3EB344272950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB21876B-FE2C-48D4-A5F4-3EB344272950}.Release|Any CPU.Build.0 = Release|Any CPU
-		{020CC7CC-2A73-4CEB-AFFC-3E2D24E6E7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{020CC7CC-2A73-4CEB-AFFC-3E2D24E6E7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{020CC7CC-2A73-4CEB-AFFC-3E2D24E6E7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{020CC7CC-2A73-4CEB-AFFC-3E2D24E6E7BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{528438BB-1B4D-407B-8D60-28D601D32BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{528438BB-1B4D-407B-8D60-28D601D32BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{528438BB-1B4D-407B-8D60-28D601D32BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU

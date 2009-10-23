@@ -82,6 +82,12 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="BurnerPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BurnerPanel.Designer.cs">
+      <DependentUpon>BurnerPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="CodePreProcess.cs" />
     <Compile Include="DummyPanel.cs">
       <SubType>Form</SubType>
@@ -89,11 +95,11 @@
     <Compile Include="DummyPanel.Designer.cs">
       <DependentUpon>DummyPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="EEPROMWindow.cs">
+    <Compile Include="AvrDudeWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EEPROMWindow.Designer.cs">
-      <DependentUpon>EEPROMWindow.cs</DependentUpon>
+    <Compile Include="AvrDudeWindow.Designer.cs">
+      <DependentUpon>AvrDudeWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ErrorReportWindow.cs">
       <SubType>Form</SubType>
@@ -181,8 +187,11 @@
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EEPROMWindow.resx">
-      <DependentUpon>EEPROMWindow.cs</DependentUpon>
+    <EmbeddedResource Include="AvrDudeWindow.resx">
+      <DependentUpon>AvrDudeWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BurnerPanel.resx">
+      <DependentUpon>BurnerPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorReportWindow.resx">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>

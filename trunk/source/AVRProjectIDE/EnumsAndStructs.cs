@@ -21,7 +21,8 @@ namespace AVRProjectIDE
 
     public enum ListViewChangeMode
     {
-        Add,
+        AddToBottom,
+        AddToTop,
         Clear
     }
 

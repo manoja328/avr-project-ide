@@ -20,6 +20,7 @@ namespace AVRProjectIDE
 
         private AVRProject project;
         private bool doNotAllowClose;
+        private BurnerPanel burnerPanel;
 
         #endregion
 
@@ -38,30 +39,11 @@ namespace AVRProjectIDE
                 dropDevices.Items.Add(s);
 
             this.project = project;
+            burnerPanel = new BurnerPanel(project);
+            grpBoxBurnerPanel.Controls.Add(burnerPanel);
+            burnerPanel.Dock = DockStyle.Fill;
 
             project.HasBeenConfigged = true;
-
-            projBurner = new ProjectBurner(project);
-
-            dropProg.Items.Clear();
-            dropProg.Items.AddRange(ProjectBurner.GetAvailProgrammers(true));
-
-            dropPart.Items.Clear();
-            if (dropProg.Items.Count > 0)
-                dropPart.Items.AddRange(ProjectBurner.GetAvailParts((string)dropProg.Items[0], true));
-
-            dropPort.Items.Clear();
-            dropPort.Items.Add("No Override");
-            dropPort.Items.Add("LPT1");
-            dropPort.Items.Add("LPT2");
-            dropPort.Items.Add("LPT3");
-            string[] portList = SerialPort.GetPortNames();
-            foreach (string port in portList)
-            {
-                dropPort.Items.Add(port);
-            }
-            dropPort.SelectedIndex = 0;
-            dropBaud.SelectedIndex = 0;
 
             txtFavoriteDir.Text = SettingsManagement.FavFolder;
             txtArduinoCore.Text = SettingsManagement.ArduinoCorePath;
@@ -141,6 +123,8 @@ namespace AVRProjectIDE
 
         private void FormToProj()
         {
+            burnerPanel.FormToProj();
+
             project.OutputDir = txtOutputPath.Text;
 
             string newDev = (string)dropDevices.Items[dropDevices.SelectedIndex];
@@ -162,33 +146,6 @@ namespace AVRProjectIDE
 
             project.UseInitStack = chkUseInitStack.Checked;
             project.InitStackAddr = Convert.ToUInt32("0x" + txtInitStackAddr.Text, 16);
-
-            project.BurnOptions = txtBurnOpt.Text;
-            project.BurnFuseBox = txtBurnFuseBox.Text;
-            project.BurnPart = (string)dropPart.Items[dropPart.SelectedIndex];
-            project.BurnProgrammer = (string)dropProg.Items[dropProg.SelectedIndex];
-            project.BurnAutoReset = chkAutoReset.Checked;
-
-            int baud = 0;
-            string selectedText = (string)dropBaud.Items[dropBaud.SelectedIndex];
-            if (int.TryParse(selectedText, out baud))
-            {
-                project.BurnBaud = int.Parse(selectedText);
-            }
-            else
-            {
-                project.BurnBaud = 0;
-            }
-
-            selectedText = (string)dropPort.Items[dropPort.SelectedIndex];
-            if (selectedText == "No Override")
-            {
-                project.BurnPort = "";
-            }
-            else
-            {
-                project.BurnPort = selectedText;
-            }
 
             project.IncludeDirList.Clear();
             foreach (DataGridViewRow i in dgvIncPaths.Rows)
@@ -234,6 +191,8 @@ namespace AVRProjectIDE
 
         private void PopulateForm()
         {
+            burnerPanel.ProjToForm();
+
             txtOutputPath.Text = project.OutputDir;
 
             if (dropDevices.Items.Count > 0)
@@ -247,69 +206,12 @@ namespace AVRProjectIDE
             else
                 dropDevices.SelectedIndex = dropDevices.Items.Add(project.Device);
 
-            if (dropPart.Items.Count > 0)
-            {
-                dropPart.SelectedIndex = 0;
-                if (dropPart.Items.Contains(project.BurnPart))
-                    dropPart.SelectedIndex = dropPart.Items.IndexOf(project.BurnPart);
-                else
-                    dropPart.SelectedIndex = dropPart.Items.Add(project.BurnPart);
-            }
-            else
-                dropPart.SelectedIndex = dropPart.Items.Add(project.BurnPart);
-
-            if (dropProg.Items.Count > 0)
-            {
-                dropProg.SelectedIndex = 0;
-                if (dropProg.Items.Contains(project.BurnProgrammer))
-                    dropProg.SelectedIndex = dropProg.Items.IndexOf(project.BurnProgrammer);
-                else
-                    dropProg.SelectedIndex = dropProg.Items.Add(project.BurnProgrammer);
-            }
-            else
-                dropProg.SelectedIndex = dropProg.Items.Add(project.BurnProgrammer);
-
-            if (dropProg.Items.Count > 0)
-            {
-                dropPort.SelectedIndex = 0;
-                if (dropPort.Items.Contains(project.BurnPort))
-                {
-                    dropPort.SelectedIndex = dropPort.Items.IndexOf(project.BurnPort);
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(project.BurnPort) == false)
-                    {
-                        int i = dropPort.Items.Add(project.BurnPort);
-                        dropPort.SelectedIndex = i;
-                    }
-                }
-            }
-
-            dropBaud.SelectedIndex = 0;
-            if (dropBaud.Items.Contains(project.BurnBaud.ToString("0")))
-            {
-                dropBaud.SelectedIndex = dropBaud.Items.IndexOf(project.BurnBaud.ToString("0"));
-            }
-            else
-            {
-                if (project.BurnBaud != 0)
-                {
-                    int i = dropBaud.Items.Add(project.BurnBaud.ToString("0"));
-                    dropBaud.SelectedIndex = i;
-                }
-            }
-
             txtOtherOptions.Text = project.OtherOptions;
             txtLinkerOptions.Text = project.LinkerOptions;
             txtInitStackAddr.Text = Convert.ToString(project.InitStackAddr, 16).ToUpper();
             numClockFreq.Value = project.ClockFreq;
             chkUseInitStack.Checked = project.UseInitStack;
             listOptimization.SelectedIndex = listOptimization.Items.IndexOf(project.Optimization);
-
-            txtBurnOpt.Text = project.BurnOptions;
-            txtBurnFuseBox.Text = project.BurnFuseBox;
-            chkAutoReset.Checked = project.BurnAutoReset;
 
             chklistOptions.SetItemChecked(2, project.PackStructs);
             chklistOptions.SetItemChecked(3, project.ShortEnums);
@@ -666,18 +568,6 @@ namespace AVRProjectIDE
 
         #endregion
 
-        #region Burning
-
-        private ProjectBurner projBurner;
-
-        private void btnBurnOnlyOpt_Click(object sender, EventArgs e)
-        {
-            FormToProj();
-            projBurner.BurnCMD(true, false, this);
-        }
-
-        #endregion
-
         #region Last Tab On The Right
 
         private void btnGotoAppdata_Click(object sender, EventArgs e)
@@ -742,11 +632,5 @@ namespace AVRProjectIDE
         }
 
         #endregion
-
-        private void btnBurnFuseBox_Click(object sender, EventArgs e)
-        {
-            FormToProj();
-            projBurner.BurnCMD(false, true, this);
-        }
     }
 }

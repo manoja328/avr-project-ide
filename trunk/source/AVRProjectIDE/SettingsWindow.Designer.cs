@@ -50,16 +50,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.numTabWidth = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkShowWS = new System.Windows.Forms.CheckBox();
             this.chkBackspaceUnindents = new System.Windows.Forms.CheckBox();
             this.chkTabIndents = new System.Windows.Forms.CheckBox();
             this.chkUseTabs = new System.Windows.Forms.CheckBox();
             this.chkWordWrap = new System.Windows.Forms.CheckBox();
-            this.chkTrimSpaceOnSave = new System.Windows.Forms.CheckBox();
             this.chkShowLineNum = new System.Windows.Forms.CheckBox();
             this.chkIndentGuide = new System.Windows.Forms.CheckBox();
+            this.chkTrimSpaceOnSave = new System.Windows.Forms.CheckBox();
             this.btnOpenInstallationFolder = new System.Windows.Forms.Button();
             this.chkCheckUpdates = new System.Windows.Forms.CheckBox();
-            this.chkShowWS = new System.Windows.Forms.CheckBox();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -259,7 +259,7 @@
             this.dropSmartIndent.Location = new System.Drawing.Point(416, 71);
             this.dropSmartIndent.Name = "dropSmartIndent";
             this.dropSmartIndent.Size = new System.Drawing.Size(108, 21);
-            this.dropSmartIndent.TabIndex = 15;
+            this.dropSmartIndent.TabIndex = 17;
             // 
             // label3
             // 
@@ -285,7 +285,7 @@
             0});
             this.numIndentWidth.Name = "numIndentWidth";
             this.numIndentWidth.Size = new System.Drawing.Size(57, 20);
-            this.numIndentWidth.TabIndex = 14;
+            this.numIndentWidth.TabIndex = 16;
             this.numIndentWidth.Value = new decimal(new int[] {
             1,
             0,
@@ -321,7 +321,7 @@
             0});
             this.numBackupInterval.Name = "numBackupInterval";
             this.numBackupInterval.Size = new System.Drawing.Size(57, 20);
-            this.numBackupInterval.TabIndex = 16;
+            this.numBackupInterval.TabIndex = 18;
             this.numBackupInterval.Value = new decimal(new int[] {
             30,
             0,
@@ -352,7 +352,7 @@
             0});
             this.numTabWidth.Name = "numTabWidth";
             this.numTabWidth.Size = new System.Drawing.Size(57, 20);
-            this.numTabWidth.TabIndex = 13;
+            this.numTabWidth.TabIndex = 15;
             this.numTabWidth.Value = new decimal(new int[] {
             1,
             0,
@@ -368,13 +368,23 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Tab Width:";
             // 
+            // chkShowWS
+            // 
+            this.chkShowWS.AutoSize = true;
+            this.chkShowWS.Location = new System.Drawing.Point(188, 88);
+            this.chkShowWS.Name = "chkShowWS";
+            this.chkShowWS.Size = new System.Drawing.Size(113, 17);
+            this.chkShowWS.TabIndex = 14;
+            this.chkShowWS.Text = "Show Whitespace";
+            this.chkShowWS.UseVisualStyleBackColor = true;
+            // 
             // chkBackspaceUnindents
             // 
             this.chkBackspaceUnindents.AutoSize = true;
             this.chkBackspaceUnindents.Location = new System.Drawing.Point(188, 65);
             this.chkBackspaceUnindents.Name = "chkBackspaceUnindents";
             this.chkBackspaceUnindents.Size = new System.Drawing.Size(131, 17);
-            this.chkBackspaceUnindents.TabIndex = 12;
+            this.chkBackspaceUnindents.TabIndex = 13;
             this.chkBackspaceUnindents.Text = "Backspace Unindents";
             this.chkBackspaceUnindents.UseVisualStyleBackColor = true;
             // 
@@ -384,7 +394,7 @@
             this.chkTabIndents.Location = new System.Drawing.Point(188, 42);
             this.chkTabIndents.Name = "chkTabIndents";
             this.chkTabIndents.Size = new System.Drawing.Size(83, 17);
-            this.chkTabIndents.TabIndex = 11;
+            this.chkTabIndents.TabIndex = 12;
             this.chkTabIndents.Text = "Tab Indents";
             this.chkTabIndents.UseVisualStyleBackColor = true;
             // 
@@ -394,7 +404,7 @@
             this.chkUseTabs.Location = new System.Drawing.Point(188, 19);
             this.chkUseTabs.Name = "chkUseTabs";
             this.chkUseTabs.Size = new System.Drawing.Size(72, 17);
-            this.chkUseTabs.TabIndex = 10;
+            this.chkUseTabs.TabIndex = 11;
             this.chkUseTabs.Text = "Use Tabs";
             this.chkUseTabs.UseVisualStyleBackColor = true;
             // 
@@ -410,17 +420,6 @@
             this.chkWordWrap.Text = "Enable Word Wrapping";
             this.chkWordWrap.UseVisualStyleBackColor = true;
             // 
-            // chkTrimSpaceOnSave
-            // 
-            this.chkTrimSpaceOnSave.AutoSize = true;
-            this.chkTrimSpaceOnSave.Location = new System.Drawing.Point(461, 318);
-            this.chkTrimSpaceOnSave.Name = "chkTrimSpaceOnSave";
-            this.chkTrimSpaceOnSave.Size = new System.Drawing.Size(149, 17);
-            this.chkTrimSpaceOnSave.TabIndex = 9;
-            this.chkTrimSpaceOnSave.Text = "Trim Whitespace on Save";
-            this.chkTrimSpaceOnSave.UseVisualStyleBackColor = true;
-            this.chkTrimSpaceOnSave.Visible = false;
-            // 
             // chkShowLineNum
             // 
             this.chkShowLineNum.AutoSize = true;
@@ -429,7 +428,7 @@
             this.chkShowLineNum.Location = new System.Drawing.Point(6, 88);
             this.chkShowLineNum.Name = "chkShowLineNum";
             this.chkShowLineNum.Size = new System.Drawing.Size(121, 17);
-            this.chkShowLineNum.TabIndex = 9;
+            this.chkShowLineNum.TabIndex = 10;
             this.chkShowLineNum.Text = "Show Line Numbers";
             this.chkShowLineNum.UseVisualStyleBackColor = true;
             // 
@@ -444,6 +443,17 @@
             this.chkIndentGuide.TabIndex = 9;
             this.chkIndentGuide.Text = "Show Indentation Guide Lines";
             this.chkIndentGuide.UseVisualStyleBackColor = true;
+            // 
+            // chkTrimSpaceOnSave
+            // 
+            this.chkTrimSpaceOnSave.AutoSize = true;
+            this.chkTrimSpaceOnSave.Location = new System.Drawing.Point(461, 318);
+            this.chkTrimSpaceOnSave.Name = "chkTrimSpaceOnSave";
+            this.chkTrimSpaceOnSave.Size = new System.Drawing.Size(149, 17);
+            this.chkTrimSpaceOnSave.TabIndex = 9;
+            this.chkTrimSpaceOnSave.Text = "Trim Whitespace on Save";
+            this.chkTrimSpaceOnSave.UseVisualStyleBackColor = true;
+            this.chkTrimSpaceOnSave.Visible = false;
             // 
             // btnOpenInstallationFolder
             // 
@@ -466,16 +476,6 @@
             this.chkCheckUpdates.TabIndex = 19;
             this.chkCheckUpdates.Text = "Check for Updates";
             this.chkCheckUpdates.UseVisualStyleBackColor = true;
-            // 
-            // chkShowWS
-            // 
-            this.chkShowWS.AutoSize = true;
-            this.chkShowWS.Location = new System.Drawing.Point(188, 88);
-            this.chkShowWS.Name = "chkShowWS";
-            this.chkShowWS.Size = new System.Drawing.Size(113, 17);
-            this.chkShowWS.TabIndex = 12;
-            this.chkShowWS.Text = "Show Whitespace";
-            this.chkShowWS.UseVisualStyleBackColor = true;
             // 
             // SettingsWindow
             // 

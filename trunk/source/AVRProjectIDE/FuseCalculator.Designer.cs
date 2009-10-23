@@ -33,6 +33,8 @@
             this.txtSuggestedFusebox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtYourFusebox = new System.Windows.Forms.TextBox();
+            this.tabAVRDUDE = new System.Windows.Forms.TabPage();
+            this.tabControl1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -42,6 +44,7 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabAVRDUDE);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -91,6 +94,16 @@
             this.txtYourFusebox.Size = new System.Drawing.Size(953, 20);
             this.txtYourFusebox.TabIndex = 0;
             // 
+            // tabAVRDUDE
+            // 
+            this.tabAVRDUDE.Location = new System.Drawing.Point(4, 22);
+            this.tabAVRDUDE.Name = "tabAVRDUDE";
+            this.tabAVRDUDE.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAVRDUDE.Size = new System.Drawing.Size(957, 411);
+            this.tabAVRDUDE.TabIndex = 0;
+            this.tabAVRDUDE.Text = "AVRDUDE Control";
+            this.tabAVRDUDE.UseVisualStyleBackColor = true;
+            // 
             // FuseCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -105,6 +118,7 @@
             this.Text = "Fuse Calculator";
             this.Load += new System.EventHandler(this.FuseCalculator_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FuseCalculator_FormClosed);
+            this.tabControl1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -120,6 +134,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtYourFusebox;
         public System.Windows.Forms.TextBox txtSuggestedFusebox;
+        private System.Windows.Forms.TabPage tabAVRDUDE;
 
     }
 }
