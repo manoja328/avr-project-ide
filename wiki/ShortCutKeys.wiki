@@ -1,0 +1,53 @@
+#summary A list of shortcut keys in AVR Project IDE
+
+===Copy===
+
+ * Ctrl-C
+
+===Cut===
+
+ * Ctrl-X
+
+===Paste===
+
+ * Ctrl-V
+
+===Undo===
+
+ * Ctrl-Z
+
+===Redo===
+
+ * Ctrl-Y
+
+===Find===
+
+ * Ctrl-F
+
+===Replace===
+
+ * Ctrl-H
+
+===Find Next===
+
+ * F3
+
+===Select All===
+
+ * Ctrl-A
+
+===Goto Line Number===
+
+ * Ctrl-G
+
+===Save All Files===
+
+ * Ctrl-S
+
+===Build Project===
+
+ * F7
+
+===Burn Project to Chip===
+
+ * F8
