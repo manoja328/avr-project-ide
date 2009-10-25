@@ -48,7 +48,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.grpboxBurnerPanel.Location = new System.Drawing.Point(12, 12);
             this.grpboxBurnerPanel.Name = "grpboxBurnerPanel";
-            this.grpboxBurnerPanel.Size = new System.Drawing.Size(697, 123);
+            this.grpboxBurnerPanel.Size = new System.Drawing.Size(631, 216);
             this.grpboxBurnerPanel.TabIndex = 0;
             this.grpboxBurnerPanel.TabStop = false;
             this.grpboxBurnerPanel.Text = "Options and Settings";
@@ -63,9 +63,9 @@
             this.groupBox1.Controls.Add(this.btnWrite);
             this.groupBox1.Controls.Add(this.dropDetectionType);
             this.groupBox1.Controls.Add(this.dropMemoryType);
-            this.groupBox1.Location = new System.Drawing.Point(12, 141);
+            this.groupBox1.Location = new System.Drawing.Point(12, 234);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(549, 79);
+            this.groupBox1.Size = new System.Drawing.Size(483, 79);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operations";
@@ -73,7 +73,7 @@
             // btnVerify
             // 
             this.btnVerify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnVerify.Location = new System.Drawing.Point(480, 19);
+            this.btnVerify.Location = new System.Drawing.Point(414, 19);
             this.btnVerify.Name = "btnVerify";
             this.btnVerify.Size = new System.Drawing.Size(63, 48);
             this.btnVerify.TabIndex = 5;
@@ -84,7 +84,7 @@
             // btnRead
             // 
             this.btnRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRead.Location = new System.Drawing.Point(413, 19);
+            this.btnRead.Location = new System.Drawing.Point(347, 19);
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(61, 48);
             this.btnRead.TabIndex = 4;
@@ -95,7 +95,7 @@
             // btnWriteNoVerify
             // 
             this.btnWriteNoVerify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWriteNoVerify.Location = new System.Drawing.Point(282, 46);
+            this.btnWriteNoVerify.Location = new System.Drawing.Point(216, 46);
             this.btnWriteNoVerify.Name = "btnWriteNoVerify";
             this.btnWriteNoVerify.Size = new System.Drawing.Size(125, 21);
             this.btnWriteNoVerify.TabIndex = 3;
@@ -106,7 +106,7 @@
             // btnWrite
             // 
             this.btnWrite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWrite.Location = new System.Drawing.Point(282, 19);
+            this.btnWrite.Location = new System.Drawing.Point(216, 19);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(125, 21);
             this.btnWrite.TabIndex = 2;
@@ -127,7 +127,7 @@
             "Raw Binary Format"});
             this.dropDetectionType.Location = new System.Drawing.Point(6, 46);
             this.dropDetectionType.Name = "dropDetectionType";
-            this.dropDetectionType.Size = new System.Drawing.Size(270, 21);
+            this.dropDetectionType.Size = new System.Drawing.Size(204, 21);
             this.dropDetectionType.TabIndex = 1;
             // 
             // dropMemoryType
@@ -141,13 +141,13 @@
             "EEPROM Memory"});
             this.dropMemoryType.Location = new System.Drawing.Point(6, 19);
             this.dropMemoryType.Name = "dropMemoryType";
-            this.dropMemoryType.Size = new System.Drawing.Size(270, 21);
+            this.dropMemoryType.Size = new System.Drawing.Size(204, 21);
             this.dropMemoryType.TabIndex = 0;
             // 
             // btnFuseTool
             // 
             this.btnFuseTool.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFuseTool.Location = new System.Drawing.Point(567, 160);
+            this.btnFuseTool.Location = new System.Drawing.Point(501, 253);
             this.btnFuseTool.Name = "btnFuseTool";
             this.btnFuseTool.Size = new System.Drawing.Size(60, 48);
             this.btnFuseTool.TabIndex = 2;
@@ -158,7 +158,7 @@
             // btnInteractive
             // 
             this.btnInteractive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInteractive.Location = new System.Drawing.Point(633, 160);
+            this.btnInteractive.Location = new System.Drawing.Point(567, 253);
             this.btnInteractive.Name = "btnInteractive";
             this.btnInteractive.Size = new System.Drawing.Size(76, 48);
             this.btnInteractive.TabIndex = 3;
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 232);
+            this.ClientSize = new System.Drawing.Size(655, 325);
             this.Controls.Add(this.btnInteractive);
             this.Controls.Add(this.btnFuseTool);
             this.Controls.Add(this.groupBox1);

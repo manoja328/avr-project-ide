@@ -29,7 +29,15 @@ namespace AVRProjectIDE
         private BackgroundWorker worker;
         private BackgroundWorker makefileWorker;
 
+        private int hasError = 0;
+
         #endregion
+
+        public int HasError
+        {
+            get { return hasError; }
+            set { hasError = value; }
+        }
 
         #region Event Handler and Delegate
 
@@ -59,6 +67,7 @@ namespace AVRProjectIDE
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            ListViewModify(errorList, new ListViewItem(new string[] { "", "", "", ((bool)e.Result) ? "OK" : "Failed","# of Errors: " + hasError.ToString("0"), }), ListViewChangeMode.AddToTop);
             DoneWork((bool)e.Result);
         }
 
@@ -267,6 +276,8 @@ namespace AVRProjectIDE
             // don't do anything if a build is still in progress
             if (worker.IsBusy || makefileWorker.IsBusy)
                 return;
+
+            hasError = 0;
 
             PrepProject();
 
@@ -1098,6 +1109,9 @@ namespace AVRProjectIDE
                             lastLoc = "";
                         }
 
+                        if (type.ToLowerInvariant().Contains("error"))
+                            hasError++;
+
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
 
@@ -1148,6 +1162,9 @@ namespace AVRProjectIDE
                             lastLoc = "";
                         }
 
+                        if (type.ToLowerInvariant().Contains("error"))
+                            hasError++;
+
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
 
@@ -1192,6 +1209,9 @@ namespace AVRProjectIDE
                             loc = "";
                             lastLoc = "";
                         }
+
+                        if (type.ToLowerInvariant().Contains("error"))
+                            hasError++;
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
@@ -1265,6 +1285,9 @@ namespace AVRProjectIDE
 
                     if (string.IsNullOrEmpty(msg) == false)
                     {
+                        if (type.ToLowerInvariant().Contains("error"))
+                            hasError++;
+
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
                     }
@@ -1298,6 +1321,9 @@ namespace AVRProjectIDE
 
                     if (string.IsNullOrEmpty(msg) == false)
                     {
+                        if (type.ToLowerInvariant().Contains("error"))
+                            hasError++;
+
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
                     }

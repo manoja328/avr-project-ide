@@ -9,17 +9,26 @@ namespace AVRProjectIDE
 {
     public static class Program
     {
+        private static SplashScreen splash;
+        public static SplashScreen SplashScreen
+        {
+            get { return splash; }
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         public static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            splash = new SplashScreen();
+            splash.Show();
+
             try
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-
                 SettingsManagement.Load();
                 FileTemplate.Unpack();
                 ProjTemplate.Load();

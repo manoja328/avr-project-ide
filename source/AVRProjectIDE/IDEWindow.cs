@@ -87,8 +87,12 @@ namespace AVRProjectIDE
             timerBackup.Interval = SettingsManagement.BackupInterval * 1000;
             timerBackup.Enabled = true;
 
-            if (System.Net.Dns.GetHostName().ToUpperInvariant().Contains("FRANK"))
-                progressBar1.Visible = true;
+            try
+            {
+                if (System.Net.Dns.GetHostName().ToUpperInvariant().Contains("FRANK"))
+                    progressBar1.Visible = true;
+            }
+            catch { }
         }
 
         private IDockContent GetPanelFromPersistString(string persistString)
@@ -136,12 +140,19 @@ namespace AVRProjectIDE
             if (success)
             {
                 messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Build Succeeded");
+                messageWin.SwitchToMessageBox();
             }
             else
             {
-                messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Build Failed");
+                messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Build Failed with " + projBuilder.HasError.ToString("0") + " errors");
+
+                if (projBuilder.HasError > 0)
+                    messageWin.SwitchToListView();
+                else
+                    messageWin.SwitchToMessageBox();
             }
 
+            messageWin.BringToFront();
             messageWin.Activate();
         }
 
@@ -1176,6 +1187,9 @@ namespace AVRProjectIDE
         {
             SettingsManagement.LoadWindowState(this);
 
+            Program.SplashScreen.BringToFront();
+            Program.SplashScreen.Activate();
+
             bool useSavedDockSettings = false;
             // if workspace setting exists, load it
             if (File.Exists(SettingsManagement.AppDataPath + "workspace.xml"))
@@ -1206,6 +1220,8 @@ namespace AVRProjectIDE
                 serialWin.Show(dockPanel1, DockState.DockBottom);
                 hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
             }
+
+            Program.SplashScreen.Close();
 
             searchWin.Activate();
 
@@ -1284,14 +1300,27 @@ namespace AVRProjectIDE
             {
                 if (file.FileExt == "c" || file.FileExt == "cpp")
                 {
+                    projBuilder.HasError = 0;
+
                     if (projBuilder.Compile(file))
                     {
-                        messageWin.MyTextBox.Text += "\r\n" + "Compilation Successful";
+                        messageWin.MyTextBox.Text = "Compilation of " + file.FileName + " Successful" + "\r\n" + messageWin.MyTextBox.Text;
+                        messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Successful");
                     }
                     else
                     {
-                        messageWin.MyTextBox.Text += "\r\n" + "Compilation Failed";
+                        messageWin.MyTextBox.Text = "Compilation of " + file.FileName + " Failed" + "\r\n" + messageWin.MyTextBox.Text;
+                        messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Failed");
+
+                        if (projBuilder.HasError > 0)
+                            messageWin.SwitchToListView();
+                        else
+                            messageWin.SwitchToMessageBox();
                     }
+
+                    messageWin.MyTextBox.SelectionStart = 0;
+                    messageWin.MyTextBox.SelectionLength = 0;
+                    messageWin.MyTextBox.ScrollToCaret();
 
                     messageWin.BringToFront();
                     messageWin.Activate();
@@ -1314,6 +1343,19 @@ namespace AVRProjectIDE
                 AvrDudeWindow adw = new AvrDudeWindow(project);
                 adw.Show();
             }
+        }
+
+        private void mbtnGoto_Click(object sender, EventArgs e)
+        {
+            if (project.IsReady == false)
+                return;
+
+            if (lastEditor == null)
+                return;
+
+            GotoDialog gd = new GotoDialog(lastEditor.Scint.Lines.Current.Number + 1, lastEditor.Scint.Lines.Count);
+            if (gd.ShowDialog() == DialogResult.OK)
+                GotoEditor(lastEditor.FileName, gd.SelectedLineNum);
         }
     }
 }

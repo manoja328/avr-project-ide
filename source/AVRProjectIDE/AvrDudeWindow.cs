@@ -182,6 +182,8 @@ namespace AVRProjectIDE
 
             FuseCalculator fc = new FuseCalculator(project);
             fc.ShowDialog();
+
+            burnerPanel.ProjToForm();
         }
 
         private void btnInteractive_Click(object sender, EventArgs e)
