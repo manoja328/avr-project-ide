@@ -51,3 +51,7 @@
 ===Burn Project to Chip===
 
  * F8
+
+===Zoom In/Out===
+
+ * Ctrl-Mouse Middle Wheel Up/Down
