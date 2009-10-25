@@ -86,6 +86,7 @@
             this.mbtnCompile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnCompileCurrent = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnBurn = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnAVRDUDE = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnFuseTool = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportMakefile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportAPS = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,7 +142,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
-            this.mbtnAVRDUDE = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnGoto = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -237,6 +238,7 @@
             this.mbtnFindReplace,
             this.mbtnFindNext,
             this.mbtnSearchAll,
+            this.mbtnGoto,
             this.toolStripSeparator15,
             this.mbtnBlockEdit,
             this.mbtnClearBookmarks});
@@ -437,6 +439,13 @@
             this.mbtnBurn.Size = new System.Drawing.Size(190, 22);
             this.mbtnBurn.Text = "&Program Chip";
             this.mbtnBurn.Click += new System.EventHandler(this.mbtnBurn_Click);
+            // 
+            // mbtnAVRDUDE
+            // 
+            this.mbtnAVRDUDE.Name = "mbtnAVRDUDE";
+            this.mbtnAVRDUDE.Size = new System.Drawing.Size(190, 22);
+            this.mbtnAVRDUDE.Text = "AVRDUDE Tool";
+            this.mbtnAVRDUDE.Click += new System.EventHandler(this.mbtnAVRDUDE_Click);
             // 
             // mbtnFuseTool
             // 
@@ -946,12 +955,13 @@
             // 
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
             // 
-            // mbtnAVRDUDE
+            // mbtnGoto
             // 
-            this.mbtnAVRDUDE.Name = "mbtnAVRDUDE";
-            this.mbtnAVRDUDE.Size = new System.Drawing.Size(190, 22);
-            this.mbtnAVRDUDE.Text = "AVRDUDE Tool";
-            this.mbtnAVRDUDE.Click += new System.EventHandler(this.mbtnAVRDUDE_Click);
+            this.mbtnGoto.Name = "mbtnGoto";
+            this.mbtnGoto.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.mbtnGoto.Size = new System.Drawing.Size(204, 22);
+            this.mbtnGoto.Text = "Goto Line";
+            this.mbtnGoto.Click += new System.EventHandler(this.mbtnGoto_Click);
             // 
             // IDEWindow
             // 
@@ -1070,6 +1080,7 @@
         private System.Windows.Forms.ToolStripMenuItem mbtnCompileCurrent;
         private System.Windows.Forms.ToolStripMenuItem mbtnFuseTool;
         private System.Windows.Forms.ToolStripMenuItem mbtnAVRDUDE;
+        private System.Windows.Forms.ToolStripMenuItem mbtnGoto;
 
 
     }

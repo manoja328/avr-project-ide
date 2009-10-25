@@ -13,6 +13,8 @@ namespace AVRProjectIDE
 {
     public partial class FuseCalculator : Form
     {
+        private static bool isOpen = false;
+
         private Dictionary<int, Dictionary<string, int>> maskList = new Dictionary<int, Dictionary<string, int>>();
         private AVRProject project;
         private BurnerPanel burnerPanel;
@@ -37,6 +39,14 @@ namespace AVRProjectIDE
 
         private void FuseCalculator_Load(object sender, EventArgs e)
         {
+            if (isOpen)
+            {
+                this.Close();
+                return;
+            }
+
+            isOpen = true;
+
             burnerPanel.ProjToForm();
 
             XmlDocument xDoc = new XmlDocument();
@@ -80,12 +90,14 @@ namespace AVRProjectIDE
             {
                 MessageBox.Show("Could not find matching XML file for your device");
                 this.Close();
+                return;
             }
             catch (Exception ex)
             {
                 ErrorReportWindow erw = new ErrorReportWindow(ex, "Fuse Calculator Error");
                 erw.Show();
                 this.Close();
+                return;
             }
 
             XmlElement docEle = xDoc.DocumentElement;
@@ -133,6 +145,8 @@ namespace AVRProjectIDE
         {
             burnerPanel.FormToProj();
             project.BurnFuseBox = txtYourFusebox.Text.Trim();
+
+            isOpen = false;
         }
     }
 }

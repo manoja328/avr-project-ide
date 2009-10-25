@@ -91,7 +91,11 @@ namespace AVRProjectIDE
                 location = location.Substring(start, end - start);
             }
 
-            ListViewItem lvi = new ListViewItem(new string[] { fileName, line.ToString(), location, type, message, });
+            string lineStr = "";
+            if (line >= 0)
+                line.ToString("0");
+
+            ListViewItem lvi = new ListViewItem(new string[] { fileName, lineStr, location, type, message, });
             listErrorsWarnings.Items.Insert(0, lvi);
         }
 
@@ -109,6 +113,32 @@ namespace AVRProjectIDE
                     GotoError(fileName, line);
                 }
                 catch { }
+            }
+        }
+
+        private delegate void NothingDelegate();
+
+        public void SwitchToListView()
+        {
+            if (tabControl1.InvokeRequired)
+            {
+                tabControl1.Invoke(new NothingDelegate(SwitchToListView));
+            }
+            else
+            {
+                tabControl1.SelectedIndex = 1;
+            }
+        }
+
+        public void SwitchToMessageBox()
+        {
+            if (tabControl1.InvokeRequired)
+            {
+                tabControl1.Invoke(new NothingDelegate(SwitchToMessageBox));
+            }
+            else
+            {
+                tabControl1.SelectedIndex = 0;
             }
         }
     }
