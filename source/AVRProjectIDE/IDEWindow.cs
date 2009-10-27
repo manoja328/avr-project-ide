@@ -43,6 +43,7 @@ namespace AVRProjectIDE
             this.project = project;
 
             InitializeComponent();
+            DisableButtons();
 
             // create panel windows, attach events, etc etc
 
@@ -62,6 +63,8 @@ namespace AVRProjectIDE
 
             if (project.IsReady)
             {
+                EnableButtons();
+
                 projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
                 projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBurner = new ProjectBurner(project);
@@ -673,6 +676,8 @@ namespace AVRProjectIDE
 
             if (newProj.IsReady) // IsReady == false means that the user closed the welcome window without opening a project
             {
+                EnableButtons();
+
                 // close all editors
                 List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
                 foreach (EditorPanel i in toClose)
@@ -779,6 +784,8 @@ namespace AVRProjectIDE
             }
             else if (newProj.IsReady)
             {
+                EnableButtons();
+
                 // close all editors
                 List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
                 foreach (EditorPanel i in toClose)
@@ -1170,7 +1177,7 @@ namespace AVRProjectIDE
 
         private void mbtnHelpTopics_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://code.google.com/p/avr-project-ide/wiki/Help");
+            System.Diagnostics.Process.Start(Properties.Resources.HelpURL);
         }
 
         private void progressBar1_Click(object sender, EventArgs e)
@@ -1233,6 +1240,8 @@ namespace AVRProjectIDE
 
             if (project.IsReady)
             {
+                EnableButtons();
+
                 ReloadLastOpened();
 
                 KeywordScanner.LaunchScan(project, editorList);
@@ -1356,6 +1365,51 @@ namespace AVRProjectIDE
             GotoDialog gd = new GotoDialog(lastEditor.Scint.Lines.Current.Number + 1, lastEditor.Scint.Lines.Count);
             if (gd.ShowDialog() == DialogResult.OK)
                 GotoEditor(lastEditor.FileName, gd.SelectedLineNum);
+        }
+
+        private void DisableButtons()
+        {
+            editToolStripMenuItem.Enabled = false;
+
+            mbtnSaveAllFiles.Enabled = false;
+            mbtnSaveConfigAs.Enabled = false;
+            mbtnSaveFileAs.Enabled = false;
+            mbtnSaveCurFile.Enabled = false;
+
+            foreach (ToolStripMenuItem i in toolsToolStripMenuItem.DropDown.Items)
+            {
+                i.Enabled = false;
+            }
+
+            mbtnEditorSettings.Enabled = true;
+
+            foreach (ToolStripItem i in toolStripMain.Items)
+            {
+                i.Enabled = false;
+            }
+
+            tbtnNewOrig.Enabled = true;
+            tbtnOpenOrig.Enabled = true;
+        }
+
+        private void EnableButtons()
+        {
+            editToolStripMenuItem.Enabled = true;
+
+            mbtnSaveAllFiles.Enabled = true;
+            mbtnSaveConfigAs.Enabled = true;
+            mbtnSaveFileAs.Enabled = true;
+            mbtnSaveCurFile.Enabled = true;
+
+            foreach (ToolStripMenuItem i in toolsToolStripMenuItem.DropDown.Items)
+            {
+                i.Enabled = true;
+            }
+
+            foreach (ToolStripItem i in toolStripMain.Items)
+            {
+                i.Enabled = true;
+            }
         }
     }
 }
