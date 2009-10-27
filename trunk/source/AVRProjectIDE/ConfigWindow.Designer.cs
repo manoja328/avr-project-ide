@@ -110,6 +110,8 @@
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.dropTemplates = new System.Windows.Forms.ComboBox();
             this.btnGotoAppdata = new System.Windows.Forms.Button();
+            this.btnDiscardAndClose = new System.Windows.Forms.Button();
+            this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.tabsMain.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numClockFreq)).BeginInit();
@@ -135,16 +137,18 @@
             // 
             // tabsMain
             // 
+            this.tabsMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabsMain.Controls.Add(this.tabGeneral);
             this.tabsMain.Controls.Add(this.tabInclude);
             this.tabsMain.Controls.Add(this.tabLibrary);
             this.tabsMain.Controls.Add(this.tabMemory);
             this.tabsMain.Controls.Add(this.Output);
-            this.tabsMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabsMain.Location = new System.Drawing.Point(0, 0);
             this.tabsMain.Name = "tabsMain";
             this.tabsMain.SelectedIndex = 0;
-            this.tabsMain.Size = new System.Drawing.Size(712, 353);
+            this.tabsMain.Size = new System.Drawing.Size(712, 364);
             this.tabsMain.TabIndex = 0;
             // 
             // tabGeneral
@@ -165,7 +169,7 @@
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(704, 327);
+            this.tabGeneral.Size = new System.Drawing.Size(704, 338);
             this.tabGeneral.TabIndex = 1;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -173,7 +177,7 @@
             // grpBoxBurnerPanel
             // 
             this.grpBoxBurnerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.grpBoxBurnerPanel.Location = new System.Drawing.Point(8, 158);
+            this.grpBoxBurnerPanel.Location = new System.Drawing.Point(8, 169);
             this.grpBoxBurnerPanel.Name = "grpBoxBurnerPanel";
             this.grpBoxBurnerPanel.Size = new System.Drawing.Size(487, 161);
             this.grpBoxBurnerPanel.TabIndex = 6;
@@ -440,7 +444,7 @@
             this.tabInclude.Location = new System.Drawing.Point(4, 22);
             this.tabInclude.Name = "tabInclude";
             this.tabInclude.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInclude.Size = new System.Drawing.Size(704, 327);
+            this.tabInclude.Size = new System.Drawing.Size(704, 338);
             this.tabInclude.TabIndex = 2;
             this.tabInclude.Text = "Include Dir";
             this.tabInclude.UseVisualStyleBackColor = true;
@@ -453,7 +457,7 @@
             this.tabsIncludeDir.Location = new System.Drawing.Point(3, 3);
             this.tabsIncludeDir.Name = "tabsIncludeDir";
             this.tabsIncludeDir.SelectedIndex = 0;
-            this.tabsIncludeDir.Size = new System.Drawing.Size(698, 321);
+            this.tabsIncludeDir.Size = new System.Drawing.Size(698, 332);
             this.tabsIncludeDir.TabIndex = 0;
             // 
             // tabIncludeDirDir
@@ -465,7 +469,7 @@
             this.tabIncludeDirDir.Location = new System.Drawing.Point(4, 22);
             this.tabIncludeDirDir.Name = "tabIncludeDirDir";
             this.tabIncludeDirDir.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncludeDirDir.Size = new System.Drawing.Size(690, 295);
+            this.tabIncludeDirDir.Size = new System.Drawing.Size(690, 306);
             this.tabIncludeDirDir.TabIndex = 0;
             this.tabIncludeDirDir.Text = "Include Paths";
             this.tabIncludeDirDir.UseVisualStyleBackColor = true;
@@ -473,7 +477,7 @@
             // btnIncPathMoveDown
             // 
             this.btnIncPathMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnIncPathMoveDown.Location = new System.Drawing.Point(168, 266);
+            this.btnIncPathMoveDown.Location = new System.Drawing.Point(168, 277);
             this.btnIncPathMoveDown.Name = "btnIncPathMoveDown";
             this.btnIncPathMoveDown.Size = new System.Drawing.Size(75, 23);
             this.btnIncPathMoveDown.TabIndex = 19;
@@ -484,7 +488,7 @@
             // btnIncPathMoveUp
             // 
             this.btnIncPathMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnIncPathMoveUp.Location = new System.Drawing.Point(87, 266);
+            this.btnIncPathMoveUp.Location = new System.Drawing.Point(87, 277);
             this.btnIncPathMoveUp.Name = "btnIncPathMoveUp";
             this.btnIncPathMoveUp.Size = new System.Drawing.Size(75, 23);
             this.btnIncPathMoveUp.TabIndex = 18;
@@ -495,7 +499,7 @@
             // btnIncDirAdd
             // 
             this.btnIncDirAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnIncDirAdd.Location = new System.Drawing.Point(6, 266);
+            this.btnIncDirAdd.Location = new System.Drawing.Point(6, 277);
             this.btnIncDirAdd.Name = "btnIncDirAdd";
             this.btnIncDirAdd.Size = new System.Drawing.Size(75, 23);
             this.btnIncDirAdd.TabIndex = 17;
@@ -538,7 +542,7 @@
             dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvIncPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
-            this.dgvIncPaths.Size = new System.Drawing.Size(684, 257);
+            this.dgvIncPaths.Size = new System.Drawing.Size(684, 268);
             this.dgvIncPaths.TabIndex = 4;
             // 
             // dgvIncPathTxtPath
@@ -651,7 +655,7 @@
             this.tabLibrary.Location = new System.Drawing.Point(4, 22);
             this.tabLibrary.Name = "tabLibrary";
             this.tabLibrary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLibrary.Size = new System.Drawing.Size(704, 327);
+            this.tabLibrary.Size = new System.Drawing.Size(704, 338);
             this.tabLibrary.TabIndex = 3;
             this.tabLibrary.Text = "Libraries";
             this.tabLibrary.UseVisualStyleBackColor = true;
@@ -661,7 +665,7 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.txtLinkerOptions);
-            this.groupBox7.Location = new System.Drawing.Point(6, 271);
+            this.groupBox7.Location = new System.Drawing.Point(6, 282);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(692, 50);
             this.groupBox7.TabIndex = 6;
@@ -707,7 +711,7 @@
             this.groupBox4.Controls.Add(this.listLinkObj);
             this.groupBox4.Location = new System.Drawing.Point(263, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(435, 259);
+            this.groupBox4.Size = new System.Drawing.Size(435, 270);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Included";
@@ -718,7 +722,7 @@
             this.listLinkObj.FormattingEnabled = true;
             this.listLinkObj.Location = new System.Drawing.Point(3, 16);
             this.listLinkObj.Name = "listLinkObj";
-            this.listLinkObj.Size = new System.Drawing.Size(429, 238);
+            this.listLinkObj.Size = new System.Drawing.Size(429, 251);
             this.listLinkObj.TabIndex = 4;
             // 
             // btnAddLibFile
@@ -758,7 +762,7 @@
             this.groupBox3.Controls.Add(this.listAvailLibs);
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(170, 259);
+            this.groupBox3.Size = new System.Drawing.Size(170, 270);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Available Link Objects";
@@ -777,7 +781,7 @@
             "libscanf_min.a"});
             this.listAvailLibs.Location = new System.Drawing.Point(3, 16);
             this.listAvailLibs.Name = "listAvailLibs";
-            this.listAvailLibs.Size = new System.Drawing.Size(164, 238);
+            this.listAvailLibs.Size = new System.Drawing.Size(164, 251);
             this.listAvailLibs.TabIndex = 0;
             // 
             // tabMemory
@@ -787,7 +791,7 @@
             this.tabMemory.Location = new System.Drawing.Point(4, 22);
             this.tabMemory.Name = "tabMemory";
             this.tabMemory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMemory.Size = new System.Drawing.Size(704, 327);
+            this.tabMemory.Size = new System.Drawing.Size(704, 338);
             this.tabMemory.TabIndex = 4;
             this.tabMemory.Text = "Memory";
             this.tabMemory.UseVisualStyleBackColor = true;
@@ -800,7 +804,7 @@
             this.groupBox6.Controls.Add(this.dgvMemory);
             this.groupBox6.Location = new System.Drawing.Point(3, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(693, 259);
+            this.groupBox6.Size = new System.Drawing.Size(693, 270);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Memory Segments";
@@ -839,7 +843,7 @@
             dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvMemory.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
-            this.dgvMemory.Size = new System.Drawing.Size(687, 240);
+            this.dgvMemory.Size = new System.Drawing.Size(687, 251);
             this.dgvMemory.TabIndex = 2;
             this.dgvMemory.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvMemory_RowValidating);
             // 
@@ -870,7 +874,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.txtInitStackAddr);
             this.groupBox5.Controls.Add(this.chkUseInitStack);
-            this.groupBox5.Location = new System.Drawing.Point(6, 271);
+            this.groupBox5.Location = new System.Drawing.Point(6, 282);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(690, 50);
             this.groupBox5.TabIndex = 0;
@@ -907,7 +911,7 @@
             this.Output.Location = new System.Drawing.Point(4, 22);
             this.Output.Name = "Output";
             this.Output.Padding = new System.Windows.Forms.Padding(3);
-            this.Output.Size = new System.Drawing.Size(704, 327);
+            this.Output.Size = new System.Drawing.Size(704, 338);
             this.Output.TabIndex = 5;
             this.Output.Text = "Project Templates";
             this.Output.UseVisualStyleBackColor = true;
@@ -1071,11 +1075,35 @@
             this.btnGotoAppdata.Visible = false;
             this.btnGotoAppdata.Click += new System.EventHandler(this.btnGotoAppdata_Click);
             // 
+            // btnDiscardAndClose
+            // 
+            this.btnDiscardAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDiscardAndClose.Location = new System.Drawing.Point(595, 370);
+            this.btnDiscardAndClose.Name = "btnDiscardAndClose";
+            this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
+            this.btnDiscardAndClose.TabIndex = 2;
+            this.btnDiscardAndClose.Text = "Discard Changes";
+            this.btnDiscardAndClose.UseVisualStyleBackColor = true;
+            this.btnDiscardAndClose.Click += new System.EventHandler(this.btnDiscardAndClose_Click);
+            // 
+            // btnSaveAndClose
+            // 
+            this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveAndClose.Location = new System.Drawing.Point(484, 370);
+            this.btnSaveAndClose.Name = "btnSaveAndClose";
+            this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
+            this.btnSaveAndClose.TabIndex = 1;
+            this.btnSaveAndClose.Text = "Save Changes";
+            this.btnSaveAndClose.UseVisualStyleBackColor = true;
+            this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
+            // 
             // ConfigWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(712, 353);
+            this.ClientSize = new System.Drawing.Size(712, 405);
+            this.Controls.Add(this.btnSaveAndClose);
+            this.Controls.Add(this.btnDiscardAndClose);
             this.Controls.Add(this.tabsMain);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1180,6 +1208,8 @@
         private System.Windows.Forms.Button btnFindArduinoLibs;
         private System.Windows.Forms.TextBox txtArduinoCore;
         private System.Windows.Forms.Button btnFindArduinoCore;
+        private System.Windows.Forms.Button btnDiscardAndClose;
+        private System.Windows.Forms.Button btnSaveAndClose;
     }
 }
 

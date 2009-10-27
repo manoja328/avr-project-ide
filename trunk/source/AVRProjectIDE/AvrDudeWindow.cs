@@ -12,6 +12,7 @@ namespace AVRProjectIDE
     public partial class AvrDudeWindow : Form
     {
         private AVRProject project;
+        private AVRProject originalProject;
         private BurnerPanel burnerPanel;
 
         private Process avrdude = new Process();
@@ -20,9 +21,10 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
-            this.project = project;
+            this.originalProject = project;
+            this.project = (AVRProject)project.Clone();
 
-            burnerPanel = new BurnerPanel(project);
+            burnerPanel = new BurnerPanel(this.project);
             grpboxBurnerPanel.Controls.Add(burnerPanel);
             burnerPanel.Dock = DockStyle.Fill;
 
@@ -207,6 +209,18 @@ namespace AVRProjectIDE
                 p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} {3} -t", project.BurnProgrammer, project.BurnPart, overrides, project.BurnOptions);
                 p.Start();
             }
+        }
+
+        private void btnSaveAndClose_Click(object sender, EventArgs e)
+        {
+            burnerPanel.FormToProj();
+            this.originalProject = this.project.CopyProperties(this.originalProject);
+            this.Close();
+        }
+
+        private void btnDiscardAndClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -1496,85 +1496,94 @@ namespace AVRProjectIDE
         public object Clone()
         {
             AVRProject newObject = new AVRProject();
-            newObject.FilePath = this.FilePath;
-            newObject.BurnOptions = this.BurnOptions;
-            newObject.BurnPart = this.BurnPart;
-            newObject.BurnProgrammer = this.BurnProgrammer;
-            newObject.BurnBaud = this.BurnBaud;
-            newObject.BurnPort = this.BurnPort;
-            newObject.BurnFuseBox = this.BurnFuseBox;
-            newObject.BurnAutoReset = this.BurnAutoReset;
-            newObject.ClockFreq = this.ClockFreq;
-            newObject.Device = this.Device;
-            newObject.dirPath = this.DirPath;
-            newObject.FilePath = this.FilePath;
-            newObject.InitStackAddr = this.InitStackAddr;
-            newObject.LinkerOptions = this.LinkerOptions;
-            newObject.Optimization = this.Optimization;
-            newObject.OtherOptions = this.OtherOptions;
-            newObject.OutputDir = this.OutputDir;
-            newObject.PackStructs = this.PackStructs;
-            newObject.ShortEnums = this.ShortEnums;
-            newObject.UnsignedBitfields = this.UnsignedBitfields;
-            newObject.UnsignedChars = this.UnsignedChars;
-            newObject.FunctionSections = this.FunctionSections;
-            newObject.DataSections= this.DataSections;
-            newObject.UseInitStack = this.UseInitStack;
-            newObject.LastFile = this.LastFile;
 
-            newObject.HasBeenConfigged = this.HasBeenConfigged;
+            newObject = CopyProperties(newObject);
 
-            newObject.fileList = new Dictionary<string, ProjectFile>();
-            newObject.fileList.Clear();
+            return newObject;
+        }
+
+        public AVRProject CopyProperties(AVRProject project)
+        {
+            project.IsReady = this.IsReady;
+            project.FilePath = this.FilePath;
+            project.BurnOptions = this.BurnOptions;
+            project.BurnPart = this.BurnPart;
+            project.BurnProgrammer = this.BurnProgrammer;
+            project.BurnBaud = this.BurnBaud;
+            project.BurnPort = this.BurnPort;
+            project.BurnFuseBox = this.BurnFuseBox;
+            project.BurnAutoReset = this.BurnAutoReset;
+            project.ClockFreq = this.ClockFreq;
+            project.Device = this.Device;
+            project.dirPath = this.DirPath;
+            project.FilePath = this.FilePath;
+            project.InitStackAddr = this.InitStackAddr;
+            project.LinkerOptions = this.LinkerOptions;
+            project.Optimization = this.Optimization;
+            project.OtherOptions = this.OtherOptions;
+            project.OutputDir = this.OutputDir;
+            project.PackStructs = this.PackStructs;
+            project.ShortEnums = this.ShortEnums;
+            project.UnsignedBitfields = this.UnsignedBitfields;
+            project.UnsignedChars = this.UnsignedChars;
+            project.FunctionSections = this.FunctionSections;
+            project.DataSections = this.DataSections;
+            project.UseInitStack = this.UseInitStack;
+            project.LastFile = this.LastFile;
+
+            project.HasBeenConfigged = this.HasBeenConfigged;
+
+            project.fileList = new Dictionary<string, ProjectFile>();
+            project.fileList.Clear();
             foreach (KeyValuePair<string, ProjectFile> file in this.FileList)
             {
                 ProjectFile newFile = (ProjectFile)file.Value.Clone();
-                newObject.fileList.Add(file.Key, newFile);
+                project.fileList.Add(file.Key, newFile);
             }
 
-            newObject.includeDirList = new List<string>();
-            newObject.includeDirList.Clear();
+            project.includeDirList = new List<string>();
+            project.includeDirList.Clear();
             foreach (string dir in this.IncludeDirList)
             {
-                newObject.includeDirList.Add((string)dir.Clone());
+                project.includeDirList.Add((string)dir.Clone());
             }
 
-            newObject.libraryDirList = new List<string>();
-            newObject.libraryDirList.Clear();
+            project.libraryDirList = new List<string>();
+            project.libraryDirList.Clear();
             foreach (string dir in this.LibraryDirList)
             {
-                newObject.libraryDirList.Add((string)dir.Clone());
+                project.libraryDirList.Add((string)dir.Clone());
             }
 
-            newObject.linkLibList = new List<string>();
-            newObject.linkLibList.Clear();
+            project.linkLibList = new List<string>();
+            project.linkLibList.Clear();
             foreach (string obj in this.LinkLibList)
             {
-                newObject.linkLibList.Add((string)obj.Clone());
+                project.linkLibList.Add((string)obj.Clone());
             }
 
-            newObject.linkObjList = new List<string>();
-            newObject.linkObjList.Clear();
+            project.linkObjList = new List<string>();
+            project.linkObjList.Clear();
             foreach (string obj in this.LinkObjList)
             {
-                newObject.linkObjList.Add((string)obj.Clone());
+                project.linkObjList.Add((string)obj.Clone());
             }
 
-            newObject.memorySegList = new List<MemorySegment>();
-            newObject.memorySegList.Clear();
+            project.memorySegList = new List<MemorySegment>();
+            project.memorySegList.Clear();
             foreach (MemorySegment obj in this.MemorySegList)
             {
-                newObject.memorySegList.Add(new MemorySegment(obj.Type, obj.Name, obj.Addr));
+                project.memorySegList.Add(new MemorySegment(obj.Type, obj.Name, obj.Addr));
             }
 
-            newObject.APSXmlElementList = new List<XmlElement>();
-            newObject.APSXmlElementList.Clear();
+            project.APSXmlElementList = new List<XmlElement>();
+            project.APSXmlElementList.Clear();
             foreach (XmlElement obj in this.APSXmlElementList)
             {
-                newObject.APSXmlElementList.Add((XmlElement)obj.Clone());
+                project.APSXmlElementList.Add((XmlElement)obj.Clone());
             }
 
-            return newObject;
+            return project;
         }
 
         #endregion
