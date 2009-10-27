@@ -19,7 +19,9 @@ namespace AVRProjectIDE
         #region Fields and Properties
 
         private AVRProject project;
-        private bool doNotAllowClose;
+        private AVRProject originalProject;
+        private bool doNotAllowClose = false;
+        private bool closingViaButtons = false;
         private BurnerPanel burnerPanel;
 
         #endregion
@@ -38,12 +40,15 @@ namespace AVRProjectIDE
             foreach (string s in orderedDevices)
                 dropDevices.Items.Add(s);
 
-            this.project = project;
-            burnerPanel = new BurnerPanel(project);
+            this.originalProject = project;
+            this.project = (AVRProject)project.Clone();
+
+            burnerPanel = new BurnerPanel(this.project);
             grpBoxBurnerPanel.Controls.Add(burnerPanel);
             burnerPanel.Dock = DockStyle.Fill;
 
-            project.HasBeenConfigged = true;
+            this.originalProject.HasBeenConfigged = true;
+            this.project.HasBeenConfigged = true;
 
             txtFavoriteDir.Text = SettingsManagement.FavFolder;
             txtArduinoCore.Text = SettingsManagement.ArduinoCorePath;
@@ -60,8 +65,6 @@ namespace AVRProjectIDE
             }
             dropTemplates.SelectedIndex = 0;
 
-            doNotAllowClose = false;
-
             PopulateForm();
         }
 
@@ -71,53 +74,14 @@ namespace AVRProjectIDE
         {
             FormToProj();
             e.Cancel = doNotAllowClose;
-        }
 
-        private SaveResult SaveProj()
-        {
-            if (string.IsNullOrEmpty(project.FilePath))
+            if (closingViaButtons == false && doNotAllowClose == false)
             {
-                return SaveProjAs();
+
             }
             else
             {
-                if (project.Save(project.FilePath))
-                {
-                    return SaveResult.Successful;
-                }
-                else
-                {
-                    MessageBox.Show("Save Failed");
-                    return SaveResult.Failed;
-                }
-            }
-        }
-
-        private SaveResult SaveProjAs()
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.OverwritePrompt = true;
-            sfd.Filter = "AVR Project (*.avrproj)|*.avrproj"; 
-            if (string.IsNullOrEmpty(project.FilePath) == false)
-                sfd.InitialDirectory = project.FilePath.Substring(0, project.FilePath.LastIndexOf('\\'));
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                FormToProj();
-                project.FilePath = sfd.FileName;
-
-                if (project.Save(sfd.FileName))
-                {
-                    return SaveResult.Successful;
-                }
-                else
-                {
-                    MessageBox.Show("Save Failed");
-                    return SaveResult.Failed;
-                }
-            }
-            else
-            {
-                return SaveResult.Cancelled;
+                closingViaButtons = false;
             }
         }
 
@@ -262,6 +226,12 @@ namespace AVRProjectIDE
                 dgvr.CreateCells(dgvMemory, memStr);
                 int i = dgvMemory.Rows.Add(dgvr);
             }
+        }
+
+        private void ApplyChanges()
+        {
+            FormToProj();
+            this.originalProject = this.project.CopyProperties(this.originalProject);
         }
 
         #endregion
@@ -632,5 +602,18 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        private void btnSaveAndClose_Click(object sender, EventArgs e)
+        {
+            ApplyChanges();
+            closingViaButtons = true;
+            this.Close();
+        }
+
+        private void btnDiscardAndClose_Click(object sender, EventArgs e)
+        {
+            closingViaButtons = true;
+            this.Close();
+        }
     }
 }

@@ -57,9 +57,10 @@
             this.chkWordWrap = new System.Windows.Forms.CheckBox();
             this.chkShowLineNum = new System.Windows.Forms.CheckBox();
             this.chkIndentGuide = new System.Windows.Forms.CheckBox();
-            this.chkTrimSpaceOnSave = new System.Windows.Forms.CheckBox();
             this.btnOpenInstallationFolder = new System.Windows.Forms.Button();
             this.chkCheckUpdates = new System.Windows.Forms.CheckBox();
+            this.btnSaveAndClose = new System.Windows.Forms.Button();
+            this.btnDiscardAndClose = new System.Windows.Forms.Button();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -80,7 +81,7 @@
             this.groupBox9.Controls.Add(this.btnFindArduinoCore);
             this.groupBox9.Location = new System.Drawing.Point(12, 64);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(627, 74);
+            this.groupBox9.Size = new System.Drawing.Size(644, 74);
             this.groupBox9.TabIndex = 4;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Arduino Related Folders";
@@ -114,13 +115,13 @@
             this.txtArduinoLibs.Location = new System.Drawing.Point(77, 45);
             this.txtArduinoLibs.Name = "txtArduinoLibs";
             this.txtArduinoLibs.ReadOnly = true;
-            this.txtArduinoLibs.Size = new System.Drawing.Size(463, 20);
+            this.txtArduinoLibs.Size = new System.Drawing.Size(480, 20);
             this.txtArduinoLibs.TabIndex = 22;
             // 
             // btnFindArduinoLibs
             // 
             this.btnFindArduinoLibs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindArduinoLibs.Location = new System.Drawing.Point(546, 43);
+            this.btnFindArduinoLibs.Location = new System.Drawing.Point(563, 43);
             this.btnFindArduinoLibs.Name = "btnFindArduinoLibs";
             this.btnFindArduinoLibs.Size = new System.Drawing.Size(75, 23);
             this.btnFindArduinoLibs.TabIndex = 6;
@@ -135,13 +136,13 @@
             this.txtArduinoCore.Location = new System.Drawing.Point(77, 19);
             this.txtArduinoCore.Name = "txtArduinoCore";
             this.txtArduinoCore.ReadOnly = true;
-            this.txtArduinoCore.Size = new System.Drawing.Size(463, 20);
+            this.txtArduinoCore.Size = new System.Drawing.Size(480, 20);
             this.txtArduinoCore.TabIndex = 21;
             // 
             // btnFindArduinoCore
             // 
             this.btnFindArduinoCore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindArduinoCore.Location = new System.Drawing.Point(546, 17);
+            this.btnFindArduinoCore.Location = new System.Drawing.Point(563, 17);
             this.btnFindArduinoCore.Name = "btnFindArduinoCore";
             this.btnFindArduinoCore.Size = new System.Drawing.Size(75, 23);
             this.btnFindArduinoCore.TabIndex = 4;
@@ -158,7 +159,7 @@
             this.groupBox8.Controls.Add(this.btnFavoriteBrowse);
             this.groupBox8.Location = new System.Drawing.Point(12, 12);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(627, 46);
+            this.groupBox8.Size = new System.Drawing.Size(644, 46);
             this.groupBox8.TabIndex = 3;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Favorite Project Folder";
@@ -181,13 +182,13 @@
             this.txtFavoriteDir.Location = new System.Drawing.Point(77, 19);
             this.txtFavoriteDir.Name = "txtFavoriteDir";
             this.txtFavoriteDir.ReadOnly = true;
-            this.txtFavoriteDir.Size = new System.Drawing.Size(463, 20);
+            this.txtFavoriteDir.Size = new System.Drawing.Size(480, 20);
             this.txtFavoriteDir.TabIndex = 20;
             // 
             // btnFavoriteBrowse
             // 
             this.btnFavoriteBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFavoriteBrowse.Location = new System.Drawing.Point(546, 17);
+            this.btnFavoriteBrowse.Location = new System.Drawing.Point(563, 17);
             this.btnFavoriteBrowse.Name = "btnFavoriteBrowse";
             this.btnFavoriteBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnFavoriteBrowse.TabIndex = 2;
@@ -198,7 +199,7 @@
             // btnOpenAppData
             // 
             this.btnOpenAppData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenAppData.Location = new System.Drawing.Point(12, 312);
+            this.btnOpenAppData.Location = new System.Drawing.Point(12, 332);
             this.btnOpenAppData.Name = "btnOpenAppData";
             this.btnOpenAppData.Size = new System.Drawing.Size(130, 23);
             this.btnOpenAppData.TabIndex = 17;
@@ -217,7 +218,6 @@
             this.chkAutocomplete.TabIndex = 7;
             this.chkAutocomplete.Text = "Enable Autocomplete";
             this.chkAutocomplete.UseVisualStyleBackColor = true;
-            this.chkAutocomplete.CheckedChanged += new System.EventHandler(this.chkAutocomplete_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -242,7 +242,7 @@
             this.groupBox1.Controls.Add(this.chkAutocomplete);
             this.groupBox1.Location = new System.Drawing.Point(12, 144);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(627, 162);
+            this.groupBox1.Size = new System.Drawing.Size(644, 182);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editor Settings (may require restarting the editor to make changes take effect)";
@@ -444,21 +444,10 @@
             this.chkIndentGuide.Text = "Show Indentation Guide Lines";
             this.chkIndentGuide.UseVisualStyleBackColor = true;
             // 
-            // chkTrimSpaceOnSave
-            // 
-            this.chkTrimSpaceOnSave.AutoSize = true;
-            this.chkTrimSpaceOnSave.Location = new System.Drawing.Point(461, 318);
-            this.chkTrimSpaceOnSave.Name = "chkTrimSpaceOnSave";
-            this.chkTrimSpaceOnSave.Size = new System.Drawing.Size(149, 17);
-            this.chkTrimSpaceOnSave.TabIndex = 9;
-            this.chkTrimSpaceOnSave.Text = "Trim Whitespace on Save";
-            this.chkTrimSpaceOnSave.UseVisualStyleBackColor = true;
-            this.chkTrimSpaceOnSave.Visible = false;
-            // 
             // btnOpenInstallationFolder
             // 
             this.btnOpenInstallationFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 312);
+            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 332);
             this.btnOpenInstallationFolder.Name = "btnOpenInstallationFolder";
             this.btnOpenInstallationFolder.Size = new System.Drawing.Size(132, 23);
             this.btnOpenInstallationFolder.TabIndex = 18;
@@ -470,25 +459,48 @@
             // 
             this.chkCheckUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkCheckUpdates.AutoSize = true;
-            this.chkCheckUpdates.Location = new System.Drawing.Point(340, 316);
+            this.chkCheckUpdates.Location = new System.Drawing.Point(294, 336);
             this.chkCheckUpdates.Name = "chkCheckUpdates";
             this.chkCheckUpdates.Size = new System.Drawing.Size(115, 17);
             this.chkCheckUpdates.TabIndex = 19;
             this.chkCheckUpdates.Text = "Check for Updates";
             this.chkCheckUpdates.UseVisualStyleBackColor = true;
             // 
+            // btnSaveAndClose
+            // 
+            this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveAndClose.Location = new System.Drawing.Point(438, 332);
+            this.btnSaveAndClose.Name = "btnSaveAndClose";
+            this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
+            this.btnSaveAndClose.TabIndex = 20;
+            this.btnSaveAndClose.Text = "Save Changes";
+            this.btnSaveAndClose.UseVisualStyleBackColor = true;
+            this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
+            // 
+            // btnDiscardAndClose
+            // 
+            this.btnDiscardAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDiscardAndClose.Location = new System.Drawing.Point(549, 332);
+            this.btnDiscardAndClose.Name = "btnDiscardAndClose";
+            this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
+            this.btnDiscardAndClose.TabIndex = 21;
+            this.btnDiscardAndClose.Text = "Discard Changes";
+            this.btnDiscardAndClose.UseVisualStyleBackColor = true;
+            this.btnDiscardAndClose.Click += new System.EventHandler(this.btnDiscardAndClose_Click);
+            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 347);
+            this.ClientSize = new System.Drawing.Size(666, 367);
+            this.Controls.Add(this.btnSaveAndClose);
+            this.Controls.Add(this.btnDiscardAndClose);
             this.Controls.Add(this.chkCheckUpdates);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnOpenInstallationFolder);
             this.Controls.Add(this.btnOpenAppData);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
-            this.Controls.Add(this.chkTrimSpaceOnSave);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsWindow";
@@ -541,7 +553,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkCheckUpdates;
         private System.Windows.Forms.CheckBox chkShowLineNum;
-        private System.Windows.Forms.CheckBox chkTrimSpaceOnSave;
         private System.Windows.Forms.CheckBox chkShowWS;
+        private System.Windows.Forms.Button btnSaveAndClose;
+        private System.Windows.Forms.Button btnDiscardAndClose;
     }
 }

@@ -219,11 +219,6 @@ namespace AVRProjectIDE
             System.Diagnostics.Process.Start(SettingsManagement.AppInstallPath);
         }
 
-        private void chkAutocomplete_CheckedChanged(object sender, EventArgs e)
-        {
-            SettingsManagement.AutocompleteEnable = chkAutocomplete.Checked;
-        }
-
         private void lnkFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(txtFavoriteDir.Text);
@@ -241,6 +236,12 @@ namespace AVRProjectIDE
 
         private void SettingsWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
+        }
+
+        private void btnSaveAndClose_Click(object sender, EventArgs e)
+        {
+            SettingsManagement.AutocompleteEnable = chkAutocomplete.Checked;
             SettingsManagement.SettingsFile.Write("Editor", "AutocompleteEnable", chkAutocomplete.Checked.ToString().ToLowerInvariant().Trim());
             SettingsManagement.SettingsFile.Write("Editor", "IndentWidth", numIndentWidth.Value.ToString("0"));
             SettingsManagement.SettingsFile.Write("Editor", "IndentTabWidth", numTabWidth.Value.ToString("0"));
@@ -252,10 +253,16 @@ namespace AVRProjectIDE
             SettingsManagement.SettingsFile.Write("Editor", "LineWrap", chkWordWrap.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "ShowLineNumbers", chkShowLineNum.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "ShowWhiteSpace", chkShowWS.Checked.ToString().Trim().ToLowerInvariant());
-            SettingsManagement.SettingsFile.Write("Editor", "TrimOnSave", chkTrimSpaceOnSave.Checked.ToString().Trim().ToLowerInvariant());
+            //SettingsManagement.SettingsFile.Write("Editor", "TrimOnSave", chkTrimSpaceOnSave.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "BackupInterval", numBackupInterval.Value.ToString("0"));
             SettingsManagement.CheckForUpdates = chkCheckUpdates.Checked;
             SettingsManagement.LoadScintSettings();
+            this.Close();
+        }
+
+        private void btnDiscardAndClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

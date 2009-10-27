@@ -38,6 +38,8 @@
             this.dropMemoryType = new System.Windows.Forms.ComboBox();
             this.btnFuseTool = new System.Windows.Forms.Button();
             this.btnInteractive = new System.Windows.Forms.Button();
+            this.btnSaveAndClose = new System.Windows.Forms.Button();
+            this.btnDiscardAndClose = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.grpboxBurnerPanel.Location = new System.Drawing.Point(12, 12);
             this.grpboxBurnerPanel.Name = "grpboxBurnerPanel";
-            this.grpboxBurnerPanel.Size = new System.Drawing.Size(631, 216);
+            this.grpboxBurnerPanel.Size = new System.Drawing.Size(631, 249);
             this.grpboxBurnerPanel.TabIndex = 0;
             this.grpboxBurnerPanel.TabStop = false;
             this.grpboxBurnerPanel.Text = "Options and Settings";
@@ -63,7 +65,7 @@
             this.groupBox1.Controls.Add(this.btnWrite);
             this.groupBox1.Controls.Add(this.dropDetectionType);
             this.groupBox1.Controls.Add(this.dropMemoryType);
-            this.groupBox1.Location = new System.Drawing.Point(12, 234);
+            this.groupBox1.Location = new System.Drawing.Point(12, 267);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(483, 79);
             this.groupBox1.TabIndex = 1;
@@ -147,7 +149,7 @@
             // btnFuseTool
             // 
             this.btnFuseTool.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFuseTool.Location = new System.Drawing.Point(501, 253);
+            this.btnFuseTool.Location = new System.Drawing.Point(501, 286);
             this.btnFuseTool.Name = "btnFuseTool";
             this.btnFuseTool.Size = new System.Drawing.Size(60, 48);
             this.btnFuseTool.TabIndex = 2;
@@ -158,7 +160,7 @@
             // btnInteractive
             // 
             this.btnInteractive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInteractive.Location = new System.Drawing.Point(567, 253);
+            this.btnInteractive.Location = new System.Drawing.Point(567, 286);
             this.btnInteractive.Name = "btnInteractive";
             this.btnInteractive.Size = new System.Drawing.Size(76, 48);
             this.btnInteractive.TabIndex = 3;
@@ -166,11 +168,35 @@
             this.btnInteractive.UseVisualStyleBackColor = true;
             this.btnInteractive.Click += new System.EventHandler(this.btnInteractive_Click);
             // 
+            // btnSaveAndClose
+            // 
+            this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveAndClose.Location = new System.Drawing.Point(427, 352);
+            this.btnSaveAndClose.Name = "btnSaveAndClose";
+            this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
+            this.btnSaveAndClose.TabIndex = 2;
+            this.btnSaveAndClose.Text = "Save Changes";
+            this.btnSaveAndClose.UseVisualStyleBackColor = true;
+            this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
+            // 
+            // btnDiscardAndClose
+            // 
+            this.btnDiscardAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDiscardAndClose.Location = new System.Drawing.Point(538, 352);
+            this.btnDiscardAndClose.Name = "btnDiscardAndClose";
+            this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
+            this.btnDiscardAndClose.TabIndex = 3;
+            this.btnDiscardAndClose.Text = "Discard Changes";
+            this.btnDiscardAndClose.UseVisualStyleBackColor = true;
+            this.btnDiscardAndClose.Click += new System.EventHandler(this.btnDiscardAndClose_Click);
+            // 
             // AvrDudeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 325);
+            this.ClientSize = new System.Drawing.Size(655, 387);
+            this.Controls.Add(this.btnSaveAndClose);
+            this.Controls.Add(this.btnDiscardAndClose);
             this.Controls.Add(this.btnInteractive);
             this.Controls.Add(this.btnFuseTool);
             this.Controls.Add(this.groupBox1);
@@ -198,6 +224,8 @@
         private System.Windows.Forms.Button btnFuseTool;
         private System.Windows.Forms.Button btnWriteNoVerify;
         private System.Windows.Forms.Button btnInteractive;
+        private System.Windows.Forms.Button btnSaveAndClose;
+        private System.Windows.Forms.Button btnDiscardAndClose;
 
 
     }

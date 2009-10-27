@@ -67,7 +67,7 @@ namespace AVRProjectIDE
 
         private string TempFuseFilePath
         {
-            get { return SettingsManagement.AppDataPath + Path.DirectorySeparatorChar + "tempfuse.txt"; }
+            get { return SettingsManagement.AppDataPath + "tempfuse.txt"; }
         }
 
         #endregion
@@ -523,6 +523,8 @@ namespace AVRProjectIDE
         {
             if (ProjectBuilder.CheckForWinAVR())
             {
+                owner.BurnerPanel.FormToProj();
+
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 p.StartInfo.FileName = "avrdude";
                 p.StartInfo.Arguments = "";
@@ -621,6 +623,8 @@ namespace AVRProjectIDE
         {
             if (ProjectBuilder.CheckForWinAVR())
             {
+                owner.BurnerPanel.FormToProj();
+
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 p.StartInfo.FileName = "cmd";
                 p.StartInfo.Arguments = "/k avrdude ";

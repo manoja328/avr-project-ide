@@ -17,7 +17,13 @@ namespace AVRProjectIDE
 
         private Dictionary<int, Dictionary<string, int>> maskList = new Dictionary<int, Dictionary<string, int>>();
         private AVRProject project;
+        private AVRProject originalProject;
         private BurnerPanel burnerPanel;
+
+        public BurnerPanel BurnerPanel
+        {
+            get { return burnerPanel; }
+        }
 
         public AVRProject Project
         {
@@ -28,8 +34,10 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
-            this.project = project;
-            burnerPanel = new BurnerPanel(project);
+            this.originalProject = project;
+            this.project = (AVRProject)project.Clone();
+
+            burnerPanel = new BurnerPanel(this.project);
 
             tabAVRDUDE.Controls.Add(burnerPanel);
 
@@ -143,10 +151,21 @@ namespace AVRProjectIDE
 
         private void FuseCalculator_FormClosed(object sender, FormClosedEventArgs e)
         {
+            isOpen = false;
+        }
+
+        private void btnSaveAndClose_Click(object sender, EventArgs e)
+        {
             burnerPanel.FormToProj();
             project.BurnFuseBox = txtYourFusebox.Text.Trim();
 
-            isOpen = false;
+            this.originalProject = this.project.CopyProperties(this.originalProject);
+            this.Close();
+        }
+
+        private void btnDiscardAndClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
