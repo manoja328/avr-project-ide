@@ -117,7 +117,7 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_Alpha49.
+        ///   Looks up a localized string similar to AVRProjectIDE_Alpha50.
         /// </summary>
         internal static string BuildID {
             get {
@@ -215,6 +215,15 @@ namespace AVRProjectIDE.Properties {
         internal static string helplinks {
             get {
                 return ResourceManager.GetString("helplinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://code.google.com/p/avr-project-ide/wiki/Help.
+        /// </summary>
+        internal static string HelpURL {
+            get {
+                return ResourceManager.GetString("HelpURL", resourceCulture);
             }
         }
         
