@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 51==
+
+ * Dialogs now have option to discard changes
+ * Fixed bug regarding fuse reading
+
 ==Alpha 48==
 
  * Goto Dialog accessible through the edit menu, or CTRL-Z, not yet through right click, will add upon request or boredom
