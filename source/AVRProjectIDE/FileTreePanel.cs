@@ -523,6 +523,9 @@ namespace AVRProjectIDE
 
         private void treeView1_DragDrop(object sender, DragEventArgs e)
         {
+            if (project.IsReady == false)
+                return;
+
             try
             {
                 Array a = (Array)e.Data.GetData(DataFormats.FileDrop);
@@ -542,6 +545,12 @@ namespace AVRProjectIDE
 
         private void treeView1_DragEnter(object sender, DragEventArgs e)
         {
+            if (project.IsReady == false)
+            {
+                e.Effect = DragDropEffects.None;
+                return;
+            }
+
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
             else
