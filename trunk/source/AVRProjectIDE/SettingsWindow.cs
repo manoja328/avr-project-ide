@@ -153,6 +153,19 @@ namespace AVRProjectIDE
                 chkShowWS.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
             }
 
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "BuildMessageBehaviour");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "BuildMessageBehaviour", "NewMsgOnTop");
+                radMsgOnTop.Checked = true;
+            }
+            else
+            {
+                radMsgOnTop.Checked = !tmpStr.Trim().ToLowerInvariant().Contains("bottom");
+            }
+
+            radMsgOnBottom.Checked = !radMsgOnTop.Checked;
+
             chkUseTabs.Checked = useTabs;
             chkWordWrap.Checked = lineWrap;
             chkTabIndents.Checked = tabIndents;
@@ -255,14 +268,31 @@ namespace AVRProjectIDE
             SettingsManagement.SettingsFile.Write("Editor", "ShowWhiteSpace", chkShowWS.Checked.ToString().Trim().ToLowerInvariant());
             //SettingsManagement.SettingsFile.Write("Editor", "TrimOnSave", chkTrimSpaceOnSave.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "BackupInterval", numBackupInterval.Value.ToString("0"));
+            SettingsManagement.SettingsFile.Write("Editor", "BuildMessageBehaviour", radMsgOnTop.Checked ? "NewMsgOnTop" : "NewMsgOnBottom");
             SettingsManagement.CheckForUpdates = chkCheckUpdates.Checked;
             SettingsManagement.LoadScintSettings();
+
+            ProjectBuilder.ReverseOutput = radMsgOnBottom.Checked;
+
             this.Close();
         }
 
         private void btnDiscardAndClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private bool blockCheckChanged = false;
+
+        private void radMsgOn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (blockCheckChanged == false)
+            {
+                blockCheckChanged = true;
+                radMsgOnBottom.Checked = !radMsgOnTop.Checked;
+                radMsgOnTop.Checked = !radMsgOnBottom.Checked;
+                blockCheckChanged = false;
+            }
         }
     }
 }

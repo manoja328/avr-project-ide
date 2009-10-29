@@ -42,6 +42,18 @@ namespace AVRProjectIDE
             {
                 TextBox box = txtMessages;
 
+                if (ProjectBuilder.ReverseOutput)
+                {
+                    if (mode == TextBoxChangeMode.Append)
+                        mode = TextBoxChangeMode.Prepend;
+                    else if (mode == TextBoxChangeMode.AppendNewLine)
+                        mode = TextBoxChangeMode.PrependNewLine;
+                    else if (mode == TextBoxChangeMode.Prepend)
+                        mode = TextBoxChangeMode.Append;
+                    else if (mode == TextBoxChangeMode.PrependNewLine)
+                        mode = TextBoxChangeMode.AppendNewLine;
+                }
+
                 if (mode == TextBoxChangeMode.Append)
                 {
                     box.Text += text;
@@ -96,7 +108,14 @@ namespace AVRProjectIDE
                 line.ToString("0");
 
             ListViewItem lvi = new ListViewItem(new string[] { fileName, lineStr, location, type, message, });
-            listErrorsWarnings.Items.Insert(0, lvi);
+            if (ProjectBuilder.ReverseOutput == false)
+            {
+                listErrorsWarnings.Items.Insert(0, lvi);
+            }
+            else
+            {
+                listErrorsWarnings.Items.Add(lvi);
+            }
         }
 
         public event OnClickError GotoError;

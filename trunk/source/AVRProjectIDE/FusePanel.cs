@@ -564,7 +564,8 @@ namespace AVRProjectIDE
 
                     if (File.Exists(TempFuseFilePath) == false)
                     {
-                        MessageBox.Show("Failed to Read Fuse, temporary file not found, please check your programmer settings. Here is the error message:\r\n\r\n" + p.StandardError.ReadToEnd() + "\r\n" + p.StandardOutput.ReadToEnd());
+                        MessageBox.Show("Failed to Read Fuse, temporary file not found at " + TempFuseFilePath + " . Here is the AVRDUDE output:\r\n\r\n" + p.StandardError.ReadToEnd() + "\r\n" + p.StandardOutput.ReadToEnd());
+                        return -1;
                     }
                     else
                     {
@@ -577,14 +578,14 @@ namespace AVRProjectIDE
 
                         if (string.IsNullOrEmpty(fuseStr))
                         {
-                            MessageBox.Show("Temporary Fuse File is Empty");
+                            MessageBox.Show("Temporary Fuse File is Empty at " + TempFuseFilePath);
                             return -1;
                         }
 
                         fuseStr = fuseStr.Trim();
                         if (string.IsNullOrEmpty(fuseStr))
                         {
-                            MessageBox.Show("Temporary Fuse File is Empty");
+                            MessageBox.Show("Temporary Fuse File is Empty at " + TempFuseFilePath);
                             return -1;
                         }
 
@@ -659,7 +660,7 @@ namespace AVRProjectIDE
                 return;
 
             if (v == fuseVal)
-                MessageBox.Show("Fuse Verified Successfully");
+                MessageBox.Show("Fuse Verified Successfully to be 0x" + v.ToString("X2"));
             else
                 MessageBox.Show("Fuse Is Mismatched, Read 0x" + v.ToString("X2") + " , Current: 0x" + fuseVal.ToString("X2"));
         }

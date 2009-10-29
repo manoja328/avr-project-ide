@@ -61,12 +61,16 @@
             this.chkCheckUpdates = new System.Windows.Forms.CheckBox();
             this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.btnDiscardAndClose = new System.Windows.Forms.Button();
+            this.radMsgOnTop = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radMsgOnBottom = new System.Windows.Forms.RadioButton();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numIndentWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBackupInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTabWidth)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox9
@@ -199,7 +203,7 @@
             // btnOpenAppData
             // 
             this.btnOpenAppData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenAppData.Location = new System.Drawing.Point(12, 332);
+            this.btnOpenAppData.Location = new System.Drawing.Point(12, 371);
             this.btnOpenAppData.Name = "btnOpenAppData";
             this.btnOpenAppData.Size = new System.Drawing.Size(130, 23);
             this.btnOpenAppData.TabIndex = 17;
@@ -221,8 +225,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dropSmartIndent);
             this.groupBox1.Controls.Add(this.label3);
@@ -242,7 +245,7 @@
             this.groupBox1.Controls.Add(this.chkAutocomplete);
             this.groupBox1.Location = new System.Drawing.Point(12, 144);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(644, 182);
+            this.groupBox1.Size = new System.Drawing.Size(644, 128);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editor Settings (may require restarting the editor to make changes take effect)";
@@ -447,7 +450,7 @@
             // btnOpenInstallationFolder
             // 
             this.btnOpenInstallationFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 332);
+            this.btnOpenInstallationFolder.Location = new System.Drawing.Point(148, 371);
             this.btnOpenInstallationFolder.Name = "btnOpenInstallationFolder";
             this.btnOpenInstallationFolder.Size = new System.Drawing.Size(132, 23);
             this.btnOpenInstallationFolder.TabIndex = 18;
@@ -459,7 +462,7 @@
             // 
             this.chkCheckUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkCheckUpdates.AutoSize = true;
-            this.chkCheckUpdates.Location = new System.Drawing.Point(294, 336);
+            this.chkCheckUpdates.Location = new System.Drawing.Point(294, 375);
             this.chkCheckUpdates.Name = "chkCheckUpdates";
             this.chkCheckUpdates.Size = new System.Drawing.Size(115, 17);
             this.chkCheckUpdates.TabIndex = 19;
@@ -469,7 +472,7 @@
             // btnSaveAndClose
             // 
             this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveAndClose.Location = new System.Drawing.Point(438, 332);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(438, 371);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnSaveAndClose.TabIndex = 20;
@@ -480,7 +483,7 @@
             // btnDiscardAndClose
             // 
             this.btnDiscardAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDiscardAndClose.Location = new System.Drawing.Point(549, 332);
+            this.btnDiscardAndClose.Location = new System.Drawing.Point(549, 371);
             this.btnDiscardAndClose.Name = "btnDiscardAndClose";
             this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnDiscardAndClose.TabIndex = 21;
@@ -488,11 +491,47 @@
             this.btnDiscardAndClose.UseVisualStyleBackColor = true;
             this.btnDiscardAndClose.Click += new System.EventHandler(this.btnDiscardAndClose_Click);
             // 
+            // radMsgOnTop
+            // 
+            this.radMsgOnTop.AutoSize = true;
+            this.radMsgOnTop.Location = new System.Drawing.Point(6, 19);
+            this.radMsgOnTop.Name = "radMsgOnTop";
+            this.radMsgOnTop.Size = new System.Drawing.Size(148, 17);
+            this.radMsgOnTop.TabIndex = 22;
+            this.radMsgOnTop.TabStop = true;
+            this.radMsgOnTop.Text = "Recent Messages on Top";
+            this.radMsgOnTop.UseVisualStyleBackColor = true;
+            this.radMsgOnTop.CheckedChanged += new System.EventHandler(this.radMsgOn_CheckedChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radMsgOnBottom);
+            this.groupBox2.Controls.Add(this.radMsgOnTop);
+            this.groupBox2.Location = new System.Drawing.Point(12, 278);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 70);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Build Output Behaviour";
+            // 
+            // radMsgOnBottom
+            // 
+            this.radMsgOnBottom.AutoSize = true;
+            this.radMsgOnBottom.Location = new System.Drawing.Point(6, 42);
+            this.radMsgOnBottom.Name = "radMsgOnBottom";
+            this.radMsgOnBottom.Size = new System.Drawing.Size(162, 17);
+            this.radMsgOnBottom.TabIndex = 22;
+            this.radMsgOnBottom.TabStop = true;
+            this.radMsgOnBottom.Text = "Recent Messages on Bottom";
+            this.radMsgOnBottom.UseVisualStyleBackColor = true;
+            this.radMsgOnBottom.CheckedChanged += new System.EventHandler(this.radMsgOn_CheckedChanged);
+            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 367);
+            this.ClientSize = new System.Drawing.Size(666, 406);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnSaveAndClose);
             this.Controls.Add(this.btnDiscardAndClose);
             this.Controls.Add(this.chkCheckUpdates);
@@ -516,6 +555,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numIndentWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBackupInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTabWidth)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,5 +597,8 @@
         private System.Windows.Forms.CheckBox chkShowWS;
         private System.Windows.Forms.Button btnSaveAndClose;
         private System.Windows.Forms.Button btnDiscardAndClose;
+        private System.Windows.Forms.RadioButton radMsgOnTop;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radMsgOnBottom;
     }
 }
