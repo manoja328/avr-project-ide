@@ -20,6 +20,13 @@ namespace AVRProjectIDE
     {
         #region Fields and Properties
 
+        private static bool reverseOutput;
+        public static bool ReverseOutput
+        {
+            get { return reverseOutput; }
+            set { reverseOutput = value; }
+        }
+
         private Dictionary<string, ProjectFile> origFileList;
         private AVRProject project;
         private Dictionary<string, ProjectFile> workingFileList;
@@ -213,6 +220,18 @@ namespace AVRProjectIDE
             }
             else
             {
+                if (ReverseOutput)
+                {
+                    if (mode == TextBoxChangeMode.Append)
+                        mode = TextBoxChangeMode.Prepend;
+                    else if (mode == TextBoxChangeMode.AppendNewLine)
+                        mode = TextBoxChangeMode.PrependNewLine;
+                    else if (mode == TextBoxChangeMode.Prepend)
+                        mode = TextBoxChangeMode.Append;
+                    else if (mode == TextBoxChangeMode.PrependNewLine)
+                        mode = TextBoxChangeMode.AppendNewLine;
+                }
+
                 if (mode == TextBoxChangeMode.Append)
                 {
                     box.Text += text;
@@ -258,6 +277,14 @@ namespace AVRProjectIDE
             }
             else
             {
+                if (ReverseOutput)
+                {
+                    if (mode == ListViewChangeMode.AddToTop)
+                        mode = ListViewChangeMode.AddToBottom;
+                    else if (mode == ListViewChangeMode.AddToBottom)
+                        mode = ListViewChangeMode.AddToTop;
+                }
+
                 if (mode == ListViewChangeMode.AddToBottom)
                     box.Items.Add(item);
                 else if (mode == ListViewChangeMode.AddToTop)

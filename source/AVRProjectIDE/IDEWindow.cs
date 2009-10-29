@@ -1313,12 +1313,12 @@ namespace AVRProjectIDE
 
                     if (projBuilder.Compile(file))
                     {
-                        messageWin.MyTextBox.Text = "Compilation of " + file.FileName + " Successful" + "\r\n" + messageWin.MyTextBox.Text;
+                        messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Compilation of " + file.FileName + " Successful");
                         messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Successful");
                     }
                     else
                     {
-                        messageWin.MyTextBox.Text = "Compilation of " + file.FileName + " Failed" + "\r\n" + messageWin.MyTextBox.Text;
+                        messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Compilation of " + file.FileName + " Failed");
                         messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Failed");
 
                         if (projBuilder.HasError > 0)

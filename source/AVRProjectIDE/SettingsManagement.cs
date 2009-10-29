@@ -351,6 +351,18 @@ namespace AVRProjectIDE
             LoadFavFolder();
 
             GetArduinoPaths();
+
+            string buildOutput = iniFile.Read("Editor", "BuildOutputBehaviour");
+
+            if (string.IsNullOrEmpty(buildOutput))
+                buildOutput = "top";
+
+            buildOutput = buildOutput.ToLowerInvariant().Trim();
+
+            if (string.IsNullOrEmpty(buildOutput))
+                buildOutput = "top";
+
+            ProjectBuilder.ReverseOutput = buildOutput.Contains("bottom");
         }
 
         /// <summary>
