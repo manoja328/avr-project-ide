@@ -78,6 +78,7 @@
             this.scint.IsBraceMatching = true;
             this.scint.Location = new System.Drawing.Point(0, 0);
             this.scint.Margins.Margin0.Width = 33;
+            this.scint.Margins.Margin1.AutoToggleMarkerNumber = 1;
             this.scint.Margins.Margin1.IsClickable = true;
             this.scint.Margins.Margin2.Width = 10;
             this.scint.Name = "scint";
@@ -92,6 +93,7 @@
             this.scint.Styles.Max.FontName = "Verdana";
             this.scint.TabIndex = 0;
             this.scint.ZoomChanged += new System.EventHandler(this.scint_ZoomChanged);
+            this.scint.MarginClick += new System.EventHandler<ScintillaNet.MarginClickEventArgs>(this.scint_MarginClick);
             this.scint.CharAdded += new System.EventHandler<ScintillaNet.CharAddedEventArgs>(this.scint_CharAdded);
             this.scint.AutoCompleteAccepted += new System.EventHandler<ScintillaNet.AutoCompleteAcceptedEventArgs>(this.scint_AutoCompleteAccepted);
             // 

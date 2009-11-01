@@ -103,6 +103,12 @@ namespace AVRProjectIDE
             set { isOpen = value; }
         }
 
+        private List<int> bookMarks = new List<int>();
+        public List<int> Bookmarks
+        {
+            get { return bookMarks; }
+        }
+
         #endregion
 
         public ProjectFile(string fileAbsPath)
@@ -142,6 +148,11 @@ namespace AVRProjectIDE
             newFile.IsOpen = this.IsOpen;
             newFile.Options = this.Options;
             newFile.ToCompile = this.ToCompile;
+
+            newFile.Bookmarks.Clear();
+            foreach (int i in this.bookMarks)
+                newFile.Bookmarks.Add(i);
+
             return newFile;
         }
 
@@ -631,6 +642,12 @@ namespace AVRProjectIDE
                     xml.WriteElementString("ToCompile", file.Value.ToCompile.ToString().ToLowerInvariant());
                     xml.WriteElementString("Options", file.Value.Options);
                     xml.WriteElementString("WasOpen", file.Value.IsOpen.ToString().ToLowerInvariant());
+
+                    xml.WriteStartElement("Bookmarks");
+                    foreach (int i in file.Value.Bookmarks)
+                        xml.WriteString(i.ToString("0") + ",");
+                    xml.WriteEndElement();
+
                     xml.WriteEndElement();
                 }
                 xml.WriteEndElement();
@@ -882,6 +899,22 @@ namespace AVRProjectIDE
                                 newFile.IsOpen = wasOpen.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                             }
 
+                            newFile.Bookmarks.Clear();
+                            foreach (XmlElement bookMarks in i.GetElementsByTagName("Bookmarks"))
+                            {
+                                string tmp = bookMarks.InnerText;
+                                string[] bkmkListStr = tmp.Split(',');
+                                foreach (string s in bkmkListStr)
+                                {
+                                    if (string.IsNullOrEmpty(s) == false)
+                                    {
+                                        int lineNum = -1;
+                                        if (int.TryParse(s, out lineNum))
+                                            newFile.Bookmarks.Add(lineNum);
+                                    }
+                                }
+                            }
+
                             flistNew.Add(newFile);
 
                             if (xDirPath != dirPath)
@@ -891,6 +924,10 @@ namespace AVRProjectIDE
                                 oldFile.ToCompile = newFile.ToCompile;
                                 oldFile.Options = newFile.Options;
                                 oldFile.IsOpen = newFile.IsOpen;
+
+                                oldFile.Bookmarks.Clear();
+                                foreach (int j in newFile.Bookmarks)
+                                    oldFile.Bookmarks.Add(j);
 
                                 flistOld.Add(oldFile);
                             }
