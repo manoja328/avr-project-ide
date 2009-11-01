@@ -182,10 +182,22 @@ namespace AVRProjectIDE
 
         public SaveResult Save()
         {
+            SaveBookmarks();
+
             if (string.IsNullOrEmpty(file.FileAbsPath) == false)
                 return Save(file.FileAbsPath);
             else
                 return SaveAs();
+        }
+
+        private void SaveBookmarks()
+        {
+            File.Bookmarks.Clear();
+            foreach (Line l in scint.Lines)
+            {
+                if (scint.Markers.GetMarkerMask(l.Number) != 0)
+                    File.Bookmarks.Add(l.Number);
+            }
         }
 
         public SaveResult SaveAs()
@@ -274,6 +286,8 @@ namespace AVRProjectIDE
                 {
                     if (ReadFromFile(file.BackupPath))
                     {
+                        ApplyBookmarks();
+
                         DeleteBackup();
 
                         fileSystemWatcher1.Filter = FileName;
@@ -289,7 +303,13 @@ namespace AVRProjectIDE
             }
 
             if (file.Exists)
-                return LoadFile(file.FileAbsPath);
+            {
+                bool res = LoadFile(file.FileAbsPath);
+
+                ApplyBookmarks();
+
+                return res;
+            }
             else
             {
                 if (MessageBox.Show(file.FileName + " Can't be Found\r\nDo you want to find it?", "File Not Found", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -305,6 +325,8 @@ namespace AVRProjectIDE
                         {
                             file.FileAbsPath = openFileDialog1.FileName;
 
+                            ApplyBookmarks();
+
                             return true;
                         }
                         else
@@ -315,6 +337,19 @@ namespace AVRProjectIDE
                 }
                 else
                     return false; // User Refused
+            }
+        }
+
+        private void ApplyBookmarks()
+        {
+            scint.Markers.DeleteAll();
+
+            foreach (int i in File.Bookmarks)
+            {
+                if (scint.Markers.GetMarkerMask(i) == 0)
+                {
+                    scint.Lines[i].AddMarker(0);
+                }
             }
         }
 
@@ -757,6 +792,10 @@ namespace AVRProjectIDE
         private void scint_ZoomChanged(object sender, EventArgs e)
         {
             SettingsManagement.ZoomLevel = scint.Zoom;
+        }
+
+        private void scint_MarginClick(object sender, MarginClickEventArgs e)
+        {
         }
     }
 }

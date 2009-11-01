@@ -560,11 +560,22 @@ namespace AVRProjectIDE
                 try
                 {
                     p.Start();
-                    p.WaitForExit(1000);
+                    p.WaitForExit(5000);
+
+                    System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+
+                    while (true)
+                    {
+                        if (File.Exists(TempFuseFilePath))
+                            break;
+
+                        if (sw.ElapsedMilliseconds > 5000)
+                            break;
+                    }
 
                     if (File.Exists(TempFuseFilePath) == false)
                     {
-                        MessageBox.Show("Failed to Read Fuse, temporary file not found at " + TempFuseFilePath + " . Here is the AVRDUDE output:\r\n\r\n" + p.StandardError.ReadToEnd() + "\r\n" + p.StandardOutput.ReadToEnd());
+                        MessageBox.Show("Failed to Read Fuse, temporary file not found at '" + TempFuseFilePath + "'. Here is the AVRDUDE output:\r\n\r\n" + p.StandardError.ReadToEnd() + "\r\n" + p.StandardOutput.ReadToEnd());
                         return -1;
                     }
                     else
