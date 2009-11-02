@@ -55,3 +55,19 @@
 ===Zoom In/Out===
 
  * Ctrl-Mouse Middle Wheel Up/Down
+
+===Toggle Bookmark===
+
+ * Ctrl-F2
+
+===Delete All Bookmarks===
+
+ * Ctrl-Shift-F2
+
+===Goto Next Bookmark===
+
+ * F2
+
+===Goto Previous Bookmark===
+
+ * Shift-F2
