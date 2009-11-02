@@ -797,5 +797,13 @@ namespace AVRProjectIDE
         private void scint_MarginClick(object sender, MarginClickEventArgs e)
         {
         }
+
+        public void ToggleBookmark()
+        {
+            if (scint.Markers.GetMarkerMask(scint.Lines.Current.Number) == 0)
+                scint.Lines.Current.AddMarker(0);
+            else
+                scint.Lines.Current.DeleteMarker(0);
+        }
     }
 }

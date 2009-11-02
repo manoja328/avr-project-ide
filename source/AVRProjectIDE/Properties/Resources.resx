@@ -251,7 +251,7 @@
     <value>..\chip_xml\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="BuildID" xml:space="preserve">
-    <value>AVRProjectIDE_Alpha55</value>
+    <value>AVRProjectIDE_Alpha56</value>
   </data>
   <data name="WinAVRURL" xml:space="preserve">
     <value>https://sourceforge.net/projects/winavr/files/</value>
@@ -261,5 +261,20 @@
   </data>
   <data name="HelpURL" xml:space="preserve">
     <value>http://code.google.com/p/avr-project-ide/wiki/Help</value>
+  </data>
+  <data name="bookmarkbasic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\graphics\bookmarkbasic.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bookmarkdelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\graphics\bookmarkdelete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bookmarknext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\graphics\bookmarknext.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bookmarkprev" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\graphics\bookmarkprev.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bookmarktoggle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\graphics\bookmarktoggle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

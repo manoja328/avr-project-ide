@@ -36,16 +36,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessagePanel));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtMessages = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listErrorsWarnings = new System.Windows.Forms.ListView();
             this.colFile = new System.Windows.Forms.ColumnHeader();
             this.colLine = new System.Windows.Forms.ColumnHeader();
             this.colLocation = new System.Windows.Forms.ColumnHeader();
             this.colType = new System.Windows.Forms.ColumnHeader();
             this.colMessage = new System.Windows.Forms.ColumnHeader();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -56,6 +59,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.ImageList = this.imageList1;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -66,23 +70,13 @@
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Transparent;
             this.tabPage1.Controls.Add(this.txtMessages);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.ImageKey = "message.png";
+            this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(806, 292);
+            this.tabPage1.Size = new System.Drawing.Size(806, 291);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Messages";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.listErrorsWarnings);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(806, 292);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Errors & Warnings";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtMessages
             // 
@@ -94,8 +88,20 @@
             this.txtMessages.Name = "txtMessages";
             this.txtMessages.ReadOnly = true;
             this.txtMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessages.Size = new System.Drawing.Size(800, 286);
+            this.txtMessages.Size = new System.Drawing.Size(800, 285);
             this.txtMessages.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.listErrorsWarnings);
+            this.tabPage2.ImageKey = "warning.ico";
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(806, 291);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Errors & Warnings";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // listErrorsWarnings
             // 
@@ -112,7 +118,7 @@
             this.listErrorsWarnings.Location = new System.Drawing.Point(3, 3);
             this.listErrorsWarnings.MultiSelect = false;
             this.listErrorsWarnings.Name = "listErrorsWarnings";
-            this.listErrorsWarnings.Size = new System.Drawing.Size(800, 286);
+            this.listErrorsWarnings.Size = new System.Drawing.Size(800, 285);
             this.listErrorsWarnings.TabIndex = 0;
             this.listErrorsWarnings.UseCompatibleStateImageBehavior = false;
             this.listErrorsWarnings.View = System.Windows.Forms.View.Details;
@@ -138,6 +144,13 @@
             // 
             this.colMessage.Text = "Message";
             this.colMessage.Width = 400;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "message.png");
+            this.imageList1.Images.SetKeyName(1, "warning.ico");
             // 
             // MessagePanel
             // 
@@ -175,5 +188,6 @@
         private System.Windows.Forms.ColumnHeader colLocation;
         private System.Windows.Forms.ColumnHeader colType;
         private System.Windows.Forms.ColumnHeader colMessage;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

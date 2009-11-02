@@ -597,17 +597,15 @@ namespace AVRProjectIDE
             }
         }
 
-        private void mbtnClearBookmarks_Click(object sender, EventArgs e)
+        private void mbtnClearHighlights_Click(object sender, EventArgs e)
         {
             if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
             {
-                ((EditorPanel)dockPanel1.ActiveContent).ClearBookmarks();
                 ((EditorPanel)dockPanel1.ActiveContent).ClearHighlights();
             }
             else if (lastEditor != null)
             {
                 lastEditor.Activate();
-                lastEditor.ClearBookmarks();
                 lastEditor.ClearHighlights();
             }
         }
@@ -1173,6 +1171,58 @@ namespace AVRProjectIDE
             }
         }
 
+        private void mbtnCompileCurrent_Click(object sender, EventArgs e)
+        {
+            if (project.IsReady == false)
+                return;
+
+            ProjectFile file = null;
+
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+            {
+                ((EditorPanel)dockPanel1.ActiveContent).Save();
+                file = ((EditorPanel)dockPanel1.ActiveContent).File;
+            }
+            else if (lastEditor != null)
+            {
+                lastEditor.Save();
+                file = lastEditor.File;
+            }
+
+            if (file != null)
+            {
+                if (file.FileExt == "c" || file.FileExt == "cpp")
+                {
+                    projBuilder.HasError = 0;
+
+                    if (projBuilder.Compile(file))
+                    {
+                        messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Compilation of " + file.FileName + " Successful");
+                        messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Successful");
+                    }
+                    else
+                    {
+                        messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Compilation of " + file.FileName + " Failed");
+                        messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Failed");
+
+                        if (projBuilder.HasError > 0)
+                            messageWin.SwitchToListView();
+                        else
+                            messageWin.SwitchToMessageBox();
+                    }
+
+                    messageWin.MyTextBox.SelectionStart = 0;
+                    messageWin.MyTextBox.SelectionLength = 0;
+                    messageWin.MyTextBox.ScrollToCaret();
+
+                    messageWin.BringToFront();
+                    messageWin.Activate();
+                }
+                else
+                    MessageBox.Show("You can only compile C or C++ files");
+            }
+        }
+
         #endregion
 
         private void mbtnHelpTopics_Click(object sender, EventArgs e)
@@ -1287,58 +1337,6 @@ namespace AVRProjectIDE
             }
         }
 
-        private void mbtnCompileCurrent_Click(object sender, EventArgs e)
-        {
-            if (project.IsReady == false)
-                return;
-
-            ProjectFile file = null;
-
-            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
-            {
-                ((EditorPanel)dockPanel1.ActiveContent).Save();
-                file = ((EditorPanel)dockPanel1.ActiveContent).File;
-            }
-            else if (lastEditor != null)
-            {
-                lastEditor.Save();
-                file = lastEditor.File;
-            }
-
-            if (file != null)
-            {
-                if (file.FileExt == "c" || file.FileExt == "cpp")
-                {
-                    projBuilder.HasError = 0;
-
-                    if (projBuilder.Compile(file))
-                    {
-                        messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Compilation of " + file.FileName + " Successful");
-                        messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Successful");
-                    }
-                    else
-                    {
-                        messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Compilation of " + file.FileName + " Failed");
-                        messageWin.AddErrorWarning(file.FileName, -1, "", "", "Compilation Failed");
-
-                        if (projBuilder.HasError > 0)
-                            messageWin.SwitchToListView();
-                        else
-                            messageWin.SwitchToMessageBox();
-                    }
-
-                    messageWin.MyTextBox.SelectionStart = 0;
-                    messageWin.MyTextBox.SelectionLength = 0;
-                    messageWin.MyTextBox.ScrollToCaret();
-
-                    messageWin.BringToFront();
-                    messageWin.Activate();
-                }
-                else
-                    MessageBox.Show("You can only compile C or C++ files");
-            }
-        }
-
         private void mbtnFuseTool_Click(object sender, EventArgs e)
         {
             if (project.IsReady)
@@ -1411,5 +1409,89 @@ namespace AVRProjectIDE
                 i.Enabled = true;
             }
         }
+
+        #region Bookmark Button Events
+
+        private void tbtnBookmarkToggle_Click(object sender, EventArgs e)
+        {
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+            {
+                ((EditorPanel)dockPanel1.ActiveContent).ToggleBookmark();
+            }
+            else if (lastEditor != null)
+            {
+                lastEditor.Activate();
+                lastEditor.ToggleBookmark();
+            }
+        }
+
+        private void tbtnBookmarkDelete_Click(object sender, EventArgs e)
+        {
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+            {
+                ((EditorPanel)dockPanel1.ActiveContent).ClearBookmarks();
+            }
+            else if (lastEditor != null)
+            {
+                lastEditor.Activate();
+                lastEditor.ClearBookmarks();
+            }
+        }
+
+        private void tbtnBookmarkPrev_Click(object sender, EventArgs e)
+        {
+            ScintillaNet.Line line = null;
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+            {
+                line = ((EditorPanel)dockPanel1.ActiveContent).Scint.Lines.Current.FindPreviousMarker(1);
+            }
+            else if (lastEditor != null)
+            {
+                lastEditor.Activate();
+                line = lastEditor.Scint.Lines.Current.FindPreviousMarker(1);
+            }
+
+            if (line != null)
+                line.Goto();
+        }
+
+        private void tbtnBookmarkNext_Click(object sender, EventArgs e)
+        {
+            ScintillaNet.Line line = null;
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+            {
+                line = ((EditorPanel)dockPanel1.ActiveContent).Scint.Lines.Current.FindNextMarker(1);
+            }
+            else if (lastEditor != null)
+            {
+                lastEditor.Activate();
+                line = lastEditor.Scint.Lines.Current.FindNextMarker(1);
+            }
+
+            if (line != null)
+                line.Goto();
+        }
+
+        private void mbtnBookmarkToggle_Click(object sender, EventArgs e)
+        {
+            tbtnBookmarkToggle_Click(sender, e);
+        }
+
+        private void mbtnBookmarkDelete_Click(object sender, EventArgs e)
+        {
+            tbtnBookmarkDelete_Click(sender, e);
+        }
+
+        private void mbtnBookmarkPrev_Click(object sender, EventArgs e)
+        {
+            tbtnBookmarkPrev_Click(sender, e);
+        }
+
+        private void mbtnBookmarkNext_Click(object sender, EventArgs e)
+        {
+            tbtnBookmarkNext_Click(sender, e);
+        }
+
+        #endregion
     }
 }

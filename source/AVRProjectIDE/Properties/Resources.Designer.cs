@@ -109,6 +109,41 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap bookmarkbasic {
+            get {
+                object obj = ResourceManager.GetObject("bookmarkbasic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap bookmarkdelete {
+            get {
+                object obj = ResourceManager.GetObject("bookmarkdelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap bookmarknext {
+            get {
+                object obj = ResourceManager.GetObject("bookmarknext", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap bookmarkprev {
+            get {
+                object obj = ResourceManager.GetObject("bookmarkprev", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap bookmarktoggle {
+            get {
+                object obj = ResourceManager.GetObject("bookmarktoggle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap build {
             get {
                 object obj = ResourceManager.GetObject("build", resourceCulture);
@@ -117,7 +152,7 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_Alpha55.
+        ///   Looks up a localized string similar to AVRProjectIDE_Alpha56.
         /// </summary>
         internal static string BuildID {
             get {
