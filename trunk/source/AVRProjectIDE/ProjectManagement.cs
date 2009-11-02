@@ -903,7 +903,7 @@ namespace AVRProjectIDE
                             foreach (XmlElement bookMarks in i.GetElementsByTagName("Bookmarks"))
                             {
                                 string tmp = bookMarks.InnerText;
-                                string[] bkmkListStr = tmp.Split(',');
+                                string[] bkmkListStr = tmp.Split(new char[] {',', ' ', '\t', '\n', '\r', '\0', });
                                 foreach (string s in bkmkListStr)
                                 {
                                     if (string.IsNullOrEmpty(s) == false)

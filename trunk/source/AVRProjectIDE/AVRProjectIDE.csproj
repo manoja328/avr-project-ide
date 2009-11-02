@@ -900,6 +900,11 @@
     <None Include="file_templates\defaultheader.txt" />
     <None Include="file_templates\initialmain.txt" />
     <None Include="file_templates\initialpde.txt" />
+    <None Include="graphics\bookmarkbasic.png" />
+    <None Include="graphics\bookmarkdelete.png" />
+    <None Include="graphics\bookmarknext.png" />
+    <None Include="graphics\bookmarkprev.png" />
+    <None Include="graphics\bookmarktoggle.png" />
     <Content Include="graphics\mainicon.ico" />
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />

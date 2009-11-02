@@ -20,6 +20,8 @@ namespace AVRProjectIDE
         public HardwareExplorer()
         {
             InitializeComponent();
+
+            this.Icon = Icon.FromHandle(Properties.Resources.burn.GetHicon());
         }
 
         public void LoadDataForChip(string chipName)

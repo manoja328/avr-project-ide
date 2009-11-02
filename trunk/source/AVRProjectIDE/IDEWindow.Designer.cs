@@ -38,21 +38,21 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IDEWindow));
-            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin2 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
-            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin2 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient4 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient8 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin2 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient2 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient9 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient5 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient10 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient2 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient11 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient12 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient6 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient13 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient14 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin8 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
+            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin8 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient22 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient50 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin8 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient8 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient51 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient23 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient52 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient8 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient53 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient54 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient24 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient55 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient56 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnOpenProject = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +81,7 @@
             this.mbtnUnindent = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnComment = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnUncomment = new System.Windows.Forms.ToolStripMenuItem();
-            this.mbtnClearBookmarks = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnClearHighlights = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnCompile = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,6 +117,11 @@
             this.tbtnBlockUntab = new System.Windows.Forms.ToolStripButton();
             this.tbtnBlockComment = new System.Windows.Forms.ToolStripButton();
             this.tbtnBlockUncomment = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.tbtnBookmarkToggle = new System.Windows.Forms.ToolStripButton();
+            this.tbtnBookmarkDelete = new System.Windows.Forms.ToolStripButton();
+            this.tbtnBookmarkPrev = new System.Windows.Forms.ToolStripButton();
+            this.tbtnBookmarkNext = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.tbtnConfig = new System.Windows.Forms.ToolStripButton();
             this.tbtnCompile = new System.Windows.Forms.ToolStripButton();
@@ -143,6 +148,11 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
+            this.mbtnBookmarks = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnBookmarkToggle = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnBookmarkDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnBookmarkPrev = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnBookmarkNext = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -241,7 +251,8 @@
             this.mbtnGoto,
             this.toolStripSeparator15,
             this.mbtnBlockEdit,
-            this.mbtnClearBookmarks});
+            this.mbtnClearHighlights,
+            this.mbtnBookmarks});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "&Edit";
@@ -391,12 +402,12 @@
             this.mbtnUncomment.Text = "&Uncomment";
             this.mbtnUncomment.Click += new System.EventHandler(this.mbtnUncomment_Click);
             // 
-            // mbtnClearBookmarks
+            // mbtnClearHighlights
             // 
-            this.mbtnClearBookmarks.Name = "mbtnClearBookmarks";
-            this.mbtnClearBookmarks.Size = new System.Drawing.Size(204, 22);
-            this.mbtnClearBookmarks.Text = "Clear Bookmarks";
-            this.mbtnClearBookmarks.Click += new System.EventHandler(this.mbtnClearBookmarks_Click);
+            this.mbtnClearHighlights.Name = "mbtnClearHighlights";
+            this.mbtnClearHighlights.Size = new System.Drawing.Size(204, 22);
+            this.mbtnClearHighlights.Text = "Clear Highlights";
+            this.mbtnClearHighlights.Click += new System.EventHandler(this.mbtnClearHighlights_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -511,7 +522,7 @@
             // mbtnAbout
             // 
             this.mbtnAbout.Name = "mbtnAbout";
-            this.mbtnAbout.Size = new System.Drawing.Size(137, 22);
+            this.mbtnAbout.Size = new System.Drawing.Size(156, 22);
             this.mbtnAbout.Text = "&About";
             this.mbtnAbout.Click += new System.EventHandler(this.mbtnAbout_Click);
             // 
@@ -538,6 +549,11 @@
             this.tbtnBlockUntab,
             this.tbtnBlockComment,
             this.tbtnBlockUncomment,
+            this.toolStripSeparator18,
+            this.tbtnBookmarkToggle,
+            this.tbtnBookmarkDelete,
+            this.tbtnBookmarkPrev,
+            this.tbtnBookmarkNext,
             this.toolStripSeparator14,
             this.tbtnConfig,
             this.tbtnCompile,
@@ -736,6 +752,51 @@
             this.tbtnBlockUncomment.ToolTipText = "Uncomment";
             this.tbtnBlockUncomment.Click += new System.EventHandler(this.tbtnBlockUncomment_Click);
             // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tbtnBookmarkToggle
+            // 
+            this.tbtnBookmarkToggle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbtnBookmarkToggle.Image = global::AVRProjectIDE.Properties.Resources.bookmarktoggle;
+            this.tbtnBookmarkToggle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnBookmarkToggle.Name = "tbtnBookmarkToggle";
+            this.tbtnBookmarkToggle.Size = new System.Drawing.Size(23, 22);
+            this.tbtnBookmarkToggle.Text = "Bookmark Toggle";
+            this.tbtnBookmarkToggle.Click += new System.EventHandler(this.tbtnBookmarkToggle_Click);
+            // 
+            // tbtnBookmarkDelete
+            // 
+            this.tbtnBookmarkDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbtnBookmarkDelete.Image = global::AVRProjectIDE.Properties.Resources.bookmarkdelete;
+            this.tbtnBookmarkDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnBookmarkDelete.Name = "tbtnBookmarkDelete";
+            this.tbtnBookmarkDelete.Size = new System.Drawing.Size(23, 22);
+            this.tbtnBookmarkDelete.Text = "Delete All Bookmarks";
+            this.tbtnBookmarkDelete.Click += new System.EventHandler(this.tbtnBookmarkDelete_Click);
+            // 
+            // tbtnBookmarkPrev
+            // 
+            this.tbtnBookmarkPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbtnBookmarkPrev.Image = global::AVRProjectIDE.Properties.Resources.bookmarkprev;
+            this.tbtnBookmarkPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnBookmarkPrev.Name = "tbtnBookmarkPrev";
+            this.tbtnBookmarkPrev.Size = new System.Drawing.Size(23, 22);
+            this.tbtnBookmarkPrev.Text = "Goto Previous Bookmark";
+            this.tbtnBookmarkPrev.Click += new System.EventHandler(this.tbtnBookmarkPrev_Click);
+            // 
+            // tbtnBookmarkNext
+            // 
+            this.tbtnBookmarkNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbtnBookmarkNext.Image = global::AVRProjectIDE.Properties.Resources.bookmarknext;
+            this.tbtnBookmarkNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnBookmarkNext.Name = "tbtnBookmarkNext";
+            this.tbtnBookmarkNext.Size = new System.Drawing.Size(23, 22);
+            this.tbtnBookmarkNext.Text = "Goto Next Bookmark";
+            this.tbtnBookmarkNext.Click += new System.EventHandler(this.tbtnBookmarkNext_Click);
+            // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
@@ -860,50 +921,50 @@
             this.dockPanel1.Location = new System.Drawing.Point(2, 52);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new System.Drawing.Size(992, 458);
-            dockPanelGradient4.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient4.StartColor = System.Drawing.SystemColors.ControlLight;
-            autoHideStripSkin2.DockStripGradient = dockPanelGradient4;
-            tabGradient8.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient8.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient8.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            autoHideStripSkin2.TabGradient = tabGradient8;
-            dockPanelSkin2.AutoHideStripSkin = autoHideStripSkin2;
-            tabGradient9.EndColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient9.StartColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient9.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient2.ActiveTabGradient = tabGradient9;
-            dockPanelGradient5.EndColor = System.Drawing.SystemColors.Control;
-            dockPanelGradient5.StartColor = System.Drawing.SystemColors.Control;
-            dockPaneStripGradient2.DockStripGradient = dockPanelGradient5;
-            tabGradient10.EndColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient10.StartColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient10.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient2.InactiveTabGradient = tabGradient10;
-            dockPaneStripSkin2.DocumentGradient = dockPaneStripGradient2;
-            tabGradient11.EndColor = System.Drawing.SystemColors.ActiveCaption;
-            tabGradient11.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient11.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
-            tabGradient11.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dockPaneStripToolWindowGradient2.ActiveCaptionGradient = tabGradient11;
-            tabGradient12.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient12.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient12.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripToolWindowGradient2.ActiveTabGradient = tabGradient12;
-            dockPanelGradient6.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient6.StartColor = System.Drawing.SystemColors.ControlLight;
-            dockPaneStripToolWindowGradient2.DockStripGradient = dockPanelGradient6;
-            tabGradient13.EndColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            tabGradient13.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient13.StartColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            tabGradient13.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripToolWindowGradient2.InactiveCaptionGradient = tabGradient13;
-            tabGradient14.EndColor = System.Drawing.Color.Transparent;
-            tabGradient14.StartColor = System.Drawing.Color.Transparent;
-            tabGradient14.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            dockPaneStripToolWindowGradient2.InactiveTabGradient = tabGradient14;
-            dockPaneStripSkin2.ToolWindowGradient = dockPaneStripToolWindowGradient2;
-            dockPanelSkin2.DockPaneStripSkin = dockPaneStripSkin2;
-            this.dockPanel1.Skin = dockPanelSkin2;
+            dockPanelGradient22.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient22.StartColor = System.Drawing.SystemColors.ControlLight;
+            autoHideStripSkin8.DockStripGradient = dockPanelGradient22;
+            tabGradient50.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient50.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient50.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            autoHideStripSkin8.TabGradient = tabGradient50;
+            dockPanelSkin8.AutoHideStripSkin = autoHideStripSkin8;
+            tabGradient51.EndColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient51.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient51.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient8.ActiveTabGradient = tabGradient51;
+            dockPanelGradient23.EndColor = System.Drawing.SystemColors.Control;
+            dockPanelGradient23.StartColor = System.Drawing.SystemColors.Control;
+            dockPaneStripGradient8.DockStripGradient = dockPanelGradient23;
+            tabGradient52.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient52.StartColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient52.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient8.InactiveTabGradient = tabGradient52;
+            dockPaneStripSkin8.DocumentGradient = dockPaneStripGradient8;
+            tabGradient53.EndColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient53.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient53.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
+            tabGradient53.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dockPaneStripToolWindowGradient8.ActiveCaptionGradient = tabGradient53;
+            tabGradient54.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient54.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient54.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient8.ActiveTabGradient = tabGradient54;
+            dockPanelGradient24.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient24.StartColor = System.Drawing.SystemColors.ControlLight;
+            dockPaneStripToolWindowGradient8.DockStripGradient = dockPanelGradient24;
+            tabGradient55.EndColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient55.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient55.StartColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient55.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient8.InactiveCaptionGradient = tabGradient55;
+            tabGradient56.EndColor = System.Drawing.Color.Transparent;
+            tabGradient56.StartColor = System.Drawing.Color.Transparent;
+            tabGradient56.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            dockPaneStripToolWindowGradient8.InactiveTabGradient = tabGradient56;
+            dockPaneStripSkin8.ToolWindowGradient = dockPaneStripToolWindowGradient8;
+            dockPanelSkin8.DockPaneStripSkin = dockPaneStripSkin8;
+            this.dockPanel1.Skin = dockPanelSkin8;
             this.dockPanel1.TabIndex = 1;
             this.dockPanel1.ActiveContentChanged += new System.EventHandler(this.dockPanel1_ActiveContentChanged);
             this.dockPanel1.ActiveDocumentChanged += new System.EventHandler(this.dockPanel1_ActiveDocumentChanged);
@@ -963,6 +1024,55 @@
             // timerBackup
             // 
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
+            // 
+            // mbtnBookmarks
+            // 
+            this.mbtnBookmarks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mbtnBookmarkToggle,
+            this.mbtnBookmarkDelete,
+            this.mbtnBookmarkPrev,
+            this.mbtnBookmarkNext});
+            this.mbtnBookmarks.Image = global::AVRProjectIDE.Properties.Resources.bookmarkbasic;
+            this.mbtnBookmarks.Name = "mbtnBookmarks";
+            this.mbtnBookmarks.Size = new System.Drawing.Size(204, 22);
+            this.mbtnBookmarks.Text = "Bookmarks";
+            // 
+            // mbtnBookmarkToggle
+            // 
+            this.mbtnBookmarkToggle.Image = global::AVRProjectIDE.Properties.Resources.bookmarktoggle;
+            this.mbtnBookmarkToggle.Name = "mbtnBookmarkToggle";
+            this.mbtnBookmarkToggle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
+            this.mbtnBookmarkToggle.Size = new System.Drawing.Size(214, 22);
+            this.mbtnBookmarkToggle.Text = "Toggle Bookmark";
+            this.mbtnBookmarkToggle.Click += new System.EventHandler(this.mbtnBookmarkToggle_Click);
+            // 
+            // mbtnBookmarkDelete
+            // 
+            this.mbtnBookmarkDelete.Image = global::AVRProjectIDE.Properties.Resources.bookmarkdelete;
+            this.mbtnBookmarkDelete.Name = "mbtnBookmarkDelete";
+            this.mbtnBookmarkDelete.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+                        | System.Windows.Forms.Keys.F2)));
+            this.mbtnBookmarkDelete.Size = new System.Drawing.Size(264, 22);
+            this.mbtnBookmarkDelete.Text = "Delete All Bookmarks";
+            this.mbtnBookmarkDelete.Click += new System.EventHandler(this.mbtnBookmarkDelete_Click);
+            // 
+            // mbtnBookmarkPrev
+            // 
+            this.mbtnBookmarkPrev.Image = global::AVRProjectIDE.Properties.Resources.bookmarkprev;
+            this.mbtnBookmarkPrev.Name = "mbtnBookmarkPrev";
+            this.mbtnBookmarkPrev.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F2)));
+            this.mbtnBookmarkPrev.Size = new System.Drawing.Size(264, 22);
+            this.mbtnBookmarkPrev.Text = "Goto Prev Bookmark";
+            this.mbtnBookmarkPrev.Click += new System.EventHandler(this.mbtnBookmarkPrev_Click);
+            // 
+            // mbtnBookmarkNext
+            // 
+            this.mbtnBookmarkNext.Image = global::AVRProjectIDE.Properties.Resources.bookmarknext;
+            this.mbtnBookmarkNext.Name = "mbtnBookmarkNext";
+            this.mbtnBookmarkNext.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.mbtnBookmarkNext.Size = new System.Drawing.Size(264, 22);
+            this.mbtnBookmarkNext.Text = "Goto Next Bookmark";
+            this.mbtnBookmarkNext.Click += new System.EventHandler(this.mbtnBookmarkNext_Click);
             // 
             // IDEWindow
             // 
@@ -1063,7 +1173,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripMenuItem mbtnClearBookmarks;
+        private System.Windows.Forms.ToolStripMenuItem mbtnClearHighlights;
         private System.Windows.Forms.ToolStripMenuItem mbtnExportMakefile;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
@@ -1082,6 +1192,16 @@
         private System.Windows.Forms.ToolStripMenuItem mbtnAVRDUDE;
         private System.Windows.Forms.ToolStripMenuItem mbtnGoto;
         public System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tbtnBookmarkNext;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+        private System.Windows.Forms.ToolStripButton tbtnBookmarkToggle;
+        private System.Windows.Forms.ToolStripButton tbtnBookmarkDelete;
+        private System.Windows.Forms.ToolStripButton tbtnBookmarkPrev;
+        private System.Windows.Forms.ToolStripMenuItem mbtnBookmarks;
+        private System.Windows.Forms.ToolStripMenuItem mbtnBookmarkToggle;
+        private System.Windows.Forms.ToolStripMenuItem mbtnBookmarkDelete;
+        private System.Windows.Forms.ToolStripMenuItem mbtnBookmarkPrev;
+        private System.Windows.Forms.ToolStripMenuItem mbtnBookmarkNext;
 
 
     }

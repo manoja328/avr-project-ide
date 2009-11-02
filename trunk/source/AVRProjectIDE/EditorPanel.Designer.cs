@@ -78,7 +78,7 @@
             this.scint.IsBraceMatching = true;
             this.scint.Location = new System.Drawing.Point(0, 0);
             this.scint.Margins.Margin0.Width = 33;
-            this.scint.Margins.Margin1.AutoToggleMarkerNumber = 1;
+            this.scint.Margins.Margin1.AutoToggleMarkerNumber = 0;
             this.scint.Margins.Margin1.IsClickable = true;
             this.scint.Margins.Margin2.Width = 10;
             this.scint.Name = "scint";
