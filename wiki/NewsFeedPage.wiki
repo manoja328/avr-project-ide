@@ -1,3 +1,5 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Fixed recent file list issue with 57, also added option to reopen last open project on start-up, open file cursor location is preserved between sessions now===
+
 ===Fixed some small issues in 56 regarding build message output behaviour, also fixed a small error in the interrupt vector XML, so delete that from your appdata folder to get the updated version===
