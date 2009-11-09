@@ -153,6 +153,27 @@ namespace AVRProjectIDE
                 chkShowWS.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
             }
 
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "OpenLastProject");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "OpenLastProject", chkReopenProject.Checked.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                chkReopenProject.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            tmpStr = SettingsManagement.SettingsFile.Read("Editor", "HighlightCurrentLine");
+            if (string.IsNullOrEmpty(tmpStr))
+            {
+                SettingsManagement.SettingsFile.Write("Editor", "HighlightCurrentLine", chkHighlightCurLine.Checked.ToString().ToLowerInvariant().Trim());
+            }
+            else
+            {
+                chkHighlightCurLine.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+            }
+
+            blockCheckChanged = true;
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "BuildMessageBehaviour");
             if (string.IsNullOrEmpty(tmpStr))
             {
@@ -165,6 +186,8 @@ namespace AVRProjectIDE
             }
 
             radMsgOnBottom.Checked = !radMsgOnTop.Checked;
+            blockCheckChanged = false;
+
 
             chkUseTabs.Checked = useTabs;
             chkWordWrap.Checked = lineWrap;
@@ -269,6 +292,9 @@ namespace AVRProjectIDE
             //SettingsManagement.SettingsFile.Write("Editor", "TrimOnSave", chkTrimSpaceOnSave.Checked.ToString().Trim().ToLowerInvariant());
             SettingsManagement.SettingsFile.Write("Editor", "BackupInterval", numBackupInterval.Value.ToString("0"));
             SettingsManagement.SettingsFile.Write("Editor", "BuildMessageBehaviour", radMsgOnTop.Checked ? "NewMsgOnTop" : "NewMsgOnBottom");
+            SettingsManagement.SettingsFile.Write("Editor", "OpenLastProject", chkReopenProject.Checked.ToString().Trim().ToLowerInvariant());
+            SettingsManagement.SettingsFile.Write("Editor", "HighlightCurrentLine", chkHighlightCurLine.Checked.ToString().Trim().ToLowerInvariant());
+            
             SettingsManagement.CheckForUpdates = chkCheckUpdates.Checked;
             SettingsManagement.LoadScintSettings();
 

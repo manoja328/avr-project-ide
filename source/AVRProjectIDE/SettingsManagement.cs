@@ -352,7 +352,7 @@ namespace AVRProjectIDE
 
             GetArduinoPaths();
 
-            string buildOutput = iniFile.Read("Editor", "BuildOutputBehaviour");
+            string buildOutput = iniFile.Read("Editor", "BuildMessageBehaviour");
 
             if (string.IsNullOrEmpty(buildOutput))
                 buildOutput = "top";
@@ -471,6 +471,7 @@ namespace AVRProjectIDE
             bool success = true;
             try
             {
+                int cnt = 0;
                 writer = new StreamWriter(recentFilePath);
                 foreach (string file in recentFileList)
                 {
@@ -478,7 +479,11 @@ namespace AVRProjectIDE
                     if (File.Exists(f))
                     {
                         writer.WriteLine(f);
+                        cnt++;
                     }
+
+                    if (cnt > 15)
+                        break;
                 }
             }
             catch
@@ -544,6 +549,49 @@ namespace AVRProjectIDE
             return success;
         }
 
+        public static string LastProjectPath
+        {
+            get
+            {
+                try
+                {
+                    return recentFileList[0];
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+        }
+
+        public static bool OpenLastProject
+        {
+            get
+            {
+                bool res = false;
+                string str = iniFile.Read("Editor", "OpenLastProject");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    OpenLastProject = res;
+                    res = OpenLastProject;
+                    return false;
+                }
+
+                res = str == true.ToString().Trim().ToLowerInvariant();
+
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Editor", "OpenLastProject", value.ToString().Trim().ToLowerInvariant());
+            }
+        }
+
         #endregion
 
         #region Scintilla Settings Related
@@ -574,6 +622,7 @@ namespace AVRProjectIDE
 
         static bool showLineNumber = true;
         static bool showWS = false;
+        static bool highlightCurLine = false;
 
         static int zoomLevel = int.MinValue;
         public static int ZoomLevel
@@ -893,7 +942,15 @@ namespace AVRProjectIDE
                     showWS = tmpStr == true.ToString().Trim().ToLowerInvariant();
                 }
 
-                
+                tmpStr = iniFile.Read("Editor", "HighlightCurrentLine");
+                if (string.IsNullOrEmpty(tmpStr))
+                {
+                    iniFile.Write("Editor", "HighlightCurrentLine", highlightCurLine.ToString().ToLowerInvariant().Trim());
+                }
+                else
+                {
+                    highlightCurLine = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                }                
 
                 scint.Dispose(); // dispose of the scint, it causes an exception if it is not disposed manually
             }
@@ -997,6 +1054,8 @@ namespace AVRProjectIDE
             scinti.AutoComplete.AutomaticLengthEntered = true;
             scinti.AutoComplete.FillUpCharacters = "";
             scinti.AutoComplete.AutoHide = true;
+
+            scinti.Caret.HighlightCurrentLine = highlightCurLine;
 
             return scinti;
         }

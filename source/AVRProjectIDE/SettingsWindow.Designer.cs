@@ -64,6 +64,8 @@
             this.radMsgOnTop = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radMsgOnBottom = new System.Windows.Forms.RadioButton();
+            this.chkReopenProject = new System.Windows.Forms.CheckBox();
+            this.chkHighlightCurLine = new System.Windows.Forms.CheckBox();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -85,7 +87,7 @@
             this.groupBox9.Controls.Add(this.btnFindArduinoCore);
             this.groupBox9.Location = new System.Drawing.Point(12, 64);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(644, 74);
+            this.groupBox9.Size = new System.Drawing.Size(725, 74);
             this.groupBox9.TabIndex = 4;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Arduino Related Folders";
@@ -119,13 +121,13 @@
             this.txtArduinoLibs.Location = new System.Drawing.Point(77, 45);
             this.txtArduinoLibs.Name = "txtArduinoLibs";
             this.txtArduinoLibs.ReadOnly = true;
-            this.txtArduinoLibs.Size = new System.Drawing.Size(480, 20);
+            this.txtArduinoLibs.Size = new System.Drawing.Size(561, 20);
             this.txtArduinoLibs.TabIndex = 22;
             // 
             // btnFindArduinoLibs
             // 
             this.btnFindArduinoLibs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindArduinoLibs.Location = new System.Drawing.Point(563, 43);
+            this.btnFindArduinoLibs.Location = new System.Drawing.Point(644, 43);
             this.btnFindArduinoLibs.Name = "btnFindArduinoLibs";
             this.btnFindArduinoLibs.Size = new System.Drawing.Size(75, 23);
             this.btnFindArduinoLibs.TabIndex = 6;
@@ -140,13 +142,13 @@
             this.txtArduinoCore.Location = new System.Drawing.Point(77, 19);
             this.txtArduinoCore.Name = "txtArduinoCore";
             this.txtArduinoCore.ReadOnly = true;
-            this.txtArduinoCore.Size = new System.Drawing.Size(480, 20);
+            this.txtArduinoCore.Size = new System.Drawing.Size(561, 20);
             this.txtArduinoCore.TabIndex = 21;
             // 
             // btnFindArduinoCore
             // 
             this.btnFindArduinoCore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindArduinoCore.Location = new System.Drawing.Point(563, 17);
+            this.btnFindArduinoCore.Location = new System.Drawing.Point(644, 17);
             this.btnFindArduinoCore.Name = "btnFindArduinoCore";
             this.btnFindArduinoCore.Size = new System.Drawing.Size(75, 23);
             this.btnFindArduinoCore.TabIndex = 4;
@@ -163,7 +165,7 @@
             this.groupBox8.Controls.Add(this.btnFavoriteBrowse);
             this.groupBox8.Location = new System.Drawing.Point(12, 12);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(644, 46);
+            this.groupBox8.Size = new System.Drawing.Size(725, 46);
             this.groupBox8.TabIndex = 3;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Favorite Project Folder";
@@ -186,13 +188,13 @@
             this.txtFavoriteDir.Location = new System.Drawing.Point(77, 19);
             this.txtFavoriteDir.Name = "txtFavoriteDir";
             this.txtFavoriteDir.ReadOnly = true;
-            this.txtFavoriteDir.Size = new System.Drawing.Size(480, 20);
+            this.txtFavoriteDir.Size = new System.Drawing.Size(561, 20);
             this.txtFavoriteDir.TabIndex = 20;
             // 
             // btnFavoriteBrowse
             // 
             this.btnFavoriteBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFavoriteBrowse.Location = new System.Drawing.Point(563, 17);
+            this.btnFavoriteBrowse.Location = new System.Drawing.Point(644, 17);
             this.btnFavoriteBrowse.Name = "btnFavoriteBrowse";
             this.btnFavoriteBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnFavoriteBrowse.TabIndex = 2;
@@ -227,6 +229,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.chkHighlightCurLine);
             this.groupBox1.Controls.Add(this.dropSmartIndent);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.numIndentWidth);
@@ -245,7 +248,7 @@
             this.groupBox1.Controls.Add(this.chkAutocomplete);
             this.groupBox1.Location = new System.Drawing.Point(12, 144);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(644, 128);
+            this.groupBox1.Size = new System.Drawing.Size(725, 128);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editor Settings (may require restarting the editor to make changes take effect)";
@@ -472,7 +475,7 @@
             // btnSaveAndClose
             // 
             this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveAndClose.Location = new System.Drawing.Point(438, 371);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(519, 371);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnSaveAndClose.TabIndex = 20;
@@ -483,7 +486,7 @@
             // btnDiscardAndClose
             // 
             this.btnDiscardAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDiscardAndClose.Location = new System.Drawing.Point(549, 371);
+            this.btnDiscardAndClose.Location = new System.Drawing.Point(630, 371);
             this.btnDiscardAndClose.Name = "btnDiscardAndClose";
             this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnDiscardAndClose.TabIndex = 21;
@@ -526,11 +529,32 @@
             this.radMsgOnBottom.UseVisualStyleBackColor = true;
             this.radMsgOnBottom.CheckedChanged += new System.EventHandler(this.radMsgOn_CheckedChanged);
             // 
+            // chkReopenProject
+            // 
+            this.chkReopenProject.AutoSize = true;
+            this.chkReopenProject.Location = new System.Drawing.Point(218, 278);
+            this.chkReopenProject.Name = "chkReopenProject";
+            this.chkReopenProject.Size = new System.Drawing.Size(194, 17);
+            this.chkReopenProject.TabIndex = 9;
+            this.chkReopenProject.Text = "Reopen Last Open Project On Start";
+            this.chkReopenProject.UseVisualStyleBackColor = true;
+            // 
+            // chkHighlightCurLine
+            // 
+            this.chkHighlightCurLine.AutoSize = true;
+            this.chkHighlightCurLine.Location = new System.Drawing.Point(535, 19);
+            this.chkHighlightCurLine.Name = "chkHighlightCurLine";
+            this.chkHighlightCurLine.Size = new System.Drawing.Size(127, 17);
+            this.chkHighlightCurLine.TabIndex = 19;
+            this.chkHighlightCurLine.Text = "Highlight Current Line";
+            this.chkHighlightCurLine.UseVisualStyleBackColor = true;
+            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 406);
+            this.ClientSize = new System.Drawing.Size(747, 406);
+            this.Controls.Add(this.chkReopenProject);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnSaveAndClose);
             this.Controls.Add(this.btnDiscardAndClose);
@@ -600,5 +624,7 @@
         private System.Windows.Forms.RadioButton radMsgOnTop;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radMsgOnBottom;
+        private System.Windows.Forms.CheckBox chkReopenProject;
+        private System.Windows.Forms.CheckBox chkHighlightCurLine;
     }
 }

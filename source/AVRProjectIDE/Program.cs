@@ -69,10 +69,32 @@ namespace AVRProjectIDE
                         MessageBox.Show("Error, failed to open file");
                     }
                 }
+                else if (SettingsManagement.OpenLastProject)
+                {
+                    if (string.IsNullOrEmpty(SettingsManagement.LastProjectPath) == false)
+                    {
+                        if (newProject.Open(SettingsManagement.LastProjectPath) == true)
+                        {
+                            SettingsManagement.AddFileAsMostRecent(SettingsManagement.LastProjectPath);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error, failed to open file");
+                        }
+                    }
+                }
 
                 KeywordScanner.Initialize();
 
                 Application.Run(new IDEWindow(newProject));
+
+                if (newProject.IsReady)
+                {
+                    if (SettingsManagement.SaveRecentList() == false)
+                    {
+                        MessageBox.Show("Error, Could Not Save Recent File List");
+                    }
+                }
             }
             catch (Exception ex)
             {
