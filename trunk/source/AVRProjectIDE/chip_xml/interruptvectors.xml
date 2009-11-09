@@ -1308,6 +1308,7 @@
 			<HasVector NewName="PCINT2_vect" OldName="SIG_PIN_CHANGE2">Pin Change Interrupt Request 2</HasVector>
 			<HasVector NewName="SPI_STC_vect" OldName="SIG_SPI">Serial Transfer Complete</HasVector>
 			<HasVector NewName="SPM_READY_vect" OldName="SIG_SPM_READY">Store Program Memory Read</HasVector>
+			<HasVector NewName="TIMER0_COMPA_vect" OldName="SIG_OUTPUT_COMPARE0A, SIG_OUTPUT_COMPARE0_A">Timer Counter 0 Compare Match A</HasVector>
 			<HasVector NewName="TIMER0_COMPB_vect" OldName="SIG_OUTPUT_COMPARE0B, SIG_OUTPUT_COMPARE0_B">Timer Counter 0 Compare Match B</HasVector>
 			<HasVector NewName="TIMER0_OVF_vect" OldName="SIG_OVERFLOW0">Timer/Counter0 Overflow</HasVector>
 			<HasVector NewName="TIMER1_CAPT_vect" OldName="SIG_INPUT_CAPTURE1">Timer/Counter Capture Event</HasVector>

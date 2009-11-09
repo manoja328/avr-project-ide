@@ -183,6 +183,8 @@ namespace AVRProjectIDE
         public SaveResult Save()
         {
             SaveBookmarks();
+            SaveFolding();
+            File.CursorPos = scint.CurrentPos;
 
             if (string.IsNullOrEmpty(file.FileAbsPath) == false)
                 return Save(file.FileAbsPath);
@@ -192,11 +194,44 @@ namespace AVRProjectIDE
 
         private void SaveBookmarks()
         {
-            File.Bookmarks.Clear();
-            foreach (Line l in scint.Lines)
+            try
             {
-                if (scint.Markers.GetMarkerMask(l.Number) != 0)
-                    File.Bookmarks.Add(l.Number);
+                File.Bookmarks.Clear();
+                foreach (Line l in scint.Lines)
+                {
+                    if (scint.Markers.GetMarkerMask(l.Number) != 0)
+                        File.Bookmarks.Add(l.Number);
+                }
+            }
+            catch { }
+        }
+
+        private void SaveFolding()
+        {
+            return;
+            try
+            {
+                File.FoldedLines.Clear();
+                foreach (Line l in scint.Lines)
+                {
+                    try
+                    {
+                        if (l.FoldExpanded == false)
+                        {
+                            if (File.FoldedLines.ContainsKey(l.FoldParent.Number) == false)
+                            {
+                                File.FoldedLines.Add(l.FoldParent.Number, l.FoldLevel);
+                            }
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Error Saving Folding: " + ex.ToString());
             }
         }
 
@@ -287,6 +322,7 @@ namespace AVRProjectIDE
                     if (ReadFromFile(file.BackupPath))
                     {
                         ApplyBookmarks();
+                        ApplyFolding();
 
                         DeleteBackup();
 
@@ -307,6 +343,10 @@ namespace AVRProjectIDE
                 bool res = LoadFile(file.FileAbsPath);
 
                 ApplyBookmarks();
+                ApplyFolding();
+
+                scint.CurrentPos = file.CursorPos;
+                scint.GoTo.Position(file.CursorPos);
 
                 return res;
             }
@@ -326,6 +366,7 @@ namespace AVRProjectIDE
                             file.FileAbsPath = openFileDialog1.FileName;
 
                             ApplyBookmarks();
+                            ApplyFolding();
 
                             return true;
                         }
@@ -342,14 +383,47 @@ namespace AVRProjectIDE
 
         private void ApplyBookmarks()
         {
-            scint.Markers.DeleteAll();
-
-            foreach (int i in File.Bookmarks)
+            try
             {
-                if (scint.Markers.GetMarkerMask(i) == 0)
+                scint.Markers.DeleteAll();
+
+                foreach (int i in File.Bookmarks)
                 {
-                    scint.Lines[i].AddMarker(0);
+                    if (scint.Markers.GetMarkerMask(i) == 0)
+                    {
+                        scint.Lines[i].AddMarker(0);
+                    }
                 }
+            }
+            catch { }
+        }
+
+        private void ApplyFolding()
+        {
+            //return;
+            try
+            {
+                foreach (Line l in scint.Lines)
+                {
+                    try
+                    {
+                        if (l.FoldExpanded == true)
+                        {
+                            if (File.FoldedLines.ContainsKey(l.FoldParent.Number))
+                            {
+                                l.FoldLevel = File.FoldedLines[l.FoldParent.Number];
+                                l.FoldExpanded = false;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Error Loading Folding: " + ex.ToString());
             }
         }
 
@@ -473,6 +547,13 @@ namespace AVRProjectIDE
                 if (e.Cancel == false)
                     file.IsOpen = false;
             }
+            else if (HasChanged == false)
+            {
+                SaveBookmarks();
+                SaveFolding();
+                File.CursorPos = scint.CurrentPos;
+            }
+
             if (e.Cancel == false)
             {
                 WatchingForChange = false;

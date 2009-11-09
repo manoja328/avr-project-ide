@@ -109,6 +109,19 @@ namespace AVRProjectIDE
             get { return bookMarks; }
         }
 
+        private Dictionary<int, int> foldedLines = new Dictionary<int, int>();
+        public Dictionary<int, int> FoldedLines
+        {
+            get { return foldedLines; }
+        }
+
+        private int cursorPos = 0;
+        public int CursorPos
+        {
+            get { return cursorPos; }
+            set { cursorPos = value; }
+        }
+
         #endregion
 
         public ProjectFile(string fileAbsPath)
@@ -152,6 +165,10 @@ namespace AVRProjectIDE
             newFile.Bookmarks.Clear();
             foreach (int i in this.bookMarks)
                 newFile.Bookmarks.Add(i);
+
+            newFile.FoldedLines.Clear();
+            foreach (KeyValuePair<int, int> i in this.foldedLines)
+                newFile.FoldedLines.Add(i.Key, i.Value);
 
             return newFile;
         }
@@ -643,10 +660,17 @@ namespace AVRProjectIDE
                     xml.WriteElementString("Options", file.Value.Options);
                     xml.WriteElementString("WasOpen", file.Value.IsOpen.ToString().ToLowerInvariant());
 
+                    xml.WriteElementString("CursorPos", file.Value.CursorPos.ToString("0"));
+
                     xml.WriteStartElement("Bookmarks");
                     foreach (int i in file.Value.Bookmarks)
                         xml.WriteString(i.ToString("0") + ",");
                     xml.WriteEndElement();
+
+                    //xml.WriteStartElement("FoldedLines");
+                    //foreach (KeyValuePair<int, int> i in file.Value.FoldedLines)
+                    //    xml.WriteString(i.Key.ToString("0") + ":" + i.Value + ",");
+                    //xml.WriteEndElement();
 
                     xml.WriteEndElement();
                 }
@@ -680,7 +704,13 @@ namespace AVRProjectIDE
 
         public bool Open(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                return false;
+
             path = Program.CleanFilePath(path);
+
+            if (File.Exists(path) == false)
+                return false;
 
             bool success = true;
 
@@ -899,6 +929,13 @@ namespace AVRProjectIDE
                                 newFile.IsOpen = wasOpen.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
                             }
 
+                            foreach (XmlElement cursorPos in i.GetElementsByTagName("CursorPos"))
+                            {
+                                int curPos = 0;
+                                if (int.TryParse(cursorPos.InnerText, out curPos))
+                                    newFile.CursorPos = curPos;
+                            }
+
                             newFile.Bookmarks.Clear();
                             foreach (XmlElement bookMarks in i.GetElementsByTagName("Bookmarks"))
                             {
@@ -915,6 +952,29 @@ namespace AVRProjectIDE
                                 }
                             }
 
+                            newFile.FoldedLines.Clear();
+                            foreach (XmlElement foldedLines in i.GetElementsByTagName("FoldedLines"))
+                            {
+                                try
+                                {
+                                    string tmp = foldedLines.InnerText;
+                                    string[] foldListStr = tmp.Split(new char[] { ',', ' ', '\t', '\n', '\r', '\0', });
+                                    foreach (string s in foldListStr)
+                                    {
+                                        if (string.IsNullOrEmpty(s) == false)
+                                        {
+                                            string[] kv = s.Split(':');
+
+                                            int lineNum = -1;
+                                            int foldLvl = -1;
+                                            if (int.TryParse(kv[0], out lineNum) && int.TryParse(kv[1], out foldLvl))
+                                                newFile.FoldedLines.Add(lineNum, foldLvl);
+                                        }
+                                    }
+                                }
+                                catch { }
+                            }
+
                             flistNew.Add(newFile);
 
                             if (xDirPath != dirPath)
@@ -924,10 +984,15 @@ namespace AVRProjectIDE
                                 oldFile.ToCompile = newFile.ToCompile;
                                 oldFile.Options = newFile.Options;
                                 oldFile.IsOpen = newFile.IsOpen;
+                                oldFile.CursorPos = newFile.CursorPos;
 
                                 oldFile.Bookmarks.Clear();
                                 foreach (int j in newFile.Bookmarks)
                                     oldFile.Bookmarks.Add(j);
+
+                                oldFile.FoldedLines.Clear();
+                                foreach (KeyValuePair<int, int> j in newFile.FoldedLines)
+                                    oldFile.FoldedLines.Add(j.Key, j.Value);
 
                                 flistOld.Add(oldFile);
                             }
