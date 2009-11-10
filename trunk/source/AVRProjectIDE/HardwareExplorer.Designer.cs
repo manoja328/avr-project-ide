@@ -36,9 +36,15 @@
             this.treeIOModules = new System.Windows.Forms.TreeView();
             this.txtIOModuleInfo = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.listInterrupts = new System.Windows.Forms.ListBox();
-            this.txtInterruptInfo = new System.Windows.Forms.TextBox();
+            this.listInterruptsAVRLibc = new System.Windows.Forms.ListBox();
+            this.txtInterruptInfoAVRLibc = new System.Windows.Forms.TextBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.listInterruptsAtmelXML = new System.Windows.Forms.ListBox();
+            this.txtInterruptInfoAtmelXML = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.treePins = new System.Windows.Forms.TreeView();
@@ -54,9 +60,15 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -159,7 +171,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.splitContainer4);
+            this.tabPage3.Controls.Add(this.tabControl2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -167,6 +179,28 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Interrupts";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage6);
+            this.tabControl2.Controls.Add(this.tabPage7);
+            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.Location = new System.Drawing.Point(3, 3);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(322, 440);
+            this.tabControl2.TabIndex = 3;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.splitContainer4);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(314, 414);
+            this.tabPage6.TabIndex = 0;
+            this.tabPage6.Text = "Data Source: AVR Libc";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // splitContainer4
             // 
@@ -177,35 +211,85 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.listInterrupts);
+            this.splitContainer4.Panel1.Controls.Add(this.listInterruptsAVRLibc);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.txtInterruptInfo);
-            this.splitContainer4.Size = new System.Drawing.Size(322, 440);
-            this.splitContainer4.SplitterDistance = 316;
+            this.splitContainer4.Panel2.Controls.Add(this.txtInterruptInfoAVRLibc);
+            this.splitContainer4.Size = new System.Drawing.Size(308, 408);
+            this.splitContainer4.SplitterDistance = 293;
             this.splitContainer4.TabIndex = 2;
             // 
-            // listInterrupts
+            // listInterruptsAVRLibc
             // 
-            this.listInterrupts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listInterrupts.FormattingEnabled = true;
-            this.listInterrupts.Location = new System.Drawing.Point(0, 0);
-            this.listInterrupts.Name = "listInterrupts";
-            this.listInterrupts.Size = new System.Drawing.Size(322, 316);
-            this.listInterrupts.TabIndex = 0;
-            this.listInterrupts.SelectedIndexChanged += new System.EventHandler(this.listInterrupts_SelectedIndexChanged);
+            this.listInterruptsAVRLibc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listInterruptsAVRLibc.FormattingEnabled = true;
+            this.listInterruptsAVRLibc.Location = new System.Drawing.Point(0, 0);
+            this.listInterruptsAVRLibc.Name = "listInterruptsAVRLibc";
+            this.listInterruptsAVRLibc.Size = new System.Drawing.Size(308, 290);
+            this.listInterruptsAVRLibc.TabIndex = 0;
+            this.listInterruptsAVRLibc.SelectedIndexChanged += new System.EventHandler(this.listInterruptsAVRLibc_SelectedIndexChanged);
             // 
-            // txtInterruptInfo
+            // txtInterruptInfoAVRLibc
             // 
-            this.txtInterruptInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInterruptInfo.Location = new System.Drawing.Point(0, 0);
-            this.txtInterruptInfo.Multiline = true;
-            this.txtInterruptInfo.Name = "txtInterruptInfo";
-            this.txtInterruptInfo.ReadOnly = true;
-            this.txtInterruptInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtInterruptInfo.Size = new System.Drawing.Size(322, 120);
-            this.txtInterruptInfo.TabIndex = 1;
+            this.txtInterruptInfoAVRLibc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInterruptInfoAVRLibc.Location = new System.Drawing.Point(0, 0);
+            this.txtInterruptInfoAVRLibc.Multiline = true;
+            this.txtInterruptInfoAVRLibc.Name = "txtInterruptInfoAVRLibc";
+            this.txtInterruptInfoAVRLibc.ReadOnly = true;
+            this.txtInterruptInfoAVRLibc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtInterruptInfoAVRLibc.Size = new System.Drawing.Size(308, 111);
+            this.txtInterruptInfoAVRLibc.TabIndex = 1;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.splitContainer5);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(314, 414);
+            this.tabPage7.TabIndex = 1;
+            this.tabPage7.Text = "Data Source: Atmel XML";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer5.Name = "splitContainer5";
+            this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.listInterruptsAtmelXML);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.txtInterruptInfoAtmelXML);
+            this.splitContainer5.Size = new System.Drawing.Size(308, 408);
+            this.splitContainer5.SplitterDistance = 293;
+            this.splitContainer5.TabIndex = 3;
+            // 
+            // listInterruptsAtmelXML
+            // 
+            this.listInterruptsAtmelXML.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listInterruptsAtmelXML.FormattingEnabled = true;
+            this.listInterruptsAtmelXML.Location = new System.Drawing.Point(0, 0);
+            this.listInterruptsAtmelXML.Name = "listInterruptsAtmelXML";
+            this.listInterruptsAtmelXML.Size = new System.Drawing.Size(308, 290);
+            this.listInterruptsAtmelXML.TabIndex = 0;
+            this.listInterruptsAtmelXML.SelectedIndexChanged += new System.EventHandler(this.listInterruptsAtmelXML_SelectedIndexChanged);
+            // 
+            // txtInterruptInfoAtmelXML
+            // 
+            this.txtInterruptInfoAtmelXML.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInterruptInfoAtmelXML.Location = new System.Drawing.Point(0, 0);
+            this.txtInterruptInfoAtmelXML.Multiline = true;
+            this.txtInterruptInfoAtmelXML.Name = "txtInterruptInfoAtmelXML";
+            this.txtInterruptInfoAtmelXML.ReadOnly = true;
+            this.txtInterruptInfoAtmelXML.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtInterruptInfoAtmelXML.Size = new System.Drawing.Size(308, 111);
+            this.txtInterruptInfoAtmelXML.TabIndex = 1;
             // 
             // tabPage4
             // 
@@ -342,10 +426,17 @@
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
             this.splitContainer4.Panel2.PerformLayout();
             this.splitContainer4.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            this.splitContainer5.Panel2.PerformLayout();
+            this.splitContainer5.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
@@ -373,13 +464,19 @@
         private System.Windows.Forms.TreeView treeIOModules;
         private System.Windows.Forms.TextBox txtIOModuleInfo;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.ListBox listInterrupts;
-        private System.Windows.Forms.TextBox txtInterruptInfo;
+        private System.Windows.Forms.ListBox listInterruptsAVRLibc;
+        private System.Windows.Forms.TextBox txtInterruptInfoAVRLibc;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.TreeView treePins;
         private System.Windows.Forms.TextBox txtPinsInfo;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TreeView treeXML;
         private System.Windows.Forms.TextBox txtXMLInfo;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.ListBox listInterruptsAtmelXML;
+        private System.Windows.Forms.TextBox txtInterruptInfoAtmelXML;
     }
 }
