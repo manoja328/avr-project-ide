@@ -15,7 +15,8 @@ namespace AVRProjectIDE
     public partial class HardwareExplorer : DockContent
     {
         private string chipName;
-        private Dictionary<string, Dictionary<string, IntVect>> intVectList = new Dictionary<string, Dictionary<string, IntVect>>();
+        private Dictionary<string, Dictionary<string, IntVect>> intVectListAVRLibc = new Dictionary<string, Dictionary<string, IntVect>>();
+        private Dictionary<string, string> intVectListAtmelXML = new Dictionary<string, string>();
 
         public HardwareExplorer()
         {
@@ -31,9 +32,9 @@ namespace AVRProjectIDE
             treeIOModules.Nodes.Clear();
             treePins.Nodes.Clear();
             treeXML.Nodes.Clear();
-            listInterrupts.Items.Clear();
+            listInterruptsAVRLibc.Items.Clear();
             txtChipInfo.Text = "";
-            txtInterruptInfo.Text = "";
+            txtInterruptInfoAVRLibc.Text = "";
             txtIOModuleInfo.Text = "";
             txtPinsInfo.Text = "";
             txtXMLInfo.Text = "";
@@ -82,8 +83,8 @@ namespace AVRProjectIDE
             {
                 txtChipInfo.Text = "Error while loading chip data: " + ex.Message;
 
-                intVectList = LoadInterruptList(intVectList);
-                GetInterruptsForChip(listInterrupts, chipName);
+                intVectListAVRLibc = LoadInterruptList(intVectListAVRLibc);
+                GetInterruptsForChip(chipName);
 
                 return;
             }
@@ -95,8 +96,10 @@ namespace AVRProjectIDE
             LoadPinTree(treePins, docEle);
             LoadIOModuleTree(treeIOModules, docEle);
 
-            intVectList = LoadInterruptList(intVectList);
-            GetInterruptsForChip(listInterrupts, chipName);
+            intVectListAVRLibc = LoadInterruptList(intVectListAVRLibc);
+            intVectListAtmelXML = LoadInterruptListFromAtmelXML(docEle, intVectListAtmelXML);
+
+            GetInterruptsForChip(chipName);
         }
 
         private void LoadIOModuleTree(TreeView treeIOModules, XmlElement docEle)
@@ -235,17 +238,79 @@ namespace AVRProjectIDE
             }
         }
 
-        private void GetInterruptsForChip(ListBox listInterrupts, string chipName)
+        private void GetInterruptsForChip(string chipName)
         {
-            if (intVectList.ContainsKey(chipName) == false)
+            listInterruptsAtmelXML.Items.Clear();
+
+            foreach (KeyValuePair<string, string> i in intVectListAtmelXML)
+            {
+                listInterruptsAtmelXML.Items.Add(i.Key);
+            }
+
+            if (intVectListAVRLibc.ContainsKey(chipName) == false)
                 return;
 
-            listInterrupts.Items.Clear();
+            listInterruptsAVRLibc.Items.Clear();
 
-            foreach (IntVect v in intVectList[chipName].Values)
+            foreach (IntVect v in intVectListAVRLibc[chipName].Values)
             {
-                listInterrupts.Items.Add(v.Description);
+                listInterruptsAVRLibc.Items.Add(v.Description);
             }
+        }
+
+        private Dictionary<string, string> LoadInterruptListFromAtmelXML(XmlElement docEle, Dictionary<string, string> intVectList)
+        {
+            try
+            {
+                foreach (XmlElement intContainer in docEle.GetElementsByTagName("INTERRUPT_VECTOR"))
+                {
+                    intVectListAtmelXML.Clear();
+
+                    for (int i = 0; i < 256; i++)
+                    {
+                        foreach (XmlElement vectEle in intContainer.GetElementsByTagName("VECTOR" + i.ToString("0")))
+                        {
+                            string name = "";
+                            string desc = "";
+
+                            foreach (XmlElement xEle in vectEle.GetElementsByTagName("DEFINITION"))
+                            {
+                                name = xEle.InnerText;
+                                desc += xEle.InnerText + "\r\n";
+                            }
+
+                            foreach (XmlElement xEle in vectEle.GetElementsByTagName("SOURCE"))
+                            {
+                                desc += "Source: " + xEle.InnerText + "\r\n";
+                            }
+
+                            int progAddr = -1;
+                            foreach (XmlElement xProgAddr in vectEle.GetElementsByTagName("PROGRAM_ADDRESS"))
+                            {
+                                if (Program.TryParseText(xProgAddr.InnerText, out progAddr))
+                                {
+                                    desc += String.Format("Addr: 0x{0:X4}\r\n", progAddr);
+                                }
+                            }
+
+                            if (string.IsNullOrEmpty(name) == false)
+                            {
+                                while (intVectListAtmelXML.ContainsKey(name))
+                                    name += "_";
+
+                                intVectListAtmelXML.Add(name, desc);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while loading interrupt vector data: " + ex.Message);
+                return intVectList;
+            }
+
+            return intVectList;
         }
 
         private Dictionary<string, Dictionary<string, IntVect>> LoadInterruptList(Dictionary<string, Dictionary<string, IntVect>> intVectList)
@@ -609,22 +674,35 @@ namespace AVRProjectIDE
             txtPinsInfo.Text = e.Node.ToolTipText;
         }
 
-        private void listInterrupts_SelectedIndexChanged(object sender, EventArgs e)
+        private void listInterruptsAVRLibc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listInterrupts.SelectedIndex < 0)
+            if (listInterruptsAVRLibc.SelectedIndex < 0)
                 return;
 
-            string desc = (string)listInterrupts.Items[listInterrupts.SelectedIndex];
+            string desc = (string)listInterruptsAVRLibc.Items[listInterruptsAVRLibc.SelectedIndex];
 
-            if (intVectList.ContainsKey(chipName) == false)
+            if (intVectListAVRLibc.ContainsKey(chipName) == false)
                 return;
 
-            if (intVectList[chipName].ContainsKey(desc) == false)
+            if (intVectListAVRLibc[chipName].ContainsKey(desc) == false)
                 return;
 
-            txtInterruptInfo.Text = "New Vector Name: " + intVectList[chipName][desc].NewName;
-            if (string.IsNullOrEmpty(intVectList[chipName][desc].OldName) == false)
-                txtInterruptInfo.Text += "\r\n" + "Old Vector Name: " + intVectList[chipName][desc].OldName;
+            txtInterruptInfoAVRLibc.Text = "New Vector Name: " + intVectListAVRLibc[chipName][desc].NewName;
+            if (string.IsNullOrEmpty(intVectListAVRLibc[chipName][desc].OldName) == false)
+                txtInterruptInfoAVRLibc.Text += "\r\n" + "Old Vector Name: " + intVectListAVRLibc[chipName][desc].OldName;
+        }
+
+        private void listInterruptsAtmelXML_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listInterruptsAtmelXML.SelectedIndex < 0)
+                return;
+
+            string desc = (string)listInterruptsAtmelXML.Items[listInterruptsAtmelXML.SelectedIndex];
+
+            if (intVectListAtmelXML.ContainsKey(desc) == false)
+                return;
+
+            txtInterruptInfoAtmelXML.Text = intVectListAtmelXML[desc];
         }
 
         private void treeXML_AfterSelect(object sender, TreeViewEventArgs e)
