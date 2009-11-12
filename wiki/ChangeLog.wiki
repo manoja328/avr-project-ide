@@ -4,6 +4,7 @@
 
  * Added file creation wizard
  * File tree panel now sorts files alphabetically
+ * Added ability to delete files
 
 ==Alpha 58==
 
