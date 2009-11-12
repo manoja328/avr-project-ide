@@ -67,7 +67,7 @@ To insert formated date and time, do something like this:
 %DATETIME:MM/dd/yyyy hh:mm:ss%
 }}}
 
-Reference http://msdn.microsoft.com/en-us/library/az4se3k1.aspx for the formatting string
+Reference http://msdn.microsoft.com/en-us/library/8kb3ddd4.aspx for the formatting string
 
 Also available (self explanatory):
 
