@@ -10,7 +10,7 @@ namespace AVRProjectIDE
     {
         public static string TemplateFolderPath
         {
-            get { return SettingsManagement.AppDataPath + Path.DirectorySeparatorChar + "file_templates" + Path.DirectorySeparatorChar; }
+            get { return SettingsManagement.AppDataPath + "file_templates" + Path.DirectorySeparatorChar; }
         }
 
         private static string PrepFinalTemplate(string template)

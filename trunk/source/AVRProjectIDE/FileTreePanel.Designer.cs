@@ -41,6 +41,7 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.treeRClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mbtnAddFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnAddFileWiz = new System.Windows.Forms.ToolStripMenuItem();
             this.imgListFileTree = new System.Windows.Forms.ImageList(this.components);
             this.nodeRClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mbtnRename = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,17 +82,25 @@
             // treeRClickMenu
             // 
             this.treeRClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mbtnAddFile});
+            this.mbtnAddFile,
+            this.mbtnAddFileWiz});
             this.treeRClickMenu.Name = "treeRClickMenu";
             this.treeRClickMenu.ShowImageMargin = false;
-            this.treeRClickMenu.Size = new System.Drawing.Size(93, 26);
+            this.treeRClickMenu.Size = new System.Drawing.Size(155, 70);
             // 
             // mbtnAddFile
             // 
             this.mbtnAddFile.Name = "mbtnAddFile";
-            this.mbtnAddFile.Size = new System.Drawing.Size(92, 22);
-            this.mbtnAddFile.Text = "Add File";
+            this.mbtnAddFile.Size = new System.Drawing.Size(154, 22);
+            this.mbtnAddFile.Text = "Add / Find File";
             this.mbtnAddFile.Click += new System.EventHandler(this.mbtnAddFile_Click);
+            // 
+            // mbtnAddFileWiz
+            // 
+            this.mbtnAddFileWiz.Name = "mbtnAddFileWiz";
+            this.mbtnAddFileWiz.Size = new System.Drawing.Size(154, 22);
+            this.mbtnAddFileWiz.Text = "Add File using Wizard";
+            this.mbtnAddFileWiz.Click += new System.EventHandler(this.mbtnAddFileWiz_Click);
             // 
             // imgListFileTree
             // 
@@ -114,26 +123,26 @@
             this.mbtnSetOpt});
             this.nodeRClickMenu.Name = "rClickMenu";
             this.nodeRClickMenu.ShowImageMargin = false;
-            this.nodeRClickMenu.Size = new System.Drawing.Size(159, 70);
+            this.nodeRClickMenu.Size = new System.Drawing.Size(148, 70);
             // 
             // mbtnRename
             // 
             this.mbtnRename.Name = "mbtnRename";
-            this.mbtnRename.Size = new System.Drawing.Size(158, 22);
+            this.mbtnRename.Size = new System.Drawing.Size(147, 22);
             this.mbtnRename.Text = "Rename";
             this.mbtnRename.Click += new System.EventHandler(this.mbtnRename_Click);
             // 
             // mbtnRemove
             // 
             this.mbtnRemove.Name = "mbtnRemove";
-            this.mbtnRemove.Size = new System.Drawing.Size(158, 22);
+            this.mbtnRemove.Size = new System.Drawing.Size(147, 22);
             this.mbtnRemove.Text = "Remove";
             this.mbtnRemove.Click += new System.EventHandler(this.mbtnDelete_Click);
             // 
             // mbtnSetOpt
             // 
             this.mbtnSetOpt.Name = "mbtnSetOpt";
-            this.mbtnSetOpt.Size = new System.Drawing.Size(158, 22);
+            this.mbtnSetOpt.Size = new System.Drawing.Size(147, 22);
             this.mbtnSetOpt.Text = "Set Compile Options";
             this.mbtnSetOpt.Click += new System.EventHandler(this.mbtnSetOpt_Click);
             // 
@@ -171,5 +180,6 @@
         private System.Windows.Forms.ToolStripMenuItem mbtnSetOpt;
         private System.Windows.Forms.ContextMenuStrip treeRClickMenu;
         private System.Windows.Forms.ToolStripMenuItem mbtnAddFile;
+        private System.Windows.Forms.ToolStripMenuItem mbtnAddFileWiz;
     }
 }

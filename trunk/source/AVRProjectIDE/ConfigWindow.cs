@@ -607,7 +607,13 @@ namespace AVRProjectIDE
         {
             ApplyChanges();
             closingViaButtons = true;
-            this.Close();
+
+            if (project.Save() == SaveResult.Failed)
+            {
+                MessageBox.Show("Error saving project");
+            }
+            else
+                this.Close();
         }
 
         private void btnDiscardAndClose_Click(object sender, EventArgs e)

@@ -493,7 +493,7 @@ namespace AVRProjectIDE
             else
             {
                 ProjectFile file;
-                if (fileTreeWin.AddFile(out file) == SaveResult.Successful)
+                if (fileTreeWin.AddFileWiz(out file) == SaveResult.Successful)
                 {
                     GotoEditor(file.FileName);
                 }
