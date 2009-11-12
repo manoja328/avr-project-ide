@@ -265,6 +265,31 @@ namespace AVRProjectIDE
             }
         }
 
+        public static string LastFileExt
+        {
+            get
+            {
+                string str = iniFile.Read("Wizard", "LastFileExt");
+
+                if (str != null)
+                    str = str.Trim().Trim(new char[] { '.', }).Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    str = "c";
+                    LastFileExt = str;
+                    str = LastFileExt;
+                }
+
+                return str.Trim();
+            }
+
+            set
+            {
+                iniFile.Write("Wizard", "LastFileExt", value.Trim());
+            }
+        }
+
         #endregion
 
         static public string AssemblyTitle
@@ -1346,7 +1371,7 @@ namespace AVRProjectIDE
         {
             get
             {
-                bool res = false;
+                bool res = true;
                 string str = iniFile.Read("Stuff", "CheckForUpdates");
 
                 if (str != null)
@@ -1356,7 +1381,7 @@ namespace AVRProjectIDE
                 {
                     CheckForUpdates = res;
                     res = CheckForUpdates;
-                    return false;
+                    return true;
                 }
 
                 res = str == true.ToString().Trim().ToLowerInvariant();

@@ -124,6 +124,7 @@
             this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Initial File Name:";
+            this.label3.Visible = false;
             // 
             // txtInitialFilename
             // 
@@ -133,6 +134,7 @@
             this.txtInitialFilename.Name = "txtInitialFilename";
             this.txtInitialFilename.Size = new System.Drawing.Size(121, 20);
             this.txtInitialFilename.TabIndex = 3;
+            this.txtInitialFilename.Visible = false;
             this.txtInitialFilename.TextChanged += new System.EventHandler(this.txtInitialFilename_TextChanged);
             // 
             // label4
@@ -144,6 +146,7 @@
             this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "Initial File Type:";
+            this.label4.Visible = false;
             // 
             // dropFileType
             // 
@@ -158,6 +161,7 @@
             this.dropFileType.Name = "dropFileType";
             this.dropFileType.Size = new System.Drawing.Size(100, 21);
             this.dropFileType.TabIndex = 4;
+            this.dropFileType.Visible = false;
             this.dropFileType.SelectedIndexChanged += new System.EventHandler(this.dropFileType_SelectedIndexChanged);
             // 
             // label5

@@ -46,7 +46,7 @@ namespace AVRProjectIDE
         {
             string fileName = node.Text;
 
-            ProjectFile f;
+            ProjectFile f = null;
             if (project.FileList.TryGetValue(fileName, out f))
             {
                 project.FileList.Remove(fileName);
@@ -60,6 +60,29 @@ namespace AVRProjectIDE
             }
 
             node.Remove();
+
+            if (f != null)
+            {
+                if (f.Exists)
+                {
+                    if (MessageBox.Show("Delete Permanently?", "Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            File.Delete(f.FileAbsPath);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Could not delete '" + f.FileAbsPath + "', " + ex.Message);
+                        }
+                    }
+                }
+            }
+
+            if (project.Save() == SaveResult.Failed)
+            {
+                MessageBox.Show("Error saving project");
+            }
         }
 
         public bool RenameNode(TreeNode node, string newName)
@@ -121,6 +144,11 @@ namespace AVRProjectIDE
 
                         project.FileList.Remove(node.Text);
                         project.FileList.Add(newName, f);
+
+                        if (project.Save() == SaveResult.Failed)
+                        {
+                            MessageBox.Show("Error saving project");
+                        }
 
                         return true;
                     }
@@ -192,6 +220,10 @@ namespace AVRProjectIDE
             headerNode.Nodes.Clear();
             otherNode.Nodes.Clear();
 
+            List<TreeNode> sourceNodeList = new List<TreeNode>();
+            List<TreeNode> headerNodeList = new List<TreeNode>();
+            List<TreeNode> otherNodeList = new List<TreeNode>();
+
             foreach (ProjectFile file in project.FileList.Values)
             {
                 KeywordScanner.FeedFileContent(file);
@@ -229,18 +261,41 @@ namespace AVRProjectIDE
                         tn.Checked = true;
                     }
 
-                    sourceNode.Nodes.Add(tn);
+                    sourceNodeList.Add(tn);
+                    //sourceNode.Nodes.Add(tn);
                 }
                 else if (ext.EndsWith(".h") || ext.EndsWith(".hpp"))
                 {
                     tn.Checked = false;
-                    headerNode.Nodes.Add(tn);
+
+                    //headerNode.Nodes.Add(tn);
+                    headerNodeList.Add(tn);
                 }
                 else
                 {
                     tn.Checked = false;
-                    otherNode.Nodes.Add(tn);
+
+                    //otherNode.Nodes.Add(tn);
+                    otherNodeList.Add(tn);
                 }
+            }
+
+            sourceNodeList.Sort((x, y) => string.Compare(x.Text, y.Text));
+            foreach (TreeNode i in sourceNodeList)
+            {
+                sourceNode.Nodes.Add(i);
+            }
+
+            headerNodeList.Sort((x, y) => string.Compare(x.Text, y.Text));
+            foreach (TreeNode i in headerNodeList)
+            {
+                headerNode.Nodes.Add(i);
+            }
+
+            otherNodeList.Sort((x, y) => string.Compare(x.Text, y.Text));
+            foreach (TreeNode i in otherNodeList)
+            {
+                otherNode.Nodes.Add(i);
             }
 
             treeView1.SuspendLayout();
@@ -253,6 +308,28 @@ namespace AVRProjectIDE
             treeView1.ResumeLayout();
 
             KeywordScanner.DoMoreWork();
+        }
+
+        public SaveResult AddFileWiz(out ProjectFile file)
+        {
+            file = null;
+
+            FileAddWizard faw = new FileAddWizard(project);
+            if (faw.ShowDialog() == DialogResult.OK)
+            {
+                if (faw.CreatedFile != null)
+                {
+                    file = faw.CreatedFile;
+                    PopulateList();
+                    return SaveResult.Successful;
+                }
+                else
+                {
+                    return SaveResult.Failed;
+                }
+            }
+            else
+                return SaveResult.Cancelled;
         }
 
         public SaveResult AddFile(out ProjectFile file)
@@ -268,7 +345,7 @@ namespace AVRProjectIDE
             string filter = "";
             filter += "C Source Code (*.c)|*.c" + "|";
             filter += "CPP Source Code (*.cpp)|*.cpp" + "|";
-            filter += "ASM Source Code (*.S)|*.S" + "|";
+            filter += "Assembly Source Code (*.S)|*.S" + "|";
             filter += "Arduino Source Code (*.pde)|*.pde" + "|";
             filter += "H Header File (*.h)|*.h" + "|";
             filter += "HPP Header File (*.hpp)|*.hpp" + "|";
@@ -352,6 +429,12 @@ namespace AVRProjectIDE
                 }
 
                 project.FileList.Add(fn, file);
+
+                if (project.Save() == SaveResult.Failed)
+                {
+                    MessageBox.Show("Error saving project");
+                }
+
                 PopulateList();
                 return SaveResult.Successful;
             }
@@ -434,6 +517,19 @@ namespace AVRProjectIDE
 
             ProjectFile file;
             if (AddFile(out file) == SaveResult.Successful)
+                OpenNode(new TreeNode(file.FileName)); // this is cheating, but i don't want to write another open event
+        }
+
+        private void mbtnAddFileWiz_Click(object sender, EventArgs e)
+        {
+            if (project == null)
+                return;
+
+            if (project.IsReady == false)
+                return;
+
+            ProjectFile file;
+            if (AddFileWiz(out file) == SaveResult.Successful)
                 OpenNode(new TreeNode(file.FileName)); // this is cheating, but i don't want to write another open event
         }
 

@@ -62,7 +62,7 @@ namespace AVRProjectIDE
 
             txtFolderPath.Text = SettingsManagement.FavFolder + Path.DirectorySeparatorChar;
 
-            string newFileName = DateTime.Now.ToShortDateString().Replace(' ', '_').Replace('-', '_').Replace(Path.AltDirectorySeparatorChar, '_').Replace(Path.DirectorySeparatorChar, '_'); ;
+            string newFileName = DateTime.Now.ToString("MM_dd_yyyy").Replace(' ', '_').Replace('-', '_').Replace(Path.AltDirectorySeparatorChar, '_').Replace(Path.DirectorySeparatorChar, '_'); ;
             char[] illegalChars = Path.GetInvalidFileNameChars();
             foreach (char c in illegalChars)
             {
@@ -89,6 +89,7 @@ namespace AVRProjectIDE
         private void btnFindFolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.SelectedPath = txtFolderPath.Text;
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 string newFolderPath = Program.CleanFilePath(fbd.SelectedPath)+ Path.DirectorySeparatorChar;
@@ -116,6 +117,7 @@ namespace AVRProjectIDE
         {
             string iniFilename = txtInitialFilename.Text.Trim();
             bool hasIniFile = !string.IsNullOrEmpty(iniFilename);
+            hasIniFile = false;
             string projFilename = txtProjName.Text.Trim();
             char[] forbidChars = Path.GetInvalidFileNameChars();
             foreach (char c in forbidChars)
@@ -240,14 +242,19 @@ namespace AVRProjectIDE
 
             project.FilePath = projFilePath;
 
+            FileAddWizard faw = new FileAddWizard(project);
+            faw.ShowDialog();
+
             if (project.Save(projFilePath) == false)
             {
                 MessageBox.Show("Error While Saving Project");
             }
-
-            if (project.Open(projFilePath) == false)
+            else
             {
-                MessageBox.Show("Error While Opening Project");
+                if (project.Open(projFilePath) == false)
+                {
+                    MessageBox.Show("Error While Opening Project");
+                }
             }
 
             this.DialogResult = DialogResult.OK;
