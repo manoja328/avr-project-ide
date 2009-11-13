@@ -1,6 +1,6 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
-===New file creation wizard in 59===
+===New file creation wizard in 59, with some fixes in 60===
 
 ===Fixed recent file list issue with 57, also added option to reopen last open project on start-up, open file cursor location is preserved between sessions now, current line now can be highlighted===
 
