@@ -27,6 +27,9 @@ namespace AVRProjectIDE
 
         public void LoadDataForChip(string chipName)
         {
+            //LoadWaitWindow lww = new LoadWaitWindow();
+            //lww.Show();
+
             this.chipName = chipName.Trim().ToLowerInvariant();
 
             treeIOModules.Nodes.Clear();
@@ -100,6 +103,8 @@ namespace AVRProjectIDE
             intVectListAtmelXML = LoadInterruptListFromAtmelXML(docEle, intVectListAtmelXML);
 
             GetInterruptsForChip(chipName);
+
+            //lww.Close();
         }
 
         private void LoadIOModuleTree(TreeView treeIOModules, XmlElement docEle)
@@ -153,16 +158,16 @@ namespace AVRProjectIDE
                                                 regNode.ToolTipText += "\r\n" + xText.InnerText + "\r\n";
                                             else if (xText.Name == "IO_ADDR")
                                             {
-                                                int num = 0;
-                                                if (Program.TryParseText(xText.InnerText, out num))
+                                                long num = 0;
+                                                if (Program.TryParseText(xText.InnerText, out num, false))
                                                     regNode.ToolTipText += String.Format("\r\nIO Address: 0x{0:X4} ( {0:0} )", num);
                                                 else if (string.IsNullOrEmpty(xText.InnerText.Trim()) == false)
                                                     regNode.ToolTipText += "\r\nIO Address: " + xText.InnerText.Trim();
                                             }
                                             else if (xText.Name == "MEM_ADDR")
                                             {
-                                                int num = 0;
-                                                if (Program.TryParseText(xText.InnerText, out num))
+                                                long num = 0;
+                                                if (Program.TryParseText(xText.InnerText, out num, false))
                                                     regNode.ToolTipText += String.Format("\r\nMemory Address: 0x{0:X4} ( {0:0} )", num);
                                                 else if (string.IsNullOrEmpty(xText.InnerText.Trim()) == false)
                                                     regNode.ToolTipText += "\r\nMemory Address: " + xText.InnerText.Trim();
@@ -284,10 +289,10 @@ namespace AVRProjectIDE
                                 desc += "Source: " + xEle.InnerText + "\r\n";
                             }
 
-                            int progAddr = -1;
+                            long progAddr = -1;
                             foreach (XmlElement xProgAddr in vectEle.GetElementsByTagName("PROGRAM_ADDRESS"))
                             {
-                                if (Program.TryParseText(xProgAddr.InnerText, out progAddr))
+                                if (Program.TryParseText(xProgAddr.InnerText, out progAddr, false))
                                 {
                                     desc += String.Format("Addr: 0x{0:X4}\r\n", progAddr);
                                 }
@@ -398,8 +403,8 @@ namespace AVRProjectIDE
 
                 foreach (XmlElement j in i.GetElementsByTagName("PROG_FLASH"))
                 {
-                    int num = 0;
-                    if (Program.TryParseText(j.InnerText, out num))
+                    long num = 0;
+                    if (Program.TryParseText(j.InnerText, out num, false))
                         result += String.Format("Flash Memory: {0} bytes ( 0x{0:X4} )\r\n", num);
                     else if (string.IsNullOrEmpty(j.InnerText.Trim()) == false)
                         result += String.Format("Flash Memory: {0}\r\n", j.InnerText.Trim());
@@ -407,8 +412,8 @@ namespace AVRProjectIDE
 
                 foreach (XmlElement j in i.GetElementsByTagName("EEPROM"))
                 {
-                    int num = 0;
-                    if (Program.TryParseText(j.InnerText, out num))
+                    long num = 0;
+                    if (Program.TryParseText(j.InnerText, out num, false))
                         result += String.Format("EEPROM Memory: {0} bytes ( 0x{0:X4} )\r\n", num);
                     else if (string.IsNullOrEmpty(j.InnerText.Trim()) == false)
                         result += String.Format("EEPROM Memory: {0}\r\n", j.InnerText.Trim());
@@ -420,8 +425,8 @@ namespace AVRProjectIDE
 
                     foreach (XmlElement k in j.GetElementsByTagName("SIZE"))
                     {
-                        int num = 0;
-                        if (Program.TryParseText(k.InnerText, out num))
+                        long num = 0;
+                        if (Program.TryParseText(k.InnerText, out num, false))
                             result += String.Format("SRAM Size: {0} bytes ( 0x{0:X4} )\r\n", num);
                         else if (string.IsNullOrEmpty(k.InnerText.Trim()) == false)
                             result += String.Format("SRAM Size: {0}\r\n", k.InnerText.Trim());
@@ -429,8 +434,8 @@ namespace AVRProjectIDE
 
                     foreach (XmlElement k in j.GetElementsByTagName("START_ADDR"))
                     {
-                        int num = 0;
-                        if (Program.TryParseText(k.InnerText, out num))
+                        long num = 0;
+                        if (Program.TryParseText(k.InnerText, out num, false))
                             result += String.Format("SRAM Starting Address: {0} ( 0x{0:X4} )\r\n", num);
                     }
                 }
@@ -446,10 +451,10 @@ namespace AVRProjectIDE
                     foreach (XmlElement k in j.GetElementsByTagName("NRWW_STOP_ADDR"))
                         endAddrStr = k.InnerText;
 
-                    int startAddr = 0;
-                    int endAddr = 0;
+                    long startAddr = 0;
+                    long endAddr = 0;
 
-                    if (Program.TryParseText(startAddrStr, out startAddr) && Program.TryParseText(endAddrStr, out endAddr))
+                    if (Program.TryParseText(startAddrStr, out startAddr, false) && Program.TryParseText(endAddrStr, out endAddr, false))
                         result += String.Format("NRWW Addr: 0x{0:X4} ( {0:0} ) to 0x{1:X4} ( {1:0} )\r\n", startAddr, endAddr);
 
                     foreach (XmlElement k in j.GetElementsByTagName("RWW_START_ADDR"))
@@ -457,14 +462,14 @@ namespace AVRProjectIDE
                     foreach (XmlElement k in j.GetElementsByTagName("RWW_STOP_ADDR"))
                         endAddrStr = k.InnerText;
 
-                    if (Program.TryParseText(startAddrStr, out startAddr) && Program.TryParseText(endAddrStr, out endAddr))
+                    if (Program.TryParseText(startAddrStr, out startAddr, false) && Program.TryParseText(endAddrStr, out endAddr, false))
                         result += String.Format("RWW Addr: 0x{0:X4} ( {0:0} ) to 0x{1:X4} ( {1:0} )\r\n", startAddr, endAddr);
 
 
                     foreach (XmlElement k in j.GetElementsByTagName("PAGESIZE"))
                     {
-                        int num = 0;
-                        if (Program.TryParseText(k.InnerText, out num))
+                        long num = 0;
+                        if (Program.TryParseText(k.InnerText, out num, false))
                             result += String.Format("Page Size: {0} ( 0x{0:X4} )\r\n", num);
                         else if (string.IsNullOrEmpty(k.InnerText.Trim()) == false)
                             result += String.Format("Page Size: {0}\r\n", k.InnerText.Trim());
@@ -476,14 +481,14 @@ namespace AVRProjectIDE
                         {
                             result += "\r\n";
 
-                            int appStart = -1;
-                            int bootStart = -1;
-                            int bootReset = -1;
+                            long appStart = -1;
+                            long bootStart = -1;
+                            long bootReset = -1;
 
                             foreach (XmlElement m in l.GetElementsByTagName("BOOTSIZE"))
                             {
-                                int num = 0;
-                                if (Program.TryParseText(m.InnerText, out num))
+                                long num = 0;
+                                if (Program.TryParseText(m.InnerText, out num, false))
                                     result += String.Format("Boot Mode {0} Boot Size: {1} bytes ( 0x{1:X4} )\r\n", k, num);
                                 else if (string.IsNullOrEmpty(m.InnerText.Trim()) == false)
                                     result += String.Format("Boot Mode {0} Boot Size: {1}\r\n", k, m.InnerText.Trim());
@@ -491,8 +496,8 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement m in l.GetElementsByTagName("PAGES"))
                             {
-                                int num = 0;
-                                if (Program.TryParseText(m.InnerText, out num))
+                                long num = 0;
+                                if (Program.TryParseText(m.InnerText, out num, false))
                                     result += String.Format("Boot Mode {0} Pages: {1}\r\n", k, num);
                                 else if (string.IsNullOrEmpty(m.InnerText.Trim()) == false)
                                     result += String.Format("Boot Mode {0} Pages: {1}\r\n", k, m.InnerText.Trim());
@@ -500,8 +505,8 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement m in l.GetElementsByTagName("APPSTART"))
                             {
-                                int num = 0;
-                                if (Program.TryParseText(m.InnerText, out num))
+                                long num = 0;
+                                if (Program.TryParseText(m.InnerText, out num, false))
                                 {
                                     appStart = num;
                                     result += String.Format("Boot Mode {0} App Start Addr: 0x{1:X4} ( {1:0} )\r\n", k, num);
@@ -512,8 +517,8 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement m in l.GetElementsByTagName("BOOTSTART"))
                             {
-                                int num = 0;
-                                if (Program.TryParseText(m.InnerText, out num))
+                                long num = 0;
+                                if (Program.TryParseText(m.InnerText, out num, false))
                                 {
                                     bootStart = num;
                                 }
@@ -521,8 +526,8 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement m in l.GetElementsByTagName("BOOTRESET"))
                             {
-                                int num = 0;
-                                if (Program.TryParseText(m.InnerText, out num))
+                                long num = 0;
+                                if (Program.TryParseText(m.InnerText, out num, false))
                                 {
                                     bootReset = num;
                                 }

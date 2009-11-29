@@ -24,6 +24,10 @@ namespace AVRProjectIDE
         private TreeNode headerNode;
         private TreeNode otherNode;
 
+        private List<TreeNode> sourceNodeList = new List<TreeNode>();
+        private List<TreeNode> headerNodeList = new List<TreeNode>();
+        private List<TreeNode> otherNodeList = new List<TreeNode>();
+
         #endregion
 
         public FileTreePanel()
@@ -140,7 +144,7 @@ namespace AVRProjectIDE
                         }
                         catch { return false; }
 
-                        node.ToolTipText = f.FileRelPath(project.DirPath);
+                        node.ToolTipText = f.FileRelPathTo(project.DirPath);
 
                         project.FileList.Remove(node.Text);
                         project.FileList.Add(newName, f);
@@ -203,6 +207,9 @@ namespace AVRProjectIDE
             otherNode.ImageKey = "folder.png";
             otherNode.SelectedImageKey = "folder.png";
             otherNode.StateImageKey = "folder.png";
+
+            treeView1.Nodes.Clear();
+            treeView1.Nodes.Add(rootNode);
         }
 
         public void PopulateList(AVRProject newProj, Dictionary<string, EditorPanel> newList)
@@ -216,43 +223,30 @@ namespace AVRProjectIDE
         {
             rootNode.Text = project.FileName;
 
+            //treeView1.SuspendLayout();
+
+            sourceNodeList.Clear();
+            headerNodeList.Clear();
+            otherNodeList.Clear();
+
             sourceNode.Nodes.Clear();
             headerNode.Nodes.Clear();
             otherNode.Nodes.Clear();
 
-            List<TreeNode> sourceNodeList = new List<TreeNode>();
-            List<TreeNode> headerNodeList = new List<TreeNode>();
-            List<TreeNode> otherNodeList = new List<TreeNode>();
-
             foreach (ProjectFile file in project.FileList.Values)
             {
-                KeywordScanner.FeedFileContent(file);
+                if (SettingsManagement.AutocompleteEnable)
+                    KeywordScanner.FeedFileContent(file);
 
-                string fn = file.FileName;
+                TreeNode tn = file.Node;
 
-                TreeNode tn = new TreeNode(fn);
-
-                tn.ToolTipText = file.FileRelPath(project.DirPath);
+                tn.ToolTipText = file.FileRelProjPath;
 
                 // attach the menu
                 tn.ContextMenuStrip = nodeRClickMenu;
 
-                // set icon according to whether or not the file is missing on disk
-                if (file.Exists == false)
-                {
-                    tn.ImageKey = "missing.ico";
-                    tn.SelectedImageKey = "missing.ico";
-                    tn.StateImageKey = "missing.ico";
-                }
-                else
-                {
-                    tn.ImageKey = "file.ico";
-                    tn.SelectedImageKey = "file.ico";
-                    tn.StateImageKey = "file.ico";
-                }
-
-                string ext = fn.ToLowerInvariant();
-                if (ext.EndsWith(".s") || ext.EndsWith(".c") || ext.EndsWith(".cpp") || ext.EndsWith(".cxx") || ext.EndsWith(".pde"))
+                string ext = file.FileExt;
+                if (ext == "s" || ext  == "c" || ext == "cpp" || ext == "cxx" || ext == "pde")
                 {
                     // only source files can be compiled
 
@@ -264,50 +258,33 @@ namespace AVRProjectIDE
                     sourceNodeList.Add(tn);
                     //sourceNode.Nodes.Add(tn);
                 }
-                else if (ext.EndsWith(".h") || ext.EndsWith(".hpp"))
+                else if (ext == "h" || ext == "hpp")
                 {
-                    tn.Checked = false;
-
                     //headerNode.Nodes.Add(tn);
                     headerNodeList.Add(tn);
                 }
                 else
                 {
-                    tn.Checked = false;
-
                     //otherNode.Nodes.Add(tn);
                     otherNodeList.Add(tn);
                 }
             }
 
             sourceNodeList.Sort((x, y) => string.Compare(x.Text, y.Text));
-            foreach (TreeNode i in sourceNodeList)
-            {
-                sourceNode.Nodes.Add(i);
-            }
+            sourceNode.Nodes.AddRange(sourceNodeList.ToArray());
 
             headerNodeList.Sort((x, y) => string.Compare(x.Text, y.Text));
-            foreach (TreeNode i in headerNodeList)
-            {
-                headerNode.Nodes.Add(i);
-            }
+            headerNode.Nodes.AddRange(headerNodeList.ToArray());
 
             otherNodeList.Sort((x, y) => string.Compare(x.Text, y.Text));
-            foreach (TreeNode i in otherNodeList)
-            {
-                otherNode.Nodes.Add(i);
-            }
-
-            treeView1.SuspendLayout();
-
-            treeView1.Nodes.Clear();
-            treeView1.Nodes.Add(rootNode);
+            otherNode.Nodes.AddRange(otherNodeList.ToArray());
 
             treeView1.ExpandAll();
 
-            treeView1.ResumeLayout();
+            //treeView1.ResumeLayout();
 
-            KeywordScanner.DoMoreWork();
+            if (SettingsManagement.AutocompleteEnable)
+                KeywordScanner.DoMoreWork();
         }
 
         public SaveResult AddFileWiz(out ProjectFile file)
@@ -400,7 +377,7 @@ namespace AVRProjectIDE
                     }
                 }
 
-                file = new ProjectFile(filePath);
+                file = new ProjectFile(filePath, this.project);
 
                 if (file.Exists == false)
                 {
@@ -559,13 +536,16 @@ namespace AVRProjectIDE
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            if (project == null)
+                return;
+
             if (e.Node != sourceNode && e.Node != headerNode && e.Node != rootNode && e.Node != otherNode)
             {
                 OpenNode(e.Node);
             }
             else
             {
-                if (e.Node == rootNode)
+                if (e.Node == rootNode && string.IsNullOrEmpty(project.DirPath) == false)
                 {
                     System.Diagnostics.Process.Start(project.DirPath + Path.DirectorySeparatorChar);
                 }

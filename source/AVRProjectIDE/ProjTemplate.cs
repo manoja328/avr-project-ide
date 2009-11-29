@@ -119,6 +119,18 @@ namespace AVRProjectIDE
                 {
                     proj.OtherOptions = param.InnerText;
                 }
+                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForC"))
+                {
+                    proj.OtherOptionsForC = param.InnerText;
+                }
+                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForCPP"))
+                {
+                    proj.OtherOptionsForCPP = param.InnerText;
+                }
+                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForS"))
+                {
+                    proj.OtherOptionsForS = param.InnerText;
+                }
                 foreach (XmlElement param in docx.GetElementsByTagName("Optimization"))
                 {
                     proj.Optimization = param.InnerText;
@@ -268,7 +280,7 @@ namespace AVRProjectIDE
                         {
                             try
                             {
-                                ProjectFile f = new ProjectFile(Program.AbsPathFromRel(proj.DirPath, fname));
+                                ProjectFile f = new ProjectFile(Program.AbsPathFromRel(proj.DirPath, fname), proj);
                                 if (proj.FileList.ContainsKey(fname) == false)
                                 {
                                     proj.FileList.Add(fname, f);

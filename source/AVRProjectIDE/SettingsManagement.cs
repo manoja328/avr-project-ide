@@ -994,11 +994,14 @@ namespace AVRProjectIDE
         /// </summary>
         /// <param name="scinti">reference to the scint</param>
         /// <returns>the same reference that was passed in</returns>
-        static public Scintilla SetScintSettings(Scintilla scinti)
+        static public Scintilla SetScintSettings(Scintilla scinti, bool asm)
         {
-            foreach (KeyValuePair<int, string> i in styleKeywords)
+            if (asm == false)
             {
-                scinti.Lexing.SetKeywords(i.Key, i.Value);
+                foreach (KeyValuePair<int, string> i in styleKeywords)
+                {
+                    scinti.Lexing.SetKeywords(i.Key, i.Value);
+                }
             }
 
             foreach (KeyValuePair<int, Color> i in styleForeColour)
@@ -1054,7 +1057,7 @@ namespace AVRProjectIDE
             scinti.Indentation.IndentWidth = indentWidth;
             scinti.Indentation.TabWidth = tabWidth;
 
-            if (smartIndent == 0)
+            if (smartIndent == 0 || asm == true)
                 scinti.Indentation.SmartIndentType = SmartIndent.None;
             else if (smartIndent == 1)
                 scinti.Indentation.SmartIndentType = SmartIndent.Simple;

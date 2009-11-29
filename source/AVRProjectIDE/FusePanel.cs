@@ -228,14 +228,14 @@ namespace AVRProjectIDE
                 {
                     foreach (XmlElement k in j.GetElementsByTagName("MASK"))
                     {
-                        int mask = -1;
-                        if (Program.TryParseText(k.InnerText, out mask) == false)
+                        long mask = -1;
+                        if (Program.TryParseText(k.InnerText, out mask, false) == false)
                             continue;
 
                         foreach (XmlElement l in j.GetElementsByTagName("VALUE"))
                         {
-                            int val = -1;
-                            if (Program.TryParseText(l.InnerText, out val) == false)
+                            long val = -1;
+                            if (Program.TryParseText(l.InnerText, out val, false) == false)
                                 continue;
 
                             foreach (XmlElement m in j.GetElementsByTagName("TEXT"))
@@ -245,15 +245,15 @@ namespace AVRProjectIDE
                                     continue;
 
                                 if (maskLookup.ContainsKey(str) == false)
-                                    maskLookup.Add(str, mask);
+                                    maskLookup.Add(str, (int)mask);
                                 else
                                     continue;
 
-                                if (presets.ContainsKey(mask) == false)
-                                    presets.Add(mask, new Dictionary<string, int>());
+                                if (presets.ContainsKey((int)mask) == false)
+                                    presets.Add((int)mask, new Dictionary<string, int>());
 
-                                if (presets[mask].ContainsKey(str) == false)
-                                    presets[mask].Add(str, val);
+                                if (presets[(int)mask].ContainsKey(str) == false)
+                                    presets[(int)mask].Add(str, (int)val);
                             }
 
                             break;

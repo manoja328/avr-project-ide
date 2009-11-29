@@ -167,7 +167,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                project.FileList.Add(fileName, new ProjectFile(fileAbsPath));
+                project.FileList.Add(fileName, new ProjectFile(fileAbsPath, project));
             }
 
             if (project.FileList[fileName].Exists == false)
@@ -181,6 +181,17 @@ namespace AVRProjectIDE
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error writing file from template, " + ex.Message);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        File.WriteAllText(fileAbsPath, "");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error creating file, " + ex.Message);
                     }
                 }
             }

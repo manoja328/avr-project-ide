@@ -233,7 +233,7 @@ namespace AVRProjectIDE
                     }
                 }
 
-                ProjectFile newFile = new ProjectFile(iniFilePath);
+                ProjectFile newFile = new ProjectFile(iniFilePath, project);
                 newFile.IsOpen = true;
                 project.FileList.Add(newFile.FileName, newFile);
             }

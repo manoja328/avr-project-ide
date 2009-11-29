@@ -150,6 +150,12 @@
     <Compile Include="IDEWindow.Designer.cs">
       <DependentUpon>IDEWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoadWaitWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadWaitWindow.Designer.cs">
+      <DependentUpon>LoadWaitWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessagePanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HardwareExplorer.resx">
       <DependentUpon>HardwareExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadWaitWindow.resx">
+      <DependentUpon>LoadWaitWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MessagePanel.resx">
       <DependentUpon>MessagePanel.cs</DependentUpon>
