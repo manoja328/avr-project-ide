@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 62==
+
+ * Added number base conversion feature, select text or copy text to display its value in base 16, 10, and 2
+ * Added file type specific compiler options
+
 ==Alpha 61==
 
  * Fixed Hardware Explorer not refreshing after changing chips
