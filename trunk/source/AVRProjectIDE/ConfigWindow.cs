@@ -100,6 +100,9 @@ namespace AVRProjectIDE
             project.ClockFreq = numClockFreq.Value;
             project.LinkerOptions = txtLinkerOptions.Text;
             project.OtherOptions = txtOtherOptions.Text;
+            project.OtherOptionsForC = txtCOptions.Text;
+            project.OtherOptionsForCPP = txtCPPOptions.Text;
+            project.OtherOptionsForS = txtSOptions.Text;
 
             project.PackStructs = chklistOptions.GetItemChecked(2);
             project.ShortEnums = chklistOptions.GetItemChecked(3);
@@ -171,6 +174,9 @@ namespace AVRProjectIDE
                 dropDevices.SelectedIndex = dropDevices.Items.Add(project.Device);
 
             txtOtherOptions.Text = project.OtherOptions;
+            txtCOptions.Text = project.OtherOptionsForC;
+            txtCPPOptions.Text = project.OtherOptionsForCPP;
+            txtSOptions.Text = project.OtherOptionsForS;
             txtLinkerOptions.Text = project.LinkerOptions;
             txtInitStackAddr.Text = Convert.ToString(project.InitStackAddr, 16).ToUpper();
             numClockFreq.Value = project.ClockFreq;

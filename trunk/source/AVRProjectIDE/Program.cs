@@ -247,36 +247,43 @@ namespace AVRProjectIDE
             }
         }
 
-        public static bool TryParseText(string text, out int num)
+        public static bool TryParseText(string text, out long num, bool allowBin)
         {
             num = 0;
             try
             {
-                text = text.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(text))
+                    return false;
+
+                text = text.Trim().ToLowerInvariant().Replace("$", "0x");
 
                 if (string.IsNullOrEmpty(text))
                     return false;
 
-                bool isHex = false;
-                if (text.Contains("$") || text.Contains("0x"))
-                    isHex = true;
-
-                foreach (char c in text)
+                try
                 {
-                    if ("abcdef".Contains(char.ToString(c)))
+                    if (allowBin && text.StartsWith("0b") && text.Length >= 3)
+                        num = Convert.ToInt64(text.Substring(2), 2);
+                    else
+                        num = Convert.ToInt64(text, 10);
+                }
+                catch
+                {
+                    try
                     {
-                        isHex = true;
+                        num = Convert.ToInt64(text, 10);
                     }
-                }
-
-                if (isHex)
-                {
-                    text = text.Replace("$", "0x");
-                    num = Convert.ToInt32(text, 16);
-                }
-                else
-                {
-                    num = Convert.ToInt32(text);
+                    catch
+                    {
+                        try
+                        {
+                            num = Convert.ToInt64(text, 16);
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                    }
                 }
 
                 return true;

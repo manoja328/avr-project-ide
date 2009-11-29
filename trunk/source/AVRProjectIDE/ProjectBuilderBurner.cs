@@ -578,7 +578,15 @@ namespace AVRProjectIDE
             if (file.FileExt == "s")
                 asmflags += "-x assembler-with-cpp -Wa,-gdwarf2";
 
-            args += String.Format(" -mmcu={0} -DF_CPU={1:0}UL {2} {3} {4} -MD -MP -MT {5}.o {6} -c {7} \"{8}\"",
+            string fileTypeOptions = "";
+            if (file.FileExt == "c")
+                fileTypeOptions = workingProject.OtherOptionsForC;
+            else if (file.FileExt == "cpp" || file.FileExt == "cxx")
+                fileTypeOptions = workingProject.OtherOptionsForCPP;
+            else if (file.FileExt == "s")
+                fileTypeOptions = workingProject.OtherOptionsForS;
+
+            args += String.Format(" -mmcu={0} -DF_CPU={1:0}UL {2} {3} {4} -MD -MP -MT {5}.o {6} -c {7} {8} \"{9}\"",
                 workingProject.Device,
                 Math.Round(project.ClockFreq),
                 workingProject.Optimization,
@@ -587,6 +595,7 @@ namespace AVRProjectIDE
                 file.FileNameNoExt,
                 asmflags,
                 file.Options,
+                fileTypeOptions,
                 file.FileAbsPath.Replace('\\', '/')
             );
 
@@ -1405,7 +1414,7 @@ namespace AVRProjectIDE
 
                         // join all the .pde files into one cpp file
                         string tempArduinoPath = SettingsManagement.AppDataPath + "temp" + Path.DirectorySeparatorChar + "arduino_temp_main.cpp";
-                        ardFile = new ProjectFile(tempArduinoPath);
+                        ardFile = new ProjectFile(tempArduinoPath, workingProject);
 
                         Program.MakeSurePathExists(SettingsManagement.AppDataPath + "temp");
 
@@ -1549,7 +1558,7 @@ namespace AVRProjectIDE
 
                         if (ext.EndsWith(".h") == false && ext.EndsWith(".hpp") == false)
                         {
-                            ProjectFile newFile = new ProjectFile(newLoc);
+                            ProjectFile newFile = new ProjectFile(newLoc, workingProject);
                             fileList.Add(newFile);
                         }
                     }
@@ -1970,6 +1979,7 @@ namespace AVRProjectIDE
                 writer.WriteLine();
                 writer.WriteLine("## Flags common to C only");
                 writer.WriteLine("CFLAGS = $(COMMON)");
+                writer.WriteLine("CONLYFLAGS = {0}", proj.OtherOptionsForC);
 
                 string cflags = proj.OtherOptions.Trim();
 
@@ -2004,11 +2014,13 @@ namespace AVRProjectIDE
                 writer.WriteLine("ASMFLAGS = $(COMMON)");
                 writer.WriteLine("ASMFLAGS += $(CFLAGS)");
                 writer.WriteLine("ASMFLAGS += -x assembler-with-cpp -Wa,-gdwarf2");
+                writer.WriteLine("ASMFLAGS += {0}", proj.OtherOptionsForS);
 
                 writer.WriteLine();
                 writer.WriteLine("## Flags common to CPP/CXX only");
                 writer.WriteLine("CXXFLAGS = $(COMMON)");
                 writer.WriteLine("CXXFLAGS += $(CFLAGS)");
+                writer.WriteLine("CXXFLAGS += {0}", proj.OtherOptionsForCPP);
 
                 writer.WriteLine();
                 writer.WriteLine("## Flags common to Linker only");
@@ -2117,7 +2129,7 @@ namespace AVRProjectIDE
                     {
                         ofiles += file.Value.FileNameNoExt + ".o ";
 
-                        compileStr += file.Value.FileNameNoExt + ".o: ./" + file.Value.FileRelPath(proj.DirPath).Replace('\\', '/');
+                        compileStr += file.Value.FileNameNoExt + ".o: ./" + file.Value.FileRelPathTo(proj.DirPath).Replace('\\', '/');
                         compileStr += "\r\n";
                         if (file.Value.FileExt == "s")
                         {
@@ -2127,7 +2139,7 @@ namespace AVRProjectIDE
                         else if (file.Value.FileExt == "c")
                         {
                             compileStr += "\t $(CC) $(INCLUDES) ";
-                            compileStr += "$(CFLAGS)";
+                            compileStr += "$(CFLAGS) $(CONLYFLAGS)";
                         }
                         else if (file.Value.FileExt == "cpp" || file.Value.FileExt == "cxx")
                         {

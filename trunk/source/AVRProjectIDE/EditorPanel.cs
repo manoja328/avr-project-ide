@@ -80,23 +80,26 @@ namespace AVRProjectIDE
 
         private void EditorPanelContent_Shown(object sender, EventArgs e)
         {
-            if (LoadFile())
+            if (LoadFile() == false)
             {
-                file.IsOpen = true;
+                MessageBox.Show("File failed to open");
+            }
 
-                scint = SettingsManagement.SetScintSettings(scint);
+            if (file.FileExt == "c" || file.FileExt == "cpp" || file.FileExt == "h" || file.FileExt == "hpp" || file.FileExt == "pde")
+            {
+                scint = SettingsManagement.SetScintSettings(scint, false);
                 scint = KeywordImageGen.ApplyImageList(scint);
-
-                fileSystemWatcher1.Filter = file.FileName;
-                fileSystemWatcher1.Path = file.FileDir + Path.DirectorySeparatorChar;
-                fileSystemWatcher1.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite;
-                fileSystemWatcher1.EnableRaisingEvents = true;
             }
             else
             {
-                HasChanged = false;
-                this.Close();
+                scint.Lexing.Lexer = Lexer.Asm;
+                scint = SettingsManagement.SetScintSettings(scint, true);
             }
+
+            fileSystemWatcher1.Filter = file.FileName;
+            fileSystemWatcher1.Path = file.FileDir + Path.DirectorySeparatorChar;
+            fileSystemWatcher1.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite;
+            fileSystemWatcher1.EnableRaisingEvents = true;
         }
 
         #region Saving and Loading
@@ -474,6 +477,39 @@ namespace AVRProjectIDE
             }
 
             lblLineNum.Text = (scint.Lines.Current.Number + 1).ToString("0");
+
+            string sel = scint.Selection.Text;
+            long res = -1;
+            if (Program.TryParseText(sel, out res, true))
+            {
+                lblLineNum.Text += ConvertString(res, "Selected");
+            }
+            else if (System.Windows.Forms.Clipboard.ContainsText())
+            {
+                try
+                {
+                    sel = System.Windows.Forms.Clipboard.GetText();
+                    if (Program.TryParseText(sel, out res, true))
+                    {
+                        lblLineNum.Text += ConvertString(res, "Copied");
+                    }
+                }
+                catch { }
+            }
+
+        }
+
+        private string ConvertString(long num, string header)
+        {
+            string hexStr = String.Format("{0:X}", num);
+            while (hexStr.Length % 2 != 0)
+                hexStr = "0" + hexStr;
+
+            string binStr = Convert.ToString(num, 2);
+            while (binStr.Length % 4 != 0 || binStr.Length < 8)
+                binStr = "0" + binStr;
+
+            return String.Format(" , {0} Number: (Hex) 0x{1} , (Bin) 0b{2} , (Dec) {3}", header, hexStr, binStr, num);
         }
 
         private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)

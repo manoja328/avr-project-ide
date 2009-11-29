@@ -674,6 +674,9 @@ namespace AVRProjectIDE
 
             if (newProj.IsReady) // IsReady == false means that the user closed the welcome window without opening a project
             {
+                LoadWaitWindow lww = new LoadWaitWindow();
+                lww.Show();
+
                 EnableButtons();
 
                 // close all editors
@@ -702,6 +705,8 @@ namespace AVRProjectIDE
                 fileTreeWin.PopulateList(newProj, editorList);
 
                 ReloadLastOpened();
+
+                lww.Close();
 
                 if (project.HasBeenConfigged == false)
                 {
@@ -782,6 +787,9 @@ namespace AVRProjectIDE
             }
             else if (newProj.IsReady)
             {
+                //LoadWaitWindow lww = new LoadWaitWindow();
+                //lww.Show();
+
                 EnableButtons();
 
                 // close all editors
@@ -810,6 +818,8 @@ namespace AVRProjectIDE
                 fileTreeWin.PopulateList(newProj, editorList);
 
                 ReloadLastOpened();
+
+                //lww.Close();
 
                 if (project.HasBeenConfigged == false)
                 {
@@ -1191,9 +1201,11 @@ namespace AVRProjectIDE
 
             if (file != null)
             {
-                if (file.FileExt == "c" || file.FileExt == "cpp")
+                if (file.FileExt == "c" || file.FileExt == "cpp" || file.FileExt == "s")
                 {
                     projBuilder.HasError = 0;
+
+                    messageWin.ClearErrors();
 
                     if (projBuilder.Compile(file))
                     {
@@ -1219,7 +1231,7 @@ namespace AVRProjectIDE
                     messageWin.Activate();
                 }
                 else
-                    MessageBox.Show("You can only compile C or C++ files");
+                    MessageBox.Show("You can only compile C or C++ or S files");
             }
         }
 
@@ -1290,6 +1302,9 @@ namespace AVRProjectIDE
 
             if (project.IsReady)
             {
+                //LoadWaitWindow lww = new LoadWaitWindow();
+                //lww.Show();
+
                 EnableButtons();
 
                 ReloadLastOpened();
@@ -1305,12 +1320,15 @@ namespace AVRProjectIDE
 
                 fileTreeWin.PopulateList(project, editorList);
 
+                //lww.Close();
+
                 hardwareExplorerWin.LoadDataForChip(project.Device);
 
                 if (project.HasBeenConfigged == false)
                 {
                     ConfigWindow wnd = new ConfigWindow(project);
                     wnd.ShowDialog();
+
                     hardwareExplorerWin.LoadDataForChip(project.Device);
                 }
             }
@@ -1324,7 +1342,11 @@ namespace AVRProjectIDE
             List<EditorPanel> tmpList = new List<EditorPanel>(editorList.Values);
             foreach (EditorPanel i in tmpList)
             {
-                SettingsManagement.SetScintSettings(i.Scint);
+                ProjectFile file = i.File;
+                if (file.FileExt == "c" || file.FileExt == "cpp" || file.FileExt == "h" || file.FileExt == "hpp" || file.FileExt == "pde")
+                    SettingsManagement.SetScintSettings(i.Scint, false);
+                else
+                    SettingsManagement.SetScintSettings(i.Scint, true);
             }
         }
 

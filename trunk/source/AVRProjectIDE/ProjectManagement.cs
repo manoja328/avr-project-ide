@@ -15,6 +15,8 @@ namespace AVRProjectIDE
     {
         #region Fields and Properties
 
+        private AVRProject project;
+
         private string fileAbsPath;
         public string FileAbsPath
         {
@@ -41,7 +43,15 @@ namespace AVRProjectIDE
             set { FileAbsPath = FileDir + Path.DirectorySeparatorChar + value.Trim() + "." + FileExt; }
         }
 
-        public string FileRelPath(string projDirPath)
+        public string FileRelProjPath
+        {
+            get
+            {
+                return FileRelPathTo(project.DirPath);
+            }
+        }
+
+        public string FileRelPathTo(string projDirPath)
         {
             return Program.RelativePath(projDirPath, FileAbsPath);
         }
@@ -122,15 +132,39 @@ namespace AVRProjectIDE
             set { cursorPos = value; }
         }
 
+        private TreeNode treeNode;
+        public TreeNode Node
+        {
+            get { return treeNode; }
+        }
+
         #endregion
 
-        public ProjectFile(string fileAbsPath)
+        public ProjectFile(string fileAbsPath, AVRProject project)
         {
+            this.project = project;
+
             FileAbsPath = fileAbsPath;
             if (FileExt == "c" || FileExt == "s" || FileExt == "cpp" || FileExt == "cxx" || FileExt == "pde")
                 ToCompile = true;
             options = "";
             isOpen = false;
+
+            treeNode = new TreeNode(FileName);
+            if (Exists == false)
+            {
+                treeNode.ImageKey = "missing.ico";
+                treeNode.SelectedImageKey = "missing.ico";
+                treeNode.StateImageKey = "missing.ico";
+            }
+            else
+            {
+                treeNode.ImageKey = "file.ico";
+                treeNode.SelectedImageKey = "file.ico";
+                treeNode.StateImageKey = "file.ico";
+            }
+
+            treeNode.Checked = toCompile;
         }
 
         public void DeleteBackup()
@@ -157,7 +191,7 @@ namespace AVRProjectIDE
         /// <returns>Reference to the Cloned ProjectFile</returns>
         public object Clone()
         {
-            ProjectFile newFile = new ProjectFile(fileAbsPath);
+            ProjectFile newFile = new ProjectFile(fileAbsPath, this.project);
             newFile.IsOpen = this.IsOpen;
             newFile.Options = this.Options;
             newFile.ToCompile = this.ToCompile;
@@ -372,6 +406,27 @@ namespace AVRProjectIDE
             set { otherOpt = value.Trim(); }
         }
 
+        private string otherOptForC;
+        public string OtherOptionsForC
+        {
+            get { return otherOptForC.Trim(); }
+            set { otherOptForC = value.Trim(); }
+        }
+
+        private string otherOptForCPP;
+        public string OtherOptionsForCPP
+        {
+            get { return otherOptForCPP.Trim(); }
+            set { otherOptForCPP = value.Trim(); }
+        }
+
+        private string otherOptForS;
+        public string OtherOptionsForS
+        {
+            get { return otherOptForS.Trim(); }
+            set { otherOptForS = value.Trim(); }
+        }
+
         private string linkerOpt;
         public string LinkerOptions
         {
@@ -564,6 +619,10 @@ namespace AVRProjectIDE
         {
             bool success = true;
             XmlTextWriter xml = null;
+
+            //LoadWaitWindow lww = new LoadWaitWindow();
+            //lww.Show();
+
             try
             {
                 xml = new XmlTextWriter(path, null);
@@ -584,6 +643,9 @@ namespace AVRProjectIDE
                 SettingsManagement.LastClockChoosen = ClockFreq;
                 xml.WriteElementString("LinkerOpt", LinkerOptions);
                 xml.WriteElementString("OtherOpt", OtherOptions);
+                xml.WriteElementString("OtherOptionsForC", OtherOptionsForC);
+                xml.WriteElementString("OtherOptionsForCPP", OtherOptionsForCPP);
+                xml.WriteElementString("OtherOptionsForS", OtherOptionsForS);
                 xml.WriteElementString("OutputDir", OutputDir);
                 xml.WriteElementString("Optimization", Optimization);
 
@@ -655,7 +717,7 @@ namespace AVRProjectIDE
                 {
                     xml.WriteStartElement("File");
                     xml.WriteElementString("AbsPath", file.Value.FileAbsPath);
-                    xml.WriteElementString("RelPath", file.Value.FileRelPath(DirPath));
+                    xml.WriteElementString("RelPath", file.Value.FileRelPathTo(DirPath));
                     xml.WriteElementString("ToCompile", file.Value.ToCompile.ToString().ToLowerInvariant());
                     xml.WriteElementString("Options", file.Value.Options);
                     xml.WriteElementString("WasOpen", file.Value.IsOpen.ToString().ToLowerInvariant());
@@ -699,6 +761,9 @@ namespace AVRProjectIDE
             {
                 success = false;
             }
+
+            //lww.Close();
+
             return success;
         }
 
@@ -711,6 +776,9 @@ namespace AVRProjectIDE
 
             if (File.Exists(path) == false)
                 return false;
+
+            //LoadWaitWindow lww = new LoadWaitWindow();
+            //lww.Show();
 
             bool success = true;
 
@@ -747,6 +815,18 @@ namespace AVRProjectIDE
                 foreach (XmlElement param in docx.GetElementsByTagName("OtherOpt"))
                 {
                     OtherOptions = param.InnerText;
+                }
+                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForC"))
+                {
+                    OtherOptionsForC = param.InnerText;
+                }
+                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForCPP"))
+                {
+                    OtherOptionsForCPP = param.InnerText;
+                }
+                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForS"))
+                {
+                    OtherOptionsForS = param.InnerText;
                 }
                 foreach (XmlElement param in docx.GetElementsByTagName("OutputDir"))
                 {
@@ -912,7 +992,7 @@ namespace AVRProjectIDE
                             string newPath = dirPath + Path.DirectorySeparatorChar + Program.CleanFilePath(relPath.InnerText);
                             string oldPath = xDirPath + Path.DirectorySeparatorChar + Program.CleanFilePath(relPath.InnerText);
 
-                            ProjectFile newFile = new ProjectFile(newPath);
+                            ProjectFile newFile = new ProjectFile(newPath, this);
 
                             foreach (XmlElement toComp in i.GetElementsByTagName("ToCompile"))
                             {
@@ -979,7 +1059,7 @@ namespace AVRProjectIDE
 
                             if (xDirPath != dirPath)
                             {
-                                ProjectFile oldFile = new ProjectFile(oldPath);
+                                ProjectFile oldFile = new ProjectFile(oldPath, this);
 
                                 oldFile.ToCompile = newFile.ToCompile;
                                 oldFile.Options = newFile.Options;
@@ -1062,6 +1142,8 @@ namespace AVRProjectIDE
                     SettingsManagement.FavFolder = dirPath.Substring(0, dirPath.LastIndexOf(Path.DirectorySeparatorChar));
                 }
             }
+
+            //lww.Close();
 
             return success;
         }
@@ -1256,7 +1338,7 @@ namespace AVRProjectIDE
 
                     foreach (XmlElement i in xProjFilesContainer.GetElementsByTagName("Name"))
                     {
-                        ProjectFile file = new ProjectFile(i.InnerText);
+                        ProjectFile file = new ProjectFile(i.InnerText, this);
                         fileList.Add(file.FileName, file);
                     }
                 }
@@ -1268,7 +1350,7 @@ namespace AVRProjectIDE
                     {
                         foreach (XmlElement i in filesContainer.ChildNodes)
                         {
-                            ProjectFile file = new ProjectFile(Program.AbsPathFromRel(dirPath, i.InnerText));
+                            ProjectFile file = new ProjectFile(Program.AbsPathFromRel(dirPath, i.InnerText), this);
                             fileList.Add(file.FileName, file);
                         }
                     }
@@ -1322,6 +1404,10 @@ namespace AVRProjectIDE
         {
             bool success = true;
             XmlTextWriter xml = null;
+
+            //LoadWaitWindow lww = new LoadWaitWindow();
+            //lww.Show();
+
             try
             {
                 xml = new XmlTextWriter(path, null);
@@ -1356,15 +1442,15 @@ namespace AVRProjectIDE
                         {
                             if (file.FileExt == "c" && file.ToCompile)
                             {
-                                xml.WriteElementString("SOURCEFILE", file.FileRelPath(DirPath));
+                                xml.WriteElementString("SOURCEFILE", file.FileRelPathTo(DirPath));
                             }
                             else if (file.FileExt == "h" || file.FileExt == "hpp")
                             {
-                                xml.WriteElementString("HEADERFILE", file.FileRelPath(DirPath));
+                                xml.WriteElementString("HEADERFILE", file.FileRelPathTo(DirPath));
                             }
                             else
                             {
-                                xml.WriteElementString("OTHERFILE", file.FileRelPath(DirPath));
+                                xml.WriteElementString("OTHERFILE", file.FileRelPathTo(DirPath));
                             }
                         }
                     }
@@ -1393,7 +1479,7 @@ namespace AVRProjectIDE
                                     {
                                         xml.WriteStartElement("OPTION");
                                         {
-                                            xml.WriteElementString("FILE", file.FileRelPath(DirPath));
+                                            xml.WriteElementString("FILE", file.FileRelPathTo(DirPath));
                                             xml.WriteElementString("OPTIONLIST", file.Options);
                                         }
                                         xml.WriteEndElement();
@@ -1453,7 +1539,7 @@ namespace AVRProjectIDE
                             if (DataSections)
                                 checkList += "-fdata-sections ";
 
-                            string optForAll = String.Format("{0} -DF_CPU={1:0}UL {2} {3}", OtherOptions.Trim(), ClockFreq, Optimization, checkList.Trim()).Replace("  ", " ");
+                            string optForAll = String.Format("{0} -DF_CPU={1:0}UL {2} {3}", (OtherOptions + " " + OtherOptionsForC).Trim(), ClockFreq, Optimization, checkList.Trim()).Replace("  ", " ");
                             xml.WriteElementString("OPTIONSFORALL", optForAll);
 
                             string linkerOpts = "";
@@ -1517,6 +1603,7 @@ namespace AVRProjectIDE
             }
             catch { success = false; }
 
+            //lww.Close();
 
             return success;
         }
@@ -1536,7 +1623,10 @@ namespace AVRProjectIDE
             dataSects = true;
             useInitStack = false;
             initStackAddr = ushort.MaxValue;
-            otherOpt = "-Wall -gdwarf-2 -std=gnu99";
+            otherOpt = "-Wall -gdwarf-2";
+            otherOptForC = "-std=gnu99";
+            otherOptForCPP = "-std=c99";
+            otherOptForS = "";
             linkerOpt = "";
             outputDir = "output";
             optimization = "-Os";
@@ -1606,6 +1696,9 @@ namespace AVRProjectIDE
 
         public AVRProject CopyProperties(AVRProject project)
         {
+            //LoadWaitWindow lww = new LoadWaitWindow();
+            //lww.Show();
+
             project.IsReady = this.IsReady;
             project.FilePath = this.FilePath;
             project.BurnOptions = this.BurnOptions;
@@ -1623,6 +1716,9 @@ namespace AVRProjectIDE
             project.LinkerOptions = this.LinkerOptions;
             project.Optimization = this.Optimization;
             project.OtherOptions = this.OtherOptions;
+            project.OtherOptionsForC = this.OtherOptionsForC;
+            project.OtherOptionsForCPP = this.OtherOptionsForCPP;
+            project.OtherOptionsForS = this.OtherOptionsForS;
             project.OutputDir = this.OutputDir;
             project.PackStructs = this.PackStructs;
             project.ShortEnums = this.ShortEnums;
@@ -1634,6 +1730,8 @@ namespace AVRProjectIDE
             project.LastFile = this.LastFile;
 
             project.HasBeenConfigged = this.HasBeenConfigged;
+            project.ShouldReloadDevice = this.ShouldReloadDevice;
+            project.ShouldReloadFiles = this.ShouldReloadFiles;
 
             project.fileList = new Dictionary<string, ProjectFile>();
             project.fileList.Clear();
@@ -1684,6 +1782,8 @@ namespace AVRProjectIDE
             {
                 project.APSXmlElementList.Add((XmlElement)obj.Clone());
             }
+
+            //lww.Close();
 
             return project;
         }
