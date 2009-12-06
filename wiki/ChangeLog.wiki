@@ -1,5 +1,11 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 63==
+
+ * Calculators for Timer, USART, SPI, TWI, and ADC
+ * Every single WndProc has been overridden with one that launches the error report when an exception occurs, hopefully this makes the IDE more robust
+ * Instead of using true.ToString(), a new function is used to accept "true", "yes", "y", and non-zero integers as booleans, this is to prevent any language issues
+
 ==Alpha 62==
 
  * Added number base conversion feature, select text or copy text to display its value in base 16, 10, and 2
