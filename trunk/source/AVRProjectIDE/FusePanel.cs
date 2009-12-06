@@ -13,6 +13,20 @@ namespace AVRProjectIDE
 {
     public partial class FusePanel : UserControl
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Fuse Panel");
+                erw.ShowDialog();
+            }
+        }
+
         #region Control Sizing
 
         private const int LEFT_MARGIN = 10;
@@ -88,7 +102,7 @@ namespace AVRProjectIDE
 
             typeOfFuse = GetTypeOfFuseFromName(fuseName);
 
-            txtInfo.Text = "Checked = Burnt = 0\r\n";
+            txtInfo.Text = "Checked = Burnt = 0" + Environment.NewLine;
             txtInfo.Text += GetInfoXMLText(xEle);
 
             fuseReset = 0xFF;
@@ -155,10 +169,10 @@ namespace AVRProjectIDE
             {
                 if (xText.NodeType == XmlNodeType.Element)
                     if (xText.Name == "TEXT")
-                        return xText.InnerText.Trim() + "\r\n";
+                        return xText.InnerText.Trim() + Environment.NewLine;
             }
 
-            return "\r\n";
+            return Environment.NewLine;
         }
 
         private static FuseType GetTypeOfFuseFromName(string fuseName)
@@ -575,7 +589,7 @@ namespace AVRProjectIDE
 
                     if (File.Exists(TempFuseFilePath) == false)
                     {
-                        MessageBox.Show("Failed to Read Fuse, temporary file not found at '" + TempFuseFilePath + "'. Here is the AVRDUDE output:\r\n\r\n" + p.StandardError.ReadToEnd() + "\r\n" + p.StandardOutput.ReadToEnd());
+                        MessageBox.Show("Failed to Read Fuse, temporary file not found at '" + TempFuseFilePath + "'. Here is the AVRDUDE output:" + Environment.NewLine + Environment.NewLine + p.StandardError.ReadToEnd() + Environment.NewLine + p.StandardOutput.ReadToEnd());
                         return -1;
                     }
                     else

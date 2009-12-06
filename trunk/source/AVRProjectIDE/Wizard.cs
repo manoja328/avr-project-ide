@@ -12,6 +12,20 @@ namespace AVRProjectIDE
 {
     public partial class Wizard : Form
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Project Wizard");
+                erw.ShowDialog();
+            }
+        }
+
         private AVRProject project;
 
         private bool overrideFolder = false;

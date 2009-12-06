@@ -63,7 +63,7 @@ namespace AVRProjectIDE
                     return true;
                 }
 
-                res = str == true.ToString().Trim().ToLowerInvariant();
+                res = Program.StringToBool(str);
 
                 return res;
             }
@@ -194,7 +194,7 @@ namespace AVRProjectIDE
                     return false;
                 }
 
-                res = str == true.ToString().Trim().ToLowerInvariant();
+                res = Program.StringToBool(str);
 
                 return res;
             }
@@ -606,7 +606,7 @@ namespace AVRProjectIDE
                     return false;
                 }
 
-                res = str == true.ToString().Trim().ToLowerInvariant();
+                res = Program.StringToBool(str);
 
                 return res;
             }
@@ -706,7 +706,7 @@ namespace AVRProjectIDE
                     return false;
                 }
 
-                res = str == true.ToString().Trim().ToLowerInvariant();
+                res = Program.StringToBool(str);
 
                 return res;
             }
@@ -785,15 +785,15 @@ namespace AVRProjectIDE
                             }
                             else if (xAttrib.Name == "Bold")
                             {
-                                styleBold.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant());
+                                styleBold.Add(styleIndex, Program.StringToBool(xAttrib));
                             }
                             else if (xAttrib.Name == "Italic")
                             {
-                                styleItalic.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant());
+                                styleItalic.Add(styleIndex, Program.StringToBool(xAttrib));
                             }
                             else if (xAttrib.Name == "Underline")
                             {
-                                styleUnderline.Add(styleIndex, xAttrib.Value.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant());
+                                styleUnderline.Add(styleIndex, Program.StringToBool(xAttrib));
                             }
                         }
                     }
@@ -874,7 +874,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    useTabs = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    useTabs = Program.StringToBool(tmpStr);
                 }
 
                 tmpStr = iniFile.Read("Editor", "IndentBackspaceUnindents");
@@ -884,7 +884,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    backspaceUnindents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    backspaceUnindents = Program.StringToBool(tmpStr);
                 }
 
                 tmpStr = iniFile.Read("Editor", "IndentTabIndents");
@@ -894,7 +894,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    tabIndents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    tabIndents = Program.StringToBool(tmpStr);
                 }
 
                 tmpStr = iniFile.Read("Editor", "IndentGuide");
@@ -904,7 +904,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    indentGuide = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    indentGuide = Program.StringToBool(tmpStr);
                 }
 
                 tmpStr = iniFile.Read("Editor", "IndentSmartness");
@@ -928,7 +928,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    lineWrap = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    lineWrap = Program.StringToBool(tmpStr);
                 }
 
                 zoomLevel = scint.Zoom;
@@ -954,7 +954,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    showLineNumber = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    showLineNumber = Program.StringToBool(tmpStr);
                 }
 
                 tmpStr = iniFile.Read("Editor", "ShowWhiteSpace");
@@ -964,7 +964,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    showWS = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    showWS = Program.StringToBool(tmpStr);
                 }
 
                 tmpStr = iniFile.Read("Editor", "HighlightCurrentLine");
@@ -974,7 +974,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    highlightCurLine = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                    highlightCurLine = Program.StringToBool(tmpStr);
                 }                
 
                 scint.Dispose(); // dispose of the scint, it causes an exception if it is not disposed manually
@@ -1111,7 +1111,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                autocompleteEnable = acStr.Trim().ToLowerInvariant() == true.ToString().Trim().ToLowerInvariant();
+                autocompleteEnable = Program.StringToBool(acStr);
             }
         }
 
@@ -1323,7 +1323,7 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    if (winMax.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant())
+                    if (Program.StringToBool(winMax))
                     {
                         form.WindowState = FormWindowState.Maximized;
                     }
@@ -1387,7 +1387,7 @@ namespace AVRProjectIDE
                     return true;
                 }
 
-                res = str == true.ToString().Trim().ToLowerInvariant();
+                res = Program.StringToBool(str);
 
                 return res;
             }

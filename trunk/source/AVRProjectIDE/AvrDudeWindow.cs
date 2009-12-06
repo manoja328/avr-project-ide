@@ -11,6 +11,20 @@ namespace AVRProjectIDE
 {
     public partial class AvrDudeWindow : Form
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In AVRDUDE Tool");
+                erw.ShowDialog();
+            }
+        }
+
         private AVRProject project;
         private AVRProject originalProject;
         private BurnerPanel burnerPanel;

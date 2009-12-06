@@ -13,6 +13,20 @@ namespace AVRProjectIDE
 {
     public partial class MessagePanel : DockContent
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Message Panel");
+                erw.ShowDialog();
+            }
+        }
+
         public MessagePanel()
         {
             InitializeComponent();
@@ -63,7 +77,7 @@ namespace AVRProjectIDE
                 }
                 else if (mode == TextBoxChangeMode.AppendNewLine)
                 {
-                    box.Text += "\r\n" + text;
+                    box.Text += Environment.NewLine + text;
                     box.SelectionStart = box.Text.Length;
                     box.SelectionLength = 0;
                     box.ScrollToCaret();
@@ -77,7 +91,7 @@ namespace AVRProjectIDE
                 }
                 else if (mode == TextBoxChangeMode.PrependNewLine)
                 {
-                    box.Text = text + "\r\n" + box.Text;
+                    box.Text = text + Environment.NewLine + box.Text;
                     box.SelectionStart = 0;
                     box.SelectionLength = 0;
                     box.ScrollToCaret();
@@ -85,7 +99,7 @@ namespace AVRProjectIDE
                 else if (mode == TextBoxChangeMode.Set)
                     box.Text = text;
                 else if (mode == TextBoxChangeMode.SetNewLine)
-                    box.Text = text + "\r\n";
+                    box.Text = text + Environment.NewLine;
             }
         }
 

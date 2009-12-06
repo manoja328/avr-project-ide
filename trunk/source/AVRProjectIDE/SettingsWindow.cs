@@ -11,6 +11,20 @@ namespace AVRProjectIDE
 {
     public partial class SettingsWindow : Form
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Settings Window");
+                erw.ShowDialog();
+            }
+        }
+
         bool backspaceUnindents = true;
         bool tabIndents = true;
         bool useTabs = true;
@@ -66,7 +80,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                useTabs = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                useTabs = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentBackspaceUnindents");
@@ -76,7 +90,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                backspaceUnindents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                backspaceUnindents = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentTabIndents");
@@ -86,7 +100,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                tabIndents = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                tabIndents = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentGuide");
@@ -96,7 +110,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                indentGuide = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                indentGuide = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "IndentSmartness");
@@ -120,7 +134,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                lineWrap = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                lineWrap = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "AutocompleteEnable");
@@ -130,7 +144,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                chkAutocomplete.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                chkAutocomplete.Checked = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "ShowLineNumbers");
@@ -140,7 +154,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                chkShowLineNum.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                chkShowLineNum.Checked = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "ShowWhiteSpace");
@@ -150,7 +164,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                chkShowWS.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                chkShowWS.Checked = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "OpenLastProject");
@@ -160,7 +174,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                chkReopenProject.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                chkReopenProject.Checked = Program.StringToBool(tmpStr);
             }
 
             tmpStr = SettingsManagement.SettingsFile.Read("Editor", "HighlightCurrentLine");
@@ -170,7 +184,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                chkHighlightCurLine.Checked = tmpStr == true.ToString().Trim().ToLowerInvariant();
+                chkHighlightCurLine.Checked = Program.StringToBool(tmpStr);
             }
 
             blockCheckChanged = true;

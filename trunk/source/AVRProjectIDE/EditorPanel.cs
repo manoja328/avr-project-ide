@@ -14,6 +14,20 @@ namespace AVRProjectIDE
 {
     public partial class EditorPanel : DockContent
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Editor Panel");
+                erw.ShowDialog();
+            }
+        }
+
         private const int SAVERETRY = 5;
         private const int SAVERETRYDELAY = 100;
 
@@ -355,7 +369,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                if (MessageBox.Show(file.FileName + " Can't be Found\r\nDo you want to find it?", "File Not Found", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show(file.FileName + " Can't be Found" + Environment.NewLine + "Do you want to find it?", "File Not Found", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     openFileDialog1.Filter = String.Format("{0} File (*.{0})|*.{0}", file.FileExt);
 
@@ -448,6 +462,10 @@ namespace AVRProjectIDE
                 if (oldName != FileName)
                     OnRename(this, new RenamedEventArgs(WatcherChangeTypes.Renamed, file.FileDir, FileName, oldName));
 
+                file.Node.ImageKey = "file.ico";
+                file.Node.SelectedImageKey = "file.ico";
+                file.Node.StateImageKey = "file.ico";
+
                 return true;
             }
             else
@@ -522,7 +540,7 @@ namespace AVRProjectIDE
             {
                 if (e.ChangeType == WatcherChangeTypes.Changed && e.FullPath == file.FileAbsPath)
                 {
-                    if (MessageBox.Show(file.FileName + " was Changed on Disk\r\nDo you want to reload it (yes = load file from disk into editor)?", "External Edit Detected", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show(file.FileName + " was Changed on Disk" + Environment.NewLine + "Do you want to reload it (yes = load file from disk into editor)?", "External Edit Detected", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         ReadFromFile(file.FileAbsPath);
                 }
             }
@@ -571,7 +589,7 @@ namespace AVRProjectIDE
         {
             if (HasChanged && closeWithoutSave == false)
             {
-                DialogResult res = MessageBox.Show("You Have Not Saved " + FileName + "\r\nWould you like to save it?", "Closing Unsaved File", MessageBoxButtons.YesNoCancel);
+                DialogResult res = MessageBox.Show("You Have Not Saved " + FileName + Environment.NewLine + "Would you like to save it?", "Closing Unsaved File", MessageBoxButtons.YesNoCancel);
                 if (res == DialogResult.Yes)
                 {
                     if (Save() != SaveResult.Successful)
@@ -837,7 +855,7 @@ namespace AVRProjectIDE
             {
                 string line = scint.Lines.Current.Text;
                 int lineLen = scint.Caret.Position - scint.Lines.Current.StartPosition;
-                line = "\r\n" + line + "\r\n";
+                line = Environment.NewLine + line + Environment.NewLine;
                 bool inString = false;
                 bool inChar = false;
                 for (int i = 2; i < lineLen + 2; i++)

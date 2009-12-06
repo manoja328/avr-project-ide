@@ -85,6 +85,8 @@ namespace AVRProjectIDE
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppData Path: " + SettingsManagement.AppDataPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppInstall Path: " + SettingsManagement.AppInstallPath);
 
+            hardwareExplorerWin.ClockFreq = project.ClockFreq;
+
             FillRecentProjects();
 
             timerBackup.Interval = SettingsManagement.BackupInterval * 1000;
@@ -430,41 +432,49 @@ namespace AVRProjectIDE
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         protected override void WndProc(ref Message m)
         {
-            // closing signal
-            if (m.Msg == 0x0010)
+            try
             {
-                SaveProj();
-
-                if (HasChanged)
+                // closing signal
+                if (m.Msg == 0x0010)
                 {
-                    // if changes have occured, ask to save everything
+                    SaveProj();
 
-                    DialogResult res = MessageBox.Show("You have unsaved changes. Do you want to save?", "Unsaved Project", MessageBoxButtons.YesNoCancel);
-                    if (res == DialogResult.Yes)
+                    if (HasChanged)
                     {
-                        SaveAll();
+                        // if changes have occured, ask to save everything
+
+                        DialogResult res = MessageBox.Show("You have unsaved changes. Do you want to save?", "Unsaved Project", MessageBoxButtons.YesNoCancel);
+                        if (res == DialogResult.Yes)
+                        {
+                            SaveAll();
+                        }
+                        else if (res == DialogResult.Cancel)
+                        {
+                            // cancelled, returning here won't call base.WndProc
+                            return;
+                        }
                     }
-                    else if (res == DialogResult.Cancel)
+
+                    // try to close all editor panels
+                    // new list because collections shouldn't be modified in foreach
+                    List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
+                    foreach (EditorPanel i in toClose)
                     {
-                        // cancelled, returning here won't call base.WndProc
-                        return;
+                        i.Close(false);
                     }
+
+                    // this thread, if not killed, may cause the IDE to hang
+                    serialWin.Disconnect();
+                    serialWin.KillThread();
                 }
 
-                // try to close all editor panels
-                // new list because collections shouldn't be modified in foreach
-                List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
-                foreach (EditorPanel i in toClose)
-                {
-                    i.Close(false);
-                }
-
-                // this thread, if not killed, may cause the IDE to hang
-                serialWin.Disconnect();
-                serialWin.KillThread();
+                base.WndProc(ref m);
             }
-
-            base.WndProc(ref m);
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Main IDE");
+                erw.ShowDialog();
+            }
         }
 
         private void frmProjIDE_FormClosed(object sender, FormClosedEventArgs e)
@@ -674,8 +684,8 @@ namespace AVRProjectIDE
 
             if (newProj.IsReady) // IsReady == false means that the user closed the welcome window without opening a project
             {
-                LoadWaitWindow lww = new LoadWaitWindow();
-                lww.Show();
+                //LoadWaitWindow lww = new LoadWaitWindow();
+                //lww.Show();
 
                 EnableButtons();
 
@@ -702,11 +712,7 @@ namespace AVRProjectIDE
 
                 FillRecentProjects();
 
-                fileTreeWin.PopulateList(newProj, editorList);
-
-                ReloadLastOpened();
-
-                lww.Close();
+                //lww.Close();
 
                 if (project.HasBeenConfigged == false)
                 {
@@ -715,6 +721,11 @@ namespace AVRProjectIDE
                 }
 
                 hardwareExplorerWin.LoadDataForChip(project.Device);
+                hardwareExplorerWin.ClockFreq = project.ClockFreq;
+
+                fileTreeWin.PopulateList(newProj, editorList);
+
+                ReloadLastOpened();
 
                 KeywordScanner.LaunchScan(project, editorList);
             }
@@ -815,10 +826,6 @@ namespace AVRProjectIDE
 
                 FillRecentProjects();
 
-                fileTreeWin.PopulateList(newProj, editorList);
-
-                ReloadLastOpened();
-
                 //lww.Close();
 
                 if (project.HasBeenConfigged == false)
@@ -828,6 +835,11 @@ namespace AVRProjectIDE
                 }
 
                 hardwareExplorerWin.LoadDataForChip(project.Device);
+                hardwareExplorerWin.ClockFreq = project.ClockFreq;
+
+                fileTreeWin.PopulateList(newProj, editorList);
+
+                ReloadLastOpened();
 
                 KeywordScanner.LaunchScan(project, editorList);
             }
@@ -1064,8 +1076,12 @@ namespace AVRProjectIDE
             if (project.ShouldReloadFiles)
                 fileTreeWin.PopulateList(project, editorList);
 
+            if (project.ShouldReloadClock)
+                hardwareExplorerWin.ClockFreq = project.ClockFreq;
+
             project.ShouldReloadFiles = false;
             project.ShouldReloadDevice = false;
+            project.ShouldReloadClock = false;
         }
 
         private void tbtnConfig_Click(object sender, EventArgs e)
@@ -1093,6 +1109,7 @@ namespace AVRProjectIDE
 
             if (ProjectBuilder.CheckForWinAVR())
             {
+                messageWin.BringToFront();
                 messageWin.Activate();
                 SaveAll();
                 projBuilder.StartBuild();
@@ -1205,6 +1222,7 @@ namespace AVRProjectIDE
                 {
                     projBuilder.HasError = 0;
 
+                    messageWin.MessageBoxModify(TextBoxChangeMode.Set, "");
                     messageWin.ClearErrors();
 
                     if (projBuilder.Compile(file))
@@ -1307,8 +1325,6 @@ namespace AVRProjectIDE
 
                 EnableButtons();
 
-                ReloadLastOpened();
-
                 KeywordScanner.LaunchScan(project, editorList);
 
                 projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
@@ -1318,19 +1334,19 @@ namespace AVRProjectIDE
                 // set title
                 this.Text = project.FileNameNoExt + " - AVR Project IDE";
 
-                fileTreeWin.PopulateList(project, editorList);
-
                 //lww.Close();
-
-                hardwareExplorerWin.LoadDataForChip(project.Device);
 
                 if (project.HasBeenConfigged == false)
                 {
                     ConfigWindow wnd = new ConfigWindow(project);
                     wnd.ShowDialog();
-
-                    hardwareExplorerWin.LoadDataForChip(project.Device);
                 }
+
+                hardwareExplorerWin.ClockFreq = project.ClockFreq;
+                hardwareExplorerWin.LoadDataForChip(project.Device);
+
+                fileTreeWin.PopulateList(project, editorList);
+                ReloadLastOpened();
             }
         }
 

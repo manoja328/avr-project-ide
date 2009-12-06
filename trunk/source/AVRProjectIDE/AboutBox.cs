@@ -13,9 +13,9 @@ namespace AVRProjectIDE
         public AboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("About {0} {0}", AssemblyTitle);
+            this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0} {0}", AssemblyVersion);
+            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
@@ -104,6 +104,20 @@ namespace AVRProjectIDE
         private void lnkButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
+        }
+
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In About Box");
+                erw.ShowDialog();
+            }
         }
     }
 }

@@ -14,6 +14,20 @@ namespace AVRProjectIDE
 {
     public partial class WelcomeWindow : Form
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Welcome Window");
+                erw.ShowDialog();
+            }
+        }
+
         private AVRProject project;
 
         public WelcomeWindow(AVRProject project)
@@ -95,7 +109,7 @@ namespace AVRProjectIDE
             {
                 if (project.ImportAPS(ofd.FileName))
                 {
-                    MessageBox.Show("Import was Successful\r\nPlease Save It");
+                    MessageBox.Show("Import was Successful" + Environment.NewLine + "Please Save It");
                     SaveResult res = project.Save();
                     if (res == SaveResult.Failed)
                     {
@@ -181,7 +195,7 @@ namespace AVRProjectIDE
                 Match m = r.Match(content);
                 while (m.Success)
                 {
-                    e.Result += m.Groups[3].Value + "\r\n\r\n";
+                    e.Result += m.Groups[3].Value + Environment.NewLine + Environment.NewLine;
                     m = m.NextMatch();
                 }
 

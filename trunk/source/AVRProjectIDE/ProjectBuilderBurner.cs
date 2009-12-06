@@ -241,7 +241,7 @@ namespace AVRProjectIDE
                 }
                 else if (mode == TextBoxChangeMode.AppendNewLine)
                 {
-                    box.Text += "\r\n" + text;
+                    box.Text += Environment.NewLine + text;
                     box.SelectionStart = box.Text.Length;
                     box.SelectionLength = 0;
                     box.ScrollToCaret();
@@ -255,7 +255,7 @@ namespace AVRProjectIDE
                 }
                 else if (mode == TextBoxChangeMode.PrependNewLine)
                 {
-                    box.Text = text + "\r\n" + box.Text;
+                    box.Text = text + Environment.NewLine + box.Text;
                     box.SelectionStart = 0;
                     box.SelectionLength = 0;
                     box.ScrollToCaret();
@@ -263,7 +263,7 @@ namespace AVRProjectIDE
                 else if (mode == TextBoxChangeMode.Set)
                     box.Text = text;
                 else if (mode == TextBoxChangeMode.SetNewLine)
-                    box.Text = text + "\r\n";
+                    box.Text = text + Environment.NewLine;
             }
         }
 
@@ -390,7 +390,7 @@ namespace AVRProjectIDE
                 bool archiveRes = CreateLib(avr_ar_targets);
                 if (archiveRes)
                 {
-                    workingProject.LinkerOptions += " " + "lib" + workingProject.FileNameNoExt + ".a";
+                    workingProject.LinkerOptions += " " + "lib" + workingProject.SafeFileNameNoExt + ".a";
                 }
 
                 elfRes = CreateELF(objFiles, false);
@@ -399,7 +399,7 @@ namespace AVRProjectIDE
             result &= elfRes;
 
             // delete all the junk files
-            CleanOD(objFiles + " lib" + workingProject.FileNameNoExt + ".a");
+            CleanOD(objFiles + " lib" + workingProject.SafeFileNameNoExt + ".a");
 
             // if successful, generate hex to be burnt
             if (elfRes)
@@ -423,7 +423,7 @@ namespace AVRProjectIDE
             if (Program.MakeSurePathExists(outputAbsPath) == false)
                 return false;
 
-            string libFilePath = outputAbsPath + Path.DirectorySeparatorChar + "lib" + workingProject.FileNameNoExt + ".a";
+            string libFilePath = outputAbsPath + Path.DirectorySeparatorChar + "lib" + workingProject.SafeFileNameNoExt + ".a";
 
             // delete object file if existing
             if (File.Exists(libFilePath))
@@ -440,7 +440,7 @@ namespace AVRProjectIDE
 
             // construct options and arguments for avr-gcc
 
-            string args = "rcs lib" + workingProject.FileNameNoExt + ".a " + avr_ar_targets;
+            string args = "rcs lib" + workingProject.SafeFileNameNoExt + ".a " + avr_ar_targets;
             TextBoxModify(outputTextbox, "Execute: avr-ar " + args, TextBoxChangeMode.PrependNewLine);
             ProcessStartInfo psi = new ProcessStartInfo("avr-ar", args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
@@ -586,9 +586,13 @@ namespace AVRProjectIDE
             else if (file.FileExt == "s")
                 fileTypeOptions = workingProject.OtherOptionsForS;
 
-            args += String.Format(" -mmcu={0} -DF_CPU={1:0}UL {2} {3} {4} -MD -MP -MT {5}.o {6} -c {7} {8} \"{9}\"",
+            string clkStr = " ";
+            if (project.ClockFreq != 0)
+                clkStr = String.Format(" -DF_CPU={0:0}UL ", Math.Round(project.ClockFreq));
+
+            args += String.Format(" -mmcu={0}{1}{2} {3} {4} -MD -MP -MT {5}.o {6} -c {7} {8} \"{9}\"",
                 workingProject.Device,
-                Math.Round(project.ClockFreq),
+                clkStr,
                 workingProject.Optimization,
                 checklist,
                 workingProject.OtherOptions,
@@ -664,7 +668,7 @@ namespace AVRProjectIDE
             if (Program.MakeSurePathExists(outputAbsPath) == false)
                 return false;
 
-            string elfFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.FileNameNoExt + ".elf";
+            string elfFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.SafeFileNameNoExt + ".elf";
 
             if (File.Exists(elfFileAbsPath))
             {
@@ -678,7 +682,7 @@ namespace AVRProjectIDE
                 }
             }
 
-            string mapFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.FileNameNoExt + ".map";
+            string mapFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.SafeFileNameNoExt + ".map";
 
             if (File.Exists(mapFileAbsPath))
             {
@@ -695,7 +699,7 @@ namespace AVRProjectIDE
             // construct options and arguments
 
             string LDSFLAGS = "-mmcu=" + workingProject.Device + " ";
-            foreach (MemorySegment seg in workingProject.MemorySegList)
+            foreach (MemorySegment seg in workingProject.MemorySegList.Values)
             {
                 int addr = (int)seg.Addr;
                 if (seg.Type.ToLowerInvariant() == "sram")
@@ -714,7 +718,7 @@ namespace AVRProjectIDE
                 LDSFLAGS += "-Wl,--defsym=__stack=0x" + Convert.ToString(workingProject.InitStackAddr, 16) + " ";
             }
 
-            LDSFLAGS += "-Wl,-Map=" + workingProject.FileNameNoExt + ".map ";
+            LDSFLAGS += "-Wl,-Map=" + workingProject.SafeFileNameNoExt + ".map ";
             LDSFLAGS += "-Wl,--gc-sections ";
             LDSFLAGS += workingProject.Optimization + " ";
             LDSFLAGS += workingProject.LinkerOptions;
@@ -759,7 +763,7 @@ namespace AVRProjectIDE
                 LINKONLYOBJECTS.Trim(),
                 LIBDIRS.Trim(),
                 LIBS.Trim(),
-                workingProject.FileNameNoExt
+                workingProject.SafeFileNameNoExt
             );
 
             TextBoxModify(outputTextbox, "Execute: avr-gcc " + args, TextBoxChangeMode.PrependNewLine);
@@ -861,7 +865,7 @@ namespace AVRProjectIDE
             if (Program.MakeSurePathExists(outputAbsPath) == false)
                 return false;
 
-            string hexFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.FileNameNoExt + ".hex";
+            string hexFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.SafeFileNameNoExt + ".hex";
 
             if (File.Exists(hexFileAbsPath))
             {
@@ -876,7 +880,7 @@ namespace AVRProjectIDE
             }
 
             string HEX_FLASH_FLAGS = "-R .eeprom -R .fuse -R .lock -R .signature ";
-            string args = HEX_FLASH_FLAGS + "-O ihex " + workingProject.FileNameNoExt + ".elf " + workingProject.FileNameNoExt + ".hex";
+            string args = HEX_FLASH_FLAGS + "-O ihex " + workingProject.SafeFileNameNoExt + ".elf " + workingProject.SafeFileNameNoExt + ".hex";
 
             TextBoxModify(outputTextbox, "Execute: avr-objcopy " + args, TextBoxChangeMode.PrependNewLine);
 
@@ -930,7 +934,7 @@ namespace AVRProjectIDE
             if (Program.MakeSurePathExists(outputAbsPath) == false)
                 return false;
 
-            string eepFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.FileNameNoExt + ".eep";
+            string eepFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.SafeFileNameNoExt + ".eep";
 
             if (File.Exists(eepFileAbsPath))
             {
@@ -946,13 +950,13 @@ namespace AVRProjectIDE
 
             string HEX_EEPROM_FLAGS = "-j .eeprom --set-section-flags=.eeprom=\"alloc,load\" --change-section-lma .eeprom=0 --no-change-warnings ";
 
-            foreach (MemorySegment seg in workingProject.MemorySegList)
+            foreach (MemorySegment seg in workingProject.MemorySegList.Values)
             {
                 if (seg.Type == "eeprom")
                     HEX_EEPROM_FLAGS += "--change-section-lma " + seg.Name + "=0x" + Convert.ToString(seg.Addr, 16) + " ";
             }
 
-            string args = HEX_EEPROM_FLAGS + " -O ihex " + workingProject.FileNameNoExt + ".elf " + workingProject.FileNameNoExt + ".eep";
+            string args = HEX_EEPROM_FLAGS + " -O ihex " + workingProject.SafeFileNameNoExt + ".elf " + workingProject.SafeFileNameNoExt + ".eep";
 
             TextBoxModify(outputTextbox, "Execute: avr-objcopy " + args, TextBoxChangeMode.PrependNewLine);
 
@@ -1006,7 +1010,7 @@ namespace AVRProjectIDE
             if (Program.MakeSurePathExists(outputAbsPath) == false)
                 return false;
 
-            string lssFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.FileNameNoExt + ".lss";
+            string lssFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.SafeFileNameNoExt + ".lss";
 
             if (File.Exists(lssFileAbsPath))
             {
@@ -1020,7 +1024,7 @@ namespace AVRProjectIDE
                 }
             }
 
-            string args = "-h -S " + workingProject.FileNameNoExt + ".elf >> " + workingProject.FileNameNoExt + ".lss";
+            string args = "-h -S " + workingProject.SafeFileNameNoExt + ".elf >> " + workingProject.SafeFileNameNoExt + ".lss";
 
             TextBoxModify(outputTextbox, "Execute: avr-objdump " + args, TextBoxChangeMode.PrependNewLine);
 
@@ -1067,7 +1071,7 @@ namespace AVRProjectIDE
         {
             string outputAbsPath = workingProject.DirPath + Path.DirectorySeparatorChar + workingProject.OutputDir;
 
-            string args = "-C --mcu=" + workingProject.Device + " " + workingProject.FileNameNoExt + ".elf";
+            string args = "-C --mcu=" + workingProject.Device + " " + workingProject.SafeFileNameNoExt + ".elf";
 
             TextBoxModify(outputTextbox, "Execute: avr-size " + args, TextBoxChangeMode.PrependNewLine);
 
@@ -1775,7 +1779,7 @@ namespace AVRProjectIDE
 
             string fileStr = "";
             if (onlyOptions == false && burnFuses == false)
-                fileStr = String.Format("-U flash:w:\"{0}\\{1}\\{2}.hex\":a", project.DirPath, project.OutputDir, project.FileNameNoExt);
+                fileStr = String.Format("-U flash:w:\"{0}\\{1}\\{2}.hex\":a", project.DirPath, project.OutputDir, project.SafeFileNameNoExt);
 
             if (burnFuses)
                 fileStr = project.BurnFuseBox;
@@ -1964,11 +1968,11 @@ namespace AVRProjectIDE
                 writer = new StreamWriter(proj.DirPath + "\\Makefile");
 
                 writer.WriteLine("##################################");
-                writer.WriteLine("## Makefile for project: {0}", proj.FileNameNoExt);
+                writer.WriteLine("## Makefile for project: {0}", proj.SafeFileNameNoExt);
                 writer.WriteLine("##################################");
                 writer.WriteLine();
                 writer.WriteLine("## General Flags");
-                writer.WriteLine("PROJECT = {0}", proj.FileNameNoExt);
+                writer.WriteLine("PROJECT = {0}", proj.SafeFileNameNoExt);
                 writer.WriteLine("MCU = {0}", proj.Device);
                 writer.WriteLine("TARGET = {0}/$(PROJECT).elf", proj.OutputDir.Replace('\\', '/'));
                 writer.WriteLine("CC = avr-gcc");
@@ -2034,7 +2038,7 @@ namespace AVRProjectIDE
                     writer.WriteLine("LDFLAGS += -Wl,--defsym=__stack=0x{0:X}", proj.InitStackAddr);
                 }
 
-                foreach (MemorySegment seg in proj.MemorySegList)
+                foreach (MemorySegment seg in proj.MemorySegList.Values)
                 {
                     int addr = (int)seg.Addr;
                     if (seg.Type.ToLowerInvariant() == "sram")
@@ -2061,7 +2065,7 @@ namespace AVRProjectIDE
                 writer.WriteLine("HEX_EEPROM_FLAGS += --set-section-flags=.eeprom=\"alloc,load\"");
                 writer.WriteLine("HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings");
 
-                foreach (MemorySegment seg in proj.MemorySegList)
+                foreach (MemorySegment seg in proj.MemorySegList.Values)
                 {
                     if (seg.Type.ToLowerInvariant() == "eeprom")
                     {
@@ -2130,7 +2134,7 @@ namespace AVRProjectIDE
                         ofiles += file.Value.FileNameNoExt + ".o ";
 
                         compileStr += file.Value.FileNameNoExt + ".o: ./" + file.Value.FileRelPathTo(proj.DirPath).Replace('\\', '/');
-                        compileStr += "\r\n";
+                        compileStr += Environment.NewLine;
                         if (file.Value.FileExt == "s")
                         {
                             compileStr += "\t $(CC) $(INCLUDES) ";
@@ -2148,7 +2152,7 @@ namespace AVRProjectIDE
                         }
                         compileStr += " -c ";
                         compileStr += file.Value.Options.Trim();
-                        compileStr += " $<\r\n\r\n";
+                        compileStr += " $<" + Environment.NewLine + Environment.NewLine;
                     }
                 }
 
@@ -2267,10 +2271,10 @@ namespace AVRProjectIDE
 
                 if (proj.UseInitStack)
                 {
-                    moreLDSFLAGS += String.Format("\r\nLDFLAGS += -Wl,--defsym=__stack=0x{0:X}", proj.InitStackAddr);
+                    moreLDSFLAGS += String.Format(Environment.NewLine + "LDFLAGS += -Wl,--defsym=__stack=0x{0:X}", proj.InitStackAddr);
                 }
 
-                foreach (MemorySegment seg in proj.MemorySegList)
+                foreach (MemorySegment seg in proj.MemorySegList.Values)
                 {
                     int addr = (int)seg.Addr;
                     if (seg.Type.ToLowerInvariant() == "sram")
@@ -2281,12 +2285,12 @@ namespace AVRProjectIDE
                     {
                         addr += 0x810000;
                     }
-                     moreLDSFLAGS += String.Format("\r\nLDFLAGS += -Wl,-section-start={0}=0x{1:X}", seg.Name, addr);
+                     moreLDSFLAGS += String.Format(Environment.NewLine + "LDFLAGS += -Wl,-section-start={0}=0x{1:X}", seg.Name, addr);
                 }
 
                 if (string.IsNullOrEmpty(proj.LinkerOptions) == false)
                 {
-                     moreLDSFLAGS += String.Format("\r\nLDFLAGS += {0}", proj.LinkerOptions);
+                     moreLDSFLAGS += String.Format(Environment.NewLine + "LDFLAGS += {0}", proj.LinkerOptions);
                 }
 
                 string libdirs = "";
@@ -2326,7 +2330,7 @@ namespace AVRProjectIDE
 
                 string addEEPROM = "";
 
-                foreach (MemorySegment seg in proj.MemorySegList)
+                foreach (MemorySegment seg in proj.MemorySegList.Values)
                 {
                     if (seg.Type.ToLowerInvariant() == "eeprom")
                     {

@@ -15,6 +15,20 @@ namespace AVRProjectIDE
 {
     public partial class SerialPortPanel : DockContent
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Serial Port Panel");
+                erw.ShowDialog();
+            }
+        }
+
         public SerialPortPanel()
         {
             InitializeControl();
@@ -303,7 +317,7 @@ namespace AVRProjectIDE
             else
             {
                 //SerialPortException(ex);
-                txtRx.Text = ex.Message + "\r\n" + textboxBuffer;
+                txtRx.Text = ex.Message + Environment.NewLine + textboxBuffer;
                 textChanged = false;
             }
         }
@@ -491,7 +505,7 @@ namespace AVRProjectIDE
                     }
                     else if (bArr[i] == '\v')
                     {
-                        resStr += "\r\n\r\n\r\n";
+                        resStr += Environment.NewLine + Environment.NewLine + Environment.NewLine;
                     }
                     else
                     {

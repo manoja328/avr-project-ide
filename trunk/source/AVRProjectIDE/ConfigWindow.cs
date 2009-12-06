@@ -16,6 +16,20 @@ namespace AVRProjectIDE
 {
     public partial class ConfigWindow : Form
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Configuration Window");
+                erw.ShowDialog();
+            }
+        }
+
         #region Fields and Properties
 
         private AVRProject project;
@@ -97,6 +111,10 @@ namespace AVRProjectIDE
                 project.ShouldReloadDevice = true;
 
             project.Device = newDev;
+
+            if (project.ClockFreq != numClockFreq.Value)
+                project.ShouldReloadClock = false;
+
             project.ClockFreq = numClockFreq.Value;
             project.LinkerOptions = txtLinkerOptions.Text;
             project.OtherOptions = txtOtherOptions.Text;
@@ -151,7 +169,7 @@ namespace AVRProjectIDE
             {
                 if (string.IsNullOrEmpty((string)i.Cells[1].Value) == false)
                 {
-                    project.MemorySegList.Add(new MemorySegment((string)i.Cells[0].Value, (string)i.Cells[1].Value, Convert.ToUInt32("0x" + (string)i.Cells[2].Value, 16)));
+                    project.MemorySegList.Add((string)i.Cells[1].Value, new MemorySegment((string)i.Cells[0].Value, (string)i.Cells[1].Value, Convert.ToUInt32("0x" + (string)i.Cells[2].Value, 16)));
                 }
             }
         }
@@ -215,7 +233,7 @@ namespace AVRProjectIDE
             }
 
             dgvMemory.Rows.Clear();
-            foreach (MemorySegment m in project.MemorySegList)
+            foreach (MemorySegment m in project.MemorySegList.Values)
             {
                 DataGridViewRow dgvr = new DataGridViewRow();
                 string[] memStr = new string[3];
