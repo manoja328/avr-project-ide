@@ -13,6 +13,19 @@ namespace AVRProjectIDE
 {
     public partial class FileTreePanel : DockContent
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In File Tree Panel");
+                erw.ShowDialog();
+            }
+        }
 
         #region Fields and Properties
 
@@ -244,6 +257,19 @@ namespace AVRProjectIDE
 
                 // attach the menu
                 tn.ContextMenuStrip = nodeRClickMenu;
+
+                if (file.Exists == false)
+                {
+                    tn.ImageKey = "missing.ico";
+                    tn.SelectedImageKey = "missing.ico";
+                    tn.StateImageKey = "missing.ico";
+                }
+                else
+                {
+                    tn.ImageKey = "file.ico";
+                    tn.SelectedImageKey = "file.ico";
+                    tn.StateImageKey = "file.ico";
+                }
 
                 string ext = file.FileExt;
                 if (ext == "s" || ext  == "c" || ext == "cpp" || ext == "cxx" || ext == "pde")

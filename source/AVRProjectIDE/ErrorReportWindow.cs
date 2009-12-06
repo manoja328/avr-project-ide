@@ -15,14 +15,14 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
-            txtException.Text = msg + "\r\n\r\n";
-            txtException.Text += "Modified code files should have been backed up occasionally automatically, go look for them if the editor crashes.\r\n";
-            txtException.Text += "If This is an Issue, Please Report This To http://code.google.com/p/avr-project-ide/issues/list\r\n";
-            txtException.Text += "\r\nMessage: " + ex.Message + "\r\n";
-            txtException.Text += "\r\nTarget Site: " + ex.TargetSite + "\r\n";
-            txtException.Text += "\r\nStack Trace: " + ex.StackTrace + "\r\n";
-            txtException.Text += "\r\nSource: " + ex.Source + "\r\n";
-            txtException.Text += "\r\nInner Exception: " + ex.InnerException + "\r\n";
+            txtException.Text = msg + Environment.NewLine + Environment.NewLine;
+            txtException.Text += "Modified code files should have been backed up occasionally automatically, go look for them if the editor crashes." + Environment.NewLine;
+            txtException.Text += "If This is an Issue, Please Report This To http://code.google.com/p/avr-project-ide/issues/list" + Environment.NewLine;
+            txtException.Text += Environment.NewLine + "Message: " + ex.Message + Environment.NewLine;
+            txtException.Text += Environment.NewLine + "Target Site: " + ex.TargetSite + Environment.NewLine;
+            txtException.Text += Environment.NewLine + "Stack Trace: " + ex.StackTrace + Environment.NewLine;
+            txtException.Text += Environment.NewLine + "Source: " + ex.Source + Environment.NewLine;
+            txtException.Text += Environment.NewLine + "Inner Exception: " + ex.InnerException + Environment.NewLine;
         }
     }
 }

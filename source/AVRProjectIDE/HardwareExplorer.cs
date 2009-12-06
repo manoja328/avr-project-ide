@@ -14,15 +14,46 @@ namespace AVRProjectIDE
 {
     public partial class HardwareExplorer : DockContent
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Hardware Explorer");
+                erw.ShowDialog();
+            }
+        }
+
         private string chipName;
         private Dictionary<string, Dictionary<string, IntVect>> intVectListAVRLibc = new Dictionary<string, Dictionary<string, IntVect>>();
         private Dictionary<string, string> intVectListAtmelXML = new Dictionary<string, string>();
+
+        public decimal ClockFreq
+        {
+            set { numClkFreq.Value = Math.Max(Math.Min(numClkFreq.Maximum, value), numClkFreq.Minimum); }
+        }
 
         public HardwareExplorer()
         {
             InitializeComponent();
 
             this.Icon = Icon.FromHandle(Properties.Resources.burn.GetHicon());
+
+            numTimerOverflows.Maximum = decimal.MaxValue;
+            numTimerRealTime.Maximum = decimal.MaxValue;
+            numTimerTotalTicks.Maximum = decimal.MaxValue;
+            numTimerRemainingTicks.Maximum = decimal.MaxValue;
+            numADCRef.Maximum = decimal.MaxValue;
+            numADCInput.Maximum = decimal.MaxValue;
+            numADC8BitRes.Maximum = decimal.MaxValue;
+            numADC10BitRes.Maximum = decimal.MaxValue;
+
+            listTimerModes.SelectedIndex = 0;
+            listTimerPrescaler.SelectedIndex = 0;
         }
 
         public void LoadDataForChip(string chipName)
@@ -132,7 +163,7 @@ namespace AVRProjectIDE
                             foreach (XmlNode xText in xIO_MODULE.ChildNodes)
                             {
                                 if (xText.Name == "TEXT")
-                                    moduleNode.ToolTipText += "\r\n" + xText.InnerText;                                
+                                    moduleNode.ToolTipText += Environment.NewLine + xText.InnerText;                                
                             }
 
                             foreach (XmlElement xLIST in xModule.GetElementsByTagName("LIST"))
@@ -155,22 +186,22 @@ namespace AVRProjectIDE
                                         foreach (XmlNode xText in xReg.ChildNodes)
                                         {
                                             if (xText.Name == "TEXT" || xText.Name == "DESCRIPTION")
-                                                regNode.ToolTipText += "\r\n" + xText.InnerText + "\r\n";
+                                                regNode.ToolTipText += Environment.NewLine + xText.InnerText + Environment.NewLine;
                                             else if (xText.Name == "IO_ADDR")
                                             {
                                                 long num = 0;
                                                 if (Program.TryParseText(xText.InnerText, out num, false))
-                                                    regNode.ToolTipText += String.Format("\r\nIO Address: 0x{0:X4} ( {0:0} )", num);
+                                                    regNode.ToolTipText += String.Format(Environment.NewLine + "IO Address: 0x{0:X4} ( {0:0} )", num);
                                                 else if (string.IsNullOrEmpty(xText.InnerText.Trim()) == false)
-                                                    regNode.ToolTipText += "\r\nIO Address: " + xText.InnerText.Trim();
+                                                    regNode.ToolTipText += Environment.NewLine + "IO Address: " + xText.InnerText.Trim();
                                             }
                                             else if (xText.Name == "MEM_ADDR")
                                             {
                                                 long num = 0;
                                                 if (Program.TryParseText(xText.InnerText, out num, false))
-                                                    regNode.ToolTipText += String.Format("\r\nMemory Address: 0x{0:X4} ( {0:0} )", num);
+                                                    regNode.ToolTipText += String.Format(Environment.NewLine + "Memory Address: 0x{0:X4} ( {0:0} )", num);
                                                 else if (string.IsNullOrEmpty(xText.InnerText.Trim()) == false)
-                                                    regNode.ToolTipText += "\r\nMemory Address: " + xText.InnerText.Trim();
+                                                    regNode.ToolTipText += Environment.NewLine + "Memory Address: " + xText.InnerText.Trim();
                                             }
                                             else if (xText.Name == "DISPLAY_BITS")
                                                 displayBits = xText.InnerText.Trim().ToLowerInvariant() == "y";
@@ -188,17 +219,17 @@ namespace AVRProjectIDE
                                                 foreach (XmlElement j in xBit.GetElementsByTagName("NAME"))
                                                 {
                                                     bitNode.Text = j.InnerText;
-                                                    bitNode.ToolTipText += "\r\n" + j.InnerText + "\r\n";
+                                                    bitNode.ToolTipText += Environment.NewLine + j.InnerText + Environment.NewLine;
                                                 }
 
                                                 foreach (XmlElement j in xBit.GetElementsByTagName("DESCRIPTION"))
                                                 {
-                                                    bitNode.ToolTipText += "\r\nDescription: " + j.InnerText + "\r\n";
+                                                    bitNode.ToolTipText += Environment.NewLine + "Description: " + j.InnerText + Environment.NewLine;
                                                 }
 
                                                 foreach (XmlElement j in xBit.GetElementsByTagName("TEXT"))
                                                 {
-                                                    bitNode.ToolTipText += "\r\n" + j.InnerText + "\r\n";
+                                                    bitNode.ToolTipText += Environment.NewLine + j.InnerText + Environment.NewLine;
                                                 }
 
                                                 foreach (XmlElement j in xBit.GetElementsByTagName("ACCESS"))
@@ -207,18 +238,18 @@ namespace AVRProjectIDE
                                                     bool write = j.InnerText.Trim().ToLowerInvariant().Contains('w');
 
                                                     if (read && !write)
-                                                        bitNode.ToolTipText += "\r\nRead Only";
+                                                        bitNode.ToolTipText += Environment.NewLine + "Read Only";
                                                     else if (read && write)
-                                                        bitNode.ToolTipText += "\r\nReadable and Writable";
+                                                        bitNode.ToolTipText += Environment.NewLine + "Readable and Writable";
                                                     else if (!read && write)
-                                                        bitNode.ToolTipText += "\r\nWrite Only";
+                                                        bitNode.ToolTipText += Environment.NewLine + "Write Only";
                                                     else if (!read && !write)
-                                                        bitNode.ToolTipText += "\r\nUnreadable and Unwritable";
+                                                        bitNode.ToolTipText += Environment.NewLine + "Unreadable and Unwritable";
                                                 }
 
                                                 foreach (XmlElement j in xBit.GetElementsByTagName("INIT_VAL"))
                                                 {
-                                                    bitNode.ToolTipText += "\r\nInitial Value: " + j.InnerText;
+                                                    bitNode.ToolTipText += Environment.NewLine + "Initial Value: " + j.InnerText;
                                                 }
 
                                                 regNode.Nodes.Add(bitNode);
@@ -281,12 +312,12 @@ namespace AVRProjectIDE
                             foreach (XmlElement xEle in vectEle.GetElementsByTagName("DEFINITION"))
                             {
                                 name = xEle.InnerText;
-                                desc += xEle.InnerText + "\r\n";
+                                desc += xEle.InnerText + Environment.NewLine;
                             }
 
                             foreach (XmlElement xEle in vectEle.GetElementsByTagName("SOURCE"))
                             {
-                                desc += "Source: " + xEle.InnerText + "\r\n";
+                                desc += "Source: " + xEle.InnerText + Environment.NewLine;
                             }
 
                             long progAddr = -1;
@@ -294,7 +325,7 @@ namespace AVRProjectIDE
                             {
                                 if (Program.TryParseText(xProgAddr.InnerText, out progAddr, false))
                                 {
-                                    desc += String.Format("Addr: 0x{0:X4}\r\n", progAddr);
+                                    desc += String.Format("Addr: 0x{0:X4}" + Environment.NewLine, progAddr);
                                 }
                             }
 
@@ -399,50 +430,50 @@ namespace AVRProjectIDE
 
             foreach (XmlElement i in docEle.GetElementsByTagName("MEMORY"))
             {
-                result += "\r\n";
+                result += Environment.NewLine;
 
                 foreach (XmlElement j in i.GetElementsByTagName("PROG_FLASH"))
                 {
                     long num = 0;
                     if (Program.TryParseText(j.InnerText, out num, false))
-                        result += String.Format("Flash Memory: {0} bytes ( 0x{0:X4} )\r\n", num);
+                        result += String.Format("Flash Memory: {0} bytes ( 0x{0:X4} )" + Environment.NewLine, num);
                     else if (string.IsNullOrEmpty(j.InnerText.Trim()) == false)
-                        result += String.Format("Flash Memory: {0}\r\n", j.InnerText.Trim());
+                        result += String.Format("Flash Memory: {0}" + Environment.NewLine, j.InnerText.Trim());
                 }
 
                 foreach (XmlElement j in i.GetElementsByTagName("EEPROM"))
                 {
                     long num = 0;
                     if (Program.TryParseText(j.InnerText, out num, false))
-                        result += String.Format("EEPROM Memory: {0} bytes ( 0x{0:X4} )\r\n", num);
+                        result += String.Format("EEPROM Memory: {0} bytes ( 0x{0:X4} )" + Environment.NewLine, num);
                     else if (string.IsNullOrEmpty(j.InnerText.Trim()) == false)
-                        result += String.Format("EEPROM Memory: {0}\r\n", j.InnerText.Trim());
+                        result += String.Format("EEPROM Memory: {0}" + Environment.NewLine, j.InnerText.Trim());
                 }
 
                 foreach (XmlElement j in i.GetElementsByTagName("INT_SRAM"))
                 {
-                    result += "\r\n";
+                    result += Environment.NewLine;
 
                     foreach (XmlElement k in j.GetElementsByTagName("SIZE"))
                     {
                         long num = 0;
                         if (Program.TryParseText(k.InnerText, out num, false))
-                            result += String.Format("SRAM Size: {0} bytes ( 0x{0:X4} )\r\n", num);
+                            result += String.Format("SRAM Size: {0} bytes ( 0x{0:X4} )" + Environment.NewLine, num);
                         else if (string.IsNullOrEmpty(k.InnerText.Trim()) == false)
-                            result += String.Format("SRAM Size: {0}\r\n", k.InnerText.Trim());
+                            result += String.Format("SRAM Size: {0}" + Environment.NewLine, k.InnerText.Trim());
                     }
 
                     foreach (XmlElement k in j.GetElementsByTagName("START_ADDR"))
                     {
                         long num = 0;
                         if (Program.TryParseText(k.InnerText, out num, false))
-                            result += String.Format("SRAM Starting Address: {0} ( 0x{0:X4} )\r\n", num);
+                            result += String.Format("SRAM Starting Address: {0} ( 0x{0:X4} )" + Environment.NewLine, num);
                     }
                 }
 
                 foreach (XmlElement j in i.GetElementsByTagName("BOOT_CONFIG"))
                 {
-                    result += "\r\nRemember that all flash addresses are WORD addresses, not BYTE addresses.\r\n\r\n";
+                    result += Environment.NewLine + "Remember that all flash addresses are WORD addresses, not BYTE addresses." + Environment.NewLine + Environment.NewLine;
 
                     string startAddrStr = null;
                     string endAddrStr = null;
@@ -455,7 +486,7 @@ namespace AVRProjectIDE
                     long endAddr = 0;
 
                     if (Program.TryParseText(startAddrStr, out startAddr, false) && Program.TryParseText(endAddrStr, out endAddr, false))
-                        result += String.Format("NRWW Addr: 0x{0:X4} ( {0:0} ) to 0x{1:X4} ( {1:0} )\r\n", startAddr, endAddr);
+                        result += String.Format("NRWW Addr: 0x{0:X4} ( {0:0} ) to 0x{1:X4} ( {1:0} )" + Environment.NewLine, startAddr, endAddr);
 
                     foreach (XmlElement k in j.GetElementsByTagName("RWW_START_ADDR"))
                         startAddrStr = k.InnerText;
@@ -463,23 +494,23 @@ namespace AVRProjectIDE
                         endAddrStr = k.InnerText;
 
                     if (Program.TryParseText(startAddrStr, out startAddr, false) && Program.TryParseText(endAddrStr, out endAddr, false))
-                        result += String.Format("RWW Addr: 0x{0:X4} ( {0:0} ) to 0x{1:X4} ( {1:0} )\r\n", startAddr, endAddr);
+                        result += String.Format("RWW Addr: 0x{0:X4} ( {0:0} ) to 0x{1:X4} ( {1:0} )" + Environment.NewLine, startAddr, endAddr);
 
 
                     foreach (XmlElement k in j.GetElementsByTagName("PAGESIZE"))
                     {
                         long num = 0;
                         if (Program.TryParseText(k.InnerText, out num, false))
-                            result += String.Format("Page Size: {0} ( 0x{0:X4} )\r\n", num);
+                            result += String.Format("Page Size: {0} ( 0x{0:X4} )" + Environment.NewLine, num);
                         else if (string.IsNullOrEmpty(k.InnerText.Trim()) == false)
-                            result += String.Format("Page Size: {0}\r\n", k.InnerText.Trim());
+                            result += String.Format("Page Size: {0}" + Environment.NewLine, k.InnerText.Trim());
                     }
 
                     for (int k = 0; k < 16; k++)
                     {
                         foreach (XmlElement l in j.GetElementsByTagName("BOOTSZMODE" + k.ToString("0")))
                         {
-                            result += "\r\n";
+                            result += Environment.NewLine;
 
                             long appStart = -1;
                             long bootStart = -1;
@@ -489,18 +520,18 @@ namespace AVRProjectIDE
                             {
                                 long num = 0;
                                 if (Program.TryParseText(m.InnerText, out num, false))
-                                    result += String.Format("Boot Mode {0} Boot Size: {1} bytes ( 0x{1:X4} )\r\n", k, num);
+                                    result += String.Format("Boot Mode {0} Boot Size: {1} bytes ( 0x{1:X4} )" + Environment.NewLine, k, num);
                                 else if (string.IsNullOrEmpty(m.InnerText.Trim()) == false)
-                                    result += String.Format("Boot Mode {0} Boot Size: {1}\r\n", k, m.InnerText.Trim());
+                                    result += String.Format("Boot Mode {0} Boot Size: {1}" + Environment.NewLine, k, m.InnerText.Trim());
                             }
 
                             foreach (XmlElement m in l.GetElementsByTagName("PAGES"))
                             {
                                 long num = 0;
                                 if (Program.TryParseText(m.InnerText, out num, false))
-                                    result += String.Format("Boot Mode {0} Pages: {1}\r\n", k, num);
+                                    result += String.Format("Boot Mode {0} Pages: {1}" + Environment.NewLine, k, num);
                                 else if (string.IsNullOrEmpty(m.InnerText.Trim()) == false)
-                                    result += String.Format("Boot Mode {0} Pages: {1}\r\n", k, m.InnerText.Trim());
+                                    result += String.Format("Boot Mode {0} Pages: {1}" + Environment.NewLine, k, m.InnerText.Trim());
                             }
 
                             foreach (XmlElement m in l.GetElementsByTagName("APPSTART"))
@@ -509,10 +540,10 @@ namespace AVRProjectIDE
                                 if (Program.TryParseText(m.InnerText, out num, false))
                                 {
                                     appStart = num;
-                                    result += String.Format("Boot Mode {0} App Start Addr: 0x{1:X4} ( {1:0} )\r\n", k, num);
+                                    result += String.Format("Boot Mode {0} App Start Addr: 0x{1:X4} ( {1:0} )" + Environment.NewLine, k, num);
                                 }
                                 else if (string.IsNullOrEmpty(m.InnerText.Trim()) == false)
-                                    result += String.Format("Boot Mode {0} App Start Addr: {1}\r\n", k, m.InnerText.Trim());
+                                    result += String.Format("Boot Mode {0} App Start Addr: {1}" + Environment.NewLine, k, m.InnerText.Trim());
                             }
 
                             foreach (XmlElement m in l.GetElementsByTagName("BOOTSTART"))
@@ -534,14 +565,14 @@ namespace AVRProjectIDE
                             }
 
                             if (bootStart == bootReset && bootStart >= 0)
-                                result += String.Format("Boot Mode {0} Boot Start & Reset Addr: 0x{1:X4} ( {1:0} )\r\n", k, bootStart);
+                                result += String.Format("Boot Mode {0} Boot Start & Reset Addr: 0x{1:X4} ( {1:0} )" + Environment.NewLine, k, bootStart);
                             else
                             {
                                 if (bootStart >= 0)
-                                    result += String.Format("Boot Mode {0} Boot Start Addr: 0x{1:X4} ( {1:0} )\r\n", k, bootStart);
+                                    result += String.Format("Boot Mode {0} Boot Start Addr: 0x{1:X4} ( {1:0} )" + Environment.NewLine, k, bootStart);
 
                                 if (bootReset >= 0)
-                                    result += String.Format("Boot Mode {0} Boot Reset Addr: 0x{1:X4} ( {1:0} )\r\n", k, bootReset);
+                                    result += String.Format("Boot Mode {0} Boot Reset Addr: 0x{1:X4} ( {1:0} )" + Environment.NewLine, k, bootReset);
                             }
 
                             if (bootReset < bootStart && bootReset >= 0)
@@ -549,7 +580,7 @@ namespace AVRProjectIDE
 
                             if (appStart >= 0 && bootStart >= appStart)
                             {
-                                result += String.Format("Boot Mode {0} App Size: {1} bytes ( 0x{1:X4} )\r\n", k, (bootStart - appStart) * 2);
+                                result += String.Format("Boot Mode {0} App Size: {1} bytes ( 0x{1:X4} )" + Environment.NewLine, k, (bootStart - appStart) * 2);
                             }
                         }
                     }
@@ -694,7 +725,7 @@ namespace AVRProjectIDE
 
             txtInterruptInfoAVRLibc.Text = "New Vector Name: " + intVectListAVRLibc[chipName][desc].NewName;
             if (string.IsNullOrEmpty(intVectListAVRLibc[chipName][desc].OldName) == false)
-                txtInterruptInfoAVRLibc.Text += "\r\n" + "Old Vector Name: " + intVectListAVRLibc[chipName][desc].OldName;
+                txtInterruptInfoAVRLibc.Text += Environment.NewLine + "Old Vector Name: " + intVectListAVRLibc[chipName][desc].OldName;
         }
 
         private void listInterruptsAtmelXML_SelectedIndexChanged(object sender, EventArgs e)
@@ -718,6 +749,276 @@ namespace AVRProjectIDE
         private void treeIOModules_AfterSelect(object sender, TreeViewEventArgs e)
         {
             txtIOModuleInfo.Text = e.Node.ToolTipText;
+        }
+
+        private decimal GetTimerMultiplier()
+        {
+            string bitStr = (string)listTimerModes.Items[listTimerModes.SelectedIndex];
+            string[] bitStrParts = bitStr.Split(new char[] { ' ', '\0', '\t', '\r', '\n', });
+            int bits = int.Parse(bitStrParts[0]);
+            return Convert.ToDecimal(Math.Pow(2, bits));
+        }
+
+        private decimal GetTimerPrescaler()
+        {
+            string str = (string)listTimerPrescaler.Items[listTimerPrescaler.SelectedIndex];
+            string[] parts = str.Split(new char[] { '/', '\\', ' ', '\0', '\t', '\r', '\n', });
+            return decimal.Parse(parts[parts.Length - 1]);
+        }
+
+        private decimal GetTimerActualClock()
+        {
+            return numClkFreq.Value / GetTimerPrescaler();
+        }
+
+        private void btnTimerUseOverflowRemainder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                numTimerTotalTicks.Value = numTimerOverflows.Value * GetTimerMultiplier() + numTimerRemainingTicks.Value;
+
+                numTimerRealTime.Value = (numTimerTotalTicks.Value / GetTimerActualClock());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void btnTimerUseTotalTicks_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal mult = GetTimerMultiplier();
+
+                numTimerRealTime.Value = (numTimerTotalTicks.Value / GetTimerActualClock());
+
+                ulong ovf = Convert.ToUInt64(Math.Floor(numTimerTotalTicks.Value / mult));
+                numTimerOverflows.Value = Convert.ToDecimal(ovf);
+                numTimerRemainingTicks.Value = numTimerTotalTicks.Value - numTimerOverflows.Value * mult;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void btnTimerUseRealTime_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal mult = GetTimerMultiplier();
+
+                numTimerTotalTicks.Value = numTimerRealTime.Value * GetTimerActualClock();
+
+                ulong ovf = Convert.ToUInt64(Math.Floor(numTimerTotalTicks.Value / mult));
+                numTimerOverflows.Value = Convert.ToDecimal(ovf);
+                numTimerRemainingTicks.Value = numTimerTotalTicks.Value - numTimerOverflows.Value * mult;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void listBaud_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listBaud.SelectedIndex < 0)
+                    return;
+
+                decimal baud = decimal.Parse((string)(listBaud.Items[listBaud.SelectedIndex]));
+                decimal multi = 16;
+                if (chkBaudDoubleSpeed.Checked)
+                    multi = 8;
+
+                if (chkBaudSPIMode.Checked)
+                {
+                    txtBaudResults.Text = "Synchronous Mode Results:" + Environment.NewLine;
+                    multi = 2;
+                }
+                else
+                    txtBaudResults.Text = "Asynchronous Mode Results:" + Environment.NewLine;
+
+                decimal ubrrRaw = (numClkFreq.Value / (multi * baud)) - 1;
+                int ubrrH = Convert.ToInt32(Math.Floor(Convert.ToDouble(ubrrRaw) / Math.Pow(2, 8)));
+                decimal ubrrL = ubrrRaw - Convert.ToDecimal((ubrrH * Convert.ToInt32(Math.Pow(2, 8))));
+
+                decimal newBaud = numClkFreq.Value / (multi * (Math.Round(ubrrRaw) + 1));
+
+                decimal err = (Math.Abs(baud / newBaud) - 1) * 100;
+
+                txtBaudResults.Text += string.Format(
+                    "UBRR = {0:0}" + Environment.NewLine +
+                    "UBRR Higher 8 bits = {1:0}" + Environment.NewLine +
+                    "UBRR Lower 8 bits = {2:0}" + Environment.NewLine +
+                    "Actual Baud Rate = {3:0.00}" + Environment.NewLine +
+                    "% Error = {4:0.00}" + Environment.NewLine,
+                    Math.Round(ubrrRaw),
+                    ubrrH,
+                    Math.Round(ubrrL),
+                    newBaud,
+                    Math.Abs(err)
+                    );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void chkBaudDoubleSpeed_CheckedChanged(object sender, EventArgs e)
+        {
+            listBaud_SelectedIndexChanged(sender, e);
+        }
+
+        private void listBaud_Click(object sender, EventArgs e)
+        {
+            listBaud_SelectedIndexChanged(sender, e);
+        }
+
+        private void numClkFreq_ValueChanged(object sender, EventArgs e)
+        {
+            listBaud_SelectedIndexChanged(sender, e);
+            listSPIPrescaler_SelectedIndexChanged(sender, e);
+            listTWIPrescaler_SelectedIndexChanged(sender, e);
+            listADCPrescaler_SelectedIndexChanged(sender, e);
+        }
+
+        private void listSPIPrescaler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listSPIPrescaler.SelectedIndex < 0)
+                    return;
+
+                string sel = (string)listSPIPrescaler.Items[listSPIPrescaler.SelectedIndex];
+                string[] parts = sel.Split(new char[] { ' ', '\0', '\t', '\r', '\n', });
+                int div = 1;
+                if (int.TryParse(parts[0], out div))
+                {
+                    txtSPIFreq.Text = String.Format("{0:0}", numClkFreq.Value / Convert.ToDecimal(div));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void chkBaudSPIMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBaudSPIMode.Checked)
+                chkBaudDoubleSpeed.Enabled = false;
+            else
+                chkBaudDoubleSpeed.Enabled = true;
+
+            listBaud_SelectedIndexChanged(sender, e);
+        }
+
+        private void listTWIPrescaler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listTWIPrescaler.SelectedIndex < 0)
+                    return;
+
+                string sel = (string)listTWIPrescaler.Items[listTWIPrescaler.SelectedIndex];
+                string[] parts = sel.Split(new char[] { ' ', '\0', '\t', '\r', '\n', });
+                int div;
+                if (int.TryParse(parts[0], out div))
+                {
+                    int TWBR = Convert.ToInt32(Math.Round(((numClkFreq.Value / numTWIFreq.Value) - Convert.ToDecimal(16)) / Convert.ToDecimal(2 * div)));
+
+                    decimal actualFreq = numClkFreq.Value / Convert.ToDecimal(16 + (2 * TWBR * div));
+
+                    txtTWIResults.Text = string.Format(
+                        "Closest TWBR Value: {0}" + Environment.NewLine +
+                        "Resulting TWI Frequency: {1:0.0} Hz" + Environment.NewLine,
+                        TWBR,
+                        actualFreq
+                        );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void numTWIFreq_ValueChanged(object sender, EventArgs e)
+        {
+            listTWIPrescaler_SelectedIndexChanged(sender, e);
+        }
+
+        private void listADCPrescaler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listADCPrescaler.SelectedIndex < 0)
+                    return;
+
+                string sel = (string)listADCPrescaler.Items[listADCPrescaler.SelectedIndex];
+                string[] parts = sel.Split(new char[] { ' ', '\0', '\t', '\r', '\n', });
+                int div;
+                if (int.TryParse(parts[0], out div))
+                {
+
+                    txtADCTimeRes.Text = string.Format(
+                        "ADC Clock Frequency: {0:0.0} Hz" + Environment.NewLine +
+                        "Time for one sample in milliseconds (13 ADC Clock Ticks): {1}" + Environment.NewLine,
+                        numClkFreq.Value / Convert.ToDecimal(div),
+                        Convert.ToDecimal(13 * div * 1000) / numClkFreq.Value
+                        );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void btnADCUseInput_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal percent = numADCInput.Value / numADCRef.Value;
+                numADC10BitRes.Value = Convert.ToDecimal(Math.Pow(2, 10)) * percent;
+                numADC8BitRes.Value = Math.Floor(Math.Floor(numADC10BitRes.Value) / 4);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void btnADCUse10BitRes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal percent = numADC10BitRes.Value / Convert.ToDecimal(Math.Pow(2, 10));
+                numADCInput.Value = numADCRef.Value * percent;
+                numADC8BitRes.Value = Math.Floor(Math.Floor(numADC10BitRes.Value) / 4);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
+        }
+
+        private void btnADCUse8BitRes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                numADC10BitRes.Value = numADC8BitRes.Value * 4;
+                decimal percent = numADC10BitRes.Value / Convert.ToDecimal(Math.Pow(2, 10));
+                numADCInput.Value = numADCRef.Value * percent;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during calculation: " + ex.Message);
+            }
         }
     }
 }

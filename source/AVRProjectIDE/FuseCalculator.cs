@@ -13,6 +13,20 @@ namespace AVRProjectIDE
 {
     public partial class FuseCalculator : Form
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Fuse Calculator");
+                erw.ShowDialog();
+            }
+        }
+
         private static bool isOpen = false;
 
         private Dictionary<int, Dictionary<string, int>> maskList = new Dictionary<int, Dictionary<string, int>>();

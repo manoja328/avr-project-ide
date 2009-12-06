@@ -204,7 +204,7 @@ namespace AVRProjectIDE
                 finalRes.AddRange(allResults[file]);
 
             int contentLen = content.Length;
-            content = "\r\n" + content + "\r\n";
+            content = Environment.NewLine + content + Environment.NewLine;
 
             string noStringContent = "";
             bool inStreamComment = false;
@@ -212,9 +212,9 @@ namespace AVRProjectIDE
             bool inString = false;
             bool inChar = false;
 
-            content = "\r\n" + content;
+            content = Environment.NewLine + content;
             int originalLength = content.Length;
-            content += "\r\n";
+            content += Environment.NewLine;
 
             for (int i = 1; i < originalLength; i++)
             {
@@ -264,7 +264,7 @@ namespace AVRProjectIDE
             }
 
             contentLen = noStringContent.Length;
-            content = "\r\n" + noStringContent + "\r\n";
+            content = Environment.NewLine + noStringContent + Environment.NewLine;
 
             string res = "";
             int braceNest = 0;
@@ -483,7 +483,7 @@ namespace AVRProjectIDE
                 return;
 
             int contentLen = content.Length;
-            content = "\r\n" + content + "\r\n";
+            content = Environment.NewLine + content + Environment.NewLine;
 
             bool inString = false;
             bool inChar = false;

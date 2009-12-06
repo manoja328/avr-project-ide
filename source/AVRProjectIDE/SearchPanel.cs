@@ -13,6 +13,20 @@ namespace AVRProjectIDE
 {
     public partial class SearchPanel : DockContent
     {
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                base.WndProc(ref m);
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Search Panel");
+                erw.ShowDialog();
+            }
+        }
+
         private Dictionary<string, EditorPanel> editorList;
 
         public SearchPanel(Dictionary<string, EditorPanel> listOfEditors)
@@ -85,16 +99,16 @@ namespace AVRProjectIDE
 
                     string hoverTxt = "";
                     if (lineNum >= 2)
-                        hoverTxt += scint.Lines[lineNum - 2].Text.TrimEnd() + "\r\n";
+                        hoverTxt += scint.Lines[lineNum - 2].Text.TrimEnd() + Environment.NewLine;
                     if (lineNum >= 1)
-                        hoverTxt += scint.Lines[lineNum - 1].Text.TrimEnd() + "\r\n";
+                        hoverTxt += scint.Lines[lineNum - 1].Text.TrimEnd() + Environment.NewLine;
 
-                    hoverTxt += scint.Lines[lineNum].Text.TrimEnd() + "\r\n";
+                    hoverTxt += scint.Lines[lineNum].Text.TrimEnd() + Environment.NewLine;
 
                     if (lineNum < scint.Lines.Count - 1)
-                        hoverTxt += scint.Lines[lineNum + 1].Text.TrimEnd() + "\r\n";
+                        hoverTxt += scint.Lines[lineNum + 1].Text.TrimEnd() + Environment.NewLine;
                     if (lineNum < scint.Lines.Count - 2)
-                        hoverTxt += scint.Lines[lineNum + 2].Text.TrimEnd() + "\r\n";
+                        hoverTxt += scint.Lines[lineNum + 2].Text.TrimEnd() + Environment.NewLine;
 
                     hoverTxt = hoverTxt.TrimEnd();
 

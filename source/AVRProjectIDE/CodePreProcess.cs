@@ -15,9 +15,9 @@ namespace AVRProjectIDE
             bool inString = false;
             bool inChar = false;
 
-            content = "\r\n" + content;
+            content = Environment.NewLine + content;
             int originalLength = content.Length;
-            content += "\r\n";
+            content += Environment.NewLine;
 
             string result = "";
 
@@ -87,9 +87,9 @@ namespace AVRProjectIDE
             bool inString = false;
             bool inChar = false;
 
-            content = "\r\n" + content;
+            content = Environment.NewLine + content;
             int originalLength = content.Length;
-            content += "\r\n";
+            content += Environment.NewLine;
 
             string result = "";
 

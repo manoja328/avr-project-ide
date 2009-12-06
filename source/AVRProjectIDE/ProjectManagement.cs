@@ -151,18 +151,10 @@ namespace AVRProjectIDE
             isOpen = false;
 
             treeNode = new TreeNode(FileName);
-            if (Exists == false)
-            {
-                treeNode.ImageKey = "missing.ico";
-                treeNode.SelectedImageKey = "missing.ico";
-                treeNode.StateImageKey = "missing.ico";
-            }
-            else
-            {
-                treeNode.ImageKey = "file.ico";
-                treeNode.SelectedImageKey = "file.ico";
-                treeNode.StateImageKey = "file.ico";
-            }
+
+            treeNode.ImageKey = "file.ico";
+            treeNode.SelectedImageKey = "file.ico";
+            treeNode.StateImageKey = "file.ico";
 
             treeNode.Checked = toCompile;
         }
@@ -228,6 +220,13 @@ namespace AVRProjectIDE
             set { shouldReloadDevice = value; }
         }
 
+        private bool shouldReloadClock = false;
+        public bool ShouldReloadClock
+        {
+            get { return shouldReloadClock; }
+            set { shouldReloadClock = value; }
+        }
+
         private bool hasBeenConfigged = false;
         public bool HasBeenConfigged
         {
@@ -279,6 +278,14 @@ namespace AVRProjectIDE
                     return Path.GetFileNameWithoutExtension(filePath);
                 else
                     return FileName;
+            }
+        }
+
+        public string SafeFileNameNoExt
+        {
+            get
+            {
+                return FileNameNoExt.Replace(" ", "_");
             }
         }
 
@@ -570,8 +577,8 @@ namespace AVRProjectIDE
             set { linkLibList = value; }
         }
 
-        private List<MemorySegment> memorySegList = new List<MemorySegment>();
-        public List<MemorySegment> MemorySegList
+        private Dictionary<string, MemorySegment> memorySegList = new Dictionary<string, MemorySegment>();
+        public Dictionary<string, MemorySegment> MemorySegList
         {
             get { return memorySegList; }
             set { memorySegList = value; }
@@ -688,7 +695,7 @@ namespace AVRProjectIDE
                 xml.WriteEndElement();
 
                 xml.WriteStartElement("MemorySegList");
-                foreach (MemorySegment i in MemorySegList)
+                foreach (MemorySegment i in MemorySegList.Values)
                 {
                     xml.WriteStartElement("Segment");
                     xml.WriteElementString("Name", i.Name);
@@ -797,178 +804,27 @@ namespace AVRProjectIDE
 
                 foreach (XmlElement param in docx.GetElementsByTagName("HasBeenConfigged"))
                 {
-                    HasBeenConfigged = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
+                    HasBeenConfigged = Program.StringToBool(param);
                 }
 
-                foreach (XmlElement param in docx.GetElementsByTagName("ClockFreq"))
-                {
-                    ClockFreq = decimal.Parse(param.InnerText);
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("Device"))
-                {
-                    Device = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("LinkerOpt"))
-                {
-                    LinkerOptions = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("OtherOpt"))
-                {
-                    OtherOptions = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForC"))
-                {
-                    OtherOptionsForC = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForCPP"))
-                {
-                    OtherOptionsForCPP = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForS"))
-                {
-                    OtherOptionsForS = param.InnerText;
-                }
                 foreach (XmlElement param in docx.GetElementsByTagName("OutputDir"))
                 {
                     OutputDir = param.InnerText;
                 }
-                foreach (XmlElement param in docx.GetElementsByTagName("Optimization"))
-                {
-                    Optimization = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("UseInitStack"))
-                {
-                    UseInitStack = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("InitStackAddr"))
-                {
-                    try
-                    {
-                        if (param.InnerText.ToLowerInvariant().StartsWith("0x"))
-                        {
-                            InitStackAddr = Convert.ToUInt32(param.InnerText, 16);
-                        }
-                        else
-                        {
-                            InitStackAddr = Convert.ToUInt32("0x" + param.InnerText, 16);
-                        }
-                    }
-                    catch { }
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("PackStructs"))
-                {
-                    PackStructs = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("ShortEnums"))
-                {
-                    ShortEnums = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("UnsignedBitfields"))
-                {
-                    UnsignedBitfields = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("UnsignedChars"))
-                {
-                    UnsignedChars = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("FunctionSections"))
-                {
-                    FunctionSections = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("DataSections"))
-                {
-                    DataSections = param.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
-                }
 
-                foreach (XmlElement param in docx.GetElementsByTagName("BurnPart"))
-                {
-                    BurnPart = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("BurnProgrammer"))
-                {
-                    BurnProgrammer = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("BurnOptions"))
-                {
-                    BurnOptions = param.InnerText;
-                }
+                LibraryDirList.Clear();
+                LinkLibList.Clear();
+                IncludeDirList.Clear();
+                LinkObjList.Clear();
+                MemorySegList.Clear();
+
+                int appCnt = 0;
+
+                LoadTemplateCommonProperties(ref appCnt, docx, this);
+
                 foreach (XmlElement param in docx.GetElementsByTagName("BurnPort"))
                 {
                     BurnPort = param.InnerText;
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("BurnBaud"))
-                {
-                    try { BurnBaud = int.Parse(param.InnerText); }
-                    catch { }
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("BurnAutoReset"))
-                {
-                    BurnAutoReset = param.InnerText.Trim().ToLowerInvariant() == true.ToString().Trim().ToLowerInvariant();
-                }
-                foreach (XmlElement param in docx.GetElementsByTagName("BurnFuseBox"))
-                {
-                    BurnFuseBox = param.InnerText;
-                }
-
-                IncludeDirList.Clear();
-                foreach (XmlElement container in docx.GetElementsByTagName("IncludeDirList"))
-                {
-                    foreach (XmlElement i in container.GetElementsByTagName("DirPath"))
-                    {
-                        IncludeDirList.Add(i.InnerText);
-                    }
-                }
-
-                LibraryDirList.Clear();
-                foreach (XmlElement container in docx.GetElementsByTagName("LibraryDirList"))
-                {
-                    foreach (XmlElement i in container.GetElementsByTagName("DirPath"))
-                    {
-                        LibraryDirList.Add(i.InnerText);
-                    }
-                }
-
-                LinkObjList.Clear();
-                foreach (XmlElement container in docx.GetElementsByTagName("LinkObjList"))
-                {
-                    foreach (XmlElement i in container.GetElementsByTagName("Obj"))
-                    {
-                        LinkObjList.Add(i.InnerText);
-                    }
-                }
-
-                LinkLibList.Clear();
-                foreach (XmlElement container in docx.GetElementsByTagName("LinkLibList"))
-                {
-                    foreach (XmlElement i in container.GetElementsByTagName("Lib"))
-                    {
-                        LinkLibList.Add(i.InnerText);
-                    }
-                }
-
-                MemorySegList.Clear();
-                foreach (XmlElement container in docx.GetElementsByTagName("MemorySegList"))
-                {
-                    foreach (XmlElement i in container.GetElementsByTagName("Segment"))
-                    {
-                        try
-                        {
-                            XmlElement type = (XmlElement)i.GetElementsByTagName("Type")[0];
-                            XmlElement name = (XmlElement)i.GetElementsByTagName("Name")[0];
-                            XmlElement addr = (XmlElement)i.GetElementsByTagName("Addr")[0];
-                            uint address;
-                            if (addr.InnerText.ToLowerInvariant().StartsWith("0x"))
-                            {
-                                address = Convert.ToUInt32(addr.InnerText, 16);
-                            }
-                            else
-                            {
-                                address = Convert.ToUInt32("0x" + addr.InnerText, 16);
-                            }
-                            MemorySegList.Add(new MemorySegment(type.InnerText, name.InnerText, address));
-                        }
-                        catch { }
-                    }
                 }
 
                 foreach (XmlElement param in docx.GetElementsByTagName("LastFile"))
@@ -996,7 +852,7 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement toComp in i.GetElementsByTagName("ToCompile"))
                             {
-                                newFile.ToCompile = toComp.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
+                                newFile.ToCompile = Program.StringToBool(toComp);
                             }
 
                             foreach (XmlElement opt in i.GetElementsByTagName("Options"))
@@ -1006,7 +862,7 @@ namespace AVRProjectIDE
 
                             foreach (XmlElement wasOpen in i.GetElementsByTagName("WasOpen"))
                             {
-                                newFile.IsOpen = wasOpen.InnerText.ToLowerInvariant().Trim() == true.ToString().Trim().ToLowerInvariant();
+                                newFile.IsOpen = Program.StringToBool(wasOpen);
                             }
 
                             foreach (XmlElement cursorPos in i.GetElementsByTagName("CursorPos"))
@@ -1229,7 +1085,17 @@ namespace AVRProjectIDE
                                     {
                                         address = Convert.ToUInt32("0x" + addr.InnerText, 16);
                                     }
-                                    MemorySegList.Add(new MemorySegment(type.InnerText, name.InnerText, address));
+
+                                    string nameStr = name.InnerText.Trim();
+                                    string typeStr = type.InnerText.Trim();
+
+                                    if (string.IsNullOrEmpty(nameStr) == false && string.IsNullOrEmpty(typeStr) == false)
+                                    {
+                                        MemorySegment seg = new MemorySegment(typeStr, nameStr, address);
+
+                                        if (MemorySegList.ContainsKey(nameStr) == false)
+                                            MemorySegList.Add(nameStr, seg);
+                                    }
                                 }
                                 catch { }
                             }
@@ -1420,7 +1286,7 @@ namespace AVRProjectIDE
 
                 xml.WriteStartElement("MANAGEMENT");
                 {
-                    xml.WriteElementString("ProjectName", this.FileNameNoExt);
+                    xml.WriteElementString("ProjectName", this.SafeFileNameNoExt);
                     xml.WriteElementString("ProjectType", "0");
                     xml.WriteElementString("ProjectTypeName", "AVR GCC");
                 }
@@ -1550,7 +1416,7 @@ namespace AVRProjectIDE
 
                             xml.WriteStartElement("SEGMENTS");
                             {
-                                foreach (MemorySegment seg in MemorySegList)
+                                foreach (MemorySegment seg in MemorySegList.Values)
                                 {
                                     xml.WriteStartElement("SEGMENT");
                                     {
@@ -1732,6 +1598,7 @@ namespace AVRProjectIDE
             project.HasBeenConfigged = this.HasBeenConfigged;
             project.ShouldReloadDevice = this.ShouldReloadDevice;
             project.ShouldReloadFiles = this.ShouldReloadFiles;
+            project.ShouldReloadClock = this.ShouldReloadClock;
 
             project.fileList = new Dictionary<string, ProjectFile>();
             project.fileList.Clear();
@@ -1769,11 +1636,11 @@ namespace AVRProjectIDE
                 project.linkObjList.Add((string)obj.Clone());
             }
 
-            project.memorySegList = new List<MemorySegment>();
+            project.memorySegList = new Dictionary<string, MemorySegment>();
             project.memorySegList.Clear();
-            foreach (MemorySegment obj in this.MemorySegList)
+            foreach (MemorySegment obj in this.MemorySegList.Values)
             {
-                project.memorySegList.Add(new MemorySegment(obj.Type, obj.Name, obj.Addr));
+                project.memorySegList.Add(obj.Name, new MemorySegment(obj.Type, obj.Name, obj.Addr));
             }
 
             project.APSXmlElementList = new List<XmlElement>();
@@ -1789,5 +1656,182 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        internal static void LoadTemplateCommonProperties(ref int appCnt, XmlElement docx, AVRProject proj)
+        {
+            foreach (XmlElement param in docx.GetElementsByTagName("ClockFreq"))
+            {
+                proj.ClockFreq = decimal.Parse(param.InnerText);
+                appCnt++;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("Device"))
+            {
+                proj.Device = param.InnerText;
+                appCnt++;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("LinkerOpt"))
+            {
+                proj.LinkerOptions = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("OtherOpt"))
+            {
+                proj.OtherOptions = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForC"))
+            {
+                proj.OtherOptionsForC = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForCPP"))
+            {
+                proj.OtherOptionsForCPP = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("OtherOptionsForS"))
+            {
+                proj.OtherOptionsForS = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("Optimization"))
+            {
+                proj.Optimization = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("UseInitStack"))
+            {
+                proj.UseInitStack = Program.StringToBool(param);
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("InitStackAddr"))
+            {
+                try
+                {
+                    if (param.InnerText.ToLowerInvariant().StartsWith("0x"))
+                    {
+                        proj.InitStackAddr = Convert.ToUInt32(param.InnerText, 16);
+                    }
+                    else
+                    {
+                        proj.InitStackAddr = Convert.ToUInt32("0x" + param.InnerText, 16);
+                    }
+                }
+                catch { }
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("PackStructs"))
+            {
+                proj.PackStructs = Program.StringToBool(param);
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("ShortEnums"))
+            {
+                proj.ShortEnums = Program.StringToBool(param);
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("UnsignedBitfields"))
+            {
+                proj.UnsignedBitfields = Program.StringToBool(param);
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("UnsignedChars"))
+            {
+                proj.UnsignedChars = Program.StringToBool(param);
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("FunctionSections"))
+            {
+                proj.FunctionSections = Program.StringToBool(param);
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("DataSections"))
+            {
+                proj.DataSections = Program.StringToBool(param);
+            }
+
+            foreach (XmlElement param in docx.GetElementsByTagName("BurnPart"))
+            {
+                proj.BurnPart = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("BurnProgrammer"))
+            {
+                proj.BurnProgrammer = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("BurnOptions"))
+            {
+                proj.BurnOptions = param.InnerText;
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("BurnBaud"))
+            {
+                try { proj.BurnBaud = int.Parse(param.InnerText); }
+                catch { }
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("BurnAutoReset"))
+            {
+                proj.BurnAutoReset = Program.StringToBool(param);
+            }
+            foreach (XmlElement param in docx.GetElementsByTagName("BurnFuseBox"))
+            {
+                proj.BurnFuseBox = param.InnerText;
+            }
+
+            foreach (XmlElement container in docx.GetElementsByTagName("IncludeDirList"))
+            {
+                foreach (XmlElement i in container.GetElementsByTagName("DirPath"))
+                {
+                    if (proj.IncludeDirList.Contains(i.InnerText) == false)
+                        proj.IncludeDirList.Add(i.InnerText);
+                }
+            }
+
+            foreach (XmlElement container in docx.GetElementsByTagName("LibraryDirList"))
+            {
+                foreach (XmlElement i in container.GetElementsByTagName("DirPath"))
+                {
+                    if (proj.LibraryDirList.Contains(i.InnerText) == false)
+                        proj.LibraryDirList.Add(i.InnerText);
+                }
+            }
+
+            foreach (XmlElement container in docx.GetElementsByTagName("LinkObjList"))
+            {
+                foreach (XmlElement i in container.GetElementsByTagName("Obj"))
+                {
+                    if (proj.LinkObjList.Contains(i.InnerText) == false)
+                        proj.LinkObjList.Add(i.InnerText);
+                }
+            }
+
+            foreach (XmlElement container in docx.GetElementsByTagName("LinkLibList"))
+            {
+                foreach (XmlElement i in container.GetElementsByTagName("Lib"))
+                {
+                    if (proj.LinkLibList.Contains(i.InnerText) == false)
+                        proj.LinkLibList.Add(i.InnerText);
+                }
+            }
+
+            foreach (XmlElement container in docx.GetElementsByTagName("MemorySegList"))
+            {
+                foreach (XmlElement i in container.GetElementsByTagName("Segment"))
+                {
+                    try
+                    {
+                        XmlElement type = (XmlElement)i.GetElementsByTagName("Type")[0];
+                        XmlElement name = (XmlElement)i.GetElementsByTagName("Name")[0];
+                        XmlElement addr = (XmlElement)i.GetElementsByTagName("Addr")[0];
+                        uint address;
+                        if (addr.InnerText.ToLowerInvariant().StartsWith("0x"))
+                        {
+                            address = Convert.ToUInt32(addr.InnerText, 16);
+                        }
+                        else
+                        {
+                            address = Convert.ToUInt32("0x" + addr.InnerText, 16);
+                        }
+
+                        string nameStr = name.InnerText.Trim();
+                        string typeStr = type.InnerText.Trim();
+
+                        if (string.IsNullOrEmpty(nameStr) == false && string.IsNullOrEmpty(typeStr) == false)
+                        {
+                            MemorySegment seg = new MemorySegment(typeStr, nameStr, address);
+
+                            if (proj.MemorySegList.ContainsKey(nameStr) == false)
+                                proj.MemorySegList.Add(nameStr, seg);
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
     }
 }

@@ -290,5 +290,41 @@ namespace AVRProjectIDE
             }
             catch { return false; }
         }
+
+        public static bool StringToBool(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return false;
+
+            s = s.ToLowerInvariant().Trim();
+
+            if (string.IsNullOrEmpty(s))
+                return false;
+
+            if (s == "true" || s == "yes" || s == "y" || s == true.ToString().ToLowerInvariant().Trim())
+                return true;
+
+            try
+            {
+                if (Convert.ToInt64(s) == 0)
+                    return false;
+                else
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool StringToBool(System.Xml.XmlElement x)
+        {
+            return StringToBool(x.InnerText);
+        }
+
+        public static bool StringToBool(System.Xml.XmlAttribute x)
+        {
+            return StringToBool(x.Value);
+        }
     }
 }
