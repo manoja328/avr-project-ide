@@ -33,6 +33,7 @@ namespace AVRProjectIDE
         private AVRProject workingProject;
         private TextBox outputTextbox;
         private ListView errorList;
+        private ListView errorOnlyList;
         private BackgroundWorker worker;
         private BackgroundWorker makefileWorker;
 
@@ -53,12 +54,13 @@ namespace AVRProjectIDE
 
         #endregion
 
-        public ProjectBuilder(AVRProject project, TextBox outputTextbox, ListView errorList)
+        public ProjectBuilder(AVRProject project, TextBox outputTextbox, ListView errorList, ListView errorOnlyList)
         {
             this.project = project;
             this.origFileList = project.FileList;
             this.outputTextbox = outputTextbox;
             this.errorList = errorList;
+            this.errorOnlyList = errorOnlyList;
 
             this.worker = new BackgroundWorker();
             this.worker.DoWork += new DoWorkEventHandler(worker_DoWork);
@@ -75,6 +77,7 @@ namespace AVRProjectIDE
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ListViewModify(errorList, new ListViewItem(new string[] { "", "", "", ((bool)e.Result) ? "OK" : "Failed","# of Errors: " + hasError.ToString("0"), }), ListViewChangeMode.AddToTop);
+            ListViewModify(errorOnlyList, new ListViewItem(new string[] { "", "", "", ((bool)e.Result) ? "OK" : "Failed", "# of Errors: " + hasError.ToString("0"), }), ListViewChangeMode.AddToTop);
             DoneWork((bool)e.Result);
         }
 
@@ -285,10 +288,10 @@ namespace AVRProjectIDE
                         mode = ListViewChangeMode.AddToTop;
                 }
 
-                if (mode == ListViewChangeMode.AddToBottom)
-                    box.Items.Add(item);
-                else if (mode == ListViewChangeMode.AddToTop)
-                    box.Items.Insert(0, item);
+                if (mode == ListViewChangeMode.AddToBottom && item != null)
+                    box.Items.Add((ListViewItem)item.Clone());
+                else if (mode == ListViewChangeMode.AddToTop && item != null)
+                    box.Items.Insert(0, (ListViewItem)item.Clone());
                 else if (mode == ListViewChangeMode.Clear)
                     box.Items.Clear();
             }
@@ -311,6 +314,8 @@ namespace AVRProjectIDE
             // clear the relevent form elements
             TextBoxModify(outputTextbox, "", TextBoxChangeMode.Set);
             ListViewModify(errorList, null, ListViewChangeMode.Clear);
+            ListViewModify(errorOnlyList, null, ListViewChangeMode.Clear);
+
 
             // start the build
             worker.RunWorkerAsync();
@@ -790,6 +795,7 @@ namespace AVRProjectIDE
                     StreamReader stdout = avrgcc.StandardOutput;
                     if (suppressErrors == false)
                         ReadErrAndWarnings(stdout, true);
+
                     avrgcc.WaitForExit(10000);
                 }
                 else
@@ -1117,9 +1123,6 @@ namespace AVRProjectIDE
 
             while (line != null)
             {
-                if (line.ToLowerInvariant().Contains("cannot find"))
-                {
-                }
                 string re1 = "([a-z0-9_]+)";   // Variable Name 1
                 string re2 = "(\\.)";	// Any Single Character 1
                 string re3 = "([a-z0-9_]+)";	// Variable Name 2
@@ -1154,6 +1157,9 @@ namespace AVRProjectIDE
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
+
+                        if (type.ToLowerInvariant().Contains("warn") == false && msg.Trim().ToLowerInvariant() != "from")
+                            ListViewModify(errorOnlyList, lvi, ListViewChangeMode.AddToTop);
 
                         lastLoc = loc;
 
@@ -1208,6 +1214,9 @@ namespace AVRProjectIDE
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
 
+                        if (type.ToLowerInvariant().Contains("warn") == false && msg.Trim().ToLowerInvariant() != "from")
+                            ListViewModify(errorOnlyList, lvi, ListViewChangeMode.AddToTop);
+
                         lastLoc = loc;
 
                         lastFile = fileName;
@@ -1255,6 +1264,9 @@ namespace AVRProjectIDE
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
+
+                        if (type.ToLowerInvariant().Contains("warn") == false && msg.Trim().ToLowerInvariant() != "from")
+                            ListViewModify(errorOnlyList, lvi, ListViewChangeMode.AddToTop);
 
                         lastLoc = loc;
 
@@ -1330,6 +1342,9 @@ namespace AVRProjectIDE
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
+
+                        if (type.ToLowerInvariant().Contains("warn") == false && msg.Trim().ToLowerInvariant() != "from")
+                            ListViewModify(errorOnlyList, lvi, ListViewChangeMode.AddToTop);
                     }
 
                     line = reader.ReadLine();
@@ -1366,6 +1381,9 @@ namespace AVRProjectIDE
 
                         ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
                         ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
+
+                        if (type.ToLowerInvariant().Contains("warn") == false && msg.Trim().ToLowerInvariant() != "from")
+                            ListViewModify(errorOnlyList, lvi, ListViewChangeMode.AddToTop);
                     }
 
                     line = reader.ReadLine();
@@ -1381,6 +1399,8 @@ namespace AVRProjectIDE
                 {
                     ListViewItem lvi = new ListViewItem(new string[] { "", "", "", "", line });
                     ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
+
+                    ListViewModify(errorOnlyList, lvi, ListViewChangeMode.AddToTop);
                 }
 
                 line = reader.ReadLine();

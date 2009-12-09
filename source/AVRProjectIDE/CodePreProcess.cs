@@ -64,7 +64,7 @@ namespace AVRProjectIDE
 
                 if (inStreamComment == false && inLineComment == false)
                 {
-                    result += c;
+                    result += content[i];
                 }
             }
 
