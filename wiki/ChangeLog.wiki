@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 64==
+
+ * fixed an arduino compile bug
+ * option to hide warnings
+
 ==Alpha 63==
 
  * Calculators for Timer, USART, SPI, TWI, and ADC
