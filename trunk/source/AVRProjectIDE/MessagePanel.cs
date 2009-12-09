@@ -32,6 +32,23 @@ namespace AVRProjectIDE
             InitializeComponent();
 
             this.Icon = Properties.Resources.warningIco;
+
+            if (SettingsManagement.ShowWarnings)
+            {
+                if (this.tabListViews.Controls.Contains(listErrorsOnly))
+                    this.tabListViews.Controls.Remove(listErrorsOnly);
+
+                if (this.tabListViews.Controls.Contains(listErrorsWarnings) == false)
+                    this.tabListViews.Controls.Add(listErrorsWarnings);
+            }
+            else
+            {
+                if (this.tabListViews.Controls.Contains(listErrorsWarnings))
+                    this.tabListViews.Controls.Remove(listErrorsWarnings);
+
+                if (this.tabListViews.Controls.Contains(listErrorsOnly) == false)
+                    this.tabListViews.Controls.Add(listErrorsOnly);
+            }
         }
 
         public TextBox MyTextBox
@@ -42,6 +59,11 @@ namespace AVRProjectIDE
         public ListView MyListView
         {
             get { return listErrorsWarnings; }
+        }
+
+        public ListView MyErrorOnlyListView
+        {
+            get { return listErrorsOnly; }
         }
 
         private delegate void BoxModifyCallback(TextBoxChangeMode mode, string text);
@@ -106,6 +128,7 @@ namespace AVRProjectIDE
         public void ClearErrors()
         {
             listErrorsWarnings.Items.Clear();
+            listErrorsOnly.Items.Clear();
         }
 
         public void AddErrorWarning(string fileName, int line, string location, string type, string message)
@@ -121,14 +144,21 @@ namespace AVRProjectIDE
             if (line >= 0)
                 line.ToString("0");
 
-            ListViewItem lvi = new ListViewItem(new string[] { fileName, lineStr, location, type, message, });
+            ListViewItem lvi1 = new ListViewItem(new string[] { fileName, lineStr, location, type, message, });
+            ListViewItem lvi2 = new ListViewItem(new string[] { fileName, lineStr, location, type, message, });
             if (ProjectBuilder.ReverseOutput == false)
             {
-                listErrorsWarnings.Items.Insert(0, lvi);
+                listErrorsWarnings.Items.Insert(0, lvi1);
+
+                if (type.ToLowerInvariant().Contains("warn") == false && message.Trim().ToLowerInvariant() != "from")
+                    listErrorsOnly.Items.Insert(0, lvi2);
             }
             else
             {
-                listErrorsWarnings.Items.Add(lvi);
+                listErrorsWarnings.Items.Add(lvi1);
+
+                if (type.ToLowerInvariant().Contains("warn") == false && message.Trim().ToLowerInvariant() != "from")
+                    listErrorsOnly.Items.Add(lvi2);
             }
         }
 
@@ -143,6 +173,20 @@ namespace AVRProjectIDE
                 {
                     string fileName = listErrorsWarnings.SelectedItems[0].SubItems[0].Text;
                     int line = int.Parse(listErrorsWarnings.SelectedItems[0].SubItems[1].Text);
+                    GotoError(fileName, line);
+                }
+                catch { }
+            }
+        }
+
+        private void listErrorsOnly_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listErrorsOnly.SelectedIndices.Count > 0)
+            {
+                try
+                {
+                    string fileName = listErrorsOnly.SelectedItems[0].SubItems[0].Text;
+                    int line = int.Parse(listErrorsOnly.SelectedItems[0].SubItems[1].Text);
                     GotoError(fileName, line);
                 }
                 catch { }
@@ -172,6 +216,57 @@ namespace AVRProjectIDE
             else
             {
                 tabControl1.SelectedIndex = 0;
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new EventHandler(tabControl1_SelectedIndexChanged), new object[] { sender, e, });
+            }
+            else
+            {
+                if (tabControl1.SelectedIndex == 2)
+                {
+                    //if (listErrorsOnly.Visible)
+                    //{
+                    //    listErrorsOnly.Visible = false;
+                    //    listErrorsWarnings.Visible = true;
+                    //    SettingsManagement.ShowWarnings = true;
+                    //}
+                    //else
+                    //{
+                    //    listErrorsOnly.Visible = true;
+                    //    listErrorsWarnings.Visible = false;
+                    //    SettingsManagement.ShowWarnings = false;
+                    //}
+
+                    if (this.tabListViews.Controls.Contains(listErrorsOnly))
+                    {
+                        if (this.tabListViews.Controls.Contains(listErrorsOnly))
+                            this.tabListViews.Controls.Remove(listErrorsOnly);
+
+                        if (this.tabListViews.Controls.Contains(listErrorsWarnings) == false)
+                            this.tabListViews.Controls.Add(listErrorsWarnings);
+
+                        SettingsManagement.ShowWarnings = true;
+                    }
+                    else
+                    {
+                        if (this.tabListViews.Controls.Contains(listErrorsWarnings))
+                            this.tabListViews.Controls.Remove(listErrorsWarnings);
+
+                        if (this.tabListViews.Controls.Contains(listErrorsOnly) == false)
+                            this.tabListViews.Controls.Add(listErrorsOnly);
+
+                        SettingsManagement.ShowWarnings = false;
+                    }
+
+                    tabControl1.SelectedIndex = 1;
+
+                    this.tabListViews.Refresh();
+                }
             }
         }
     }

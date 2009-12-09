@@ -1366,6 +1366,34 @@ namespace AVRProjectIDE
             }
         }
 
+        public static bool ShowWarnings
+        {
+            get
+            {
+                bool res = true;
+                string str = iniFile.Read("Editor", "ShowWarnings");
+
+                if (str != null)
+                    str.Trim().ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    ShowWarnings = res;
+                    res = ShowWarnings;
+                    return true;
+                }
+
+                res = Program.StringToBool(str);
+
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Editor", "ShowWarnings", value.ToString().Trim().ToLowerInvariant());
+            }
+        }
+
         #endregion
 
         #region Updater

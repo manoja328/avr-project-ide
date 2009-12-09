@@ -65,7 +65,7 @@ namespace AVRProjectIDE
             {
                 EnableButtons();
 
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
                 projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBurner = new ProjectBurner(project);
             }
@@ -699,7 +699,7 @@ namespace AVRProjectIDE
 
                 project = newProj; // reassign project
 
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
                 projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBurner = new ProjectBurner(project);
 
@@ -813,7 +813,7 @@ namespace AVRProjectIDE
 
                 project = newProj; // reassign project
 
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
                 projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBurner = new ProjectBurner(project);
 
@@ -1096,7 +1096,9 @@ namespace AVRProjectIDE
 
             if (ProjectBuilder.CheckForWinAVR())
             {
+                messageWin.BringToFront();
                 messageWin.Activate();
+                messageWin.SwitchToMessageBox();
                 SaveAll();
                 projBuilder.StartBuild();
             }
@@ -1111,6 +1113,7 @@ namespace AVRProjectIDE
             {
                 messageWin.BringToFront();
                 messageWin.Activate();
+                messageWin.SwitchToMessageBox();
                 SaveAll();
                 projBuilder.StartBuild();
             }
@@ -1327,7 +1330,7 @@ namespace AVRProjectIDE
 
                 KeywordScanner.LaunchScan(project, editorList);
 
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView);
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
                 projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBurner = new ProjectBurner(project);
 
