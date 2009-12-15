@@ -1,5 +1,9 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 65==
+
+ * installer improvements
+
 ==Alpha 64==
 
  * fixed an arduino compile bug
