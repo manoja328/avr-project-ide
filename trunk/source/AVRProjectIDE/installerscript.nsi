@@ -7,6 +7,13 @@ SetCompressor /SOLID /FINAL lzma
 
 Name "AVR Project IDE"
 
+!define MUI_ICON graphics\mainicon.ico
+
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_BITMAP graphics\installer_small_banner.bmp
+
+!define MUI_WELCOMEFINISHPAGE_BITMAP graphics\installer_large_banner.bmp
+
 RequestExecutionLevel highest
 
 OutFile "AVRProjectIDE_Installer.exe"
@@ -14,15 +21,12 @@ OutFile "AVRProjectIDE_Installer.exe"
 InstallDir $PROGRAMFILES\AVRProjectIDE
 InstallDirRegKey HKCU "Software\AVRProjectIDE" ""
 
-;Page directory
-;Page components
-;Page instfiles
-;UninstPage uninstConfirm
-;UninstPage instfiles
-
 !insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "eula.rtf"
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
+Var StartMenuFolder
+!insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 
@@ -37,7 +41,7 @@ Section ;"Main Editor"
 
 	SetOutPath $INSTDIR
 	
-	FILE AVRProjectIDE.exe
+	File AVRProjectIDE.exe
 	File mainicon.ico
 	File SciLexer.dll
 	File ScintillaNet.dll
@@ -48,6 +52,15 @@ Section ;"Main Editor"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AVRProjectIDE" "DisplayName" "AVRProjectIDE"	
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AVRProjectIDE" "UninstallString" "$\"$INSTDIR\uninstaller.exe$\""	
 	WriteRegStr HKCU "Software\AVRProjectIDE" "" $INSTDIR
+
+	!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+	
+	SetOutPath $STARTMENU\$StartMenuFolder
+
+	CreateShortCut $STARTMENU\$StartMenuFolder\AVRProjectIDE.lnk $INSTDIR\AVRProjectIDE.exe
+	CreateShortCut $STARTMENU\$StartMenuFolder\Uninstall.lnk $INSTDIR\uninstaller.exe
+
+	!insertmacro MUI_STARTMENU_WRITE_END
 	
 SectionEnd
 
@@ -75,15 +88,6 @@ Section "Desktop Shortcut" SecDesktopShortcut
 	
 SectionEnd
 
-Section "Start Menu Entry" SecStartMenu
-
-	SetOutPath $STARTMENU\AVRProjectIDE
-	
-	CreateShortCut $STARTMENU\AVRProjectIDE\AVRProjectIDE.lnk $INSTDIR\AVRProjectIDE.exe
-	CreateShortCut $STARTMENU\AVRProjectIDE\Uninstall.lnk $INSTDIR\uninstaller.exe
-	
-SectionEnd
-
 Section "Atmel Part Description XML" SecAtmelPartXML
 
 	SetOutPath $INSTDIR\chip_xml
@@ -101,7 +105,6 @@ SectionEnd
 LangString DESC_ArdCore ${LANG_ENGLISH} "Arduino 0017 Core Files"
 LangString DESC_ArdLib ${LANG_ENGLISH} "Arduino 0017 Library Files"
 LangString DESC_DesktopShortcut ${LANG_ENGLISH} "A shortcut to AVR Project IDE on your desktop"
-LangString DESC_StartMenu ${LANG_ENGLISH} "A shortcut to AVR Project IDE on in your start menu"
 LangString DESC_FileAssociate ${LANG_ENGLISH} "Open *.avrproj files with AVR Project IDE"
 LangString DESC_AtmelPartXML ${LANG_ENGLISH} "Files used by the Hardware Explorer feature that provides information about the AVR chip you are using"
 
@@ -109,7 +112,6 @@ LangString DESC_AtmelPartXML ${LANG_ENGLISH} "Files used by the Hardware Explore
 !insertmacro MUI_DESCRIPTION_TEXT ${SecArdCore} $(DESC_ArdCore)
 !insertmacro MUI_DESCRIPTION_TEXT ${SecArdLib} $(DESC_ArdLib)
 !insertmacro MUI_DESCRIPTION_TEXT ${SecDesktopShortcut} $(DESC_DesktopShortcut)
-!insertmacro MUI_DESCRIPTION_TEXT ${SecStartMenu} $(DESC_StartMenu)
 !insertmacro MUI_DESCRIPTION_TEXT ${SecAtmelPartXML} $(DESC_AtmelPartXML)
 !insertmacro MUI_DESCRIPTION_TEXT ${SecFileAssociate} $(DESC_FileAssociate)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
@@ -125,8 +127,8 @@ Section "Uninstall"
 	Delete $INSTDIR\*.*
 	RMDir /r $INSTDIR
 
-	Delete $STARTMENU\AVRProjectIDE\AVRProjectIDE.lnk
-	RMDir /r $STARTMENU\AVRProjectIDE
+	Delete $STARTMENU\$StartMenuFolder\*.*
+	RMDir /r $STARTMENU\$StartMenuFolder
 	Delete $DESKTOP\AVRProjectIDE.lnk
 	
 	${unregisterExtension} ".avrproj" "AVRProjectIDE File"
