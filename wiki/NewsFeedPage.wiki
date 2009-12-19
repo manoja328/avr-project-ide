@@ -1,3 +1,5 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Update alpha 66 adds a fix to fuse calculator that shows undefined preset options===
+
 ===Update, alpha 65's installer is sort of broken, the start menu entry may not be created or destroyed properly, sorry==
