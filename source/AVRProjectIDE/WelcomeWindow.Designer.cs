@@ -49,6 +49,7 @@
             this.btnWizard = new System.Windows.Forms.Button();
             this.txtNews = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnDonate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,6 +89,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnDonate);
             this.groupBox1.Controls.Add(this.chkShowWelcomeAtStart);
             this.groupBox1.Controls.Add(this.listRecentFiles);
             this.groupBox1.Controls.Add(this.btnOpen);
@@ -168,6 +170,17 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // btnDonate
+            // 
+            this.btnDonate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDonate.Location = new System.Drawing.Point(480, 248);
+            this.btnDonate.Name = "btnDonate";
+            this.btnDonate.Size = new System.Drawing.Size(62, 23);
+            this.btnDonate.TabIndex = 8;
+            this.btnDonate.Text = "Donate";
+            this.btnDonate.UseVisualStyleBackColor = true;
+            this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
+            // 
             // WelcomeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,5 +218,6 @@
         private System.Windows.Forms.TextBox txtNews;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.CheckBox chkShowWelcomeAtStart;
+        private System.Windows.Forms.Button btnDonate;
     }
 }

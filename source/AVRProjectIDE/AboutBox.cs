@@ -119,5 +119,10 @@ namespace AVRProjectIDE
                 erw.ShowDialog();
             }
         }
+
+        private void btnDonate_Click(object sender, EventArgs e)
+        {
+            Program.LaunchDonate();
+        }
     }
 }

@@ -327,5 +327,11 @@ namespace AVRProjectIDE
         {
             return StringToBool(x.Value);
         }
+
+        public static void LaunchDonate()
+        {
+            System.Windows.Forms.MessageBox.Show("There is a donate button on my website");
+            System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
+        }
     }
 }

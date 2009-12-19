@@ -43,6 +43,7 @@
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.okButton = new System.Windows.Forms.Button();
             this.lnkButton = new System.Windows.Forms.Button();
+            this.btnDonate = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.tableLayoutPanel.Controls.Add(this.textBoxDescription, 1, 4);
             this.tableLayoutPanel.Controls.Add(this.okButton, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.lnkButton, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.btnDonate, 0, 2);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -151,6 +153,15 @@
             this.lnkButton.Text = "Website";
             this.lnkButton.Click += new System.EventHandler(this.lnkButton_Click);
             // 
+            // btnDonate
+            // 
+            this.btnDonate.Location = new System.Drawing.Point(3, 73);
+            this.btnDonate.Name = "btnDonate";
+            this.btnDonate.Size = new System.Drawing.Size(75, 20);
+            this.btnDonate.TabIndex = 24;
+            this.btnDonate.Text = "Donate";
+            this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
+            // 
             // AboutBox
             // 
             this.AcceptButton = this.okButton;
@@ -183,5 +194,6 @@
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button lnkButton;
+        private System.Windows.Forms.Button btnDonate;
     }
 }

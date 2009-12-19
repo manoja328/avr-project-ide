@@ -195,7 +195,7 @@ namespace AVRProjectIDE
                 Match m = r.Match(content);
                 while (m.Success)
                 {
-                    e.Result += m.Groups[3].Value + Environment.NewLine + Environment.NewLine;
+                    e.Result += System.Web.HttpUtility.HtmlDecode(m.Groups[3].Value) + Environment.NewLine + Environment.NewLine;
                     m = m.NextMatch();
                 }
 
@@ -214,6 +214,11 @@ namespace AVRProjectIDE
             if (e.Result != null)
                 if (string.IsNullOrEmpty((string)e.Result) == false)
                     txtNews.Text = (string)e.Result;
+        }
+
+        private void btnDonate_Click(object sender, EventArgs e)
+        {
+            Program.LaunchDonate();
         }
     }
 }
