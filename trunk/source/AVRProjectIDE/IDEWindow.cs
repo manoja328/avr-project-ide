@@ -1534,5 +1534,10 @@ namespace AVRProjectIDE
         }
 
         #endregion
+
+        private void mbtnDonate_Click(object sender, EventArgs e)
+        {
+            Program.LaunchDonate();
+        }
     }
 }

@@ -61,6 +61,8 @@ namespace AVRProjectIDE
         private Dictionary<int, ComboBox> dropdowns = new Dictionary<int, ComboBox>();
         private Dictionary<int, CheckBox> checkboxes = new Dictionary<int, CheckBox>();
 
+        private static List<int> POWERS_OF_TWO = new List<int>(new int[] { 1, 2, 4, 8, 16, 32, 64, 128, });
+
         #endregion
 
         #region Properties
@@ -282,17 +284,15 @@ namespace AVRProjectIDE
         private void FillControls()
         {
             int ctrlCnt = 0;
-            int possibilities = 0;
             foreach (KeyValuePair<int, Dictionary<string, int>> i in presets)
             {
-                if (i.Value.Count == 1)
+                if (POWERS_OF_TWO.Contains(i.Key))
                 {
                     CheckBox cb = new CheckBox();
                     foreach (KeyValuePair<string, int> j in i.Value)
                         cb.Text = j.Key;
                     cb.Location = CreatePoint(ctrlCnt);
                     ctrlCnt++;
-                    possibilities += 2;
                     cb.Size = CreateSize(25);
                     cb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
@@ -301,15 +301,39 @@ namespace AVRProjectIDE
                     checkboxes.Add(i.Key, cb);
                     grpPresetBox.Controls.Add(cb);
                 }
-                else if (i.Value.Count > 1)
+                else
                 {
+                    List<int> usedValues = new List<int>();
+
                     ComboBox cb = new ComboBox();
                     cb.DropDownStyle = ComboBoxStyle.DropDownList;
                     foreach (KeyValuePair<string, int> j in i.Value)
                     {
+                        usedValues.Add(j.Value);
+
                         cb.Items.Add(j.Key);
-                        possibilities++;
                     }
+
+                    for (int k = 0, m = 1; k <= 0xFF; k++)
+                    {
+                        if (usedValues.Contains(k) == false)
+                        {
+                            if (((byte)k & (byte)i.Key) == (byte)k)
+                            {
+                                string newName = string.Format(
+                                    "Undefined Preset {0}: 0x{1:X2}",
+                                    m,
+                                    k
+                                    );
+
+                                i.Value.Add(newName, k);
+                                cb.Items.Add(newName);
+
+                                m++;
+                            }
+                        }
+                    }
+
                     cb.SelectedIndex = 0;
 
                     cb.SelectedIndexChanged += new EventHandler(PresetEvent);
