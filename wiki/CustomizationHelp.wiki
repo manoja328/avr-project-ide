@@ -1,10 +1,10 @@
-#summary Help Regarding How to Customize AVRProjectIDE
+#summary Help Regarding How to Customize AVR Project IDE
 
 ==General==
 
-You can configure a lot of things through files stored in the application data folder that AVRProjectIDE uses. To find this folder, run AVRProjectIDE, and it should appear in the "Messages" subwindow. You can also open the configuration window, go to the last tab, and click on the button that says "Open Application Data Folder".
+You can configure a lot of things through files stored in the application data folder that AVR Project IDE uses. To find this folder, run AVR Project IDE, and it should appear in the "Messages" subwindow. You can also open the configuration window, go to the last tab, and click on the button that says "Open Application Data Folder".
 
-If any files become unusable, AVRProjectIDE should be able to handle it, maybe even rewrite the default configurations back. If any files are missing, AVRProjectIDE will recreate the default configuration.
+If any files become unusable, AVR Project IDE should be able to handle it, maybe even rewrite the default configurations back. If any files are missing, AVR Project IDE will recreate the default configuration.
 
 Do not touch workspace.xml unless you understand how DockPanel Suite handles it.
 
