@@ -22,6 +22,10 @@ Note that you can't "supplement" a C or C++ project with a pde file as the Ardui
 
 Those are the same default compiler options that AVRStudio used. It means all warnings are displayed, use dwarf-2 for debugging, and the C standard is GNU99.
 
+===I don't want F_CPU defined in the compilation options===
+
+Set clock speed to 0, and there won't be "DF_CPU=" in the compilation options, allowing you to manually define the clock speed in the code.
+
 ===What is the “Run Only Options” button for in the AVRDUDE command builder?===
 
 It'll run AVRDUDE but won't write the hex file to it, this is used to check that your programmer is working
