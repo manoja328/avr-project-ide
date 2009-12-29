@@ -419,6 +419,670 @@
     <None Include="graphics\unknown.ico" />
     <None Include="graphics\warning.ico" />
     <None Include="graphics\exit.png" />
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT86RF401.xml">
+      <Link>chip_xml\AT86RF401.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT89S51.xml">
+      <Link>chip_xml\AT89S51.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT89S52.xml">
+      <Link>chip_xml\AT89S52.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90CAN128.xml">
+      <Link>chip_xml\AT90CAN128.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90CAN32.xml">
+      <Link>chip_xml\AT90CAN32.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90CAN64.xml">
+      <Link>chip_xml\AT90CAN64.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM2.xml">
+      <Link>chip_xml\AT90PWM2.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM216.xml">
+      <Link>chip_xml\AT90PWM216.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM2B.xml">
+      <Link>chip_xml\AT90PWM2B.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM3.xml">
+      <Link>chip_xml\AT90PWM3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM316.xml">
+      <Link>chip_xml\AT90PWM316.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM3B.xml">
+      <Link>chip_xml\AT90PWM3B.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM81.xml">
+      <Link>chip_xml\AT90PWM81.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S1200.xml">
+      <Link>chip_xml\AT90S1200.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S2313.xml">
+      <Link>chip_xml\AT90S2313.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S2323.xml">
+      <Link>chip_xml\AT90S2323.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S2343.xml">
+      <Link>chip_xml\AT90S2343.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S4414.xml">
+      <Link>chip_xml\AT90S4414.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S4433.xml">
+      <Link>chip_xml\AT90S4433.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S4434.xml">
+      <Link>chip_xml\AT90S4434.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S8515.xml">
+      <Link>chip_xml\AT90S8515.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S8515comp.xml">
+      <Link>chip_xml\AT90S8515comp.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S8535.xml">
+      <Link>chip_xml\AT90S8535.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90S8535comp.xml">
+      <Link>chip_xml\AT90S8535comp.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90SCR100H.xml">
+      <Link>chip_xml\AT90SCR100H.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90USB1286.xml">
+      <Link>chip_xml\AT90USB1286.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90USB1287.xml">
+      <Link>chip_xml\AT90USB1287.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90USB162.xml">
+      <Link>chip_xml\AT90USB162.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90USB646.xml">
+      <Link>chip_xml\AT90USB646.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90USB647.xml">
+      <Link>chip_xml\AT90USB647.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90USB82.xml">
+      <Link>chip_xml\AT90USB82.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega103.xml">
+      <Link>chip_xml\ATmega103.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega103comp.xml">
+      <Link>chip_xml\ATmega103comp.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega128.xml">
+      <Link>chip_xml\ATmega128.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega1280.xml">
+      <Link>chip_xml\ATmega1280.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega1281.xml">
+      <Link>chip_xml\ATmega1281.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega1284P.xml">
+      <Link>chip_xml\ATmega1284P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega128A.xml">
+      <Link>chip_xml\ATmega128A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega128RFA1.xml">
+      <Link>chip_xml\ATmega128RFA1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16.xml">
+      <Link>chip_xml\ATmega16.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega161.xml">
+      <Link>chip_xml\ATmega161.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega161comp.xml">
+      <Link>chip_xml\ATmega161comp.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega162.xml">
+      <Link>chip_xml\ATmega162.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega163.xml">
+      <Link>chip_xml\ATmega163.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega164P.xml">
+      <Link>chip_xml\ATmega164P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega164PA.xml">
+      <Link>chip_xml\ATmega164PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega165.xml">
+      <Link>chip_xml\ATmega165.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega165P.xml">
+      <Link>chip_xml\ATmega165P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega165PA.xml">
+      <Link>chip_xml\ATmega165PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega168.xml">
+      <Link>chip_xml\ATmega168.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega168A.xml">
+      <Link>chip_xml\ATmega168A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega168P.xml">
+      <Link>chip_xml\ATmega168P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega168PA.xml">
+      <Link>chip_xml\ATmega168PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega169.xml">
+      <Link>chip_xml\ATmega169.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega169P.xml">
+      <Link>chip_xml\ATmega169P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega169PA.xml">
+      <Link>chip_xml\ATmega169PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16A.xml">
+      <Link>chip_xml\ATmega16A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16HVA.xml">
+      <Link>chip_xml\ATmega16HVA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16HVA2.xml">
+      <Link>chip_xml\ATmega16HVA2.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16HVB.xml">
+      <Link>chip_xml\ATmega16HVB.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16M1.xml">
+      <Link>chip_xml\ATmega16M1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16U2.xml">
+      <Link>chip_xml\ATmega16U2.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega16U4.xml">
+      <Link>chip_xml\ATmega16U4.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega2560.xml">
+      <Link>chip_xml\ATmega2560.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega2561.xml">
+      <Link>chip_xml\ATmega2561.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32.xml">
+      <Link>chip_xml\ATmega32.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega323.xml">
+      <Link>chip_xml\ATmega323.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega324P.xml">
+      <Link>chip_xml\ATmega324P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega324PA.xml">
+      <Link>chip_xml\ATmega324PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega325.xml">
+      <Link>chip_xml\ATmega325.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega3250.xml">
+      <Link>chip_xml\ATmega3250.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega3250P.xml">
+      <Link>chip_xml\ATmega3250P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega325P.xml">
+      <Link>chip_xml\ATmega325P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega328P.xml">
+      <Link>chip_xml\ATmega328P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega329.xml">
+      <Link>chip_xml\ATmega329.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega3290.xml">
+      <Link>chip_xml\ATmega3290.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega3290P.xml">
+      <Link>chip_xml\ATmega3290P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega329P.xml">
+      <Link>chip_xml\ATmega329P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega329PA.xml">
+      <Link>chip_xml\ATmega329PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32A.xml">
+      <Link>chip_xml\ATmega32A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32C1.xml">
+      <Link>chip_xml\ATmega32C1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32HVB.xml">
+      <Link>chip_xml\ATmega32HVB.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32M1.xml">
+      <Link>chip_xml\ATmega32M1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32U2.xml">
+      <Link>chip_xml\ATmega32U2.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32U4.xml">
+      <Link>chip_xml\ATmega32U4.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega32U6.xml">
+      <Link>chip_xml\ATmega32U6.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega406.xml">
+      <Link>chip_xml\ATmega406.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega48.xml">
+      <Link>chip_xml\ATmega48.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega48A.xml">
+      <Link>chip_xml\ATmega48A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega48P.xml">
+      <Link>chip_xml\ATmega48P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega48PA.xml">
+      <Link>chip_xml\ATmega48PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega64.xml">
+      <Link>chip_xml\ATmega64.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega640.xml">
+      <Link>chip_xml\ATmega640.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega644.xml">
+      <Link>chip_xml\ATmega644.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega644P.xml">
+      <Link>chip_xml\ATmega644P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega644PA.xml">
+      <Link>chip_xml\ATmega644PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega645.xml">
+      <Link>chip_xml\ATmega645.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega6450.xml">
+      <Link>chip_xml\ATmega6450.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega649.xml">
+      <Link>chip_xml\ATmega649.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega6490.xml">
+      <Link>chip_xml\ATmega6490.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega649P.xml">
+      <Link>chip_xml\ATmega649P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega64A.xml">
+      <Link>chip_xml\ATmega64A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega64C1.xml">
+      <Link>chip_xml\ATmega64C1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega64HVE.xml">
+      <Link>chip_xml\ATmega64HVE.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega64M1.xml">
+      <Link>chip_xml\ATmega64M1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega8.xml">
+      <Link>chip_xml\ATmega8.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega8515.xml">
+      <Link>chip_xml\ATmega8515.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega8535.xml">
+      <Link>chip_xml\ATmega8535.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega88.xml">
+      <Link>chip_xml\ATmega88.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega88A.xml">
+      <Link>chip_xml\ATmega88A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega88P.xml">
+      <Link>chip_xml\ATmega88P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega88PA.xml">
+      <Link>chip_xml\ATmega88PA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega8A.xml">
+      <Link>chip_xml\ATmega8A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega8HVA.xml">
+      <Link>chip_xml\ATmega8HVA.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega8U2.xml">
+      <Link>chip_xml\ATmega8U2.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny10.xml">
+      <Link>chip_xml\ATtiny10.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny11.xml">
+      <Link>chip_xml\ATtiny11.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny12.xml">
+      <Link>chip_xml\ATtiny12.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny13.xml">
+      <Link>chip_xml\ATtiny13.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny13A.xml">
+      <Link>chip_xml\ATtiny13A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny15.xml">
+      <Link>chip_xml\ATtiny15.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny167.xml">
+      <Link>chip_xml\ATtiny167.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny20.xml">
+      <Link>chip_xml\ATtiny20.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny22.xml">
+      <Link>chip_xml\ATtiny22.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny2313.xml">
+      <Link>chip_xml\ATtiny2313.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny2313A.xml">
+      <Link>chip_xml\ATtiny2313A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny24.xml">
+      <Link>chip_xml\ATtiny24.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny24A.xml">
+      <Link>chip_xml\ATtiny24A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny25.xml">
+      <Link>chip_xml\ATtiny25.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny26.xml">
+      <Link>chip_xml\ATtiny26.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny261.xml">
+      <Link>chip_xml\ATtiny261.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny261A.xml">
+      <Link>chip_xml\ATtiny261A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny28.xml">
+      <Link>chip_xml\ATtiny28.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny4.xml">
+      <Link>chip_xml\ATtiny4.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny40.xml">
+      <Link>chip_xml\ATtiny40.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny4313.xml">
+      <Link>chip_xml\ATtiny4313.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny43U.xml">
+      <Link>chip_xml\ATtiny43U.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny44.xml">
+      <Link>chip_xml\ATtiny44.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny44A.xml">
+      <Link>chip_xml\ATtiny44A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny45.xml">
+      <Link>chip_xml\ATtiny45.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny461.xml">
+      <Link>chip_xml\ATtiny461.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny461A.xml">
+      <Link>chip_xml\ATtiny461A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny48.xml">
+      <Link>chip_xml\ATtiny48.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny5.xml">
+      <Link>chip_xml\ATtiny5.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny84.xml">
+      <Link>chip_xml\ATtiny84.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny85.xml">
+      <Link>chip_xml\ATtiny85.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny861.xml">
+      <Link>chip_xml\ATtiny861.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny861A.xml">
+      <Link>chip_xml\ATtiny861A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny87.xml">
+      <Link>chip_xml\ATtiny87.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny88.xml">
+      <Link>chip_xml\ATtiny88.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATtiny9.xml">
+      <Link>chip_xml\ATtiny9.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega128A1.xml">
+      <Link>chip_xml\ATxmega128A1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega128A3.xml">
+      <Link>chip_xml\ATxmega128A3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega128D3.xml">
+      <Link>chip_xml\ATxmega128D3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega16A4.xml">
+      <Link>chip_xml\ATxmega16A4.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega16D4.xml">
+      <Link>chip_xml\ATxmega16D4.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega192A3.xml">
+      <Link>chip_xml\ATxmega192A3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega192D3.xml">
+      <Link>chip_xml\ATxmega192D3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega256A3.xml">
+      <Link>chip_xml\ATxmega256A3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega256A3B.xml">
+      <Link>chip_xml\ATxmega256A3B.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega256D3.xml">
+      <Link>chip_xml\ATxmega256D3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega32A4.xml">
+      <Link>chip_xml\ATxmega32A4.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega32D4.xml">
+      <Link>chip_xml\ATxmega32D4.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega64A1.xml">
+      <Link>chip_xml\ATxmega64A1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega64A3.xml">
+      <Link>chip_xml\ATxmega64A3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega64D3.xml">
+      <Link>chip_xml\ATxmega64D3.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="arduino\core\binary.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -477,468 +1141,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="autocomplete.xml" />
-    <Content Include="chip_xml\at86rf401.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at89s51.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at89s52.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90can128.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90can32.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90can64.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90pwm2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90pwm216.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90pwm2b.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90pwm3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90pwm316.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90pwm3b.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90pwm81.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s1200.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s2313.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s2323.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s2343.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s4414.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s4433.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s4434.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s8515.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s8515comp.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s8535.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90s8535comp.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90scr100h.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90usb1286.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90usb1287.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90usb162.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90usb646.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90usb647.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\at90usb82.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega103.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega103comp.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega128.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega1280.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega1281.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega1284p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega128a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega128rfa1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega16.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega161.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega161comp.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega162.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega163.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega164p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega164pa.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega165.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega165p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega168.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega168p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega168pa.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega169.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega169p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega16a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega16hva.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega16hvb.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega16m1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega16u2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega16u4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega2560.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega2561.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega323.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega324p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega324pa.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega325.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega3250.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega3250p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega325p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega328p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega329.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega3290.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega3290p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega329p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32c1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32hvb.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32m1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32u2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32u4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega32u6.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega406.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega48.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega48p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega48pa.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega64.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega640.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega644.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega644p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega644pa.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega645.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega6450.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega649.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega6490.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega64a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega64c1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega64m1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega8.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega8515.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega8535.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega88.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega88p.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega88pa.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega8a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega8hva.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atmega8u2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny10.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny11.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny12.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny13.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny13a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny15.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny167.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny22.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny2313.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny2313a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny24.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny24a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny25.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny26.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny261.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny261a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny28.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny4313.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny43u.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny44.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny44a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny45.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny461.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny48.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny5.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny84.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny85.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny861.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny861a.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny87.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny88.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\attiny9.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega128a1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega128a3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega128d3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega16a4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega16d4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega192a3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega192d3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega256a3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega256a3b.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega256d3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega32a4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega32d4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega64a1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega64a3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chip_xml\atxmega64d3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="chip_xml\interruptvectors.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

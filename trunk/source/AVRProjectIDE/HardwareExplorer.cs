@@ -61,7 +61,7 @@ namespace AVRProjectIDE
             //LoadWaitWindow lww = new LoadWaitWindow();
             //lww.Show();
 
-            this.chipName = chipName.Trim().ToLowerInvariant();
+            this.chipName = Program.ProperChipName(chipName);
 
             treeIOModules.Nodes.Clear();
             treePins.Nodes.Clear();
@@ -76,8 +76,6 @@ namespace AVRProjectIDE
             XmlDocument xDoc = new XmlDocument();
             try
             {
-                //ResourceManager resxMan = new ResourceManager(SettingsManagement.AssemblyTitle + ".chip_xml", System.Reflection.Assembly.GetExecutingAssembly());
-
                 if (Program.MakeSurePathExists(SettingsManagement.AppDataPath + "chip_xml"))
                 {
                     string xmlFilePathA;
@@ -112,6 +110,11 @@ namespace AVRProjectIDE
 
                     xDoc.Load(xmlFilePathB);
                 }
+            }
+            catch (XmlException ex)
+            {
+                txtChipInfo.Text = "Error in chip description file: " + ex.Message;
+                return;
             }
             catch (Exception ex)
             {
@@ -340,9 +343,14 @@ namespace AVRProjectIDE
                     }
                 }
             }
+            catch (XmlException ex)
+            {
+                MessageBox.Show("XML error while loading interrupt vector data from Atmel's chip description file: " + ex.Message);
+                return intVectList;
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while loading interrupt vector data: " + ex.Message);
+                MessageBox.Show("Error while loading interrupt vector data from Atmel's chip description file: " + ex.Message);
                 return intVectList;
             }
 
@@ -369,9 +377,14 @@ namespace AVRProjectIDE
                     xDoc.LoadXml(Properties.Resources.interruptvectors);
                 }
             }
+            catch (XmlException ex)
+            {
+                MessageBox.Show("XML error while loading interrupt vector data from interruptvectors.xml : " + ex.Message);
+                return intVectList;
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while loading interrupt vector data: " + ex.Message);
+                MessageBox.Show("Error while loading interrupt vector data from interruptvectors.xml : " + ex.Message);
                 return intVectList;
             }
 

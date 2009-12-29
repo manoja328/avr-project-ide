@@ -120,7 +120,16 @@ namespace AVRProjectIDE
             string overrides = "";
 
             if (string.IsNullOrEmpty(project.BurnPort) == false)
-                overrides += "-P " + project.BurnPort;
+            {
+                if (project.BurnPort.StartsWith("COM"))
+                {
+                    overrides += "-P //./" + project.BurnPort;
+                }
+                else
+                {
+                    overrides += "-P " + project.BurnPort;
+                }
+            }
 
             if (project.BurnBaud != 0)
                 overrides += " -b " + project.BurnBaud.ToString("0");
@@ -215,7 +224,16 @@ namespace AVRProjectIDE
                 string overrides = "";
 
                 if (string.IsNullOrEmpty(project.BurnPort) == false)
-                    overrides += "-P " + project.BurnPort;
+                {
+                    if (project.BurnPort.StartsWith("COM"))
+                    {
+                        overrides += "-P //./" + project.BurnPort;
+                    }
+                    else
+                    {
+                        overrides += "-P " + project.BurnPort;
+                    }
+                }
 
                 if (project.BurnBaud != 0)
                     overrides += " -b " + project.BurnBaud.ToString("0");

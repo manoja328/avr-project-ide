@@ -48,6 +48,11 @@ namespace AVRProjectIDE
                     }
                 }
             }
+            catch (XmlException ex)
+            {
+                MessageBox.Show("XML Error in Template File: " + ex.Message);
+                return false;
+            }
             catch (Exception ex)
             {
                 ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while loading templates");

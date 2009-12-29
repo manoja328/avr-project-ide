@@ -45,17 +45,6 @@ namespace AVRProjectIDE
             if (dropProg.Items.Count > 0)
                 dropPart.Items.AddRange(ProjectBurner.GetAvailParts((string)dropProg.Items[0], true));
 
-            dropPort.Items.Clear();
-            dropPort.Items.Add("No Override");
-            dropPort.Items.Add("LPT1");
-            dropPort.Items.Add("LPT2");
-            dropPort.Items.Add("LPT3");
-            string[] portList = System.IO.Ports.SerialPort.GetPortNames();
-            foreach (string port in portList)
-            {
-                dropPort.Items.Add(port);
-            }
-            dropPort.SelectedIndex = 0;
             dropBaud.SelectedIndex = 0;
 
             ProjToForm();
@@ -85,22 +74,7 @@ namespace AVRProjectIDE
             else
                 dropProg.SelectedIndex = dropProg.Items.Add(project.BurnProgrammer);
 
-            if (dropPort.Items.Count > 0)
-            {
-                dropPort.SelectedIndex = 0;
-                if (dropPort.Items.Contains(project.BurnPort))
-                {
-                    dropPort.SelectedIndex = dropPort.Items.IndexOf(project.BurnPort);
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(project.BurnPort) == false)
-                    {
-                        int i = dropPort.Items.Add(project.BurnPort);
-                        dropPort.SelectedIndex = i;
-                    }
-                }
-            }
+            txtPortOverride.Text = project.BurnPort.Trim();
 
             dropBaud.SelectedIndex = 0;
             if (dropBaud.Items.Contains(project.BurnBaud.ToString("0")))
@@ -138,21 +112,27 @@ namespace AVRProjectIDE
                 project.BurnBaud = 0;
             }
 
-            selectedText = (string)dropPort.Items[dropPort.SelectedIndex];
-            if (selectedText == "No Override")
-            {
-                project.BurnPort = "";
-            }
-            else
-            {
-                project.BurnPort = selectedText;
-            }
+            project.BurnPort = txtPortOverride.Text.Trim();
         }
 
         private void btnBurnOnlyOpt_Click(object sender, EventArgs e)
         {
             FormToProj();
             projBurner.BurnCMD(true, false, this);
+        }
+
+        private void dropProg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dropProg.SelectedIndex < 0)
+                return;
+
+            string prog = ((string)dropProg.Items[dropProg.SelectedIndex]).ToLowerInvariant();
+
+            if (prog == "avrdoper")
+            {
+                if (string.IsNullOrEmpty(txtPortOverride.Text))
+                    txtPortOverride.Text = "avrdoper";
+            }
         }
     }
 }

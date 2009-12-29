@@ -33,13 +33,13 @@
             this.txtBurnOpt = new System.Windows.Forms.TextBox();
             this.dropBaud = new System.Windows.Forms.ComboBox();
             this.dropProg = new System.Windows.Forms.ComboBox();
-            this.dropPort = new System.Windows.Forms.ComboBox();
             this.dropPart = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtPortOverride = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // chkAutoReset
@@ -49,7 +49,7 @@
             this.chkAutoReset.Location = new System.Drawing.Point(315, 69);
             this.chkAutoReset.Name = "chkAutoReset";
             this.chkAutoReset.Size = new System.Drawing.Size(118, 17);
-            this.chkAutoReset.TabIndex = 27;
+            this.chkAutoReset.TabIndex = 6;
             this.chkAutoReset.Text = "Arduino Auto Reset";
             this.chkAutoReset.UseVisualStyleBackColor = true;
             // 
@@ -58,7 +58,7 @@
             this.btnBurnOnlyOpt.Location = new System.Drawing.Point(84, 93);
             this.btnBurnOnlyOpt.Name = "btnBurnOnlyOpt";
             this.btnBurnOnlyOpt.Size = new System.Drawing.Size(107, 23);
-            this.btnBurnOnlyOpt.TabIndex = 26;
+            this.btnBurnOnlyOpt.TabIndex = 7;
             this.btnBurnOnlyOpt.Text = "Run Only Options";
             this.btnBurnOnlyOpt.UseVisualStyleBackColor = true;
             this.btnBurnOnlyOpt.Click += new System.EventHandler(this.btnBurnOnlyOpt_Click);
@@ -68,7 +68,7 @@
             this.txtBurnOpt.Location = new System.Drawing.Point(84, 67);
             this.txtBurnOpt.Name = "txtBurnOpt";
             this.txtBurnOpt.Size = new System.Drawing.Size(107, 20);
-            this.txtBurnOpt.TabIndex = 25;
+            this.txtBurnOpt.TabIndex = 5;
             // 
             // dropBaud
             // 
@@ -94,7 +94,7 @@
             this.dropBaud.Location = new System.Drawing.Point(326, 40);
             this.dropBaud.Name = "dropBaud";
             this.dropBaud.Size = new System.Drawing.Size(107, 21);
-            this.dropBaud.TabIndex = 24;
+            this.dropBaud.TabIndex = 4;
             // 
             // dropProg
             // 
@@ -161,17 +161,8 @@
             this.dropProg.Location = new System.Drawing.Point(84, 40);
             this.dropProg.Name = "dropProg";
             this.dropProg.Size = new System.Drawing.Size(107, 21);
-            this.dropProg.TabIndex = 23;
-            // 
-            // dropPort
-            // 
-            this.dropPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dropPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropPort.FormattingEnabled = true;
-            this.dropPort.Location = new System.Drawing.Point(326, 13);
-            this.dropPort.Name = "dropPort";
-            this.dropPort.Size = new System.Drawing.Size(107, 21);
-            this.dropPort.TabIndex = 22;
+            this.dropProg.TabIndex = 3;
+            this.dropProg.SelectedIndexChanged += new System.EventHandler(this.dropProg_SelectedIndexChanged);
             // 
             // dropPart
             // 
@@ -259,7 +250,7 @@
             this.dropPart.Location = new System.Drawing.Point(84, 13);
             this.dropPart.Name = "dropPart";
             this.dropPart.Size = new System.Drawing.Size(107, 21);
-            this.dropPart.TabIndex = 21;
+            this.dropPart.TabIndex = 1;
             // 
             // label11
             // 
@@ -308,6 +299,13 @@
             this.label1.TabIndex = 17;
             this.label1.Text = "Part:";
             // 
+            // txtPortOverride
+            // 
+            this.txtPortOverride.Location = new System.Drawing.Point(326, 13);
+            this.txtPortOverride.Name = "txtPortOverride";
+            this.txtPortOverride.Size = new System.Drawing.Size(107, 20);
+            this.txtPortOverride.TabIndex = 2;
+            // 
             // BurnerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,10 +313,10 @@
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Controls.Add(this.chkAutoReset);
             this.Controls.Add(this.btnBurnOnlyOpt);
+            this.Controls.Add(this.txtPortOverride);
             this.Controls.Add(this.txtBurnOpt);
             this.Controls.Add(this.dropBaud);
             this.Controls.Add(this.dropProg);
-            this.Controls.Add(this.dropPort);
             this.Controls.Add(this.dropPart);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label9);
@@ -339,12 +337,12 @@
         private System.Windows.Forms.TextBox txtBurnOpt;
         private System.Windows.Forms.ComboBox dropBaud;
         private System.Windows.Forms.ComboBox dropProg;
-        private System.Windows.Forms.ComboBox dropPort;
         private System.Windows.Forms.ComboBox dropPart;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtPortOverride;
     }
 }

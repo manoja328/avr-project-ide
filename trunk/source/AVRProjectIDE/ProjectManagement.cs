@@ -876,7 +876,7 @@ namespace AVRProjectIDE
                             foreach (XmlElement bookMarks in i.GetElementsByTagName("Bookmarks"))
                             {
                                 string tmp = bookMarks.InnerText;
-                                string[] bkmkListStr = tmp.Split(new char[] {',', ' ', '\t', '\n', '\r', '\0', });
+                                string[] bkmkListStr = tmp.Split(new char[] { ',', ' ', '\t', '\n', '\r', '\0', });
                                 foreach (string s in bkmkListStr)
                                 {
                                     if (string.IsNullOrEmpty(s) == false)
@@ -945,10 +945,10 @@ namespace AVRProjectIDE
                     {
                         for (int i = 0; i < total && newCnt < (total + 1) / 2 && oldCnt < (total + 1) / 2; i++)
                         {
-                                newCnt++;
+                            newCnt++;
                             if (flistNew[i].Exists)
-                            if (flistOld[i].Exists)
-                                oldCnt++;
+                                if (flistOld[i].Exists)
+                                    oldCnt++;
                         }
                     }
                     else
@@ -984,6 +984,11 @@ namespace AVRProjectIDE
                         APSXmlElementList.Add(i);
                     }
                 }
+            }
+            catch (XmlException ex)
+            {
+                MessageBox.Show("Error in Project File: " + ex.Message);
+                success = false;
             }
             catch { success = false; }
 
@@ -1255,6 +1260,11 @@ namespace AVRProjectIDE
                     }
                 }
 
+            }
+            catch (XmlException ex)
+            {
+                MessageBox.Show("Error in APS File: " + ex.Message);
+                success = false;
             }
             catch { success = false; }
 
