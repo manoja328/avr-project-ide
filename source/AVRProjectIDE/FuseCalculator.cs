@@ -75,7 +75,7 @@ namespace AVRProjectIDE
 
             try
             {
-                string chipName = project.Device;
+                string chipName = Program.ProperChipName(project.Device);
                 string xmlFilePathA;
                 string xmlFilePathB;
                 int cnt = chipName.Length;
@@ -111,6 +111,12 @@ namespace AVRProjectIDE
             catch (FileNotFoundException)
             {
                 MessageBox.Show("Could not find matching XML file for your device");
+                this.Close();
+                return;
+            }
+            catch (XmlException ex)
+            {
+                MessageBox.Show("Error in Chip Description XML File: " + ex.Message);
                 this.Close();
                 return;
             }

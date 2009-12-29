@@ -232,6 +232,15 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to http://frank.circleofcurrent.com/.
+        /// </summary>
+        internal static string FranksSiteURL {
+            get {
+                return ResourceManager.GetString("FranksSiteURL", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap header {
             get {
                 object obj = ResourceManager.GetObject("header", resourceCulture);

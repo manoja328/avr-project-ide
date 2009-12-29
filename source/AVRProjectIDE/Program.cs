@@ -331,7 +331,15 @@ namespace AVRProjectIDE
         public static void LaunchDonate()
         {
             System.Windows.Forms.MessageBox.Show("There is a donate button on my website");
-            System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
+            System.Diagnostics.Process.Start(Properties.Resources.FranksSiteURL);
+        }
+
+        public static string ProperChipName(string chipName)
+        {
+            if (string.IsNullOrEmpty(chipName))
+                chipName = "";
+
+            return chipName.Trim().ToUpperInvariant().Replace("ATXMEGA", "ATxmega").Replace("ATMEGA", "ATmega").Replace("ATTINY", "ATtiny");
         }
     }
 }
