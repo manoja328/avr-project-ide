@@ -25,11 +25,15 @@ namespace AVRProjectIDE
             }
         }
 
+        const string BUTTON_TEXT = "Run '{0}'";
         private AVRProject project;
         private ProjectBurner projBurner;
+        private bool allowEvents = false;
 
         public BurnerPanel(AVRProject project)
         {
+            allowEvents = false;
+
             InitializeComponent();
 
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -50,6 +54,9 @@ namespace AVRProjectIDE
             ProjToForm();
         }
 
+        /// <summary>
+        /// Load form fields with project properties
+        /// </summary>
         public void ProjToForm()
         {
             if (dropPart.Items.Count > 0)
@@ -92,6 +99,10 @@ namespace AVRProjectIDE
 
             txtBurnOpt.Text = project.BurnOptions;
             chkAutoReset.Checked = project.BurnAutoReset;
+
+            SetButtonText();
+
+            allowEvents = true;
         }
 
         public void FormToProj()
@@ -105,7 +116,7 @@ namespace AVRProjectIDE
             string selectedText = (string)dropBaud.Items[dropBaud.SelectedIndex];
             if (int.TryParse(selectedText, out baud))
             {
-                project.BurnBaud = int.Parse(selectedText);
+                project.BurnBaud = baud;
             }
             else
             {
@@ -132,6 +143,85 @@ namespace AVRProjectIDE
             {
                 if (string.IsNullOrEmpty(txtPortOverride.Text))
                     txtPortOverride.Text = "avrdoper";
+            }
+        }
+
+        public static void GetPortOverride(ref string args, AVRProject project)
+        {
+            string res = "";
+
+            try
+            {
+                if (string.IsNullOrEmpty(project.BurnPort) == false)
+                {
+                    res = "-P " + project.BurnPort;
+                    if (project.BurnPort.Length > 3)
+                    {
+                        int portNum;
+                        if (project.BurnPort.StartsWith("COM") && int.TryParse(project.BurnPort.Substring(3), out portNum))
+                        {
+                            res = "-P //./" + project.BurnPort;
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            args += res;
+
+            res = "";
+
+            if (project.BurnBaud != 0)
+                res = " -b " + project.BurnBaud.ToString("0");
+
+            args += res;
+        }
+
+        private string GetArgs()
+        {
+            return BurnerPanel.GetArgs(this.project);
+        }
+
+        public static string GetArgs(AVRProject project)
+        {
+            string overrides = "";
+            BurnerPanel.GetPortOverride(ref overrides, project);
+            string res = String.Format("-p {0} -c {1} {2} {3}", project.BurnPart.ToUpperInvariant(), project.BurnProgrammer, overrides, project.BurnOptions);
+
+            while (res.Contains("  "))
+                res = res.Replace("  ", " ");
+
+            return res;
+        }
+
+        private void txt_TextChanged(object sender, EventArgs e)
+        {
+            if (allowEvents == false)
+                return;
+
+            FormToProj();
+            SetButtonText();
+        }
+
+        private void SetButtonText()
+        {
+            btnBurnOnlyOpt.Text = String.Format(BUTTON_TEXT, BurnerPanel.GetArgs(this.project));
+        }
+
+        private void drop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txt_TextChanged(sender, e);
+        }
+
+        private void txtPortOverride_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtPortOverride.Text.Length > 3)
+            {
+                int portNum;
+                if (txtPortOverride.Text.ToUpperInvariant().StartsWith("COM") && int.TryParse(txtPortOverride.Text.Substring(3), out portNum))
+                {
+                    txtPortOverride.Text = "COM" + portNum.ToString("0");
+                }
             }
         }
     }

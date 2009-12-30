@@ -49,7 +49,7 @@ namespace AVRProjectIDE
             InitializeComponent();
 
             this.originalProject = project;
-            this.project = (AVRProject)project.Clone();
+            this.project = project.Clone();
 
             burnerPanel = new BurnerPanel(this.project);
 
@@ -61,6 +61,8 @@ namespace AVRProjectIDE
 
         private void FuseCalculator_Load(object sender, EventArgs e)
         {
+            // avoid having two fuse calculators open since this tool can be
+            // opened from two places
             if (isOpen)
             {
                 this.Close();

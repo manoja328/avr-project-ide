@@ -55,7 +55,7 @@ namespace AVRProjectIDE
                 dropDevices.Items.Add(s);
 
             this.originalProject = project;
-            this.project = (AVRProject)project.Clone();
+            this.project = project.Clone();
 
             burnerPanel = new BurnerPanel(this.project);
             grpBoxBurnerPanel.Controls.Add(burnerPanel);

@@ -251,7 +251,7 @@
     <value>..\chip_xml\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="BuildID" xml:space="preserve">
-    <value>AVRProjectIDE_Alpha_67</value>
+    <value>AVRProjectIDE_Alpha_69</value>
   </data>
   <data name="WinAVRURL" xml:space="preserve">
     <value>https://sourceforge.net/projects/winavr/files/</value>
@@ -276,9 +276,6 @@
   </data>
   <data name="bookmarktoggle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\graphics\bookmarktoggle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DonationURL" xml:space="preserve">
-    <value />
   </data>
   <data name="FranksSiteURL" xml:space="preserve">
     <value>http://frank.circleofcurrent.com/</value>

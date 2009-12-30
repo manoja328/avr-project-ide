@@ -1263,6 +1263,11 @@ namespace AVRProjectIDE
             System.Diagnostics.Process.Start(Properties.Resources.HelpURL);
         }
 
+        /// <summary>
+        /// ignore me, the progress bar is only there to do some testing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void progressBar1_Click(object sender, EventArgs e)
         {
             

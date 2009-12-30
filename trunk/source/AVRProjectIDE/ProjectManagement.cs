@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace AVRProjectIDE
 {
-    public class ProjectFile : ICloneable
+    public class ProjectFile
     {
         #region Fields and Properties
 
@@ -181,7 +181,7 @@ namespace AVRProjectIDE
         /// Makes a copy of ProjectFile, used by the background worker of the project builder
         /// </summary>
         /// <returns>Reference to the Cloned ProjectFile</returns>
-        public object Clone()
+        public ProjectFile Clone()
         {
             ProjectFile newFile = new ProjectFile(fileAbsPath, this.project);
             newFile.IsOpen = this.IsOpen;
@@ -202,7 +202,7 @@ namespace AVRProjectIDE
         #endregion
     }
 
-    public class AVRProject : ICloneable
+    public class AVRProject
     {
         #region Project File Fields and Properties
 
@@ -1561,7 +1561,7 @@ namespace AVRProjectIDE
         /// Makes a copy of AVRProject, used by the background worker of the project builder
         /// </summary>
         /// <returns>Reference to the Cloned AVRProject</returns>
-        public object Clone()
+        public AVRProject Clone()
         {
             AVRProject newObject = new AVRProject();
 
@@ -1614,7 +1614,7 @@ namespace AVRProjectIDE
             project.fileList.Clear();
             foreach (KeyValuePair<string, ProjectFile> file in this.FileList)
             {
-                ProjectFile newFile = (ProjectFile)file.Value.Clone();
+                ProjectFile newFile = file.Value.Clone();
                 project.fileList.Add(file.Key, newFile);
             }
 

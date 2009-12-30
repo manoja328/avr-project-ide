@@ -90,6 +90,8 @@ namespace AVRProjectIDE
 
             this.file = file;
             this.project = project;
+
+            SettingsManagement.LoadEditorState(this);
         }
 
         private void EditorPanelContent_Shown(object sender, EventArgs e)
@@ -587,6 +589,7 @@ namespace AVRProjectIDE
 
         private void EditorPanelContent_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SettingsManagement.SaveEditorState(this);
             if (HasChanged && closeWithoutSave == false)
             {
                 DialogResult res = MessageBox.Show("You Have Not Saved " + FileName + Environment.NewLine + "Would you like to save it?", "Closing Unsaved File", MessageBoxButtons.YesNoCancel);

@@ -10,6 +10,7 @@ using System.Reflection;
 using Ini;
 using ScintillaNet;
 using System.Text.RegularExpressions;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace AVRProjectIDE
 {
@@ -1310,6 +1311,64 @@ namespace AVRProjectIDE
 
         #region Window State
 
+        public static void LoadEditorState(DockContent form)
+        {
+            return;
+
+            try
+            {
+                string winMax = iniFile.Read("Editor", "EditorMax");
+                string winWidth = iniFile.Read("Editor", "EditorWidth");
+                string winHeight = iniFile.Read("Editor", "EditorHeight");
+                if (string.IsNullOrEmpty(winMax) || string.IsNullOrEmpty(winWidth) || string.IsNullOrEmpty(winHeight))
+                {
+                    form.DockState = DockState.Document;
+                }
+                else
+                {
+                    if (Program.StringToBool(winMax))
+                    {
+                        form.DockState = DockState.Document;
+                    }
+                    else
+                    {
+                        int w;
+                        int h;
+                        if (int.TryParse(winWidth, out w) == false || int.TryParse(winHeight, out h) == false)
+                        {
+                            form.DockState = DockState.Document;
+                        }
+                        else
+                        {
+                            form.DockState = DockState.Float; // this line mysteriously fails for now
+                            form.Width = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Width, w)));
+                            form.Height = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Height, h)));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while loading editor state");
+                erw.ShowDialog();
+            }
+        }
+
+        public static void SaveEditorState(DockContent form)
+        {
+            try
+            {
+                iniFile.Write("Editor", "EditorMax", (form.DockState == DockState.Document).ToString().ToLowerInvariant());
+                iniFile.Write("Editor", "EditorWidth", form.Width.ToString("0"));
+                iniFile.Write("Editor", "EditorHeight", form.Height.ToString("0"));
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while saving editor state");
+                erw.ShowDialog();
+            }
+        }
+
         public static void LoadWindowState(Form form)
         {
             try
@@ -1338,8 +1397,8 @@ namespace AVRProjectIDE
                         else
                         {
                             form.WindowState = FormWindowState.Normal;
-                            form.Width = w;
-                            form.Height = h;
+                            form.Width = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Width, w)));
+                            form.Height = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Height, h)));
                         }
                     }
                 }

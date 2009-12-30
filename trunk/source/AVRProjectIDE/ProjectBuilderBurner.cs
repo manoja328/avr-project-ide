@@ -6,12 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Diagnostics;
-using System.Data;
 using System.ComponentModel;
-using System.Threading;
 using System.Runtime.InteropServices;
 using System.IO.Ports;
-using System.Configuration;
 using System.Collections.Specialized;
 
 namespace AVRProjectIDE
@@ -1806,20 +1803,7 @@ namespace AVRProjectIDE
 
             string overrides = "";
 
-            if (string.IsNullOrEmpty(project.BurnPort) == false)
-            {
-                if (project.BurnPort.StartsWith("COM"))
-                {
-                    overrides += "-P //./" + project.BurnPort;
-                }
-                else
-                {
-                    overrides += "-P " + project.BurnPort;
-                }
-            }
-
-            if (project.BurnBaud != 0)
-                overrides += " -b " + project.BurnBaud.ToString("0");
+            BurnerPanel.GetPortOverride(ref overrides, project);
 
             string args = String.Format("avrdude -p {0} -c {1} {2} {3} {4}", project.BurnPart.ToUpperInvariant(), project.BurnProgrammer, overrides, fileStr, project.BurnOptions);
             avrdude.StartInfo = new ProcessStartInfo("cmd", "/k " + args);
