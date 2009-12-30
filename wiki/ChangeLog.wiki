@@ -1,5 +1,12 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 68==
+
+ * Some small structure changes involving Burner Panel
+ * Added command line preview of AVRDUDE arguments
+ * Fixed cosmetic bug with the new port override textbox
+ * Port override will automatically turn lowercase com port names to uppercase
+
 ==Alpha 67==
 
  * Programmer port override now uses textbox instead of dropdown, allowing for more flexible port parameters such as usb:xx:xx and other weird things.
