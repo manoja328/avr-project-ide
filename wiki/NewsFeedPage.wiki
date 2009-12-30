@@ -1,3 +1,5 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Major cosmetic bug found in 67 related to the change from dropdown to textbox, added some slight improvements to override behaviour, added preview for command line arguments===
+
 ===Update 67 has changes to AVRDUDE port override behaviour, and updated chip description XMLs===
