@@ -35,8 +35,9 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
+            // two projects allow changes to be discarded
             this.originalProject = project;
-            this.project = (AVRProject)project.Clone();
+            this.project = project.Clone();
 
             burnerPanel = new BurnerPanel(this.project);
             grpboxBurnerPanel.Controls.Add(burnerPanel);
@@ -47,9 +48,21 @@ namespace AVRProjectIDE
             dropDetectionType.SelectedIndex = 0;
             dropMemoryType.SelectedIndex = 0;
 
+            // this is the only way i can think of that will
+            // allow the user to view the progress bar live
+            // by using the command line window
+            // because redirecting STDERR doesn't work since
+            // the .NET built-in stream redirection only has
+            // the ability to read line by line so the progress
+            // bar is lost
             avrdude.StartInfo.FileName = "cmd";
         }
 
+        /// <summary>
+        /// close without saving
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AvrDudeWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             burnerPanel.FormToProj();
@@ -57,6 +70,9 @@ namespace AVRProjectIDE
             TryKill();
         }
 
+        /// <summary>
+        /// avoid having a bunch of cmd windows cluttering the screen
+        /// </summary>
         private void TryKill()
         {
             try
@@ -79,6 +95,16 @@ namespace AVRProjectIDE
             }
         }
 
+        /// <summary>
+        /// format the correct AVRDUDE command line arguments
+        /// </summary>
+        /// <param name="memType"></param>
+        /// <param name="overrides"></param>
+        /// <param name="operationChar"></param>
+        /// <param name="filePath"></param>
+        /// <param name="fileFormat"></param>
+        /// <param name="verify"></param>
+        /// <returns></returns>
         private string GetArgs(string memType, string overrides, string operationChar, string filePath, string fileFormat, bool verify)
         {
             return "/k avrdude " + String.Format(
@@ -119,20 +145,7 @@ namespace AVRProjectIDE
         {
             string overrides = "";
 
-            if (string.IsNullOrEmpty(project.BurnPort) == false)
-            {
-                if (project.BurnPort.StartsWith("COM"))
-                {
-                    overrides += "-P //./" + project.BurnPort;
-                }
-                else
-                {
-                    overrides += "-P " + project.BurnPort;
-                }
-            }
-
-            if (project.BurnBaud != 0)
-                overrides += " -b " + project.BurnBaud.ToString("0");
+            BurnerPanel.GetPortOverride(ref overrides, project);
 
             return overrides;
         }
@@ -223,20 +236,7 @@ namespace AVRProjectIDE
 
                 string overrides = "";
 
-                if (string.IsNullOrEmpty(project.BurnPort) == false)
-                {
-                    if (project.BurnPort.StartsWith("COM"))
-                    {
-                        overrides += "-P //./" + project.BurnPort;
-                    }
-                    else
-                    {
-                        overrides += "-P " + project.BurnPort;
-                    }
-                }
-
-                if (project.BurnBaud != 0)
-                    overrides += " -b " + project.BurnBaud.ToString("0");
+                BurnerPanel.GetPortOverride(ref overrides, project);
 
                 p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} {3} -t", project.BurnProgrammer, project.BurnPart, overrides, project.BurnOptions);
                 p.Start();

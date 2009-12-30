@@ -101,6 +101,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnHelpTopics = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.tbtnNewOrig = new System.Windows.Forms.ToolStripButton();
             this.tbtnOpenOrig = new System.Windows.Forms.ToolStripButton();
@@ -153,7 +154,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
-            this.mbtnDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -576,6 +576,13 @@
             this.mbtnAbout.Size = new System.Drawing.Size(156, 22);
             this.mbtnAbout.Text = "&About";
             this.mbtnAbout.Click += new System.EventHandler(this.mbtnAbout_Click);
+            // 
+            // mbtnDonate
+            // 
+            this.mbtnDonate.Name = "mbtnDonate";
+            this.mbtnDonate.Size = new System.Drawing.Size(156, 22);
+            this.mbtnDonate.Text = "Donate";
+            this.mbtnDonate.Click += new System.EventHandler(this.mbtnDonate_Click);
             // 
             // toolStripMain
             // 
@@ -1076,13 +1083,6 @@
             // 
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
             // 
-            // mbtnDonate
-            // 
-            this.mbtnDonate.Name = "mbtnDonate";
-            this.mbtnDonate.Size = new System.Drawing.Size(156, 22);
-            this.mbtnDonate.Text = "Donate";
-            this.mbtnDonate.Click += new System.EventHandler(this.mbtnDonate_Click);
-            // 
             // IDEWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1095,6 +1095,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripMain;
+            this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "IDEWindow";
             this.Text = "AVR Project IDE";
             this.Load += new System.EventHandler(this.IDEWindow_Load);

@@ -571,20 +571,7 @@ namespace AVRProjectIDE
 
                 string overrides = "";
 
-                if (string.IsNullOrEmpty(owner.Project.BurnPort) == false)
-                {
-                    if (owner.Project.BurnPort.StartsWith("COM"))
-                    {
-                        overrides += "-P //./" + owner.Project.BurnPort;
-                    }
-                    else
-                    {
-                        overrides += "-P " + owner.Project.BurnPort;
-                    }
-                }
-
-                if (owner.Project.BurnBaud != 0)
-                    overrides += " -b " + owner.Project.BurnBaud.ToString("0");
+                BurnerPanel.GetPortOverride(ref overrides, owner.Project);
 
                 string avrdudeFuseStr = GetAVRDUDEFuseStringFromType(typeOfFuse);
 
@@ -690,20 +677,7 @@ namespace AVRProjectIDE
 
                 string overrides = "";
 
-                if (string.IsNullOrEmpty(owner.Project.BurnPort) == false)
-                {
-                    if (owner.Project.BurnPort.StartsWith("COM"))
-                    {
-                        overrides += "-P //./" + owner.Project.BurnPort;
-                    }
-                    else
-                    {
-                        overrides += "-P " + owner.Project.BurnPort;
-                    }
-                }
-
-                if (owner.Project.BurnBaud != 0)
-                    overrides += " -b " + owner.Project.BurnBaud.ToString("0");
+                BurnerPanel.GetPortOverride(ref overrides, owner.Project);
 
                 p.StartInfo.Arguments += String.Format("-c {0} -p {1} {2} {3} {4}", owner.Project.BurnProgrammer, owner.Project.BurnPart, overrides, owner.Project.BurnOptions, GetArgString(fuseVal));
 

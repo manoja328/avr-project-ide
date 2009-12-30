@@ -55,11 +55,14 @@
             // 
             // btnBurnOnlyOpt
             // 
-            this.btnBurnOnlyOpt.Location = new System.Drawing.Point(84, 93);
+            this.btnBurnOnlyOpt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBurnOnlyOpt.Location = new System.Drawing.Point(15, 93);
             this.btnBurnOnlyOpt.Name = "btnBurnOnlyOpt";
-            this.btnBurnOnlyOpt.Size = new System.Drawing.Size(107, 23);
+            this.btnBurnOnlyOpt.Size = new System.Drawing.Size(418, 23);
             this.btnBurnOnlyOpt.TabIndex = 7;
-            this.btnBurnOnlyOpt.Text = "Run Only Options";
+            this.btnBurnOnlyOpt.Text = "Run";
+            this.btnBurnOnlyOpt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBurnOnlyOpt.UseVisualStyleBackColor = true;
             this.btnBurnOnlyOpt.Click += new System.EventHandler(this.btnBurnOnlyOpt_Click);
             // 
@@ -69,6 +72,7 @@
             this.txtBurnOpt.Name = "txtBurnOpt";
             this.txtBurnOpt.Size = new System.Drawing.Size(107, 20);
             this.txtBurnOpt.TabIndex = 5;
+            this.txtBurnOpt.TextChanged += new System.EventHandler(this.txt_TextChanged);
             // 
             // dropBaud
             // 
@@ -95,6 +99,7 @@
             this.dropBaud.Name = "dropBaud";
             this.dropBaud.Size = new System.Drawing.Size(107, 21);
             this.dropBaud.TabIndex = 4;
+            this.dropBaud.SelectedIndexChanged += new System.EventHandler(this.drop_SelectedIndexChanged);
             // 
             // dropProg
             // 
@@ -162,7 +167,7 @@
             this.dropProg.Name = "dropProg";
             this.dropProg.Size = new System.Drawing.Size(107, 21);
             this.dropProg.TabIndex = 3;
-            this.dropProg.SelectedIndexChanged += new System.EventHandler(this.dropProg_SelectedIndexChanged);
+            this.dropProg.SelectedIndexChanged += new System.EventHandler(this.drop_SelectedIndexChanged);
             // 
             // dropPart
             // 
@@ -251,6 +256,7 @@
             this.dropPart.Name = "dropPart";
             this.dropPart.Size = new System.Drawing.Size(107, 21);
             this.dropPart.TabIndex = 1;
+            this.dropPart.SelectedIndexChanged += new System.EventHandler(this.drop_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -301,10 +307,13 @@
             // 
             // txtPortOverride
             // 
+            this.txtPortOverride.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPortOverride.Location = new System.Drawing.Point(326, 13);
             this.txtPortOverride.Name = "txtPortOverride";
             this.txtPortOverride.Size = new System.Drawing.Size(107, 20);
             this.txtPortOverride.TabIndex = 2;
+            this.txtPortOverride.TextChanged += new System.EventHandler(this.txt_TextChanged);
+            this.txtPortOverride.Validating += new System.ComponentModel.CancelEventHandler(this.txtPortOverride_Validating);
             // 
             // BurnerPanel
             // 

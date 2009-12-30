@@ -152,7 +152,7 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_Alpha_67.
+        ///   Looks up a localized string similar to AVRProjectIDE_Alpha_69.
         /// </summary>
         internal static string BuildID {
             get {
@@ -192,15 +192,6 @@ namespace AVRProjectIDE.Properties {
             get {
                 object obj = ResourceManager.GetObject("cut", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string DonationURL {
-            get {
-                return ResourceManager.GetString("DonationURL", resourceCulture);
             }
         }
         
