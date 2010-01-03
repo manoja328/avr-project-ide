@@ -38,6 +38,8 @@ namespace AVRProjectIDE
 
             this.project = project;
 
+            this.Icon = GraphicsResx.mainicon;
+
             chkShowWelcomeAtStart.Checked = SettingsManagement.WelcomeWindowAtStart;
 
             backgroundWorker1.RunWorkerAsync();

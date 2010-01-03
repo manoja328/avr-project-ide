@@ -41,7 +41,7 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
-            this.Icon = Icon.FromHandle(Properties.Resources.burn.GetHicon());
+            this.Icon = GraphicsResx.burn;
 
             numTimerOverflows.Maximum = decimal.MaxValue;
             numTimerRealTime.Maximum = decimal.MaxValue;

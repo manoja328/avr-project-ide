@@ -35,7 +35,7 @@ namespace AVRProjectIDE
 
             this.editorList = listOfEditors;
 
-            this.Icon = Properties.Resources.searchIco;
+            this.Icon = GraphicsResx.serial;
         }
 
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)

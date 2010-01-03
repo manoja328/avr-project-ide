@@ -44,7 +44,7 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
-            this.Icon = Properties.Resources.serialIco;
+            this.Icon = GraphicsResx.serial;
 
             // get a list of available ports and populate the list
             string[] portList = SerialPort.GetPortNames();
