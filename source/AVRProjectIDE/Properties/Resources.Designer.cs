@@ -109,48 +109,6 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap bookmarkbasic {
-            get {
-                object obj = ResourceManager.GetObject("bookmarkbasic", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap bookmarkdelete {
-            get {
-                object obj = ResourceManager.GetObject("bookmarkdelete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap bookmarknext {
-            get {
-                object obj = ResourceManager.GetObject("bookmarknext", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap bookmarkprev {
-            get {
-                object obj = ResourceManager.GetObject("bookmarkprev", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap bookmarktoggle {
-            get {
-                object obj = ResourceManager.GetObject("bookmarktoggle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap build {
-            get {
-                object obj = ResourceManager.GetObject("build", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Looks up a localized string similar to AVRProjectIDE_Alpha_69.
         /// </summary>
@@ -160,89 +118,12 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap burn {
-            get {
-                object obj = ResourceManager.GetObject("burn", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap comment {
-            get {
-                object obj = ResourceManager.GetObject("comment", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap configure {
-            get {
-                object obj = ResourceManager.GetObject("configure", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap copy {
-            get {
-                object obj = ResourceManager.GetObject("copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap cut {
-            get {
-                object obj = ResourceManager.GetObject("cut", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap exit {
-            get {
-                object obj = ResourceManager.GetObject("exit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap file {
-            get {
-                object obj = ResourceManager.GetObject("file", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap find {
-            get {
-                object obj = ResourceManager.GetObject("find", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap findnext {
-            get {
-                object obj = ResourceManager.GetObject("findnext", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Looks up a localized string similar to http://frank.circleofcurrent.com/.
         /// </summary>
         internal static string FranksSiteURL {
             get {
                 return ResourceManager.GetString("FranksSiteURL", resourceCulture);
-            }
-        }
-        
-        internal static System.Drawing.Bitmap header {
-            get {
-                object obj = ResourceManager.GetObject("header", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap help {
-            get {
-                object obj = ResourceManager.GetObject("help", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -271,20 +152,6 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap hppheader {
-            get {
-                object obj = ResourceManager.GetObject("hppheader", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap indent {
-            get {
-                object obj = ResourceManager.GetObject("indent", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;us-ascii&quot;?&gt;
         ///&lt;InterruptVectors&gt;
@@ -309,62 +176,6 @@ namespace AVRProjectIDE.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap missing {
-            get {
-                object obj = ResourceManager.GetObject("missing", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap newFile {
-            get {
-                object obj = ResourceManager.GetObject("newFile", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap nocompile {
-            get {
-                object obj = ResourceManager.GetObject("nocompile", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap paste {
-            get {
-                object obj = ResourceManager.GetObject("paste", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap redo {
-            get {
-                object obj = ResourceManager.GetObject("redo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap redo1 {
-            get {
-                object obj = ResourceManager.GetObject("redo1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap save {
-            get {
-                object obj = ResourceManager.GetObject("save", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap saveall {
-            get {
-                object obj = ResourceManager.GetObject("saveall", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Styles&gt;
@@ -382,48 +193,6 @@ namespace AVRProjectIDE.Properties {
         internal static string scintconfig {
             get {
                 return ResourceManager.GetString("scintconfig", resourceCulture);
-            }
-        }
-        
-        internal static System.Drawing.Bitmap search {
-            get {
-                object obj = ResourceManager.GetObject("search", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap searchall {
-            get {
-                object obj = ResourceManager.GetObject("searchall", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Icon searchIco {
-            get {
-                object obj = ResourceManager.GetObject("searchIco", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap serial {
-            get {
-                object obj = ResourceManager.GetObject("serial", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Icon serialIco {
-            get {
-                object obj = ResourceManager.GetObject("serialIco", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap SHELL32_223 {
-            get {
-                object obj = ResourceManager.GetObject("SHELL32_223", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -452,69 +221,6 @@ namespace AVRProjectIDE.Properties {
         internal static string templates {
             get {
                 return ResourceManager.GetString("templates", resourceCulture);
-            }
-        }
-        
-        internal static System.Drawing.Bitmap treeroot {
-            get {
-                object obj = ResourceManager.GetObject("treeroot", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap uncomment {
-            get {
-                object obj = ResourceManager.GetObject("uncomment", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap undo {
-            get {
-                object obj = ResourceManager.GetObject("undo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap unindent {
-            get {
-                object obj = ResourceManager.GetObject("unindent", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap unknown {
-            get {
-                object obj = ResourceManager.GetObject("unknown", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap unknown2 {
-            get {
-                object obj = ResourceManager.GetObject("unknown2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap warning {
-            get {
-                object obj = ResourceManager.GetObject("warning", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Icon warningIco {
-            get {
-                object obj = ResourceManager.GetObject("warningIco", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap web {
-            get {
-                object obj = ResourceManager.GetObject("web", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

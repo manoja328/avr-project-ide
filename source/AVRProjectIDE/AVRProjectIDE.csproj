@@ -162,6 +162,11 @@
     <Compile Include="GotoDialog.Designer.cs">
       <DependentUpon>GotoDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsResx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GraphicsResx.resx</DependentUpon>
+    </Compile>
     <Compile Include="HardwareExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +267,11 @@
     <EmbeddedResource Include="GotoDialog.resx">
       <DependentUpon>GotoDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsResx.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GraphicsResx.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="HardwareExplorer.resx">
       <DependentUpon>HardwareExplorer.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +280,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MessagePanel.resx">
       <DependentUpon>MessagePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorPanel.resx">
       <DependentUpon>EditorPanel.cs</DependentUpon>
@@ -1154,6 +1165,17 @@
     <None Include="graphics\bookmarknext.png" />
     <None Include="graphics\bookmarkprev.png" />
     <None Include="graphics\bookmarktoggle.png" />
+    <None Include="graphics\cppsource.ico" />
+    <None Include="graphics\csource.ico" />
+    <None Include="graphics\file2.ico" />
+    <None Include="graphics\bricks.png" />
+    <None Include="graphics\cog_edit.png" />
+    <None Include="graphics\folder.png" />
+    <None Include="graphics\folder2.png" />
+    <None Include="graphics\build_img.png" />
+    <None Include="graphics\burn_img.png" />
+    <None Include="graphics\findnext_16x16.png" />
+    <None Include="graphics\help_img.png" />
     <Content Include="graphics\installer_large_banner.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1163,6 +1185,13 @@
     <Content Include="graphics\mainicon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="graphics\oldmainicon.ico" />
+    <None Include="graphics\message.png" />
+    <None Include="graphics\Save_16x16.png" />
+    <None Include="graphics\splash.png" />
+    <None Include="graphics\redo_img.png" />
+    <None Include="graphics\undo_img.png" />
+    <None Include="graphics\newfile.png" />
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />
     <None Include="installerscript.nsi">

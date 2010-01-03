@@ -31,7 +31,7 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
-            this.Icon = Properties.Resources.warningIco;
+            this.Icon = GraphicsResx.warning;
 
             if (SettingsManagement.ShowWarnings)
             {

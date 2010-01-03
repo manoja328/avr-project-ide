@@ -229,7 +229,7 @@
             // 
             // mbtnExit
             // 
-            this.mbtnExit.Image = global::AVRProjectIDE.Properties.Resources.exit;
+            this.mbtnExit.Image = global::AVRProjectIDE.GraphicsResx.exit;
             this.mbtnExit.Name = "mbtnExit";
             this.mbtnExit.Size = new System.Drawing.Size(181, 22);
             this.mbtnExit.Text = "E&xit";
@@ -260,7 +260,7 @@
             // 
             // mbtnUndo
             // 
-            this.mbtnUndo.Image = ((System.Drawing.Image)(resources.GetObject("mbtnUndo.Image")));
+            this.mbtnUndo.Image = global::AVRProjectIDE.GraphicsResx.undo_img;
             this.mbtnUndo.Name = "mbtnUndo";
             this.mbtnUndo.ShortcutKeyDisplayString = "Ctrl-Z";
             this.mbtnUndo.Size = new System.Drawing.Size(204, 22);
@@ -269,7 +269,7 @@
             // 
             // mbtnRedo
             // 
-            this.mbtnRedo.Image = ((System.Drawing.Image)(resources.GetObject("mbtnRedo.Image")));
+            this.mbtnRedo.Image = global::AVRProjectIDE.GraphicsResx.redo_img;
             this.mbtnRedo.Name = "mbtnRedo";
             this.mbtnRedo.ShortcutKeyDisplayString = "Ctrl-Y";
             this.mbtnRedo.Size = new System.Drawing.Size(204, 22);
@@ -291,7 +291,7 @@
             // 
             // mbtnCut
             // 
-            this.mbtnCut.Image = global::AVRProjectIDE.Properties.Resources.cut;
+            this.mbtnCut.Image = global::AVRProjectIDE.GraphicsResx.cut;
             this.mbtnCut.Name = "mbtnCut";
             this.mbtnCut.ShortcutKeyDisplayString = "Ctrl-X";
             this.mbtnCut.Size = new System.Drawing.Size(204, 22);
@@ -300,7 +300,7 @@
             // 
             // mbtnCopy
             // 
-            this.mbtnCopy.Image = global::AVRProjectIDE.Properties.Resources.copy;
+            this.mbtnCopy.Image = global::AVRProjectIDE.GraphicsResx.copy;
             this.mbtnCopy.Name = "mbtnCopy";
             this.mbtnCopy.ShortcutKeyDisplayString = "Ctrl-C";
             this.mbtnCopy.Size = new System.Drawing.Size(204, 22);
@@ -309,7 +309,7 @@
             // 
             // mbtnPaste
             // 
-            this.mbtnPaste.Image = global::AVRProjectIDE.Properties.Resources.paste;
+            this.mbtnPaste.Image = global::AVRProjectIDE.GraphicsResx.paste;
             this.mbtnPaste.Name = "mbtnPaste";
             this.mbtnPaste.ShortcutKeyDisplayString = "Ctrl-V";
             this.mbtnPaste.Size = new System.Drawing.Size(204, 22);
@@ -323,7 +323,7 @@
             // 
             // mbtnFindReplace
             // 
-            this.mbtnFindReplace.Image = global::AVRProjectIDE.Properties.Resources.find;
+            this.mbtnFindReplace.Image = global::AVRProjectIDE.GraphicsResx.find;
             this.mbtnFindReplace.Name = "mbtnFindReplace";
             this.mbtnFindReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.mbtnFindReplace.Size = new System.Drawing.Size(204, 22);
@@ -332,7 +332,7 @@
             // 
             // mbtnFindNext
             // 
-            this.mbtnFindNext.Image = global::AVRProjectIDE.Properties.Resources.findnext;
+            this.mbtnFindNext.Image = global::AVRProjectIDE.GraphicsResx.findnext;
             this.mbtnFindNext.Name = "mbtnFindNext";
             this.mbtnFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
             this.mbtnFindNext.Size = new System.Drawing.Size(204, 22);
@@ -341,7 +341,7 @@
             // 
             // mbtnSearchAll
             // 
-            this.mbtnSearchAll.Image = global::AVRProjectIDE.Properties.Resources.searchall;
+            this.mbtnSearchAll.Image = global::AVRProjectIDE.GraphicsResx.searchall;
             this.mbtnSearchAll.Name = "mbtnSearchAll";
             this.mbtnSearchAll.Size = new System.Drawing.Size(204, 22);
             this.mbtnSearchAll.Text = "&Search in Project";
@@ -373,7 +373,7 @@
             // 
             // mbtnIndent
             // 
-            this.mbtnIndent.Image = global::AVRProjectIDE.Properties.Resources.indent;
+            this.mbtnIndent.Image = global::AVRProjectIDE.GraphicsResx.indent;
             this.mbtnIndent.Name = "mbtnIndent";
             this.mbtnIndent.Size = new System.Drawing.Size(141, 22);
             this.mbtnIndent.Text = "&Indent";
@@ -381,7 +381,7 @@
             // 
             // mbtnUnindent
             // 
-            this.mbtnUnindent.Image = global::AVRProjectIDE.Properties.Resources.unindent;
+            this.mbtnUnindent.Image = global::AVRProjectIDE.GraphicsResx.unindent;
             this.mbtnUnindent.Name = "mbtnUnindent";
             this.mbtnUnindent.Size = new System.Drawing.Size(141, 22);
             this.mbtnUnindent.Text = "U&nindent";
@@ -389,7 +389,7 @@
             // 
             // mbtnComment
             // 
-            this.mbtnComment.Image = global::AVRProjectIDE.Properties.Resources.comment;
+            this.mbtnComment.Image = global::AVRProjectIDE.GraphicsResx.comment;
             this.mbtnComment.Name = "mbtnComment";
             this.mbtnComment.Size = new System.Drawing.Size(141, 22);
             this.mbtnComment.Text = "&Comment";
@@ -397,7 +397,7 @@
             // 
             // mbtnUncomment
             // 
-            this.mbtnUncomment.Image = global::AVRProjectIDE.Properties.Resources.uncomment;
+            this.mbtnUncomment.Image = global::AVRProjectIDE.GraphicsResx.uncomment;
             this.mbtnUncomment.Name = "mbtnUncomment";
             this.mbtnUncomment.Size = new System.Drawing.Size(141, 22);
             this.mbtnUncomment.Text = "&Uncomment";
@@ -417,14 +417,14 @@
             this.mbtnBookmarkDelete,
             this.mbtnBookmarkPrev,
             this.mbtnBookmarkNext});
-            this.mbtnBookmarks.Image = global::AVRProjectIDE.Properties.Resources.bookmarkbasic;
+            this.mbtnBookmarks.Image = global::AVRProjectIDE.GraphicsResx.bookmarkbasic;
             this.mbtnBookmarks.Name = "mbtnBookmarks";
             this.mbtnBookmarks.Size = new System.Drawing.Size(204, 22);
             this.mbtnBookmarks.Text = "Bookmarks";
             // 
             // mbtnBookmarkToggle
             // 
-            this.mbtnBookmarkToggle.Image = global::AVRProjectIDE.Properties.Resources.bookmarktoggle;
+            this.mbtnBookmarkToggle.Image = global::AVRProjectIDE.GraphicsResx.bookmarktoggle;
             this.mbtnBookmarkToggle.Name = "mbtnBookmarkToggle";
             this.mbtnBookmarkToggle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
             this.mbtnBookmarkToggle.Size = new System.Drawing.Size(264, 22);
@@ -433,7 +433,7 @@
             // 
             // mbtnBookmarkDelete
             // 
-            this.mbtnBookmarkDelete.Image = global::AVRProjectIDE.Properties.Resources.bookmarkdelete;
+            this.mbtnBookmarkDelete.Image = global::AVRProjectIDE.GraphicsResx.bookmarkdelete;
             this.mbtnBookmarkDelete.Name = "mbtnBookmarkDelete";
             this.mbtnBookmarkDelete.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.F2)));
@@ -443,7 +443,7 @@
             // 
             // mbtnBookmarkPrev
             // 
-            this.mbtnBookmarkPrev.Image = global::AVRProjectIDE.Properties.Resources.bookmarkprev;
+            this.mbtnBookmarkPrev.Image = global::AVRProjectIDE.GraphicsResx.bookmarkprev;
             this.mbtnBookmarkPrev.Name = "mbtnBookmarkPrev";
             this.mbtnBookmarkPrev.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F2)));
             this.mbtnBookmarkPrev.Size = new System.Drawing.Size(264, 22);
@@ -452,7 +452,7 @@
             // 
             // mbtnBookmarkNext
             // 
-            this.mbtnBookmarkNext.Image = global::AVRProjectIDE.Properties.Resources.bookmarknext;
+            this.mbtnBookmarkNext.Image = global::AVRProjectIDE.GraphicsResx.bookmarknext;
             this.mbtnBookmarkNext.Name = "mbtnBookmarkNext";
             this.mbtnBookmarkNext.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.mbtnBookmarkNext.Size = new System.Drawing.Size(264, 22);
@@ -478,7 +478,7 @@
             // 
             // mbtnConfig
             // 
-            this.mbtnConfig.Image = global::AVRProjectIDE.Properties.Resources.configure;
+            this.mbtnConfig.Image = global::AVRProjectIDE.GraphicsResx.cog_edit;
             this.mbtnConfig.Name = "mbtnConfig";
             this.mbtnConfig.Size = new System.Drawing.Size(190, 22);
             this.mbtnConfig.Text = "Con&figure Project";
@@ -486,7 +486,7 @@
             // 
             // mbtnCompile
             // 
-            this.mbtnCompile.Image = global::AVRProjectIDE.Properties.Resources.build;
+            this.mbtnCompile.Image = global::AVRProjectIDE.GraphicsResx.build_img;
             this.mbtnCompile.Name = "mbtnCompile";
             this.mbtnCompile.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.mbtnCompile.Size = new System.Drawing.Size(190, 22);
@@ -502,7 +502,7 @@
             // 
             // mbtnBurn
             // 
-            this.mbtnBurn.Image = global::AVRProjectIDE.Properties.Resources.burn;
+            this.mbtnBurn.Image = global::AVRProjectIDE.GraphicsResx.burn_img;
             this.mbtnBurn.Name = "mbtnBurn";
             this.mbtnBurn.ShortcutKeys = System.Windows.Forms.Keys.F8;
             this.mbtnBurn.Size = new System.Drawing.Size(190, 22);
@@ -563,7 +563,7 @@
             // 
             // mbtnHelpTopics
             // 
-            this.mbtnHelpTopics.Image = global::AVRProjectIDE.Properties.Resources.help;
+            this.mbtnHelpTopics.Image = global::AVRProjectIDE.GraphicsResx.help_img;
             this.mbtnHelpTopics.Name = "mbtnHelpTopics";
             this.mbtnHelpTopics.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.mbtnHelpTopics.Size = new System.Drawing.Size(156, 22);
@@ -627,7 +627,7 @@
             // tbtnNewOrig
             // 
             this.tbtnNewOrig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnNewOrig.Image = ((System.Drawing.Image)(resources.GetObject("tbtnNewOrig.Image")));
+            this.tbtnNewOrig.Image = global::AVRProjectIDE.GraphicsResx.newfile;
             this.tbtnNewOrig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnNewOrig.Name = "tbtnNewOrig";
             this.tbtnNewOrig.Size = new System.Drawing.Size(23, 22);
@@ -638,7 +638,7 @@
             // tbtnOpenOrig
             // 
             this.tbtnOpenOrig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnOpenOrig.Image = ((System.Drawing.Image)(resources.GetObject("tbtnOpenOrig.Image")));
+            this.tbtnOpenOrig.Image = global::AVRProjectIDE.GraphicsResx.folder2;
             this.tbtnOpenOrig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnOpenOrig.Name = "tbtnOpenOrig";
             this.tbtnOpenOrig.Size = new System.Drawing.Size(23, 22);
@@ -649,7 +649,7 @@
             // tbtnSaveOrig
             // 
             this.tbtnSaveOrig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnSaveOrig.Image = global::AVRProjectIDE.Properties.Resources.save;
+            this.tbtnSaveOrig.Image = global::AVRProjectIDE.GraphicsResx.save;
             this.tbtnSaveOrig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnSaveOrig.Name = "tbtnSaveOrig";
             this.tbtnSaveOrig.Size = new System.Drawing.Size(23, 22);
@@ -659,7 +659,7 @@
             // tbtnSaveAll
             // 
             this.tbtnSaveAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnSaveAll.Image = global::AVRProjectIDE.Properties.Resources.saveall;
+            this.tbtnSaveAll.Image = global::AVRProjectIDE.GraphicsResx.saveall;
             this.tbtnSaveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnSaveAll.Name = "tbtnSaveAll";
             this.tbtnSaveAll.Size = new System.Drawing.Size(23, 22);
@@ -674,7 +674,7 @@
             // tbtnUndo
             // 
             this.tbtnUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnUndo.Image = ((System.Drawing.Image)(resources.GetObject("tbtnUndo.Image")));
+            this.tbtnUndo.Image = global::AVRProjectIDE.GraphicsResx.undo_img;
             this.tbtnUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnUndo.Name = "tbtnUndo";
             this.tbtnUndo.Size = new System.Drawing.Size(23, 22);
@@ -684,7 +684,7 @@
             // tbtnRedo
             // 
             this.tbtnRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnRedo.Image = ((System.Drawing.Image)(resources.GetObject("tbtnRedo.Image")));
+            this.tbtnRedo.Image = global::AVRProjectIDE.GraphicsResx.redo_img;
             this.tbtnRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnRedo.Name = "tbtnRedo";
             this.tbtnRedo.Size = new System.Drawing.Size(23, 22);
@@ -699,7 +699,7 @@
             // tbtnCutOrig
             // 
             this.tbtnCutOrig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnCutOrig.Image = global::AVRProjectIDE.Properties.Resources.cut;
+            this.tbtnCutOrig.Image = global::AVRProjectIDE.GraphicsResx.cut;
             this.tbtnCutOrig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnCutOrig.Name = "tbtnCutOrig";
             this.tbtnCutOrig.Size = new System.Drawing.Size(23, 22);
@@ -709,7 +709,7 @@
             // tbtnCopyOrig
             // 
             this.tbtnCopyOrig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnCopyOrig.Image = global::AVRProjectIDE.Properties.Resources.copy;
+            this.tbtnCopyOrig.Image = global::AVRProjectIDE.GraphicsResx.copy;
             this.tbtnCopyOrig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnCopyOrig.Name = "tbtnCopyOrig";
             this.tbtnCopyOrig.Size = new System.Drawing.Size(23, 22);
@@ -719,7 +719,7 @@
             // tbtnPasteOrig
             // 
             this.tbtnPasteOrig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnPasteOrig.Image = global::AVRProjectIDE.Properties.Resources.paste;
+            this.tbtnPasteOrig.Image = global::AVRProjectIDE.GraphicsResx.paste;
             this.tbtnPasteOrig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnPasteOrig.Name = "tbtnPasteOrig";
             this.tbtnPasteOrig.Size = new System.Drawing.Size(23, 22);
@@ -734,7 +734,7 @@
             // tbtnFind
             // 
             this.tbtnFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnFind.Image = ((System.Drawing.Image)(resources.GetObject("tbtnFind.Image")));
+            this.tbtnFind.Image = global::AVRProjectIDE.GraphicsResx.find;
             this.tbtnFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnFind.Name = "tbtnFind";
             this.tbtnFind.Size = new System.Drawing.Size(23, 22);
@@ -744,7 +744,7 @@
             // tbtnFindNext
             // 
             this.tbtnFindNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnFindNext.Image = ((System.Drawing.Image)(resources.GetObject("tbtnFindNext.Image")));
+            this.tbtnFindNext.Image = global::AVRProjectIDE.GraphicsResx.findnext_16x16;
             this.tbtnFindNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnFindNext.Name = "tbtnFindNext";
             this.tbtnFindNext.Size = new System.Drawing.Size(23, 22);
@@ -754,7 +754,7 @@
             // tbtnSearch
             // 
             this.tbtnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("tbtnSearch.Image")));
+            this.tbtnSearch.Image = global::AVRProjectIDE.GraphicsResx.searchall;
             this.tbtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnSearch.Name = "tbtnSearch";
             this.tbtnSearch.Size = new System.Drawing.Size(23, 22);
@@ -769,7 +769,7 @@
             // tbtnBlockTab
             // 
             this.tbtnBlockTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBlockTab.Image = ((System.Drawing.Image)(resources.GetObject("tbtnBlockTab.Image")));
+            this.tbtnBlockTab.Image = global::AVRProjectIDE.GraphicsResx.indent;
             this.tbtnBlockTab.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBlockTab.Name = "tbtnBlockTab";
             this.tbtnBlockTab.Size = new System.Drawing.Size(23, 22);
@@ -780,7 +780,7 @@
             // tbtnBlockUntab
             // 
             this.tbtnBlockUntab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBlockUntab.Image = ((System.Drawing.Image)(resources.GetObject("tbtnBlockUntab.Image")));
+            this.tbtnBlockUntab.Image = global::AVRProjectIDE.GraphicsResx.unindent;
             this.tbtnBlockUntab.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBlockUntab.Name = "tbtnBlockUntab";
             this.tbtnBlockUntab.Size = new System.Drawing.Size(23, 22);
@@ -791,7 +791,7 @@
             // tbtnBlockComment
             // 
             this.tbtnBlockComment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBlockComment.Image = ((System.Drawing.Image)(resources.GetObject("tbtnBlockComment.Image")));
+            this.tbtnBlockComment.Image = global::AVRProjectIDE.GraphicsResx.comment;
             this.tbtnBlockComment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBlockComment.Name = "tbtnBlockComment";
             this.tbtnBlockComment.Size = new System.Drawing.Size(23, 22);
@@ -802,7 +802,7 @@
             // tbtnBlockUncomment
             // 
             this.tbtnBlockUncomment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBlockUncomment.Image = ((System.Drawing.Image)(resources.GetObject("tbtnBlockUncomment.Image")));
+            this.tbtnBlockUncomment.Image = global::AVRProjectIDE.GraphicsResx.uncomment;
             this.tbtnBlockUncomment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBlockUncomment.Name = "tbtnBlockUncomment";
             this.tbtnBlockUncomment.Size = new System.Drawing.Size(23, 22);
@@ -818,7 +818,7 @@
             // tbtnBookmarkToggle
             // 
             this.tbtnBookmarkToggle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBookmarkToggle.Image = global::AVRProjectIDE.Properties.Resources.bookmarktoggle;
+            this.tbtnBookmarkToggle.Image = global::AVRProjectIDE.GraphicsResx.bookmarktoggle;
             this.tbtnBookmarkToggle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBookmarkToggle.Name = "tbtnBookmarkToggle";
             this.tbtnBookmarkToggle.Size = new System.Drawing.Size(23, 22);
@@ -828,7 +828,7 @@
             // tbtnBookmarkDelete
             // 
             this.tbtnBookmarkDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBookmarkDelete.Image = global::AVRProjectIDE.Properties.Resources.bookmarkdelete;
+            this.tbtnBookmarkDelete.Image = global::AVRProjectIDE.GraphicsResx.bookmarkdelete;
             this.tbtnBookmarkDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBookmarkDelete.Name = "tbtnBookmarkDelete";
             this.tbtnBookmarkDelete.Size = new System.Drawing.Size(23, 22);
@@ -838,7 +838,7 @@
             // tbtnBookmarkPrev
             // 
             this.tbtnBookmarkPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBookmarkPrev.Image = global::AVRProjectIDE.Properties.Resources.bookmarkprev;
+            this.tbtnBookmarkPrev.Image = global::AVRProjectIDE.GraphicsResx.bookmarkprev;
             this.tbtnBookmarkPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBookmarkPrev.Name = "tbtnBookmarkPrev";
             this.tbtnBookmarkPrev.Size = new System.Drawing.Size(23, 22);
@@ -848,7 +848,7 @@
             // tbtnBookmarkNext
             // 
             this.tbtnBookmarkNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBookmarkNext.Image = global::AVRProjectIDE.Properties.Resources.bookmarknext;
+            this.tbtnBookmarkNext.Image = global::AVRProjectIDE.GraphicsResx.bookmarknext;
             this.tbtnBookmarkNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBookmarkNext.Name = "tbtnBookmarkNext";
             this.tbtnBookmarkNext.Size = new System.Drawing.Size(23, 22);
@@ -863,7 +863,7 @@
             // tbtnConfig
             // 
             this.tbtnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnConfig.Image = global::AVRProjectIDE.Properties.Resources.configure;
+            this.tbtnConfig.Image = global::AVRProjectIDE.GraphicsResx.cog_edit;
             this.tbtnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnConfig.Name = "tbtnConfig";
             this.tbtnConfig.Size = new System.Drawing.Size(23, 22);
@@ -874,7 +874,7 @@
             // tbtnCompile
             // 
             this.tbtnCompile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnCompile.Image = global::AVRProjectIDE.Properties.Resources.build;
+            this.tbtnCompile.Image = global::AVRProjectIDE.GraphicsResx.build_img;
             this.tbtnCompile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnCompile.Name = "tbtnCompile";
             this.tbtnCompile.Size = new System.Drawing.Size(23, 22);
@@ -884,7 +884,7 @@
             // tbtnBurn
             // 
             this.tbtnBurn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbtnBurn.Image = global::AVRProjectIDE.Properties.Resources.burn;
+            this.tbtnBurn.Image = global::AVRProjectIDE.GraphicsResx.burn_img;
             this.tbtnBurn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBurn.Name = "tbtnBurn";
             this.tbtnBurn.Size = new System.Drawing.Size(23, 22);
