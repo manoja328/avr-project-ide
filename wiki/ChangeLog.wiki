@@ -5,6 +5,7 @@
  * Added ability to override Arduino Core path for a particular project, allowing for certain projects to use alternative core files (maybe meant for Sanguino, Teensy, etc)
  * Fixed APS import so that the save directory defaults to the directory the APS resides in.
  * Fixed possible crash due to invalid data in clipboard.
+ * Fixed crash when user refuses to find a missing file.
 
 ==Alpha 68==
 
