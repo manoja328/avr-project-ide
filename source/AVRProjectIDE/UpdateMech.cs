@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Net;
+using System.Web;
 using System.Text.RegularExpressions;
 
 namespace AVRProjectIDE
@@ -44,7 +45,7 @@ namespace AVRProjectIDE
                 HttpWebResponse wResp = (HttpWebResponse)wReq.GetResponse();
                 Stream wStream = wResp.GetResponseStream();
                 StreamReader reader = new StreamReader(wStream);
-                string content = reader.ReadToEnd().Replace("&quot;", "\"");
+                string content = HttpUtility.HtmlDecode(reader.ReadToEnd());
                 reader.Close();
                 wStream.Close();
                 wResp.Close();

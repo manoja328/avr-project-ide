@@ -64,10 +64,6 @@ namespace AVRProjectIDE
             this.originalProject.HasBeenConfigged = true;
             this.project.HasBeenConfigged = true;
 
-            txtFavoriteDir.Text = SettingsManagement.FavFolder;
-            txtArduinoCore.Text = SettingsManagement.ArduinoCorePath;
-            txtArduinoLibs.Text = SettingsManagement.ArduinoLibPath;
-
             string[] templateList = ProjTemplate.GetTemplateNames();
             foreach (string tempName in templateList)
             {
@@ -172,6 +168,8 @@ namespace AVRProjectIDE
                     project.MemorySegList.Add((string)i.Cells[1].Value, new MemorySegment((string)i.Cells[0].Value, (string)i.Cells[1].Value, Convert.ToUInt32("0x" + (string)i.Cells[2].Value, 16)));
                 }
             }
+
+            project.ArduinoCoreOverride = txtArduinoCoreOverride.Text;
         }
 
         private void PopulateForm()
@@ -207,6 +205,8 @@ namespace AVRProjectIDE
             chklistOptions.SetItemChecked(0, project.UnsignedChars);
             chklistOptions.SetItemChecked(4, project.FunctionSections);
             chklistOptions.SetItemChecked(5, project.DataSections);
+
+            txtArduinoCoreOverride.Text = project.ArduinoCoreOverride;
 
             listLinkObj.Items.Clear();
             foreach (string i in project.LinkLibList)
@@ -250,6 +250,8 @@ namespace AVRProjectIDE
                 dgvr.CreateCells(dgvMemory, memStr);
                 int i = dgvMemory.Rows.Add(dgvr);
             }
+
+
         }
 
         private void ApplyChanges()
@@ -569,17 +571,24 @@ namespace AVRProjectIDE
             Process.Start(SettingsManagement.AppDataPath);
         }
 
-        private void btnFavoriteBrowse_Click(object sender, EventArgs e)
+        private void btnArduinoCoreOverrideBrowse_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
-            
-            if (SettingsManagement.FavFolder != "")
-                fbd.SelectedPath = SettingsManagement.FavFolder;
+
+            string previousPath = project.ArduinoCoreOverride;
+            if (string.IsNullOrEmpty(previousPath))
+                previousPath = txtArduinoCoreOverride.Text;
+
+
+            if (string.IsNullOrEmpty(previousPath) == false)
+            {
+                if (Directory.Exists(previousPath))
+                    fbd.SelectedPath = previousPath;
+            }
 
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                SettingsManagement.FavFolder = fbd.SelectedPath;
-                txtFavoriteDir.Text = SettingsManagement.FavFolder;
+                txtArduinoCoreOverride.Text = fbd.SelectedPath;
             }
         }
 
@@ -595,34 +604,6 @@ namespace AVRProjectIDE
             }
 
             PopulateForm();
-        }
-
-        private void btnFindArduinoCore_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-
-            if (SettingsManagement.ArduinoCorePath != "")
-                fbd.SelectedPath = SettingsManagement.ArduinoCorePath;
-
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                SettingsManagement.ArduinoCorePath = fbd.SelectedPath;
-                txtArduinoCore.Text = SettingsManagement.ArduinoCorePath;
-            }
-        }
-
-        private void btnFindArduinoLibs_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-
-            if (SettingsManagement.ArduinoLibPath != "")
-                fbd.SelectedPath = SettingsManagement.ArduinoLibPath;
-
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                SettingsManagement.ArduinoLibPath = fbd.SelectedPath;
-                txtArduinoLibs.Text = SettingsManagement.ArduinoLibPath;
-            }
         }
 
         #endregion

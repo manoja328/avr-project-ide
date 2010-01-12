@@ -485,6 +485,28 @@ namespace AVRProjectIDE
             }
         }
 
+        private string ardCoreOverride;
+        public string ArduinoCoreOverride
+        {
+            get { return ardCoreOverride.Trim(); }
+            set
+            {
+                string v = value;
+                if (value != null)
+                    v = value.Trim();
+
+                if (string.IsNullOrEmpty(v))
+                    ardCoreOverride = "";
+                else
+                    ardCoreOverride = Program.CleanFilePath(v);
+            }
+        }
+
+        public bool OverrideArduinoCore
+        {
+            get { return string.IsNullOrEmpty(ArduinoCoreOverride); }
+        }
+
         #endregion
 
         #region AVRDUDE Fields and Properties
@@ -634,7 +656,8 @@ namespace AVRProjectIDE
             {
                 xml = new XmlTextWriter(path, null);
 
-                xml.Indentation = 4;
+                xml.Indentation = 2;
+                xml.IndentChar = ' ';
                 xml.Formatting = Formatting.Indented;
                 xml.WriteStartDocument();
 
@@ -744,6 +767,8 @@ namespace AVRProjectIDE
                     xml.WriteEndElement();
                 }
                 xml.WriteEndElement();
+
+                xml.WriteElementString("ArduinoCoreOverride", ArduinoCoreOverride);
 
                 xml.WriteStartElement("AVRStudioXMLStuff");
                 foreach (XmlElement xEle in APSXmlElementList)
@@ -1518,6 +1543,8 @@ namespace AVRProjectIDE
             burnFuseBox = "";
             burnAutoReset = SettingsManagement.LastProgAutoReset;
 
+            ardCoreOverride = "";
+
             lastFile = "";
 
             FileList.Clear();
@@ -1538,6 +1565,10 @@ namespace AVRProjectIDE
             if (string.IsNullOrEmpty(DirPath) == false)
             {
                 sfd.InitialDirectory = DirPath + Path.DirectorySeparatorChar;
+            }
+            else if (string.IsNullOrEmpty(dirPath) == false)
+            {
+                sfd.InitialDirectory = dirPath;
             }
             else if (string.IsNullOrEmpty(SettingsManagement.FavFolder) == false)
             {
@@ -1652,6 +1683,8 @@ namespace AVRProjectIDE
             {
                 project.memorySegList.Add(obj.Name, new MemorySegment(obj.Type, obj.Name, obj.Addr));
             }
+
+            project.ArduinoCoreOverride = this.ArduinoCoreOverride;
 
             project.APSXmlElementList = new List<XmlElement>();
             project.APSXmlElementList.Clear();
@@ -1841,6 +1874,11 @@ namespace AVRProjectIDE
                     }
                     catch { }
                 }
+            }
+
+            foreach (XmlElement param in docx.GetElementsByTagName("ArduinoCoreOverride"))
+            {
+                proj.ArduinoCoreOverride = param.InnerText;
             }
         }
     }

@@ -29,7 +29,7 @@
     </LinkLibList>
   </template>
 
-  <template name="Arduino ATMega8 8MHz">
+  <template name="Arduino ATmega8 8MHz">
     <Device>atmega8</Device>
     <ClockFreq>8000000</ClockFreq>
     <BurnPart>atmega8</BurnPart>
@@ -38,7 +38,7 @@
     <Inherit>Arduino Bootloader 19200 Baud</Inherit>
   </template>
 
-  <template name="Arduino ATMega168 8MHz">
+  <template name="Arduino ATmega168 8MHz">
     <Device>atmega168</Device>
     <ClockFreq>8000000</ClockFreq>
     <BurnPart>atmega168</BurnPart>
@@ -47,7 +47,7 @@
     <Inherit>Arduino Bootloader 19200 Baud</Inherit>
   </template>
 
-  <template name="Arduino ATMega168P 8MHz">
+  <template name="Arduino ATmega168P 8MHz">
     <Device>atmega168p</Device>
     <ClockFreq>8000000</ClockFreq>
     <BurnPart>atmega168p</BurnPart>
@@ -56,7 +56,7 @@
     <Inherit>Arduino Bootloader 19200 Baud</Inherit>
   </template>
 
-  <template name="Arduino ATMega328P 8MHz">
+  <template name="Arduino ATmega328P 8MHz">
     <Device>atmega328p</Device>
     <ClockFreq>8000000</ClockFreq>
     <BurnPart>atmega328p</BurnPart>
@@ -65,7 +65,7 @@
     <Inherit>Arduino Bootloader 57600 Baud</Inherit>
   </template>
 
-  <template name="Arduino ATMega8 16MHz">
+  <template name="Arduino ATmega8 16MHz">
     <Device>atmega8</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega8</BurnPart>
@@ -74,7 +74,7 @@
     <Inherit>Arduino Bootloader 19200 Baud</Inherit>
   </template>
 
-  <template name="Arduino ATMega168 16MHz">
+  <template name="Arduino ATmega168 16MHz">
     <Device>atmega168</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega168</BurnPart>
@@ -83,7 +83,7 @@
     <Inherit>Arduino Bootloader 19200 Baud</Inherit>
   </template>
 
-  <template name="Arduino ATMega168P 16MHz">
+  <template name="Arduino ATmega168P 16MHz">
     <Device>atmega168p</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega168p</BurnPart>
@@ -92,7 +92,7 @@
     <Inherit>Arduino Bootloader 19200 Baud</Inherit>
   </template>
 
-  <template name="Arduino ATMega328P 16MHz">
+  <template name="Arduino ATmega328P 16MHz">
     <Device>atmega328p</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega328p</BurnPart>
@@ -101,7 +101,7 @@
     <Inherit>Arduino Bootloader 57600 Baud</Inherit>
   </template>
 
-  <template name="Sanguino ATMega644P 16MHz">
+  <template name="Sanguino ATmega644P 16MHz">
     <Device>atmega644p</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega644p</BurnPart>
@@ -111,8 +111,8 @@
     <BurnBaud>38400</BurnBaud>
   </template>
 
-  <template name="Sanguino ATMega644 16MHz">
-    <Device>atmega644</Device>
+  <template name="Sanguino ATmega644 16MHz">
+    <Device>atmega644p</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega644</BurnPart>
     <BurnFuseBox>-U lfuse:w:0xff:m -U hfuse:w:0xdc:m -U efuse:w:0xfd:m</BurnFuseBox>
@@ -121,7 +121,18 @@
     <BurnBaud>38400</BurnBaud>
   </template>
 
-  <template name="Arduino Mega ATMega1280 16MHz">
+  <template name="rDuino LEDHead ATmega644P 16MHz">
+    <Device>atmega644p</Device>
+    <ClockFreq>16000000</ClockFreq>
+    <BurnPart>atmega644p</BurnPart>
+    <BurnFuseBox>-U lfuse:w:0xff:m -U hfuse:w:0xdc:m -U efuse:w:0xfd:m</BurnFuseBox>
+    <BurnProgrammer>stk500</BurnProgrammer>
+    <BurnOptions>-F</BurnOptions>
+    <BurnBaud>38400</BurnBaud>
+    <ArduinoCoreOverride>Please Select A Path!!!</ArduinoCoreOverride>
+  </template>
+
+  <template name="Arduino Mega ATmega1280 16MHz">
     <Device>atmega1280</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega1280</BurnPart>
@@ -130,21 +141,21 @@
     <Inherit>Arduino Bootloader 57600 Baud</Inherit>
   </template>
 
-  <template name="Axon ATMega640 16MHz">
+  <template name="Axon ATmega640 16MHz">
     <Device>atmega640</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega640</BurnPart>
     <BurnFuseBox>-U lfuse:w:0xff:m -U hfuse:w:0x99:m -U efuse:w:0xff:m</BurnFuseBox>
   </template>
 
-  <template name="Axon ATMega640 8MHz">
+  <template name="Axon ATmega640 8MHz">
     <Device>atmega640</Device>
     <ClockFreq>8000000</ClockFreq>
     <BurnPart>atmega640</BurnPart>
     <BurnFuseBox>-U lfuse:w:0xe2:m -U hfuse:w:0x99:m -U efuse:w:0xff:m</BurnFuseBox>
   </template>
 
-  <template name="Illuminato ATMega645">
+  <template name="Illuminato ATmega645">
     <Device>atmega645</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega645</BurnPart>
@@ -152,7 +163,7 @@
     <BurnBaud>57600</BurnBaud>
   </template>
 
-  <template name="Wiring.org.co ATMega128">
+  <template name="Wiring.org.co ATmega128">
     <Device>atmega128</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega128</BurnPart>
