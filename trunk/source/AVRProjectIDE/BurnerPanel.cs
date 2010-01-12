@@ -59,6 +59,9 @@ namespace AVRProjectIDE
         /// </summary>
         public void ProjToForm()
         {
+            allowEvents = false;
+            readyForEvents = false;
+
             if (dropPart.Items.Count > 0)
             {
                 dropPart.SelectedIndex = 0;
@@ -103,6 +106,7 @@ namespace AVRProjectIDE
             SetButtonText();
 
             allowEvents = true;
+            readyForEvents = true;
         }
 
         public void FormToProj()
@@ -199,6 +203,9 @@ namespace AVRProjectIDE
             if (allowEvents == false)
                 return;
 
+            if (readyForEvents == false)
+                return;
+
             FormToProj();
             SetButtonText();
         }
@@ -208,9 +215,11 @@ namespace AVRProjectIDE
             btnBurnOnlyOpt.Text = String.Format(BUTTON_TEXT, BurnerPanel.GetArgs(this.project));
         }
 
+        bool readyForEvents = false;
         private void drop_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txt_TextChanged(sender, e);
+            if (readyForEvents)
+                txt_TextChanged(sender, e);
         }
 
         private void txtPortOverride_Validating(object sender, CancelEventArgs e)

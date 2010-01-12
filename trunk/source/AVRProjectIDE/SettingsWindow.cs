@@ -217,7 +217,7 @@ namespace AVRProjectIDE
             dropSmartIndent.SelectedIndex = Math.Max(0, Math.Min(smartIndent, 3));
         }
 
-        private void btnFavoriteBrowse_Click(object sender, EventArgs e)
+        private void btnArduinoCoreOverrideBrowse_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
 

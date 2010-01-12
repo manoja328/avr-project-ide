@@ -745,7 +745,17 @@ namespace AVRProjectIDE
                     }
                     else
                     {
-                        LIBS += "-l\"" + obj.TrimEnd('a').TrimEnd('.') + "\" ";
+                        string libName = Path.GetFileNameWithoutExtension(obj);
+
+                        if (libName.StartsWith("lib"))
+                            libName = libName.Substring(3);
+
+                        string libPath = Path.GetDirectoryName(obj);
+
+                        LIBS += "-l" + libName + " ";
+
+                        if (workingProject.LibraryDirList.Contains(libPath) == false)
+                            workingProject.LibraryDirList.Add(libPath);
                     }
                 }
             }
@@ -1447,7 +1457,10 @@ namespace AVRProjectIDE
                             ardWriter.WriteLine("extern \"C\" void __cxa_pure_virtual() {}"); // required to prevent a compile error
                             ardWriter.Flush();
 
-                            workingProject.IncludeDirList.Add(SettingsManagement.ArduinoCorePath);
+                            if (workingProject.OverrideArduinoCore)
+                                workingProject.IncludeDirList.Add(workingProject.ArduinoCoreOverride);
+                            else
+                                workingProject.IncludeDirList.Add(SettingsManagement.ArduinoCorePath);
 
                             ardLibList.Clear();
 
@@ -1482,7 +1495,10 @@ namespace AVRProjectIDE
                 }
 
                 // since arduino sketches needs its core files, gather all the core files
-                GetCompilableFiles(SettingsManagement.ArduinoCorePath, ardExtList, false);
+                if (workingProject.OverrideArduinoCore)
+                    GetCompilableFiles(workingProject.ArduinoCoreOverride, ardExtList, false);
+                else
+                    GetCompilableFiles(SettingsManagement.ArduinoCorePath, ardExtList, false);
 
                 try
                 {
@@ -1618,19 +1634,18 @@ namespace AVRProjectIDE
 
             string contents = Properties.Resources.arduinomain;
             string filePath = SettingsManagement.ArduinoCorePath + Path.DirectorySeparatorChar + "main.cxx";
-            if (File.Exists(filePath))
+            if (workingProject.OverrideArduinoCore)
+                filePath = workingProject.ArduinoCoreOverride;
+
+            try
             {
-                try
-                {
-                    StreamReader reader = new StreamReader(filePath);
-                    contents = reader.ReadToEnd();
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    TextBoxModify(outputTextbox, "####Error while reading arduino\\core\\main.cxx , embedded version used instead., " + ex.Message, TextBoxChangeMode.PrependNewLine);
-                }
+                contents = File.ReadAllText(filePath);
             }
+            catch (Exception ex)
+            {
+                TextBoxModify(outputTextbox, "####Error while reading the core main.cxx file, embedded version used instead., " + ex.Message, TextBoxChangeMode.PrependNewLine);
+            }
+
             return contents;
         }
 
@@ -1639,16 +1654,12 @@ namespace AVRProjectIDE
             try
             {
                 writer.WriteLine("#line 1 \"{0}\"", file.FileName);
-                StreamReader reader = new StreamReader(file.FileAbsPath);
-
-                string fileContent = reader.ReadToEnd();
+                string fileContent = File.ReadAllText(file.FileAbsPath);
                 
                 // function prototypes need to be inserted before the first non-preprocessor statement
                 fileContent = InsertAtFirstStatement(fileContent, prototypes);
 
                 writer.WriteLine(fileContent);
-
-                reader.Close();
             }
             catch (Exception ex)
             {
@@ -1837,6 +1848,12 @@ namespace AVRProjectIDE
 
         private void ToggleRTS(string p)
         {
+            if (p.StartsWith("COM") == false && p.StartsWith("//./COM") == false && p.StartsWith("\\\\.\\COM") == false)
+            {
+                MessageBox.Show("Error: Cannot perform Arduino auto-reset without a valid COM port defined");
+                return;
+            }
+
             try
             {
                 UnmanagedSerialPort usp = new UnmanagedSerialPort(p);
@@ -1971,8 +1988,10 @@ namespace AVRProjectIDE
         /// </summary>
         /// <param name="proj">the project containing the settings</param>
         /// <returns>returns true if successful</returns>
-        public static bool GenerateNormal(AVRProject proj)
+        public static bool GenerateNormal(AVRProject projOrig)
         {
+            AVRProject proj = projOrig.Clone();
+
             bool success = true;
 
             StreamWriter writer = null;
@@ -2100,6 +2119,40 @@ namespace AVRProjectIDE
                     writer.WriteLine("INCLUDES = {0}", incdirs);
                 }
 
+                string linklibstr = "";
+                foreach (string obj in proj.LinkLibList)
+                {
+                    if (string.IsNullOrEmpty(obj) == false)
+                    {
+                        if (obj.StartsWith("lib"))
+                        {
+                            linklibstr += "-l" + obj.Substring(3).TrimEnd('a').TrimEnd('.') + " ";
+                        }
+                        else
+                        {
+                            string libName = Path.GetFileNameWithoutExtension(obj);
+
+                            if (libName.StartsWith("lib"))
+                                libName = libName.Substring(3);
+
+                            string libPath = Path.GetDirectoryName(obj);
+
+                            linklibstr += "-l" + libName + " ";
+
+                            if (proj.LibraryDirList.Contains(libPath) == false)
+                                proj.LibraryDirList.Add(libPath);
+                        }
+                    }
+                }
+
+                linklibstr = linklibstr.Trim();
+                if (string.IsNullOrEmpty(linklibstr) == false)
+                {
+                    writer.WriteLine();
+                    writer.WriteLine("## Libraries");
+                    writer.WriteLine("LIBS = {0}", linklibstr);
+                }
+
                 string libdirs = "";
                 foreach (string s in proj.LibraryDirList)
                 {
@@ -2112,29 +2165,6 @@ namespace AVRProjectIDE
                     writer.WriteLine();
                     writer.WriteLine("## Library Directories");
                     writer.WriteLine("LIBDIRS = {0}", libdirs);
-                }
-
-                string linklibstr = "";
-                foreach (string s in proj.LinkLibList)
-                {
-                    if (string.IsNullOrEmpty(s) == false)
-                    {
-                        if (s.StartsWith("lib"))
-                        {
-                            linklibstr += "-l" + s.Substring(3).TrimEnd('a').TrimEnd('.') + " ";
-                        }
-                        else
-                        {
-                            linklibstr += "-l\"" + s.TrimEnd('a').TrimEnd('.') + "\" ";
-                        }
-                    }
-                }
-                linklibstr = linklibstr.Trim();
-                if (string.IsNullOrEmpty(linklibstr) == false)
-                {
-                    writer.WriteLine();
-                    writer.WriteLine("## Libraries");
-                    writer.WriteLine("LIBS = {0}", linklibstr);
                 }
 
                 string ofiles = "";

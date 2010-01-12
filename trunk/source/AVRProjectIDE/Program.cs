@@ -111,7 +111,7 @@ namespace AVRProjectIDE
                     {
                         try
                         {
-                            if (MessageBox.Show("An Updated Version of AVRProjectIDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            if (MessageBox.Show("An Updated Version of AVR Project IDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
                                 System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
                             }

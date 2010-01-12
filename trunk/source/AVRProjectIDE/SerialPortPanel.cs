@@ -294,18 +294,21 @@ namespace AVRProjectIDE
         private void timerTextBoxUpdater_Tick(object sender, EventArgs e)
         {
             // calling textBox.Text all the time has a high overhead, so this is used instead
-
-            if (textChanged)
+            try
             {
-                bool scroll = txtRx.SelectionLength < 2;
-                txtRx.Text = textboxBuffer;
-                if (scroll)
+                if (textChanged)
                 {
-                    txtRx.Select(textboxBuffer.Length, 0);
-                    txtRx.ScrollToCaret();
+                    bool scroll = txtRx.SelectionLength < 2;
+                    txtRx.Text = textboxBuffer;
+                    if (scroll)
+                    {
+                        txtRx.Select(textboxBuffer.Length, 0);
+                        txtRx.ScrollToCaret();
+                    }
+                    textChanged = false;
                 }
-                textChanged = false;
             }
+            catch { }
         }
 
         private void RaiseException(Exception ex)
@@ -331,81 +334,88 @@ namespace AVRProjectIDE
 
         private void timerStatusChecker_Tick(object sender, EventArgs e)
         {
-            bool isOpen = false;
             try
             {
-                isOpen = serialPort1.IsOpen;
-            }
-            catch (Exception ex)
-            {
-                RaiseException(ex);
-            }
-
-            if (isOpen)
-            {
-                btnConnect.Text = "Disconnect";
-                btnSend.Enabled = true;
-                dropPorts.Enabled = false;
-                dropBaud.Enabled = false;
-                attemptedDisconnect = false;
-            }
-            else
-            {
-                btnConnect.Text = "Connect";
-                btnSend.Enabled = false;
-                dropPorts.Enabled = true;
-                dropBaud.Enabled = true;
-                barSerPortTick.Visible = false;
-
-                if (attemptedDisconnect == false)
+                bool isOpen = false;
+                try
                 {
-                    attemptedDisconnect = true;
-                    try
-                    {
-                        serialPort1.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        RaiseException(ex);
-                    }
+                    isOpen = serialPort1.IsOpen;
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
                 }
 
-                pendingDisconnect = false;
-            }
-
-            // textbox too full, clear 2/3 of it automatically
-            string fromTxt = txtRx.Text;
-            if (fromTxt.Length > txtRx.MaxLength / 2)
-            {
-                fromTxt = fromTxt.Substring(txtRx.MaxLength / 3);
-                txtRx.Text = fromTxt;
-                txtRx.Select(fromTxt.Length, 0);
-                txtRx.ScrollToCaret();
-            }
-
-            if (pendingDisconnect)
-            {
-                if (serialPort1.IsOpen)
+                if (isOpen)
                 {
-                    if (bgTxWorker.IsBusy || serialPort1.BytesToRead > 0)
+                    btnConnect.Text = "Disconnect";
+                    btnSend.Enabled = true;
+                    dropPorts.Enabled = false;
+                    dropBaud.Enabled = false;
+                    attemptedDisconnect = false;
+                }
+                else
+                {
+                    btnConnect.Text = "Connect";
+                    btnSend.Enabled = false;
+                    dropPorts.Enabled = true;
+                    dropBaud.Enabled = true;
+                    barSerPortTick.Visible = false;
+
+                    if (attemptedDisconnect == false)
                     {
-                        pendingDisconnect = true;
-                        btnConnect.Enabled = false;
-                        btnSend.Enabled = false;
-                        return;
+                        attemptedDisconnect = true;
+                        try
+                        {
+                            serialPort1.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            RaiseException(ex);
+                        }
                     }
 
-                    Disconnect();
+                    pendingDisconnect = false;
+                }
+
+                // textbox too full, clear 2/3 of it automatically
+                string fromTxt = txtRx.Text;
+                if (fromTxt.Length > txtRx.MaxLength / 2)
+                {
+                    fromTxt = fromTxt.Substring(txtRx.MaxLength / 3);
+                    txtRx.Text = fromTxt;
+                    txtRx.Select(fromTxt.Length, 0);
+                    txtRx.ScrollToCaret();
+                }
+
+                if (pendingDisconnect)
+                {
+                    if (serialPort1.IsOpen)
+                    {
+                        if (bgTxWorker.IsBusy || serialPort1.BytesToRead > 0)
+                        {
+                            pendingDisconnect = true;
+                            btnConnect.Enabled = false;
+                            btnSend.Enabled = false;
+                            return;
+                        }
+
+                        Disconnect();
+                    }
+                    else
+                    {
+                        btnConnect.Enabled = true;
+                        pendingDisconnect = false;
+                    }
                 }
                 else
                 {
                     btnConnect.Enabled = true;
-                    pendingDisconnect = false;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                btnConnect.Enabled = true;
+                RaiseException(ex);
             }
         }
 

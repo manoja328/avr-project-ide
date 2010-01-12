@@ -38,7 +38,7 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.lnkFolder = new System.Windows.Forms.LinkLabel();
             this.txtFavoriteDir = new System.Windows.Forms.TextBox();
-            this.btnFavoriteBrowse = new System.Windows.Forms.Button();
+            this.btnArduinoCoreOverrideBrowse = new System.Windows.Forms.Button();
             this.btnOpenAppData = new System.Windows.Forms.Button();
             this.chkAutocomplete = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -162,7 +162,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.Controls.Add(this.lnkFolder);
             this.groupBox8.Controls.Add(this.txtFavoriteDir);
-            this.groupBox8.Controls.Add(this.btnFavoriteBrowse);
+            this.groupBox8.Controls.Add(this.btnArduinoCoreOverrideBrowse);
             this.groupBox8.Location = new System.Drawing.Point(12, 12);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(725, 46);
@@ -191,16 +191,16 @@
             this.txtFavoriteDir.Size = new System.Drawing.Size(561, 20);
             this.txtFavoriteDir.TabIndex = 20;
             // 
-            // btnFavoriteBrowse
+            // btnArduinoCoreOverrideBrowse
             // 
-            this.btnFavoriteBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFavoriteBrowse.Location = new System.Drawing.Point(644, 17);
-            this.btnFavoriteBrowse.Name = "btnFavoriteBrowse";
-            this.btnFavoriteBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnFavoriteBrowse.TabIndex = 2;
-            this.btnFavoriteBrowse.Text = "Find";
-            this.btnFavoriteBrowse.UseVisualStyleBackColor = true;
-            this.btnFavoriteBrowse.Click += new System.EventHandler(this.btnFavoriteBrowse_Click);
+            this.btnArduinoCoreOverrideBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnArduinoCoreOverrideBrowse.Location = new System.Drawing.Point(644, 17);
+            this.btnArduinoCoreOverrideBrowse.Name = "btnArduinoCoreOverrideBrowse";
+            this.btnArduinoCoreOverrideBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnArduinoCoreOverrideBrowse.TabIndex = 2;
+            this.btnArduinoCoreOverrideBrowse.Text = "Find";
+            this.btnArduinoCoreOverrideBrowse.UseVisualStyleBackColor = true;
+            this.btnArduinoCoreOverrideBrowse.Click += new System.EventHandler(this.btnArduinoCoreOverrideBrowse_Click);
             // 
             // btnOpenAppData
             // 
@@ -595,7 +595,7 @@
         private System.Windows.Forms.Button btnFindArduinoCore;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.TextBox txtFavoriteDir;
-        private System.Windows.Forms.Button btnFavoriteBrowse;
+        private System.Windows.Forms.Button btnArduinoCoreOverrideBrowse;
         private System.Windows.Forms.Button btnOpenAppData;
         private System.Windows.Forms.CheckBox chkAutocomplete;
         private System.Windows.Forms.GroupBox groupBox1;

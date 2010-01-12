@@ -80,7 +80,7 @@ namespace AVRProjectIDE
                 messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Error Loading Web Links:, " + ex.Message);
             }
 
-            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Arduino Core Path: " + SettingsManagement.ArduinoCorePath);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Default Arduino Core Path: " + SettingsManagement.ArduinoCorePath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Arduino Library Path: " + SettingsManagement.ArduinoLibPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppData Path: " + SettingsManagement.AppDataPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppInstall Path: " + SettingsManagement.AppInstallPath);
@@ -1275,7 +1275,11 @@ namespace AVRProjectIDE
 
         private void timerScanner_Tick(object sender, EventArgs e)
         {
-            KeywordScanner.DoMoreWork();
+            try
+            {
+                KeywordScanner.DoMoreWork();
+            }
+            catch { }
         }
 
         private void IDEWindow_Load(object sender, EventArgs e)
@@ -1376,11 +1380,15 @@ namespace AVRProjectIDE
 
         private void timerBackup_Tick(object sender, EventArgs e)
         {
-            List<EditorPanel> tmpList = new List<EditorPanel>(editorList.Values);
-            foreach (EditorPanel i in tmpList)
+            try
             {
-                i.SaveBackup();
+                List<EditorPanel> tmpList = new List<EditorPanel>(editorList.Values);
+                foreach (EditorPanel i in tmpList)
+                {
+                    i.SaveBackup();
+                }
             }
+            catch { }
         }
 
         private void mbtnFuseTool_Click(object sender, EventArgs e)

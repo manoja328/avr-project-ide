@@ -490,7 +490,7 @@
             this.mbtnCompile.Name = "mbtnCompile";
             this.mbtnCompile.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.mbtnCompile.Size = new System.Drawing.Size(190, 22);
-            this.mbtnCompile.Text = "&Compile All";
+            this.mbtnCompile.Text = "&Compile All / Build Project";
             this.mbtnCompile.Click += new System.EventHandler(this.mbtnCompile_Click);
             // 
             // mbtnCompileCurrent
@@ -878,7 +878,7 @@
             this.tbtnCompile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnCompile.Name = "tbtnCompile";
             this.tbtnCompile.Size = new System.Drawing.Size(23, 22);
-            this.tbtnCompile.Text = "Compile";
+            this.tbtnCompile.Text = "Compile All / Build Project";
             this.tbtnCompile.Click += new System.EventHandler(this.tbtnCompile_Click);
             // 
             // tbtnBurn

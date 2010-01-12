@@ -49,11 +49,17 @@
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.grpBoxBurnerPanel = new System.Windows.Forms.GroupBox();
             this.numClockFreq = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.chklistOptions = new System.Windows.Forms.CheckedListBox();
             this.dropDevices = new System.Windows.Forms.ComboBox();
             this.listOptimization = new System.Windows.Forms.ComboBox();
+            this.txtSOptions = new System.Windows.Forms.TextBox();
+            this.txtCPPOptions = new System.Windows.Forms.TextBox();
+            this.txtCOptions = new System.Windows.Forms.TextBox();
             this.txtOtherOptions = new System.Windows.Forms.TextBox();
             this.txtOutputPath = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -96,28 +102,15 @@
             this.txtInitStackAddr = new System.Windows.Forms.TextBox();
             this.chkUseInitStack = new System.Windows.Forms.CheckBox();
             this.Output = new System.Windows.Forms.TabPage();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtArduinoLibs = new System.Windows.Forms.TextBox();
-            this.btnFindArduinoLibs = new System.Windows.Forms.Button();
-            this.txtArduinoCore = new System.Windows.Forms.TextBox();
-            this.btnFindArduinoCore = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.txtFavoriteDir = new System.Windows.Forms.TextBox();
-            this.btnFavoriteBrowse = new System.Windows.Forms.Button();
+            this.txtArduinoCoreOverride = new System.Windows.Forms.TextBox();
+            this.btnArduinoCoreOverrideBrowse = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.dropTemplates = new System.Windows.Forms.ComboBox();
             this.btnGotoAppdata = new System.Windows.Forms.Button();
             this.btnDiscardAndClose = new System.Windows.Forms.Button();
             this.btnSaveAndClose = new System.Windows.Forms.Button();
-            this.txtCOptions = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtCPPOptions = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtSOptions = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabsMain.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numClockFreq)).BeginInit();
@@ -136,7 +129,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvMemory)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.Output.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -212,6 +204,33 @@
             this.numClockFreq.Name = "numClockFreq";
             this.numClockFreq.Size = new System.Drawing.Size(100, 20);
             this.numClockFreq.TabIndex = 3;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 197);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 13);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "S Only Options:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(5, 171);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "CPP Only Options:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 145);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "C Only Options:";
             // 
             // label7
             // 
@@ -399,6 +418,27 @@
             this.listOptimization.Size = new System.Drawing.Size(100, 21);
             this.listOptimization.TabIndex = 4;
             // 
+            // txtSOptions
+            // 
+            this.txtSOptions.Location = new System.Drawing.Point(105, 194);
+            this.txtSOptions.Name = "txtSOptions";
+            this.txtSOptions.Size = new System.Drawing.Size(401, 20);
+            this.txtSOptions.TabIndex = 8;
+            // 
+            // txtCPPOptions
+            // 
+            this.txtCPPOptions.Location = new System.Drawing.Point(105, 168);
+            this.txtCPPOptions.Name = "txtCPPOptions";
+            this.txtCPPOptions.Size = new System.Drawing.Size(401, 20);
+            this.txtCPPOptions.TabIndex = 7;
+            // 
+            // txtCOptions
+            // 
+            this.txtCOptions.Location = new System.Drawing.Point(105, 142);
+            this.txtCOptions.Name = "txtCOptions";
+            this.txtCOptions.Size = new System.Drawing.Size(401, 20);
+            this.txtCOptions.TabIndex = 6;
+            // 
             // txtOtherOptions
             // 
             this.txtOtherOptions.Location = new System.Drawing.Point(105, 116);
@@ -456,7 +496,7 @@
             this.tabInclude.Location = new System.Drawing.Point(4, 22);
             this.tabInclude.Name = "tabInclude";
             this.tabInclude.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInclude.Size = new System.Drawing.Size(704, 338);
+            this.tabInclude.Size = new System.Drawing.Size(704, 416);
             this.tabInclude.TabIndex = 2;
             this.tabInclude.Text = "Include Dir";
             this.tabInclude.UseVisualStyleBackColor = true;
@@ -469,7 +509,7 @@
             this.tabsIncludeDir.Location = new System.Drawing.Point(3, 3);
             this.tabsIncludeDir.Name = "tabsIncludeDir";
             this.tabsIncludeDir.SelectedIndex = 0;
-            this.tabsIncludeDir.Size = new System.Drawing.Size(698, 332);
+            this.tabsIncludeDir.Size = new System.Drawing.Size(698, 410);
             this.tabsIncludeDir.TabIndex = 0;
             // 
             // tabIncludeDirDir
@@ -481,7 +521,7 @@
             this.tabIncludeDirDir.Location = new System.Drawing.Point(4, 22);
             this.tabIncludeDirDir.Name = "tabIncludeDirDir";
             this.tabIncludeDirDir.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncludeDirDir.Size = new System.Drawing.Size(690, 306);
+            this.tabIncludeDirDir.Size = new System.Drawing.Size(690, 384);
             this.tabIncludeDirDir.TabIndex = 0;
             this.tabIncludeDirDir.Text = "Include Paths";
             this.tabIncludeDirDir.UseVisualStyleBackColor = true;
@@ -489,7 +529,7 @@
             // btnIncPathMoveDown
             // 
             this.btnIncPathMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnIncPathMoveDown.Location = new System.Drawing.Point(168, 277);
+            this.btnIncPathMoveDown.Location = new System.Drawing.Point(168, 355);
             this.btnIncPathMoveDown.Name = "btnIncPathMoveDown";
             this.btnIncPathMoveDown.Size = new System.Drawing.Size(75, 23);
             this.btnIncPathMoveDown.TabIndex = 19;
@@ -500,7 +540,7 @@
             // btnIncPathMoveUp
             // 
             this.btnIncPathMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnIncPathMoveUp.Location = new System.Drawing.Point(87, 277);
+            this.btnIncPathMoveUp.Location = new System.Drawing.Point(87, 355);
             this.btnIncPathMoveUp.Name = "btnIncPathMoveUp";
             this.btnIncPathMoveUp.Size = new System.Drawing.Size(75, 23);
             this.btnIncPathMoveUp.TabIndex = 18;
@@ -511,7 +551,7 @@
             // btnIncDirAdd
             // 
             this.btnIncDirAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnIncDirAdd.Location = new System.Drawing.Point(6, 277);
+            this.btnIncDirAdd.Location = new System.Drawing.Point(6, 355);
             this.btnIncDirAdd.Name = "btnIncDirAdd";
             this.btnIncDirAdd.Size = new System.Drawing.Size(75, 23);
             this.btnIncDirAdd.TabIndex = 17;
@@ -554,7 +594,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvIncPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvIncPaths.Size = new System.Drawing.Size(684, 268);
+            this.dgvIncPaths.Size = new System.Drawing.Size(684, 346);
             this.dgvIncPaths.TabIndex = 4;
             // 
             // dgvIncPathTxtPath
@@ -572,7 +612,7 @@
             this.tabIncludeDirLib.Location = new System.Drawing.Point(4, 22);
             this.tabIncludeDirLib.Name = "tabIncludeDirLib";
             this.tabIncludeDirLib.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncludeDirLib.Size = new System.Drawing.Size(690, 306);
+            this.tabIncludeDirLib.Size = new System.Drawing.Size(690, 384);
             this.tabIncludeDirLib.TabIndex = 1;
             this.tabIncludeDirLib.Text = "Library Paths";
             this.tabIncludeDirLib.UseVisualStyleBackColor = true;
@@ -580,7 +620,7 @@
             // btnLibPathMoveDown
             // 
             this.btnLibPathMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLibPathMoveDown.Location = new System.Drawing.Point(168, 277);
+            this.btnLibPathMoveDown.Location = new System.Drawing.Point(168, 355);
             this.btnLibPathMoveDown.Name = "btnLibPathMoveDown";
             this.btnLibPathMoveDown.Size = new System.Drawing.Size(75, 23);
             this.btnLibPathMoveDown.TabIndex = 22;
@@ -591,7 +631,7 @@
             // btnLibPathMoveUp
             // 
             this.btnLibPathMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLibPathMoveUp.Location = new System.Drawing.Point(87, 277);
+            this.btnLibPathMoveUp.Location = new System.Drawing.Point(87, 355);
             this.btnLibPathMoveUp.Name = "btnLibPathMoveUp";
             this.btnLibPathMoveUp.Size = new System.Drawing.Size(75, 23);
             this.btnLibPathMoveUp.TabIndex = 21;
@@ -602,7 +642,7 @@
             // btnLibDirAdd
             // 
             this.btnLibDirAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLibDirAdd.Location = new System.Drawing.Point(6, 277);
+            this.btnLibDirAdd.Location = new System.Drawing.Point(6, 355);
             this.btnLibDirAdd.Name = "btnLibDirAdd";
             this.btnLibDirAdd.Size = new System.Drawing.Size(75, 23);
             this.btnLibDirAdd.TabIndex = 20;
@@ -645,7 +685,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvLibPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvLibPaths.Size = new System.Drawing.Size(684, 268);
+            this.dgvLibPaths.Size = new System.Drawing.Size(684, 346);
             this.dgvLibPaths.TabIndex = 3;
             // 
             // dgvLibPathTxtPath
@@ -667,7 +707,7 @@
             this.tabLibrary.Location = new System.Drawing.Point(4, 22);
             this.tabLibrary.Name = "tabLibrary";
             this.tabLibrary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLibrary.Size = new System.Drawing.Size(704, 338);
+            this.tabLibrary.Size = new System.Drawing.Size(704, 416);
             this.tabLibrary.TabIndex = 3;
             this.tabLibrary.Text = "Libraries";
             this.tabLibrary.UseVisualStyleBackColor = true;
@@ -803,7 +843,7 @@
             this.tabMemory.Location = new System.Drawing.Point(4, 22);
             this.tabMemory.Name = "tabMemory";
             this.tabMemory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMemory.Size = new System.Drawing.Size(704, 338);
+            this.tabMemory.Size = new System.Drawing.Size(704, 416);
             this.tabMemory.TabIndex = 4;
             this.tabMemory.Text = "Memory";
             this.tabMemory.UseVisualStyleBackColor = true;
@@ -916,130 +956,49 @@
             // 
             // Output
             // 
-            this.Output.Controls.Add(this.groupBox9);
             this.Output.Controls.Add(this.groupBox8);
             this.Output.Controls.Add(this.groupBox2);
             this.Output.Controls.Add(this.btnGotoAppdata);
             this.Output.Location = new System.Drawing.Point(4, 22);
             this.Output.Name = "Output";
             this.Output.Padding = new System.Windows.Forms.Padding(3);
-            this.Output.Size = new System.Drawing.Size(704, 338);
+            this.Output.Size = new System.Drawing.Size(704, 416);
             this.Output.TabIndex = 5;
             this.Output.Text = "Project Templates";
             this.Output.UseVisualStyleBackColor = true;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox9.Controls.Add(this.label13);
-            this.groupBox9.Controls.Add(this.label12);
-            this.groupBox9.Controls.Add(this.txtArduinoLibs);
-            this.groupBox9.Controls.Add(this.btnFindArduinoLibs);
-            this.groupBox9.Controls.Add(this.txtArduinoCore);
-            this.groupBox9.Controls.Add(this.btnFindArduinoCore);
-            this.groupBox9.Location = new System.Drawing.Point(8, 139);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(688, 74);
-            this.groupBox9.TabIndex = 2;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Arduino Related Folders";
-            this.groupBox9.Visible = false;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 48);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 13);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "Library Files:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 22);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(56, 13);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Core Files:";
-            // 
-            // txtArduinoLibs
-            // 
-            this.txtArduinoLibs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtArduinoLibs.Location = new System.Drawing.Point(77, 45);
-            this.txtArduinoLibs.Name = "txtArduinoLibs";
-            this.txtArduinoLibs.ReadOnly = true;
-            this.txtArduinoLibs.Size = new System.Drawing.Size(524, 20);
-            this.txtArduinoLibs.TabIndex = 8;
-            // 
-            // btnFindArduinoLibs
-            // 
-            this.btnFindArduinoLibs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindArduinoLibs.Location = new System.Drawing.Point(607, 43);
-            this.btnFindArduinoLibs.Name = "btnFindArduinoLibs";
-            this.btnFindArduinoLibs.Size = new System.Drawing.Size(75, 23);
-            this.btnFindArduinoLibs.TabIndex = 5;
-            this.btnFindArduinoLibs.Text = "Find";
-            this.btnFindArduinoLibs.UseVisualStyleBackColor = true;
-            this.btnFindArduinoLibs.Click += new System.EventHandler(this.btnFindArduinoLibs_Click);
-            // 
-            // txtArduinoCore
-            // 
-            this.txtArduinoCore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtArduinoCore.Location = new System.Drawing.Point(77, 19);
-            this.txtArduinoCore.Name = "txtArduinoCore";
-            this.txtArduinoCore.ReadOnly = true;
-            this.txtArduinoCore.Size = new System.Drawing.Size(524, 20);
-            this.txtArduinoCore.TabIndex = 7;
-            // 
-            // btnFindArduinoCore
-            // 
-            this.btnFindArduinoCore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindArduinoCore.Location = new System.Drawing.Point(607, 17);
-            this.btnFindArduinoCore.Name = "btnFindArduinoCore";
-            this.btnFindArduinoCore.Size = new System.Drawing.Size(75, 23);
-            this.btnFindArduinoCore.TabIndex = 4;
-            this.btnFindArduinoCore.Text = "Find";
-            this.btnFindArduinoCore.UseVisualStyleBackColor = true;
-            this.btnFindArduinoCore.Click += new System.EventHandler(this.btnFindArduinoCore_Click);
             // 
             // groupBox8
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox8.Controls.Add(this.txtFavoriteDir);
-            this.groupBox8.Controls.Add(this.btnFavoriteBrowse);
+            this.groupBox8.Controls.Add(this.txtArduinoCoreOverride);
+            this.groupBox8.Controls.Add(this.btnArduinoCoreOverrideBrowse);
             this.groupBox8.Location = new System.Drawing.Point(8, 87);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(688, 46);
             this.groupBox8.TabIndex = 2;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Favorite Project Folder";
-            this.groupBox8.Visible = false;
+            this.groupBox8.Text = "Override Arduino Core Path (blank for do not override)";
             // 
-            // txtFavoriteDir
+            // txtArduinoCoreOverride
             // 
-            this.txtFavoriteDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtArduinoCoreOverride.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFavoriteDir.Location = new System.Drawing.Point(6, 19);
-            this.txtFavoriteDir.Name = "txtFavoriteDir";
-            this.txtFavoriteDir.ReadOnly = true;
-            this.txtFavoriteDir.Size = new System.Drawing.Size(595, 20);
-            this.txtFavoriteDir.TabIndex = 6;
+            this.txtArduinoCoreOverride.Location = new System.Drawing.Point(6, 19);
+            this.txtArduinoCoreOverride.Name = "txtArduinoCoreOverride";
+            this.txtArduinoCoreOverride.Size = new System.Drawing.Size(595, 20);
+            this.txtArduinoCoreOverride.TabIndex = 6;
             // 
-            // btnFavoriteBrowse
+            // btnArduinoCoreOverrideBrowse
             // 
-            this.btnFavoriteBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFavoriteBrowse.Location = new System.Drawing.Point(607, 17);
-            this.btnFavoriteBrowse.Name = "btnFavoriteBrowse";
-            this.btnFavoriteBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnFavoriteBrowse.TabIndex = 3;
-            this.btnFavoriteBrowse.Text = "Find";
-            this.btnFavoriteBrowse.UseVisualStyleBackColor = true;
-            this.btnFavoriteBrowse.Click += new System.EventHandler(this.btnFavoriteBrowse_Click);
+            this.btnArduinoCoreOverrideBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnArduinoCoreOverrideBrowse.Location = new System.Drawing.Point(607, 17);
+            this.btnArduinoCoreOverrideBrowse.Name = "btnArduinoCoreOverrideBrowse";
+            this.btnArduinoCoreOverrideBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnArduinoCoreOverrideBrowse.TabIndex = 3;
+            this.btnArduinoCoreOverrideBrowse.Text = "Find";
+            this.btnArduinoCoreOverrideBrowse.UseVisualStyleBackColor = true;
+            this.btnArduinoCoreOverrideBrowse.Click += new System.EventHandler(this.btnArduinoCoreOverrideBrowse_Click);
             // 
             // groupBox2
             // 
@@ -1109,54 +1068,6 @@
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
-            // txtCOptions
-            // 
-            this.txtCOptions.Location = new System.Drawing.Point(105, 142);
-            this.txtCOptions.Name = "txtCOptions";
-            this.txtCOptions.Size = new System.Drawing.Size(401, 20);
-            this.txtCOptions.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 145);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "C Only Options:";
-            // 
-            // txtCPPOptions
-            // 
-            this.txtCPPOptions.Location = new System.Drawing.Point(105, 168);
-            this.txtCPPOptions.Name = "txtCPPOptions";
-            this.txtCPPOptions.Size = new System.Drawing.Size(401, 20);
-            this.txtCPPOptions.TabIndex = 7;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 171);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(94, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "CPP Only Options:";
-            // 
-            // txtSOptions
-            // 
-            this.txtSOptions.Location = new System.Drawing.Point(105, 194);
-            this.txtSOptions.Name = "txtSOptions";
-            this.txtSOptions.Size = new System.Drawing.Size(401, 20);
-            this.txtSOptions.TabIndex = 8;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 197);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 13);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "S Only Options:";
-            // 
             // ConfigWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1192,8 +1103,6 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.Output.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1259,15 +1168,8 @@
         private System.Windows.Forms.ComboBox dropTemplates;
         private System.Windows.Forms.Button btnApplyTemplate;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.TextBox txtFavoriteDir;
-        private System.Windows.Forms.Button btnFavoriteBrowse;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtArduinoLibs;
-        private System.Windows.Forms.Button btnFindArduinoLibs;
-        private System.Windows.Forms.TextBox txtArduinoCore;
-        private System.Windows.Forms.Button btnFindArduinoCore;
+        private System.Windows.Forms.TextBox txtArduinoCoreOverride;
+        private System.Windows.Forms.Button btnArduinoCoreOverrideBrowse;
         private System.Windows.Forms.Button btnDiscardAndClose;
         private System.Windows.Forms.Button btnSaveAndClose;
         private System.Windows.Forms.Label label9;

@@ -23,7 +23,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Editor Panel");
+                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Editor Panel for '" + this.FileName + "'");
                 erw.ShowDialog();
             }
         }
@@ -98,7 +98,9 @@ namespace AVRProjectIDE
         {
             if (LoadFile() == false)
             {
-                MessageBox.Show("File failed to open");
+                MessageBox.Show("File '" + this.FileName + "' failed to open");
+                this.Close();
+                return;
             }
 
             if (file.FileExt == "c" || file.FileExt == "cpp" || file.FileExt == "h" || file.FileExt == "hpp" || file.FileExt == "pde")
@@ -489,34 +491,41 @@ namespace AVRProjectIDE
 
         private void timerChangeMonitor_Tick(object sender, EventArgs e)
         {
-            if (scint.Modified)
+            try
             {
-                hasChanged = scint.Modified;
-                this.Text = FileName + " *";
-                this.TabText = FileName + " *";
-            }
-
-            lblLineNum.Text = (scint.Lines.Current.Number + 1).ToString("0");
-
-            string sel = scint.Selection.Text;
-            long res = -1;
-            if (Program.TryParseText(sel, out res, true))
-            {
-                lblLineNum.Text += ConvertString(res, "Selected");
-            }
-            else if (System.Windows.Forms.Clipboard.ContainsText())
-            {
-                try
+                if (scint.Modified)
                 {
-                    sel = System.Windows.Forms.Clipboard.GetText();
-                    if (Program.TryParseText(sel, out res, true))
-                    {
-                        lblLineNum.Text += ConvertString(res, "Copied");
-                    }
+                    hasChanged = scint.Modified;
+                    this.Text = FileName + " *";
+                    this.TabText = FileName + " *";
                 }
-                catch { }
-            }
 
+                lblLineNum.Text = (scint.Lines.Current.Number + 1).ToString("0");
+            }
+            catch { }
+
+            try
+            {
+                string sel = scint.Selection.Text;
+                long res = -1;
+                if (Program.TryParseText(sel, out res, true))
+                {
+                    lblLineNum.Text += ConvertString(res, "Selected");
+                }
+                else if (System.Windows.Forms.Clipboard.ContainsText())
+                {
+                    try
+                    {
+                        sel = System.Windows.Forms.Clipboard.GetText();
+                        if (Program.TryParseText(sel, out res, true))
+                        {
+                            lblLineNum.Text += ConvertString(res, "Copied");
+                        }
+                    }
+                    catch { }
+                }
+            }
+            catch { }
         }
 
         private string ConvertString(long num, string header)
