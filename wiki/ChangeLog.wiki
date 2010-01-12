@@ -7,6 +7,8 @@
  * Fixed possible crash due to invalid data in clipboard.
  * Fixed crash when user refuses to find a missing file.
  * Default distributed configuration templates now include the rDuino LEDHead.
+ * Fixed .a files not found properly
+ * Fixed burner part and programmer not being remembered properly
 
 ==Alpha 68==
 
