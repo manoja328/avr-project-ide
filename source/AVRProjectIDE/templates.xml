@@ -128,7 +128,7 @@
     <BurnFuseBox>-U lfuse:w:0xff:m -U hfuse:w:0xdc:m -U efuse:w:0xfd:m</BurnFuseBox>
     <BurnProgrammer>stk500</BurnProgrammer>
     <BurnOptions>-F</BurnOptions>
-    <BurnBaud>38400</BurnBaud>
+    <BurnBaud>57600</BurnBaud>
     <ArduinoCoreOverride>Please Select A Path!!!</ArduinoCoreOverride>
   </template>
 
