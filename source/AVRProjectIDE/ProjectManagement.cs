@@ -504,7 +504,7 @@ namespace AVRProjectIDE
 
         public bool OverrideArduinoCore
         {
-            get { return string.IsNullOrEmpty(ArduinoCoreOverride); }
+            get { return !string.IsNullOrEmpty(ArduinoCoreOverride); }
         }
 
         #endregion

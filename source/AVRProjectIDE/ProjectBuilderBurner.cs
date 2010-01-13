@@ -1643,7 +1643,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error while reading the core main.cxx file, embedded version used instead., " + ex.Message, TextBoxChangeMode.PrependNewLine);
+                TextBoxModify(outputTextbox, "####Error while reading the core main.cxx file, embedded version used instead. " + ex.Message, TextBoxChangeMode.PrependNewLine);
             }
 
             return contents;
