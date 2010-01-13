@@ -1,5 +1,7 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Broke Arduino compilation, fixed in alpha 70===
+
 ===Major bug fix related to the AVRDUDE part and programmer not being remembered. Added Arduino Core Override option. Fixed issue linking .a files. How come nobody reported these bugs?? Please submit any and all issues===
 
 ===Major cosmetic bug found in 67 related to the change from dropdown to textbox, added some slight improvements to override behaviour, added preview for command line arguments===
