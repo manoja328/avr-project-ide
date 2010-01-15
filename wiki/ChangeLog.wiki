@@ -1,5 +1,14 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 71==
+
+ * Cancelling renaming a file no longer causes exception (can't believe nobody told me about this one)
+ * Fixed some icons
+ * Added notification for updated files
+ * Added new macro for file templates (USERNAME)
+ * Icons for open files are different from closed files
+ * Cosmetic fix in timer calculator
+
 ==Alpha 70==
 
  * update 69 broke arduino compiling, fixed in update alpha 70
