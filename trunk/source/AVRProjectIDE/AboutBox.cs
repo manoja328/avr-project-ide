@@ -118,8 +118,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In About Box");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In About Box");
+                
             }
         }
 

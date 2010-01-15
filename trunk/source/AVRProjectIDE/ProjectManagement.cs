@@ -152,9 +152,9 @@ namespace AVRProjectIDE
 
             treeNode = new TreeNode(FileName);
 
-            treeNode.ImageKey = "file.ico";
-            treeNode.SelectedImageKey = "file.ico";
-            treeNode.StateImageKey = "file.ico";
+            treeNode.ImageKey = "file2.ico";
+            treeNode.SelectedImageKey = "file2.ico";
+            treeNode.StateImageKey = "file2.ico";
 
             treeNode.Checked = toCompile;
         }
@@ -169,8 +169,8 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Deleting Backup");
-                    erw.ShowDialog();
+                    ErrorReportWindow.Show(ex, "Error Deleting Backup");
+                    
                 }
             }
         }

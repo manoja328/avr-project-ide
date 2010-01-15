@@ -23,8 +23,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Editor Panel for '" + this.FileName + "'");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Editor Panel for '" + this.FileName + "'");
+                
             }
         }
 
@@ -158,8 +158,8 @@ namespace AVRProjectIDE
                         if (i == SAVERETRY)
                         {
                             success = false;
-                            //ErrorReportWindow erw = new ErrorReportWindow(ex, "Save Error");
-                            //erw.ShowDialog();
+                            //ErrorReportWindow.Show(ex, "Save Error");
+                            //
                             break;
                         }
                         System.Threading.Thread.Sleep(SAVERETRYDELAY);
@@ -179,8 +179,8 @@ namespace AVRProjectIDE
                     if (i == SAVERETRY)
                     {
                         success = false;
-                        ErrorReportWindow erw = new ErrorReportWindow(ex, "Save Error");
-                        erw.ShowDialog();
+                        ErrorReportWindow.Show(ex, "Save Error");
+                        
                         break;
                     }
                     System.Threading.Thread.Sleep(SAVERETRYDELAY);
@@ -466,6 +466,8 @@ namespace AVRProjectIDE
                 if (oldName != FileName)
                     OnRename(this, new RenamedEventArgs(WatcherChangeTypes.Renamed, file.FileDir, FileName, oldName));
 
+                file.IsOpen = true;
+
                 file.Node.ImageKey = "file.ico";
                 file.Node.SelectedImageKey = "file.ico";
                 file.Node.StateImageKey = "file.ico";
@@ -624,6 +626,10 @@ namespace AVRProjectIDE
             {
                 WatchingForChange = false;
                 File.DeleteBackup();
+
+                file.Node.ImageKey = "file2.ico";
+                file.Node.SelectedImageKey = "file2.ico";
+                file.Node.StateImageKey = "file2.ico";
             }
         }
 

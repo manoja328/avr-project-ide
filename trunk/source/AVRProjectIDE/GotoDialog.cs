@@ -20,8 +20,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Goto Dialog");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Goto Dialog");
+                
             }
         }
 

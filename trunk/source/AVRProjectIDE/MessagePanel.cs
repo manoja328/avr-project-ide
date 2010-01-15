@@ -22,8 +22,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Message Panel");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Message Panel");
+                
             }
         }
 

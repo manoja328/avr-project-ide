@@ -43,6 +43,9 @@ namespace AVRProjectIDE
             this.project = project;
 
             InitializeComponent();
+
+            this.Icon = GraphicsResx.mainicon;
+
             DisableButtons();
 
             // create panel windows, attach events, etc etc
@@ -472,8 +475,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Main IDE");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Main IDE");
+                
             }
         }
 

@@ -36,8 +36,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Loading Wait Window");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Loading Wait Window");
+                
             }
         }
     }

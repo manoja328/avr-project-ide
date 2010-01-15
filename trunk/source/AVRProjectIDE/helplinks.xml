@@ -8,4 +8,5 @@
   <Link Text="Baud Rate Chart" URL="http://www.wormfood.net/avrbaudcalc.php" />
   <Link Text="Timer Calculator" URL="http://frank.circleofcurrent.com/content.php?page_id=avrtimercalc" />
   <Link Text="Atmel's Site" URL="http://www.atmel.com/products/AVR/" />
+  <Link Text="Arduino Reference" URL="http://arduino.cc/en/Reference/Extended" />
 </HelpLinks>

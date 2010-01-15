@@ -24,26 +24,20 @@ namespace AVRProjectIDE
             }
         }
 
-        public static string FuseCalcLink
+        public static string LastRunVersion
         {
             get
             {
-                string lnk = iniFile.Read("Links", "FuseCalculator");
+                string str = iniFile.Read("Stuff", "LastRunVersion");
+                if (string.IsNullOrEmpty(str))
+                    str = "Unknown Build ID";
 
-                if (lnk != null)
-                    lnk.Trim().ToLowerInvariant();
-
-                if (string.IsNullOrEmpty(lnk))
-                {
-                    FuseCalcLink = "http://www.engbedded.com/cgi-bin/fcx.cgi";
-                    lnk = FuseCalcLink;
-                }
-                return lnk;
+                return str;
             }
 
             set
             {
-                iniFile.Write("Links", "FuseCalculator", value.Trim());
+                iniFile.Write("Stuff", "LastRunVersion", value.Trim());
             }
         }
 
@@ -1349,8 +1343,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while loading editor state");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error while loading editor state");
+                
             }
         }
 
@@ -1364,8 +1358,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while saving editor state");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error while saving editor state");
+                
             }
         }
 
@@ -1405,8 +1399,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while loading window state");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error while loading window state");
+                
             }
         }
 
@@ -1420,8 +1414,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while saving window state");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error while saving window state");
+                
             }
         }
 

@@ -796,12 +796,16 @@ namespace AVRProjectIDE
             {
                 if (avrgcc.Start())
                 {
+
                     StreamReader stderr = avrgcc.StandardError;
                     if (suppressErrors == false)
                         ReadErrAndWarnings(stderr, true);
                     StreamReader stdout = avrgcc.StandardOutput;
                     if (suppressErrors == false)
                         ReadErrAndWarnings(stdout, true);
+                    
+                    //TextBoxModify(outputTextbox, stderr.ReadToEnd(), TextBoxChangeMode.PrependNewLine);
+                    //TextBoxModify(outputTextbox, stdout.ReadToEnd(), TextBoxChangeMode.PrependNewLine);
 
                     avrgcc.WaitForExit(10000);
                 }
@@ -1839,8 +1843,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error, Unable to Start AVRDUDE");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error, Unable to Start AVRDUDE");
+                
             }
 
             // note that avrdude's output can't be redirected easily, as the text based progress bar is annoying to deal with
@@ -1864,8 +1868,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Performing AutoReset");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error Performing AutoReset");
+                
             }
         }
 
@@ -1900,8 +1904,8 @@ namespace AVRProjectIDE
             {
                 if (suppressErr == false)
                 {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error: Unable to start AVRDUDE");
-                    erw.ShowDialog();
+                    ErrorReportWindow.Show(ex, "Error: Unable to start AVRDUDE");
+                    
                 }
             }
 
@@ -1956,8 +1960,8 @@ namespace AVRProjectIDE
             {
                 if (suppressErr == false)
                 {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error, Unable to Start AVRDUDE");
-                    erw.ShowDialog();
+                    ErrorReportWindow.Show(ex, "Error, Unable to Start AVRDUDE");
+                    
                 }
             }
 

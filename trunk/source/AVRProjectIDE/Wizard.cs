@@ -21,8 +21,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Project Wizard");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Project Wizard");
+                
             }
         }
 
@@ -133,6 +133,13 @@ namespace AVRProjectIDE
             bool hasIniFile = !string.IsNullOrEmpty(iniFilename);
             hasIniFile = false;
             string projFilename = txtProjName.Text.Trim();
+
+            if (string.IsNullOrEmpty(projFilename))
+            {
+                MessageBox.Show("The project name can't be blank");
+                return;
+            }
+
             char[] forbidChars = Path.GetInvalidFileNameChars();
             foreach (char c in forbidChars)
             {
@@ -242,8 +249,8 @@ namespace AVRProjectIDE
                     }
                     catch (Exception ex)
                     {
-                        ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while creating initial file");
-                        erw.ShowDialog();
+                        ErrorReportWindow.Show(ex, "Error while creating initial file");
+                        
                     }
                 }
 

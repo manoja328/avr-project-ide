@@ -22,8 +22,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Search Panel");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Search Panel");
+                
             }
         }
 
@@ -35,7 +35,7 @@ namespace AVRProjectIDE
 
             this.editorList = listOfEditors;
 
-            this.Icon = GraphicsResx.serial;
+            this.Icon = GraphicsResx.search;
         }
 
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)

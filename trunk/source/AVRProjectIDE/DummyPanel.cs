@@ -21,8 +21,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Dummy Panel");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Dummy Panel");
+                
             }
         }
 

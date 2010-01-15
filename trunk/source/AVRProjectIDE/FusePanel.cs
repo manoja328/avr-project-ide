@@ -22,8 +22,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Fuse Panel");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Fuse Panel");
+                
             }
         }
 
@@ -639,8 +639,8 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error While Reading Fuse");
-                    erw.ShowDialog();
+                    ErrorReportWindow.Show(ex, "Error While Reading Fuse");
+                    
                 }
             }
 
@@ -687,8 +687,8 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error While Writing Fuse");
-                    erw.ShowDialog();
+                    ErrorReportWindow.Show(ex, "Error While Writing Fuse");
+                    
                 }
             }
         }

@@ -1176,6 +1176,7 @@
     <None Include="graphics\burn_img.png" />
     <None Include="graphics\findnext_16x16.png" />
     <None Include="graphics\help_img.png" />
+    <None Include="graphics\chip.ico" />
     <Content Include="graphics\installer_large_banner.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

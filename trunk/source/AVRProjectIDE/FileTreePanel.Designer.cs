@@ -104,16 +104,15 @@
             // 
             // imgListFileTree
             // 
-            this.imgListFileTree.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListFileTree.ImageStream")));
             this.imgListFileTree.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListFileTree.Images.SetKeyName(0, "file.ico");
-            this.imgListFileTree.Images.SetKeyName(1, "file2.ico");
-            this.imgListFileTree.Images.SetKeyName(2, "nocompile.ico");
-            this.imgListFileTree.Images.SetKeyName(3, "missing.ico");
-            this.imgListFileTree.Images.SetKeyName(4, "treeroot.ico");
-            this.imgListFileTree.Images.SetKeyName(5, "unknown2.ico");
-            this.imgListFileTree.Images.SetKeyName(6, "folder.png");
-            this.imgListFileTree.Images.SetKeyName(7, "folder2.png");
+            this.imgListFileTree.Images.Add("file.ico", global::AVRProjectIDE.GraphicsResx.file);
+            this.imgListFileTree.Images.Add("file2.ico", global::AVRProjectIDE.GraphicsResx.file2);
+            this.imgListFileTree.Images.Add("nocompile.ico", global::AVRProjectIDE.GraphicsResx.nocompile);
+            this.imgListFileTree.Images.Add("missing.ico", global::AVRProjectIDE.GraphicsResx.missing);
+            this.imgListFileTree.Images.Add("treeroot.ico", global::AVRProjectIDE.GraphicsResx.treeroot);
+            this.imgListFileTree.Images.Add("unknown2.ico", global::AVRProjectIDE.GraphicsResx.unknown2);
+            this.imgListFileTree.Images.Add("folder.png", global::AVRProjectIDE.GraphicsResx.folder);
+            this.imgListFileTree.Images.Add("folder2.png", global::AVRProjectIDE.GraphicsResx.folder2);
             // 
             // nodeRClickMenu
             // 

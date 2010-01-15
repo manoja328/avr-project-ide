@@ -11,13 +11,19 @@ namespace AVRProjectIDE
 {
     public partial class ErrorReportWindow : Form
     {
-        public ErrorReportWindow(Exception ex, string msg)
+        public static void Show(Exception ex, string msg)
+        {
+            ErrorReportWindow.Show(ex, msg);
+            
+        }
+
+        private ErrorReportWindow(Exception ex, string msg)
         {
             InitializeComponent();
 
             txtException.Text = msg + Environment.NewLine + Environment.NewLine;
             txtException.Text += "Modified code files should have been backed up occasionally automatically, go look for them if the editor crashes." + Environment.NewLine;
-            txtException.Text += "If This is an Issue, Please Report This To http://code.google.com/p/avr-project-ide/issues/list" + Environment.NewLine;
+            txtException.Text += "If this is an issue or bug, please report this to http://code.google.com/p/avr-project-ide/issues/list" + Environment.NewLine;
             txtException.Text += Environment.NewLine + "Message: " + ex.Message + Environment.NewLine;
             txtException.Text += Environment.NewLine + "Target Site: " + ex.TargetSite + Environment.NewLine;
             txtException.Text += Environment.NewLine + "Stack Trace: " + ex.StackTrace + Environment.NewLine;

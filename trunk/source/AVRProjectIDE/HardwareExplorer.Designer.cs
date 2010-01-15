@@ -71,43 +71,43 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listTimerModes = new System.Windows.Forms.ListBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.chkBaudSPIMode = new System.Windows.Forms.CheckBox();
             this.txtBaudResults = new System.Windows.Forms.TextBox();
             this.chkBaudDoubleSpeed = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.listBaud = new System.Windows.Forms.ListBox();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSPIFreq = new System.Windows.Forms.TextBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.listSPIPrescaler = new System.Windows.Forms.ListBox();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.txtTWIResults = new System.Windows.Forms.TextBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.numTWIFreq = new System.Windows.Forms.NumericUpDown();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.listTWIPrescaler = new System.Windows.Forms.ListBox();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.listADCPrescaler = new System.Windows.Forms.ListBox();
+            this.txtADCTimeRes = new System.Windows.Forms.TextBox();
+            this.btnADCUse8BitRes = new System.Windows.Forms.Button();
+            this.btnADCUse10BitRes = new System.Windows.Forms.Button();
+            this.btnADCUseInput = new System.Windows.Forms.Button();
+            this.numADC8BitRes = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numADC10BitRes = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numADCInput = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numADCRef = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeXML = new System.Windows.Forms.TreeView();
             this.txtXMLInfo = new System.Windows.Forms.TextBox();
-            this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.listSPIPrescaler = new System.Windows.Forms.ListBox();
-            this.txtSPIFreq = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.chkBaudSPIMode = new System.Windows.Forms.CheckBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.listTWIPrescaler = new System.Windows.Forms.ListBox();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.numTWIFreq = new System.Windows.Forms.NumericUpDown();
-            this.txtTWIResults = new System.Windows.Forms.TextBox();
-            this.tabPage13 = new System.Windows.Forms.TabPage();
-            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.listADCPrescaler = new System.Windows.Forms.ListBox();
-            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
-            this.txtADCTimeRes = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numADCRef = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numADCInput = new System.Windows.Forms.NumericUpDown();
-            this.btnADCUseInput = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numADC10BitRes = new System.Windows.Forms.NumericUpDown();
-            this.btnADCUse10BitRes = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.numADC8BitRes = new System.Windows.Forms.NumericUpDown();
-            this.btnADCUse8BitRes = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -146,28 +146,28 @@
             this.groupBox2.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
             this.tabPage11.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tabPage12.SuspendLayout();
-            this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTWIFreq)).BeginInit();
+            this.groupBox11.SuspendLayout();
             this.tabPage13.SuspendLayout();
             this.splitContainer6.Panel1.SuspendLayout();
             this.splitContainer6.Panel2.SuspendLayout();
             this.splitContainer6.SuspendLayout();
-            this.groupBox13.SuspendLayout();
             this.splitContainer7.Panel1.SuspendLayout();
             this.splitContainer7.Panel2.SuspendLayout();
             this.splitContainer7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numADCRef)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numADCInput)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numADC10BitRes)).BeginInit();
+            this.groupBox13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numADC8BitRes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numADC10BitRes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numADCInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numADCRef)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -689,8 +689,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.listTimerModes);
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
@@ -726,6 +724,19 @@
             this.tabPage10.TabIndex = 1;
             this.tabPage10.Text = "Baud Rate";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // chkBaudSPIMode
+            // 
+            this.chkBaudSPIMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkBaudSPIMode.AutoSize = true;
+            this.chkBaudSPIMode.Location = new System.Drawing.Point(9, 262);
+            this.chkBaudSPIMode.Name = "chkBaudSPIMode";
+            this.chkBaudSPIMode.Size = new System.Drawing.Size(168, 17);
+            this.chkBaudSPIMode.TabIndex = 2;
+            this.chkBaudSPIMode.Text = "Use Synchronous/SPI Mode?";
+            this.chkBaudSPIMode.UseVisualStyleBackColor = true;
+            this.chkBaudSPIMode.CheckedChanged += new System.EventHandler(this.chkBaudSPIMode_CheckedChanged);
             // 
             // txtBaudResults
             // 
@@ -789,6 +800,379 @@
             this.listBaud.SelectedIndexChanged += new System.EventHandler(this.listBaud_SelectedIndexChanged);
             this.listBaud.Click += new System.EventHandler(this.listBaud_Click);
             // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.label1);
+            this.tabPage11.Controls.Add(this.txtSPIFreq);
+            this.tabPage11.Controls.Add(this.groupBox10);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(313, 339);
+            this.tabPage11.TabIndex = 2;
+            this.tabPage11.Text = "SPI";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 186);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "SPI Frequency (Hz):";
+            // 
+            // txtSPIFreq
+            // 
+            this.txtSPIFreq.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSPIFreq.Location = new System.Drawing.Point(114, 183);
+            this.txtSPIFreq.Name = "txtSPIFreq";
+            this.txtSPIFreq.ReadOnly = true;
+            this.txtSPIFreq.Size = new System.Drawing.Size(190, 20);
+            this.txtSPIFreq.TabIndex = 1;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox10.Controls.Add(this.listSPIPrescaler);
+            this.groupBox10.Location = new System.Drawing.Point(6, 6);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(301, 171);
+            this.groupBox10.TabIndex = 0;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Prescaler";
+            // 
+            // listSPIPrescaler
+            // 
+            this.listSPIPrescaler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSPIPrescaler.FormattingEnabled = true;
+            this.listSPIPrescaler.Items.AddRange(new object[] {
+            "2 (SPI2X = 1, SPR1 = 0, SPR0 = 0)",
+            "4 (SPI2X = 0, SPR1 = 0, SPR0 = 0)",
+            "8 (SPI2X = 1, SPR1 = 0, SPR0 = 1)",
+            "16 (SPI2X = 0, SPR1 = 0, SPR0 = 1)",
+            "32 (SPI2X = 1, SPR1 = 1, SPR0 = 0)",
+            "64 (SPI2X = 0, SPR1 = 1, SPR0 = 0)",
+            "64 (SPI2X = 1, SPR1 = 1, SPR0 = 1)",
+            "128 (SPI2X = 0, SPR1 = 1, SPR0 = 1)"});
+            this.listSPIPrescaler.Location = new System.Drawing.Point(3, 16);
+            this.listSPIPrescaler.Name = "listSPIPrescaler";
+            this.listSPIPrescaler.Size = new System.Drawing.Size(295, 147);
+            this.listSPIPrescaler.TabIndex = 0;
+            this.listSPIPrescaler.SelectedIndexChanged += new System.EventHandler(this.listSPIPrescaler_SelectedIndexChanged);
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.txtTWIResults);
+            this.tabPage12.Controls.Add(this.groupBox12);
+            this.tabPage12.Controls.Add(this.groupBox11);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(313, 339);
+            this.tabPage12.TabIndex = 3;
+            this.tabPage12.Text = "TWI";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // txtTWIResults
+            // 
+            this.txtTWIResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTWIResults.Location = new System.Drawing.Point(9, 165);
+            this.txtTWIResults.Multiline = true;
+            this.txtTWIResults.Name = "txtTWIResults";
+            this.txtTWIResults.ReadOnly = true;
+            this.txtTWIResults.Size = new System.Drawing.Size(295, 168);
+            this.txtTWIResults.TabIndex = 2;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.numTWIFreq);
+            this.groupBox12.Location = new System.Drawing.Point(6, 116);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(301, 43);
+            this.groupBox12.TabIndex = 1;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Desired Frequency";
+            // 
+            // numTWIFreq
+            // 
+            this.numTWIFreq.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numTWIFreq.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numTWIFreq.Location = new System.Drawing.Point(3, 16);
+            this.numTWIFreq.Maximum = new decimal(new int[] {
+            48000000,
+            0,
+            0,
+            0});
+            this.numTWIFreq.Name = "numTWIFreq";
+            this.numTWIFreq.Size = new System.Drawing.Size(295, 20);
+            this.numTWIFreq.TabIndex = 2;
+            this.numTWIFreq.Value = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numTWIFreq.ValueChanged += new System.EventHandler(this.numTWIFreq_ValueChanged);
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox11.Controls.Add(this.listTWIPrescaler);
+            this.groupBox11.Location = new System.Drawing.Point(6, 6);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(301, 104);
+            this.groupBox11.TabIndex = 0;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Prescaler";
+            // 
+            // listTWIPrescaler
+            // 
+            this.listTWIPrescaler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listTWIPrescaler.FormattingEnabled = true;
+            this.listTWIPrescaler.Items.AddRange(new object[] {
+            "1 (TWPS1 = 0, TWPS0 = 0)",
+            "4 (TWPS1 = 0, TWPS0 = 1)",
+            "16 (TWPS1 = 1, TWPS0 = 0)",
+            "64 (TWPS1 = 1, TWPS0 = 1)"});
+            this.listTWIPrescaler.Location = new System.Drawing.Point(3, 16);
+            this.listTWIPrescaler.Name = "listTWIPrescaler";
+            this.listTWIPrescaler.Size = new System.Drawing.Size(295, 82);
+            this.listTWIPrescaler.TabIndex = 0;
+            this.listTWIPrescaler.SelectedIndexChanged += new System.EventHandler(this.listTWIPrescaler_SelectedIndexChanged);
+            // 
+            // tabPage13
+            // 
+            this.tabPage13.Controls.Add(this.splitContainer6);
+            this.tabPage13.Location = new System.Drawing.Point(4, 22);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage13.Size = new System.Drawing.Size(313, 339);
+            this.tabPage13.TabIndex = 4;
+            this.tabPage13.Text = "ADC";
+            this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer6
+            // 
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer6.Name = "splitContainer6";
+            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer6.Panel1
+            // 
+            this.splitContainer6.Panel1.Controls.Add(this.splitContainer7);
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.btnADCUse8BitRes);
+            this.splitContainer6.Panel2.Controls.Add(this.btnADCUse10BitRes);
+            this.splitContainer6.Panel2.Controls.Add(this.btnADCUseInput);
+            this.splitContainer6.Panel2.Controls.Add(this.numADC8BitRes);
+            this.splitContainer6.Panel2.Controls.Add(this.label5);
+            this.splitContainer6.Panel2.Controls.Add(this.numADC10BitRes);
+            this.splitContainer6.Panel2.Controls.Add(this.label4);
+            this.splitContainer6.Panel2.Controls.Add(this.numADCInput);
+            this.splitContainer6.Panel2.Controls.Add(this.label3);
+            this.splitContainer6.Panel2.Controls.Add(this.numADCRef);
+            this.splitContainer6.Panel2.Controls.Add(this.label2);
+            this.splitContainer6.Size = new System.Drawing.Size(307, 333);
+            this.splitContainer6.SplitterDistance = 164;
+            this.splitContainer6.TabIndex = 0;
+            // 
+            // splitContainer7
+            // 
+            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer7.Name = "splitContainer7";
+            this.splitContainer7.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer7.Panel1
+            // 
+            this.splitContainer7.Panel1.Controls.Add(this.groupBox13);
+            // 
+            // splitContainer7.Panel2
+            // 
+            this.splitContainer7.Panel2.Controls.Add(this.txtADCTimeRes);
+            this.splitContainer7.Size = new System.Drawing.Size(307, 164);
+            this.splitContainer7.SplitterDistance = 102;
+            this.splitContainer7.TabIndex = 0;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.listADCPrescaler);
+            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox13.Location = new System.Drawing.Point(0, 0);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(307, 102);
+            this.groupBox13.TabIndex = 0;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "ADC Prescaler";
+            // 
+            // listADCPrescaler
+            // 
+            this.listADCPrescaler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listADCPrescaler.FormattingEnabled = true;
+            this.listADCPrescaler.Items.AddRange(new object[] {
+            "2 (ADSP = 000)",
+            "2 (ADSP = 001)",
+            "4 (ADSP = 010)",
+            "8 (ADSP = 011)",
+            "16 (ADSP = 100)",
+            "32 (ADSP = 101)",
+            "64 (ADSP = 110)",
+            "128 (ADSP = 111)"});
+            this.listADCPrescaler.Location = new System.Drawing.Point(3, 16);
+            this.listADCPrescaler.Name = "listADCPrescaler";
+            this.listADCPrescaler.Size = new System.Drawing.Size(301, 82);
+            this.listADCPrescaler.TabIndex = 0;
+            this.listADCPrescaler.SelectedIndexChanged += new System.EventHandler(this.listADCPrescaler_SelectedIndexChanged);
+            // 
+            // txtADCTimeRes
+            // 
+            this.txtADCTimeRes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtADCTimeRes.Location = new System.Drawing.Point(0, 0);
+            this.txtADCTimeRes.Multiline = true;
+            this.txtADCTimeRes.Name = "txtADCTimeRes";
+            this.txtADCTimeRes.ReadOnly = true;
+            this.txtADCTimeRes.Size = new System.Drawing.Size(307, 58);
+            this.txtADCTimeRes.TabIndex = 0;
+            // 
+            // btnADCUse8BitRes
+            // 
+            this.btnADCUse8BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnADCUse8BitRes.Location = new System.Drawing.Point(241, 88);
+            this.btnADCUse8BitRes.Name = "btnADCUse8BitRes";
+            this.btnADCUse8BitRes.Size = new System.Drawing.Size(63, 20);
+            this.btnADCUse8BitRes.TabIndex = 6;
+            this.btnADCUse8BitRes.Text = "Use Me";
+            this.btnADCUse8BitRes.UseVisualStyleBackColor = true;
+            this.btnADCUse8BitRes.Click += new System.EventHandler(this.btnADCUse8BitRes_Click);
+            // 
+            // btnADCUse10BitRes
+            // 
+            this.btnADCUse10BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnADCUse10BitRes.Location = new System.Drawing.Point(241, 62);
+            this.btnADCUse10BitRes.Name = "btnADCUse10BitRes";
+            this.btnADCUse10BitRes.Size = new System.Drawing.Size(63, 20);
+            this.btnADCUse10BitRes.TabIndex = 4;
+            this.btnADCUse10BitRes.Text = "Use Me";
+            this.btnADCUse10BitRes.UseVisualStyleBackColor = true;
+            this.btnADCUse10BitRes.Click += new System.EventHandler(this.btnADCUse10BitRes_Click);
+            // 
+            // btnADCUseInput
+            // 
+            this.btnADCUseInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnADCUseInput.Location = new System.Drawing.Point(241, 36);
+            this.btnADCUseInput.Name = "btnADCUseInput";
+            this.btnADCUseInput.Size = new System.Drawing.Size(63, 20);
+            this.btnADCUseInput.TabIndex = 2;
+            this.btnADCUseInput.Text = "Use Me";
+            this.btnADCUseInput.UseVisualStyleBackColor = true;
+            this.btnADCUseInput.Click += new System.EventHandler(this.btnADCUseInput_Click);
+            // 
+            // numADC8BitRes
+            // 
+            this.numADC8BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.numADC8BitRes.Location = new System.Drawing.Point(135, 88);
+            this.numADC8BitRes.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numADC8BitRes.Name = "numADC8BitRes";
+            this.numADC8BitRes.Size = new System.Drawing.Size(100, 20);
+            this.numADC8BitRes.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(40, 90);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "8 Bit ADC Result:";
+            // 
+            // numADC10BitRes
+            // 
+            this.numADC10BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.numADC10BitRes.Location = new System.Drawing.Point(135, 62);
+            this.numADC10BitRes.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numADC10BitRes.Name = "numADC10BitRes";
+            this.numADC10BitRes.Size = new System.Drawing.Size(100, 20);
+            this.numADC10BitRes.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(34, 64);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "10 Bit ADC Result:";
+            // 
+            // numADCInput
+            // 
+            this.numADCInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.numADCInput.DecimalPlaces = 3;
+            this.numADCInput.Location = new System.Drawing.Point(135, 36);
+            this.numADCInput.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numADCInput.Name = "numADCInput";
+            this.numADCInput.Size = new System.Drawing.Size(100, 20);
+            this.numADCInput.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(56, 38);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Input Voltage:";
+            // 
+            // numADCRef
+            // 
+            this.numADCRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.numADCRef.DecimalPlaces = 3;
+            this.numADCRef.Location = new System.Drawing.Point(135, 10);
+            this.numADCRef.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numADCRef.Name = "numADCRef";
+            this.numADCRef.Size = new System.Drawing.Size(100, 20);
+            this.numADCRef.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(5, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(124, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "ADC Reference Voltage:";
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.splitContainer2);
@@ -842,392 +1226,6 @@
             this.txtXMLInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtXMLInfo.Size = new System.Drawing.Size(331, 120);
             this.txtXMLInfo.TabIndex = 1;
-            // 
-            // tabPage11
-            // 
-            this.tabPage11.Controls.Add(this.label1);
-            this.tabPage11.Controls.Add(this.txtSPIFreq);
-            this.tabPage11.Controls.Add(this.groupBox10);
-            this.tabPage11.Location = new System.Drawing.Point(4, 22);
-            this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(313, 339);
-            this.tabPage11.TabIndex = 2;
-            this.tabPage11.Text = "SPI";
-            this.tabPage11.UseVisualStyleBackColor = true;
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox10.Controls.Add(this.listSPIPrescaler);
-            this.groupBox10.Location = new System.Drawing.Point(6, 6);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(301, 171);
-            this.groupBox10.TabIndex = 0;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Prescaler";
-            // 
-            // listSPIPrescaler
-            // 
-            this.listSPIPrescaler.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listSPIPrescaler.FormattingEnabled = true;
-            this.listSPIPrescaler.Items.AddRange(new object[] {
-            "2 (SPI2X = 1, SPR1 = 0, SPR0 = 0)",
-            "4 (SPI2X = 0, SPR1 = 0, SPR0 = 0)",
-            "8 (SPI2X = 1, SPR1 = 0, SPR0 = 1)",
-            "16 (SPI2X = 0, SPR1 = 0, SPR0 = 1)",
-            "32 (SPI2X = 1, SPR1 = 1, SPR0 = 0)",
-            "64 (SPI2X = 0, SPR1 = 1, SPR0 = 0)",
-            "64 (SPI2X = 1, SPR1 = 1, SPR0 = 1)",
-            "128 (SPI2X = 0, SPR1 = 1, SPR0 = 1)"});
-            this.listSPIPrescaler.Location = new System.Drawing.Point(3, 16);
-            this.listSPIPrescaler.Name = "listSPIPrescaler";
-            this.listSPIPrescaler.Size = new System.Drawing.Size(295, 147);
-            this.listSPIPrescaler.TabIndex = 0;
-            this.listSPIPrescaler.SelectedIndexChanged += new System.EventHandler(this.listSPIPrescaler_SelectedIndexChanged);
-            // 
-            // txtSPIFreq
-            // 
-            this.txtSPIFreq.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSPIFreq.Location = new System.Drawing.Point(114, 183);
-            this.txtSPIFreq.Name = "txtSPIFreq";
-            this.txtSPIFreq.ReadOnly = true;
-            this.txtSPIFreq.Size = new System.Drawing.Size(190, 20);
-            this.txtSPIFreq.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 186);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "SPI Frequency (Hz):";
-            // 
-            // tabPage12
-            // 
-            this.tabPage12.Controls.Add(this.txtTWIResults);
-            this.tabPage12.Controls.Add(this.groupBox12);
-            this.tabPage12.Controls.Add(this.groupBox11);
-            this.tabPage12.Location = new System.Drawing.Point(4, 22);
-            this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(313, 339);
-            this.tabPage12.TabIndex = 3;
-            this.tabPage12.Text = "TWI";
-            this.tabPage12.UseVisualStyleBackColor = true;
-            // 
-            // chkBaudSPIMode
-            // 
-            this.chkBaudSPIMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkBaudSPIMode.AutoSize = true;
-            this.chkBaudSPIMode.Location = new System.Drawing.Point(9, 262);
-            this.chkBaudSPIMode.Name = "chkBaudSPIMode";
-            this.chkBaudSPIMode.Size = new System.Drawing.Size(168, 17);
-            this.chkBaudSPIMode.TabIndex = 2;
-            this.chkBaudSPIMode.Text = "Use Synchronous/SPI Mode?";
-            this.chkBaudSPIMode.UseVisualStyleBackColor = true;
-            this.chkBaudSPIMode.CheckedChanged += new System.EventHandler(this.chkBaudSPIMode_CheckedChanged);
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox11.Controls.Add(this.listTWIPrescaler);
-            this.groupBox11.Location = new System.Drawing.Point(6, 6);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(301, 104);
-            this.groupBox11.TabIndex = 0;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Prescaler";
-            // 
-            // listTWIPrescaler
-            // 
-            this.listTWIPrescaler.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listTWIPrescaler.FormattingEnabled = true;
-            this.listTWIPrescaler.Items.AddRange(new object[] {
-            "1 (TWPS1 = 0, TWPS0 = 0)",
-            "4 (TWPS1 = 0, TWPS0 = 1)",
-            "16 (TWPS1 = 1, TWPS0 = 0)",
-            "64 (TWPS1 = 1, TWPS0 = 1)"});
-            this.listTWIPrescaler.Location = new System.Drawing.Point(3, 16);
-            this.listTWIPrescaler.Name = "listTWIPrescaler";
-            this.listTWIPrescaler.Size = new System.Drawing.Size(295, 82);
-            this.listTWIPrescaler.TabIndex = 0;
-            this.listTWIPrescaler.SelectedIndexChanged += new System.EventHandler(this.listTWIPrescaler_SelectedIndexChanged);
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.numTWIFreq);
-            this.groupBox12.Location = new System.Drawing.Point(6, 116);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(301, 43);
-            this.groupBox12.TabIndex = 1;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Desired Frequency";
-            // 
-            // numTWIFreq
-            // 
-            this.numTWIFreq.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numTWIFreq.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numTWIFreq.Location = new System.Drawing.Point(3, 16);
-            this.numTWIFreq.Maximum = new decimal(new int[] {
-            48000000,
-            0,
-            0,
-            0});
-            this.numTWIFreq.Name = "numTWIFreq";
-            this.numTWIFreq.Size = new System.Drawing.Size(295, 20);
-            this.numTWIFreq.TabIndex = 2;
-            this.numTWIFreq.Value = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numTWIFreq.ValueChanged += new System.EventHandler(this.numTWIFreq_ValueChanged);
-            // 
-            // txtTWIResults
-            // 
-            this.txtTWIResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTWIResults.Location = new System.Drawing.Point(9, 165);
-            this.txtTWIResults.Multiline = true;
-            this.txtTWIResults.Name = "txtTWIResults";
-            this.txtTWIResults.ReadOnly = true;
-            this.txtTWIResults.Size = new System.Drawing.Size(295, 168);
-            this.txtTWIResults.TabIndex = 2;
-            // 
-            // tabPage13
-            // 
-            this.tabPage13.Controls.Add(this.splitContainer6);
-            this.tabPage13.Location = new System.Drawing.Point(4, 22);
-            this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage13.Size = new System.Drawing.Size(313, 339);
-            this.tabPage13.TabIndex = 4;
-            this.tabPage13.Text = "ADC";
-            this.tabPage13.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer6
-            // 
-            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer6.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer6.Name = "splitContainer6";
-            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer6.Panel1
-            // 
-            this.splitContainer6.Panel1.Controls.Add(this.splitContainer7);
-            // 
-            // splitContainer6.Panel2
-            // 
-            this.splitContainer6.Panel2.Controls.Add(this.btnADCUse8BitRes);
-            this.splitContainer6.Panel2.Controls.Add(this.btnADCUse10BitRes);
-            this.splitContainer6.Panel2.Controls.Add(this.btnADCUseInput);
-            this.splitContainer6.Panel2.Controls.Add(this.numADC8BitRes);
-            this.splitContainer6.Panel2.Controls.Add(this.label5);
-            this.splitContainer6.Panel2.Controls.Add(this.numADC10BitRes);
-            this.splitContainer6.Panel2.Controls.Add(this.label4);
-            this.splitContainer6.Panel2.Controls.Add(this.numADCInput);
-            this.splitContainer6.Panel2.Controls.Add(this.label3);
-            this.splitContainer6.Panel2.Controls.Add(this.numADCRef);
-            this.splitContainer6.Panel2.Controls.Add(this.label2);
-            this.splitContainer6.Size = new System.Drawing.Size(307, 333);
-            this.splitContainer6.SplitterDistance = 164;
-            this.splitContainer6.TabIndex = 0;
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Controls.Add(this.listADCPrescaler);
-            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox13.Location = new System.Drawing.Point(0, 0);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(307, 102);
-            this.groupBox13.TabIndex = 0;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "ADC Prescaler";
-            // 
-            // listADCPrescaler
-            // 
-            this.listADCPrescaler.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listADCPrescaler.FormattingEnabled = true;
-            this.listADCPrescaler.Items.AddRange(new object[] {
-            "2 (ADSP = 000)",
-            "2 (ADSP = 001)",
-            "4 (ADSP = 010)",
-            "8 (ADSP = 011)",
-            "16 (ADSP = 100)",
-            "32 (ADSP = 101)",
-            "64 (ADSP = 110)",
-            "128 (ADSP = 111)"});
-            this.listADCPrescaler.Location = new System.Drawing.Point(3, 16);
-            this.listADCPrescaler.Name = "listADCPrescaler";
-            this.listADCPrescaler.Size = new System.Drawing.Size(301, 82);
-            this.listADCPrescaler.TabIndex = 0;
-            this.listADCPrescaler.SelectedIndexChanged += new System.EventHandler(this.listADCPrescaler_SelectedIndexChanged);
-            // 
-            // splitContainer7
-            // 
-            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer7.Name = "splitContainer7";
-            this.splitContainer7.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer7.Panel1
-            // 
-            this.splitContainer7.Panel1.Controls.Add(this.groupBox13);
-            // 
-            // splitContainer7.Panel2
-            // 
-            this.splitContainer7.Panel2.Controls.Add(this.txtADCTimeRes);
-            this.splitContainer7.Size = new System.Drawing.Size(307, 164);
-            this.splitContainer7.SplitterDistance = 102;
-            this.splitContainer7.TabIndex = 0;
-            // 
-            // txtADCTimeRes
-            // 
-            this.txtADCTimeRes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtADCTimeRes.Location = new System.Drawing.Point(0, 0);
-            this.txtADCTimeRes.Multiline = true;
-            this.txtADCTimeRes.Name = "txtADCTimeRes";
-            this.txtADCTimeRes.ReadOnly = true;
-            this.txtADCTimeRes.Size = new System.Drawing.Size(307, 58);
-            this.txtADCTimeRes.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "ADC Reference Voltage:";
-            // 
-            // numADCRef
-            // 
-            this.numADCRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.numADCRef.DecimalPlaces = 3;
-            this.numADCRef.Location = new System.Drawing.Point(135, 10);
-            this.numADCRef.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numADCRef.Name = "numADCRef";
-            this.numADCRef.Size = new System.Drawing.Size(100, 20);
-            this.numADCRef.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(56, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Input Voltage:";
-            // 
-            // numADCInput
-            // 
-            this.numADCInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.numADCInput.DecimalPlaces = 3;
-            this.numADCInput.Location = new System.Drawing.Point(135, 36);
-            this.numADCInput.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numADCInput.Name = "numADCInput";
-            this.numADCInput.Size = new System.Drawing.Size(100, 20);
-            this.numADCInput.TabIndex = 1;
-            // 
-            // btnADCUseInput
-            // 
-            this.btnADCUseInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnADCUseInput.Location = new System.Drawing.Point(241, 36);
-            this.btnADCUseInput.Name = "btnADCUseInput";
-            this.btnADCUseInput.Size = new System.Drawing.Size(63, 20);
-            this.btnADCUseInput.TabIndex = 2;
-            this.btnADCUseInput.Text = "Use Me";
-            this.btnADCUseInput.UseVisualStyleBackColor = true;
-            this.btnADCUseInput.Click += new System.EventHandler(this.btnADCUseInput_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 64);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "10 Bit ADC Result:";
-            // 
-            // numADC10BitRes
-            // 
-            this.numADC10BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.numADC10BitRes.Location = new System.Drawing.Point(135, 62);
-            this.numADC10BitRes.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numADC10BitRes.Name = "numADC10BitRes";
-            this.numADC10BitRes.Size = new System.Drawing.Size(100, 20);
-            this.numADC10BitRes.TabIndex = 3;
-            // 
-            // btnADCUse10BitRes
-            // 
-            this.btnADCUse10BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnADCUse10BitRes.Location = new System.Drawing.Point(241, 62);
-            this.btnADCUse10BitRes.Name = "btnADCUse10BitRes";
-            this.btnADCUse10BitRes.Size = new System.Drawing.Size(63, 20);
-            this.btnADCUse10BitRes.TabIndex = 4;
-            this.btnADCUse10BitRes.Text = "Use Me";
-            this.btnADCUse10BitRes.UseVisualStyleBackColor = true;
-            this.btnADCUse10BitRes.Click += new System.EventHandler(this.btnADCUse10BitRes_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(40, 90);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "8 Bit ADC Result:";
-            // 
-            // numADC8BitRes
-            // 
-            this.numADC8BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.numADC8BitRes.Location = new System.Drawing.Point(135, 88);
-            this.numADC8BitRes.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numADC8BitRes.Name = "numADC8BitRes";
-            this.numADC8BitRes.Size = new System.Drawing.Size(100, 20);
-            this.numADC8BitRes.TabIndex = 5;
-            // 
-            // btnADCUse8BitRes
-            // 
-            this.btnADCUse8BitRes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnADCUse8BitRes.Location = new System.Drawing.Point(241, 88);
-            this.btnADCUse8BitRes.Name = "btnADCUse8BitRes";
-            this.btnADCUse8BitRes.Size = new System.Drawing.Size(63, 20);
-            this.btnADCUse8BitRes.TabIndex = 6;
-            this.btnADCUse8BitRes.Text = "Use Me";
-            this.btnADCUse8BitRes.UseVisualStyleBackColor = true;
-            this.btnADCUse8BitRes.Click += new System.EventHandler(this.btnADCUse8BitRes_Click);
             // 
             // HardwareExplorer
             // 
@@ -1290,33 +1288,33 @@
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
             this.groupBox9.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
-            this.splitContainer2.ResumeLayout(false);
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.tabPage12.ResumeLayout(false);
             this.tabPage12.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numTWIFreq)).EndInit();
+            this.groupBox11.ResumeLayout(false);
             this.tabPage13.ResumeLayout(false);
             this.splitContainer6.Panel1.ResumeLayout(false);
             this.splitContainer6.Panel2.ResumeLayout(false);
             this.splitContainer6.Panel2.PerformLayout();
             this.splitContainer6.ResumeLayout(false);
-            this.groupBox13.ResumeLayout(false);
             this.splitContainer7.Panel1.ResumeLayout(false);
             this.splitContainer7.Panel2.ResumeLayout(false);
             this.splitContainer7.Panel2.PerformLayout();
             this.splitContainer7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numADCRef)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numADCInput)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numADC10BitRes)).EndInit();
+            this.groupBox13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numADC8BitRes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numADC10BitRes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numADCInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numADCRef)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
