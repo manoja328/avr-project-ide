@@ -112,7 +112,7 @@
   </template>
 
   <template name="Sanguino ATmega644 16MHz">
-    <Device>atmega644p</Device>
+    <Device>atmega644</Device>
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega644</BurnPart>
     <BurnFuseBox>-U lfuse:w:0xff:m -U hfuse:w:0xdc:m -U efuse:w:0xfd:m</BurnFuseBox>
@@ -171,13 +171,13 @@
   </template>
 
   <template name="Arduino Bootloader 19200 Baud">
-    <BurnProgrammer>stk500</BurnProgrammer>
+    <BurnProgrammer>stk500v1</BurnProgrammer>
     <BurnBaud>19200</BurnBaud>
     <BurnAutoReset>true</BurnAutoReset>
   </template>
 
   <template name="Arduino Bootloader 57600 Baud">
-    <BurnProgrammer>stk500</BurnProgrammer>
+    <BurnProgrammer>stk500v1</BurnProgrammer>
     <BurnBaud>57600</BurnBaud>
     <BurnAutoReset>true</BurnAutoReset>
   </template>

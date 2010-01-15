@@ -24,8 +24,7 @@ namespace AVRProjectIDE
                 }
                 catch (Exception ex)
                 {
-                    ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while creating templates");
-                    erw.ShowDialog();
+                    ErrorReportWindow.Show(ex, "Error while creating templates");
                     return false;
                 }
             }
@@ -55,8 +54,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error while loading templates");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error while loading templates");
+                
                 return false;
             }
 

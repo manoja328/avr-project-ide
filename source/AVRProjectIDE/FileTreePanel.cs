@@ -22,8 +22,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In File Tree Panel");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In File Tree Panel");
+                
             }
         }
 
@@ -82,7 +82,7 @@ namespace AVRProjectIDE
             {
                 if (f.Exists)
                 {
-                    if (MessageBox.Show("Delete Permanently?", "Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show("Delete '" + f.FileName + "' Permanently?", "Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         try
                         {
@@ -266,9 +266,18 @@ namespace AVRProjectIDE
                 }
                 else
                 {
-                    tn.ImageKey = "file.ico";
-                    tn.SelectedImageKey = "file.ico";
-                    tn.StateImageKey = "file.ico";
+                    if (file.IsOpen)
+                    {
+                        tn.ImageKey = "file.ico";
+                        tn.SelectedImageKey = "file.ico";
+                        tn.StateImageKey = "file.ico";
+                    }
+                    else
+                    {
+                        tn.ImageKey = "file2.ico";
+                        tn.SelectedImageKey = "file2.ico";
+                        tn.StateImageKey = "file2.ico";
+                    }
                 }
 
                 string ext = file.FileExt;
@@ -426,8 +435,8 @@ namespace AVRProjectIDE
                     }
                     catch (Exception ex)
                     {
-                        ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Creating New File " + file.FileName);
-                        erw.ShowDialog();
+                        ErrorReportWindow.Show(ex, "Error Creating New File " + file.FileName);
+                        
                     }
                 }
 
@@ -548,6 +557,12 @@ namespace AVRProjectIDE
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             if (e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode)
+            {
+                e.CancelEdit = true;
+                return;
+            }
+
+            if (e.Label == null)
             {
                 e.CancelEdit = true;
                 return;

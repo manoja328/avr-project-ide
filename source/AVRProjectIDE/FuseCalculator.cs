@@ -22,8 +22,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Fuse Calculator");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Fuse Calculator");
+                
             }
         }
 
@@ -124,8 +124,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Fuse Calculator Error");
-                erw.Show();
+                ErrorReportWindow.Show(ex, "Fuse Calculator Error");
                 this.Close();
                 return;
             }

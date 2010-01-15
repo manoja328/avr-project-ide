@@ -104,6 +104,7 @@ namespace AVRProjectIDE
             template = template.Replace("%FILENAMENOEXT%", fileNameNoExt);
             template = template.Replace("%FILEEXT%", fileExt);
             template = template.Replace("%PROJNAME%", projName);
+            template = template.Replace("%USERNAME%", Environment.UserName);
 
             return template;
         }

@@ -39,8 +39,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Initialization Error");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Initialization Error");
+                
             }
 
             try
@@ -49,8 +49,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Checking Updates");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error Checking Updates");
+                
             }
 
             try
@@ -99,8 +99,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Main IDE Error");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Main IDE Error");
+                
             }
 
             try
@@ -111,24 +111,83 @@ namespace AVRProjectIDE
                     {
                         try
                         {
-                            if (MessageBox.Show("An Updated Version of AVR Project IDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "), Download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            if (MessageBox.Show("An Updated Version of AVR Project IDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "). Would you like to download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
                                 System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
                             }
                         }
                         catch (Exception ex)
                         {
-                            ErrorReportWindow erw = new ErrorReportWindow(ex, "Updater Error");
-                            erw.ShowDialog();
+                            ErrorReportWindow.Show(ex, "Updater Error");
+                            
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error Checking Updates");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error Checking Updates");
             }
+
+            try
+            {
+                if (SettingsManagement.LastRunVersion != Properties.Resources.BuildID)
+                {
+                    NotifyOfUserAction();
+                }
+
+                SettingsManagement.LastRunVersion = Properties.Resources.BuildID;
+            }
+            catch { }
+        }
+
+        private static void NotifyOfUserAction()
+        {
+            bool showMsg = false;
+            string msg = "It appears that you have recently updated AVR Project IDE. There may be some files that may have been updated but you already have a different version." + Environment.NewLine;
+            msg += "You may have customized these files yourself, in this case you can choose not to update these files." + Environment.NewLine;
+            msg += "If you wish to update these files, you can delete them and they will be updated when you start AVR Project IDE again." + Environment.NewLine;
+            msg += "You can also save a backup of your own version, and then delete the originals to receive the updated version, and then merge the changes manually." + Environment.NewLine;
+            msg += "These are the files:" + Environment.NewLine;
+
+            try
+            {
+                if (File.ReadAllText(SettingsManagement.AppDataPath + "templates.xml") != Properties.Resources.templates)
+                {
+                    msg += "Project configuration templates file at '" + SettingsManagement.AppDataPath + "templates.xml" + "'" + Environment.NewLine;
+                    showMsg = true;
+                }
+
+                if (File.ReadAllText(SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "interruptvectors.xml") != Properties.Resources.interruptvectors)
+                {
+                    msg += "Interrupt vector list file at '" + SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "interruptvectors.xml" + "'" + Environment.NewLine;
+                    showMsg = true;
+                }
+
+                if (File.ReadAllText(SettingsManagement.AppDataPath + "helplinks.xml") != Properties.Resources.helplinks)
+                {
+                    msg += "Help links collection file at '" + SettingsManagement.AppDataPath + "helplinks.xml" + "'" + Environment.NewLine;
+                    showMsg = true;
+                }
+
+                if (SettingsManagement.AutocompleteEnable)
+                {
+                    if (File.ReadAllText(SettingsManagement.AppDataPath + "autocomplete.xml") != Properties.Resources.autocomplete)
+                    {
+                        msg += "Autocomplete keyword collection file at '" + SettingsManagement.AppDataPath + "autocomplete.xml" + "'" + Environment.NewLine;
+                        showMsg = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow.Show(ex, "Error while scanning for updated files");
+            }
+
+            msg += "Also various other files may have changed, such as the files under '" + SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "' and '" + SettingsManagement.AppDataPath + "file_templates" + Path.DirectorySeparatorChar + "'" + Environment.NewLine;
+
+            if (showMsg)
+                MessageBox.Show(msg);
         }
 
         public static bool MakeSurePathExists(string dirPath)

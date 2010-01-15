@@ -137,6 +137,13 @@ namespace AVRProjectIDE {
             }
         }
         
+        internal static System.Drawing.Icon chip {
+            get {
+                object obj = ResourceManager.GetObject("chip", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap cog_edit {
             get {
                 object obj = ResourceManager.GetObject("cog_edit", resourceCulture);

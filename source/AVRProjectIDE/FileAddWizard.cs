@@ -21,8 +21,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In File Add Wizard");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In File Add Wizard");
+                
             }
         }
 
@@ -136,7 +136,15 @@ namespace AVRProjectIDE
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            string fileName = txtFileName.Text + "." + this.SelectedExtension;
+            string f = txtFileName.Text.Trim();
+
+            if (string.IsNullOrEmpty(f))
+            {
+                MessageBox.Show("File name must not be blank");
+                return;
+            }
+
+            string fileName = f + "." + this.SelectedExtension;
 
             if (
                 fileName.Contains(" ") ||

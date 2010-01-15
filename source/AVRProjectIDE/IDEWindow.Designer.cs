@@ -133,7 +133,7 @@
             this.tbtnCompile = new System.Windows.Forms.ToolStripButton();
             this.tbtnBurn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.imgListFileTree = new System.Windows.Forms.ImageList(this.components);
+            //this.imgListFileTree = new System.Windows.Forms.ImageList(this.components);
             this.imgListTabs = new System.Windows.Forms.ImageList(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -896,27 +896,13 @@
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
-            // imgListFileTree
-            // 
-            this.imgListFileTree.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListFileTree.ImageStream")));
-            this.imgListFileTree.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListFileTree.Images.SetKeyName(0, "file.ico");
-            this.imgListFileTree.Images.SetKeyName(1, "file2.ico");
-            this.imgListFileTree.Images.SetKeyName(2, "nocompile.ico");
-            this.imgListFileTree.Images.SetKeyName(3, "missing.ico");
-            this.imgListFileTree.Images.SetKeyName(4, "treeroot.ico");
-            this.imgListFileTree.Images.SetKeyName(5, "unknown2.ico");
-            this.imgListFileTree.Images.SetKeyName(6, "folder.png");
-            this.imgListFileTree.Images.SetKeyName(7, "folder2.png");
-            // 
             // imgListTabs
             // 
-            this.imgListTabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTabs.ImageStream")));
             this.imgListTabs.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListTabs.Images.SetKeyName(0, "serial.ico");
-            this.imgListTabs.Images.SetKeyName(1, "searchall.png");
-            this.imgListTabs.Images.SetKeyName(2, "warning.ico");
-            this.imgListTabs.Images.SetKeyName(3, "message.png");
+            this.imgListTabs.Images.Add("serial.ico", global::AVRProjectIDE.GraphicsResx.serial);
+            this.imgListTabs.Images.Add("searchall.ico", global::AVRProjectIDE.GraphicsResx.searchall);
+            this.imgListTabs.Images.Add("warning.ico", global::AVRProjectIDE.GraphicsResx.warning);
+            this.imgListTabs.Images.Add("message.ico", global::AVRProjectIDE.GraphicsResx.message);
             // 
             // toolStripSeparator2
             // 
@@ -1092,7 +1078,7 @@
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.menuStripMain);
             this.Controls.Add(this.dockPanel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = GraphicsResx.mainicon;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripMain;
             this.MinimumSize = new System.Drawing.Size(400, 300);
@@ -1125,7 +1111,7 @@
         private System.Windows.Forms.ToolStripButton tbtnPasteOrig;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ImageList imgListFileTree;
+        //private System.Windows.Forms.ImageList imgListFileTree;
         private System.Windows.Forms.ImageList imgListTabs;
         private System.Windows.Forms.ToolStripMenuItem mbtnSaveAllFiles;
         private System.Windows.Forms.ToolStripMenuItem mbtnSaveConfigAs;

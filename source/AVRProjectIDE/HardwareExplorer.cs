@@ -23,8 +23,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In Hardware Explorer");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In Hardware Explorer");
+                
             }
         }
 
@@ -41,7 +41,7 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
-            this.Icon = GraphicsResx.burn;
+            this.Icon = GraphicsResx.chip;
 
             numTimerOverflows.Maximum = decimal.MaxValue;
             numTimerRealTime.Maximum = decimal.MaxValue;

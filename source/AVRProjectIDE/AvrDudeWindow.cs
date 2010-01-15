@@ -20,8 +20,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error In AVRDUDE Tool");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error In AVRDUDE Tool");
+                
             }
         }
 
@@ -90,8 +90,8 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                ErrorReportWindow erw = new ErrorReportWindow(ex, "Error using AVRDUDE GUI");
-                erw.ShowDialog();
+                ErrorReportWindow.Show(ex, "Error using AVRDUDE GUI");
+                
             }
         }
 
