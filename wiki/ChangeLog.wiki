@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 72==
+
+ * Fixed hardware explorer not showing vector name info
+ * Fixed AVRDUDE tool not being able to do anything useful
+
 ==Alpha 71==
 
  * Cancelling renaming a file no longer causes exception (can't believe nobody told me about this one)
