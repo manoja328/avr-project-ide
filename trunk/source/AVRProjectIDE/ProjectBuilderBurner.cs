@@ -1134,6 +1134,7 @@ namespace AVRProjectIDE
 
             while (line != null)
             {
+
                 string re1 = "([a-z0-9_]+)";   // Variable Name 1
                 string re2 = "(\\.)";	// Any Single Character 1
                 string re3 = "([a-z0-9_]+)";	// Variable Name 2
