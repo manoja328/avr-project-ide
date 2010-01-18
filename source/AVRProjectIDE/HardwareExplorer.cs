@@ -727,7 +727,7 @@ namespace AVRProjectIDE
         {
             if (listInterruptsAVRLibc.SelectedIndex < 0)
                 return;
-
+            string chipName = this.chipName.ToLowerInvariant();
             string desc = (string)listInterruptsAVRLibc.Items[listInterruptsAVRLibc.SelectedIndex];
 
             if (intVectListAVRLibc.ContainsKey(chipName) == false)
