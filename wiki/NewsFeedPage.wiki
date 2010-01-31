@@ -1,5 +1,7 @@
 This page is reserved for the latest news feeds to the AVRProjectIDE's Welcome Window.
 
+===Small bug fixes in 73===
+
 ===Just a heads up, WinAVR released a new version on Jan 10 of 2010, please consider updating WinAVR===
 
 ===A bunch of fixes in 71, also some additional features===
