@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 73==
+
+ * Noticed (hopefully fixed) a bug regarding serial port preference
+ * Fixed stack-overflow in the error report window
+ 
 ==Alpha 72==
 
  * Fixed hardware explorer not showing vector name info
