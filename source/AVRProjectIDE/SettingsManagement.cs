@@ -115,6 +115,135 @@ namespace AVRProjectIDE
             }
         }
 
+        public static string LastICEHardware
+        {
+            get
+            {
+                string str = iniFile.Read("Debugger", "LastICEHardware");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastICEHardware = "JTAG mkI";
+                    str = LastICEHardware;
+                }
+                return str.Trim();
+            }
+
+            set
+            {
+                iniFile.Write("Debugger", "LastICEHardware", value.Trim());
+            }
+        }
+
+        public static string LastICEOptions
+        {
+            get
+            {
+                string str = iniFile.Read("Debugger", "LastICEOptions");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastICEHardware = "";
+                    str = LastICEHardware;
+                }
+                return str.Trim();
+            }
+
+            set
+            {
+                iniFile.Write("Debugger", "LastICEOptions", value.Trim());
+            }
+        }
+
+        public static string LastJTAGPort
+        {
+            get
+            {
+                string str = iniFile.Read("Debugger", "LastJTAGPort");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastICEHardware = "COM1";
+                    str = LastICEHardware;
+                }
+                return str.Trim();
+            }
+
+            set
+            {
+                iniFile.Write("Debugger", "LastJTAGPort", value.Trim());
+            }
+        }
+
+        public static int LastJTAGFreq
+        {
+            get
+            {
+                int res = int.MaxValue;
+                string str = iniFile.Read("Debugger", "LastJTAGFreq");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastJTAGFreq = res;
+                    res = LastJTAGFreq;
+                }
+                else if (int.TryParse(str, out res) == false)
+                {
+                    res = int.MaxValue;
+                    LastJTAGFreq = res;
+                    res = LastJTAGFreq;
+                }
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Debugger", "LastJTAGFreq", value.ToString("0"));
+            }
+        }
+
+        public static int LastGDBPort
+        {
+            get
+            {
+                int res = UInt16.MaxValue / 2;
+                string str = iniFile.Read("Debugger", "LastGDBPort");
+
+                if (str != null)
+                    str.Trim();
+
+                if (string.IsNullOrEmpty(str))
+                {
+                    LastGDBPort = res;
+                    res = LastGDBPort;
+                }
+                else if (int.TryParse(str, out res) == false)
+                {
+                    res = UInt16.MaxValue / 2;
+                    LastGDBPort = res;
+                    res = LastGDBPort;
+                }
+                return res;
+            }
+
+            set
+            {
+                iniFile.Write("Debugger", "LastGDBPort", value.ToString("0"));
+            }
+        }
+
         public static int LastProgBaud
         {
             get
@@ -159,7 +288,7 @@ namespace AVRProjectIDE
                     LastProgPortChoosen = "NoOverride";
                     str = LastProgPortChoosen;
                 }
-                return str;
+                return str.Trim();
             }
 
             set
@@ -284,6 +413,8 @@ namespace AVRProjectIDE
                 iniFile.Write("Wizard", "LastFileExt", value.Trim());
             }
         }
+
+
 
         #endregion
 
@@ -1124,7 +1255,7 @@ namespace AVRProjectIDE
                 if (string.IsNullOrEmpty(str))
                 {
                     PortName = "COM1";
-                    str = LastChipChoosen;
+                    str = PortName;
                 }
                 return str;
             }

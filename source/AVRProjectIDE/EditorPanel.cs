@@ -92,6 +92,8 @@ namespace AVRProjectIDE
             this.project = project;
 
             SettingsManagement.LoadEditorState(this);
+
+            
         }
 
         private void EditorPanelContent_Shown(object sender, EventArgs e)

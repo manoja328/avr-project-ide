@@ -44,6 +44,33 @@ namespace AVRProjectIDE
         {
             InitializeComponent();
 
+            try
+            {
+                try
+                {
+                    this.txtTx.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+                    this.txtRx.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+                }
+                catch
+                {
+                    try
+                    {
+                        this.txtTx.Font = new System.Drawing.Font("Courier", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+                        this.txtRx.Font = new System.Drawing.Font("Courier", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+                    }
+                    catch
+                    {
+                        this.txtTx.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+                        this.txtRx.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+                    }
+                }
+            }
+            catch
+            {
+                this.txtTx.Font = new System.Drawing.Font(System.Drawing.FontFamily.GenericMonospace, 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+                this.txtRx.Font = new System.Drawing.Font(System.Drawing.FontFamily.GenericMonospace, 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            }
+
             this.Icon = GraphicsResx.serial;
 
             // get a list of available ports and populate the list
@@ -519,7 +546,10 @@ namespace AVRProjectIDE
                     }
                     else
                     {
-                        resStr += "{\\x" + Convert.ToString(bArr[i], 16).ToUpper() + "}";
+                        string hexStr = Convert.ToString(bArr[i], 16).ToUpper();
+                        while (hexStr.Length % 2 == 1)
+                            hexStr = "0" + hexStr;
+                        resStr += "{\\x" + hexStr + "}";
                     }
                 }
 
