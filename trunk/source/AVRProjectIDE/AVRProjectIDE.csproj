@@ -114,6 +114,12 @@
       <DependentUpon>BurnerPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="CodePreProcess.cs" />
+    <Compile Include="DebuggerPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebuggerPanel.Designer.cs">
+      <DependentUpon>DebuggerPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="DummyPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,7 @@
     <Compile Include="ErrorReportWindow.Designer.cs">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalTool.cs" />
     <Compile Include="FileAddWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BurnerPanel.resx">
       <DependentUpon>BurnerPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebuggerPanel.resx">
+      <DependentUpon>DebuggerPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorReportWindow.resx">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
@@ -1177,6 +1187,7 @@
     <None Include="graphics\findnext_16x16.png" />
     <None Include="graphics\help_img.png" />
     <None Include="graphics\chip.ico" />
+    <Content Include="ext_tools.xml" />
     <Content Include="graphics\installer_large_banner.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

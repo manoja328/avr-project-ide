@@ -74,6 +74,14 @@ namespace AVRProjectIDE
             set { FileAbsPath = Path.ChangeExtension(FileAbsPath, value.Trim()); }
         }
 
+        public bool IsSource
+        {
+            get
+            {
+                return (this.FileExt == "c" || this.FileExt == "cpp" || this.FileExt == "cxx" || this.FileExt == "s" || this.FileExt == "pde");                    
+            }
+        }
+
         public string BackupPath
         {
             get { return FileAbsPath + ".backup"; }
@@ -94,7 +102,7 @@ namespace AVRProjectIDE
         private bool toCompile;
         public bool ToCompile
         {
-            get { return toCompile; }
+            get { return toCompile && this.IsSource; }
             set { toCompile = value; }
         }
 
@@ -505,6 +513,37 @@ namespace AVRProjectIDE
         public bool OverrideArduinoCore
         {
             get { return !string.IsNullOrEmpty(ArduinoCoreOverride); }
+        }
+
+        #endregion
+
+        #region Debugger Settings
+
+        private string iCEHardware;
+        public string ICEHardware
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(iCEHardware))
+                    iCEHardware = "";
+
+                return iCEHardware.Trim();
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    value = "";
+
+                iCEHardware = value.Trim();
+            }
+        }
+
+        private int jTAGFreq;
+        public int JTAGFreq
+        {
+            get { return jTAGFreq; }
+            set { jTAGFreq = value; }
         }
 
         #endregion
@@ -1536,12 +1575,15 @@ namespace AVRProjectIDE
             burnProg = SettingsManagement.LastProgChoosen;
             burnOpt = "";
             burnBaud = SettingsManagement.LastProgBaud;
-            if (SettingsManagement.LastProgPortChoosen.Trim().ToLowerInvariant() == "nooverride")
+            if (SettingsManagement.LastProgPortChoosen.ToLowerInvariant() == "nooverride")
                 burnPort = "";
             else
-                burnPort = SettingsManagement.LastProgPortChoosen.Trim();
+                burnPort = SettingsManagement.LastProgPortChoosen;
             burnFuseBox = "";
             burnAutoReset = SettingsManagement.LastProgAutoReset;
+
+            iCEHardware = SettingsManagement.LastICEHardware;
+            jTAGFreq = SettingsManagement.LastJTAGFreq;
 
             ardCoreOverride = "";
 

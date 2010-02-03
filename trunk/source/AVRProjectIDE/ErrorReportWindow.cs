@@ -13,7 +13,7 @@ namespace AVRProjectIDE
     {
         public static void Show(Exception ex, string msg)
         {
-            ErrorReportWindow.Show(ex, msg);
+            new ErrorReportWindow(ex, msg).ShowDialog();
             
         }
 

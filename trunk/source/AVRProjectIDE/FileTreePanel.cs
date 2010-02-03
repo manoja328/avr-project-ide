@@ -402,7 +402,7 @@ namespace AVRProjectIDE
             }
             else
             {
-                if (ext == "c" || ext == "cpp" || ext == "cxx" || ext == "s" || ext == "h" || ext == "hpp")
+                if (ext == ".c" || ext == ".cpp" || ext == ".cxx" || ext == ".s" || ext == ".h" || ext == ".hpp")
                 {
                     // check for space if it's a source or header file, we don't care about the other files
                     if (fn.Contains(" "))
@@ -605,7 +605,24 @@ namespace AVRProjectIDE
         private void treeView1_BeforeCheck(object sender, TreeViewCancelEventArgs e)
         {
             if ((e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode) || e.Node.Parent != sourceNode)
+            {
                 e.Cancel = true;
+                return;
+            }
+
+            string ext = e.Node.Text.ToLowerInvariant().Trim();
+            if (ext.Contains(".") == false)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            ext = ext.Substring(ext.LastIndexOf('.'));
+            if (ext != "c" && ext != "cpp" && ext != "cxx" && ext != "s" && ext != "pde")
+            {
+                e.Cancel = true;
+                return;
+            }
         }
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
@@ -632,7 +649,54 @@ namespace AVRProjectIDE
             treeView1.SelectedNode = e.Node;
         }
 
+        private void tmrHeaderUnchecker_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rootNode.Checked == false)
+                    rootNode.Checked = true;
+
+                if (sourceNode.Checked == false)
+                    sourceNode.Checked = true;
+
+                if (headerNode.Checked == true)
+                    headerNode.Checked = false;
+
+                foreach (TreeNode n in headerNode.Nodes)
+                {
+                    if (n.Checked == true)
+                        n.Checked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         #endregion
+
+        private void mbtnEnableCompileAll_Click(object sender, EventArgs e)
+        {
+            if (this.project == null)
+                return;
+
+            if (this.project.IsReady == false)
+                return;
+
+            if (this.treeView1.SelectedNode != this.sourceNode)
+            {
+                MessageBox.Show("You can only compile source code files");
+                return;
+            }
+
+            foreach (ProjectFile f in this.project.FileList.Values)
+            {
+                if (f.IsSource)
+                    f.ToCompile = true;
+
+                f.Node.Checked = true;
+            }
+        }
 
         #region Drag and Drop Event Handling
 

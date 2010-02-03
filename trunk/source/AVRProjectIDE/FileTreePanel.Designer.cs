@@ -37,7 +37,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileTreePanel));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.treeRClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mbtnAddFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +46,8 @@
             this.mbtnRename = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnSetOpt = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnEnableCompileAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmrHeaderUnchecker = new System.Windows.Forms.Timer(this.components);
             this.treeRClickMenu.SuspendLayout();
             this.nodeRClickMenu.SuspendLayout();
             this.SuspendLayout();
@@ -83,27 +84,37 @@
             // 
             this.treeRClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mbtnAddFile,
-            this.mbtnAddFileWiz});
+            this.mbtnAddFileWiz,
+            this.mbtnEnableCompileAll});
             this.treeRClickMenu.Name = "treeRClickMenu";
             this.treeRClickMenu.ShowImageMargin = false;
-            this.treeRClickMenu.Size = new System.Drawing.Size(155, 70);
+            this.treeRClickMenu.Size = new System.Drawing.Size(164, 48);
             // 
             // mbtnAddFile
             // 
             this.mbtnAddFile.Name = "mbtnAddFile";
-            this.mbtnAddFile.Size = new System.Drawing.Size(154, 22);
+            this.mbtnAddFile.Size = new System.Drawing.Size(163, 22);
             this.mbtnAddFile.Text = "Add / Find File";
             this.mbtnAddFile.Click += new System.EventHandler(this.mbtnAddFile_Click);
             // 
             // mbtnAddFileWiz
             // 
             this.mbtnAddFileWiz.Name = "mbtnAddFileWiz";
-            this.mbtnAddFileWiz.Size = new System.Drawing.Size(154, 22);
+            this.mbtnAddFileWiz.Size = new System.Drawing.Size(163, 22);
             this.mbtnAddFileWiz.Text = "Add File using Wizard";
             this.mbtnAddFileWiz.Click += new System.EventHandler(this.mbtnAddFileWiz_Click);
             // 
+            // mbtnAddFileWiz
+            // 
+            this.mbtnEnableCompileAll.Name = "mbtnAddFileWiz";
+            this.mbtnEnableCompileAll.Size = new System.Drawing.Size(163, 22);
+            this.mbtnEnableCompileAll.Text = "Enable Compile on All";
+            this.mbtnEnableCompileAll.Click += new System.EventHandler(this.mbtnEnableCompileAll_Click);
+            // 
             // imgListFileTree
             // 
+            this.imgListFileTree.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imgListFileTree.ImageSize = new System.Drawing.Size(16, 16);
             this.imgListFileTree.TransparentColor = System.Drawing.Color.Transparent;
             this.imgListFileTree.Images.Add("file.ico", global::AVRProjectIDE.GraphicsResx.file);
             this.imgListFileTree.Images.Add("file2.ico", global::AVRProjectIDE.GraphicsResx.file2);
@@ -122,28 +133,34 @@
             this.mbtnSetOpt});
             this.nodeRClickMenu.Name = "rClickMenu";
             this.nodeRClickMenu.ShowImageMargin = false;
-            this.nodeRClickMenu.Size = new System.Drawing.Size(148, 70);
+            this.nodeRClickMenu.Size = new System.Drawing.Size(159, 70);
             // 
             // mbtnRename
             // 
             this.mbtnRename.Name = "mbtnRename";
-            this.mbtnRename.Size = new System.Drawing.Size(147, 22);
+            this.mbtnRename.Size = new System.Drawing.Size(158, 22);
             this.mbtnRename.Text = "Rename";
             this.mbtnRename.Click += new System.EventHandler(this.mbtnRename_Click);
             // 
             // mbtnRemove
             // 
             this.mbtnRemove.Name = "mbtnRemove";
-            this.mbtnRemove.Size = new System.Drawing.Size(147, 22);
+            this.mbtnRemove.Size = new System.Drawing.Size(158, 22);
             this.mbtnRemove.Text = "Remove";
             this.mbtnRemove.Click += new System.EventHandler(this.mbtnDelete_Click);
             // 
             // mbtnSetOpt
             // 
             this.mbtnSetOpt.Name = "mbtnSetOpt";
-            this.mbtnSetOpt.Size = new System.Drawing.Size(147, 22);
+            this.mbtnSetOpt.Size = new System.Drawing.Size(158, 22);
             this.mbtnSetOpt.Text = "Set Compile Options";
             this.mbtnSetOpt.Click += new System.EventHandler(this.mbtnSetOpt_Click);
+            // 
+            // timerScanner
+            // 
+            this.tmrHeaderUnchecker.Enabled = true;
+            this.tmrHeaderUnchecker.Interval = 1000;
+            this.tmrHeaderUnchecker.Tick += new System.EventHandler(this.tmrHeaderUnchecker_Tick);
             // 
             // FileTreePanel
             // 
@@ -157,7 +174,7 @@
             this.Controls.Add(this.treeView1);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft)
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HideOnClose = true;
             this.Name = "FileTreePanel";
@@ -180,5 +197,7 @@
         private System.Windows.Forms.ContextMenuStrip treeRClickMenu;
         private System.Windows.Forms.ToolStripMenuItem mbtnAddFile;
         private System.Windows.Forms.ToolStripMenuItem mbtnAddFileWiz;
+        private System.Windows.Forms.ToolStripMenuItem mbtnEnableCompileAll;
+        private System.Windows.Forms.Timer tmrHeaderUnchecker;
     }
 }

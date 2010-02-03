@@ -15,6 +15,21 @@ namespace AVRProjectIDE
     {
         #region Fields and Properties
 
+        private static AVRProject curProj;
+        public static AVRProject CurrentProject
+        {
+            get
+            {
+                if (curProj == null)
+                    return null;
+
+                if (curProj.IsReady == false)
+                    return null;
+
+                return curProj;
+            }
+        }
+
         private AVRProject project;
 
         private SerialPortPanel serialWin;
@@ -22,6 +37,7 @@ namespace AVRProjectIDE
         private FileTreePanel fileTreeWin;
         private MessagePanel messageWin;
         private HardwareExplorer hardwareExplorerWin;
+        private DebuggerPanel debuggerWin;
 
         private EditorPanel lastEditor;
         
@@ -33,6 +49,43 @@ namespace AVRProjectIDE
         public Dictionary<string, EditorPanel> EditorList
         {
             get { return editorList; }
+        }
+
+        public ProjectFile CurrentFile
+        {
+            get
+            {
+                if (this.project != null)
+                {
+                    if (this.project.IsReady)
+                    {
+                        ProjectFile file = null;
+
+                        if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+                        {
+                            ((EditorPanel)dockPanel1.ActiveContent).Save();
+                            file = ((EditorPanel)dockPanel1.ActiveContent).File;
+                        }
+                        else if (lastEditor != null)
+                        {
+                            lastEditor.Save();
+                            file = lastEditor.File;
+                        }
+
+                        return file;
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        public AVRProject CurrentProj
+        {
+            get
+            {
+                return this.project;
+            }
         }
 
         #endregion
@@ -63,6 +116,9 @@ namespace AVRProjectIDE
 
             messageWin = new MessagePanel();
             messageWin.GotoError += new MessagePanel.OnClickError(messageWin_GotoError);
+
+            debuggerWin = new DebuggerPanel();
+
 
             if (project.IsReady)
             {
@@ -115,6 +171,8 @@ namespace AVRProjectIDE
                 return fileTreeWin;
             else if (persistString == typeof(HardwareExplorer).ToString())
                 return hardwareExplorerWin;
+            else if (persistString == typeof(DebuggerPanel).ToString())
+                return debuggerWin;
             else
             {
                 return null;
@@ -1312,6 +1370,7 @@ namespace AVRProjectIDE
                 searchWin.Show(dockPanel1);
                 serialWin.Show(dockPanel1);
                 hardwareExplorerWin.Show(dockPanel1);
+                debuggerWin.Show(dockPanel1);
             }
             else
             {
@@ -1321,6 +1380,7 @@ namespace AVRProjectIDE
                 searchWin.Show(dockPanel1, DockState.DockBottom);
                 serialWin.Show(dockPanel1, DockState.DockBottom);
                 hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
+                debuggerWin.Show(dockPanel1, DockState.DockRightAutoHide);
             }
 
             Program.SplashScreen.Close();

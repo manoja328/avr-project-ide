@@ -28,6 +28,9 @@ namespace AVRProjectIDE
         public SplashScreen()
         {
             InitializeComponent();
+            
+            this.Width = this.BackgroundImage.Width;
+            this.Height = this.BackgroundImage.Height;
         }
     }
 }
