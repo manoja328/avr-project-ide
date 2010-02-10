@@ -227,6 +227,8 @@ namespace AVRProjectIDE
                         }
                     }
 
+                    chipList.Sort((x, y) => string.Compare(x, y));
+
                     foreach (string c in chipList)
                     {
                         this.dropAVRChips.Items.Add(c);

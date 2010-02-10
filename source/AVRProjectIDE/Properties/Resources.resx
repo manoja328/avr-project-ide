@@ -127,9 +127,6 @@
   <data name="arduinomakefile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\arduinomakefile;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arduinomain" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\arduino\core\main.cxx;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="autocomplete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\autocomplete.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -153,5 +150,8 @@
   </data>
   <data name="FranksSiteURL" xml:space="preserve">
     <value>http://frank.circleofcurrent.com/</value>
+  </data>
+  <data name="arduinomain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\arduino\core\main.cpp;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

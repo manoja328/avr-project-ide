@@ -61,7 +61,9 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to int main(void)
+        ///   Looks up a localized string similar to #include &lt;WProgram.h&gt;
+        ///
+        ///int main(void)
         ///{
         ///	init();
         ///
