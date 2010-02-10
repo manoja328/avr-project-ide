@@ -403,9 +403,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="arduinomakefile" />
-    <None Include="arduino\core\Makefile">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="eula.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1104,63 +1101,26 @@
       <Link>chip_xml\ATxmega64D3.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="arduino\core\binary.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\HardwareSerial.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\HardwareSerial.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\main.cxx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\pins_arduino.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\pins_arduino.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\Print.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\Print.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\WConstants.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\WInterrupts.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\wiring.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\wiring.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\wiring_analog.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\wiring_digital.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\wiring_private.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\wiring_pulse.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\wiring_shift.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\WMath.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="arduino\core\WProgram.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="arduino\core\binary.h" />
+    <Content Include="arduino\core\HardwareSerial.cpp" />
+    <Content Include="arduino\core\HardwareSerial.h" />
+    <Content Include="arduino\core\main.cpp" />
+    <Content Include="arduino\core\pins_arduino.c" />
+    <Content Include="arduino\core\pins_arduino.h" />
+    <Content Include="arduino\core\Print.cpp" />
+    <Content Include="arduino\core\Print.h" />
+    <Content Include="arduino\core\Tone.cpp" />
+    <Content Include="arduino\core\WConstants.h" />
+    <Content Include="arduino\core\WInterrupts.c" />
+    <Content Include="arduino\core\wiring.c" />
+    <Content Include="arduino\core\wiring.h" />
+    <Content Include="arduino\core\wiring_analog.c" />
+    <Content Include="arduino\core\wiring_digital.c" />
+    <Content Include="arduino\core\wiring_private.h" />
+    <Content Include="arduino\core\wiring_pulse.c" />
+    <Content Include="arduino\core\wiring_shift.c" />
+    <Content Include="arduino\core\WMath.cpp" />
+    <Content Include="arduino\core\WProgram.h" />
     <Content Include="autocomplete.xml" />
     <Content Include="chip_xml\interruptvectors.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

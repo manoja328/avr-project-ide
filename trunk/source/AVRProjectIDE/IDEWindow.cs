@@ -117,7 +117,7 @@ namespace AVRProjectIDE
             messageWin = new MessagePanel();
             messageWin.GotoError += new MessagePanel.OnClickError(messageWin_GotoError);
 
-            debuggerWin = new DebuggerPanel();
+            //debuggerWin = new DebuggerPanel();
 
 
             if (project.IsReady)
@@ -1370,7 +1370,7 @@ namespace AVRProjectIDE
                 searchWin.Show(dockPanel1);
                 serialWin.Show(dockPanel1);
                 hardwareExplorerWin.Show(dockPanel1);
-                debuggerWin.Show(dockPanel1);
+                //debuggerWin.Show(dockPanel1);
             }
             else
             {
@@ -1380,7 +1380,7 @@ namespace AVRProjectIDE
                 searchWin.Show(dockPanel1, DockState.DockBottom);
                 serialWin.Show(dockPanel1, DockState.DockBottom);
                 hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
-                debuggerWin.Show(dockPanel1, DockState.DockRightAutoHide);
+                //debuggerWin.Show(dockPanel1, DockState.DockRightAutoHide);
             }
 
             Program.SplashScreen.Close();
