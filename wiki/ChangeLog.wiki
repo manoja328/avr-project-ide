@@ -1,5 +1,9 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 74==
+
+ * Changed to Arduino 0018 files
+
 ==Alpha 73==
 
  * Noticed (hopefully fixed) a bug regarding serial port preference
