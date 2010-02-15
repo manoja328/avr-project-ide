@@ -49,3 +49,7 @@ The custom help menu is stored in helplinks.xml. The structure looks like this:
 }}}
 
 The "Text" attribute is what the menu item displays, and the "URL" attribute is the URL to the webpage you want the item to visit when clicked, the URL can also be a file path to an local file or exe. When the "Link" elements are nested, the children of the element become the drop-down from that menu item. If the "URL" attribute is missing, then the link will still appear but will not be clickable.
+
+===Custom External Tools===
+
+See ExternalTools
