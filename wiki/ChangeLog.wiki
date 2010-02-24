@@ -1,5 +1,9 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 77==
+
+ * Minor change to absolute file path, now saved in the XML as a comment instead of an element, also uses Path.GetFullPath method to avoid having double dots in the path
+
 ==Alpha 76==
 
  * Fixed compile problem with Arduino 0018 files
