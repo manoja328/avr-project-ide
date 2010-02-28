@@ -39,3 +39,7 @@ If you want to send a single byte, use \xFF where FF is the hexadecimal represen
 ===How do I debug or run a simulator?===
 
 Export as an aps file and open it with AVRStudio.
+
+===I can't run the makefile I just exported===
+
+The generated makefile is intended to be used in your output directory, but the make command is executed on the project directory.
