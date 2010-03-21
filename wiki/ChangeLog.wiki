@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Alpha 79==
+
+ * Issue 47 prompted me to add one more try-catch inside Hardware Explorer
+ * More details provided in Error Report Window
+
 ==Alpha 78==
 
  * Added hotkeys for dialog buttons
