@@ -4,6 +4,7 @@
 
  * Noticed optimization option was not saved right
  * Icons for editor panels
+ * APS export saving dialog now use a default folder and filename
 
 ==Alpha 79==
 
