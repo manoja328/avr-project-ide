@@ -49,11 +49,26 @@ namespace AVRProjectIDE
             get { return file; }
         }
 
+        private IDEWindow parent;
+
         private bool hasChanged;
         public bool HasChanged
         {
             get { return hasChanged | Scint.Modified; }
             set { hasChanged = value; Scint.Modified = value; }
+        }
+
+        public bool ReadOnly
+        {
+            get
+            {
+                return scint.IsReadOnly;
+            }
+
+            set
+            {
+                scint.IsReadOnly = value;
+            }
         }
 
         public Scintilla Scint
@@ -84,16 +99,17 @@ namespace AVRProjectIDE
 
         #endregion
 
-        public EditorPanel(ProjectFile file, AVRProject project)
+        public EditorPanel(ProjectFile file, AVRProject project, IDEWindow parent)
         {
             InitializeComponent();
 
+            this.parent = parent;
             this.file = file;
             this.project = project;
 
             SettingsManagement.LoadEditorState(this);
 
-            
+            this.Icon = GraphicsResx.file;
         }
 
         private void EditorPanelContent_Shown(object sender, EventArgs e)
@@ -107,13 +123,23 @@ namespace AVRProjectIDE
 
             if (file.FileExt == "c" || file.FileExt == "cpp" || file.FileExt == "h" || file.FileExt == "hpp" || file.FileExt == "pde")
             {
-                scint = SettingsManagement.SetScintSettings(scint, false);
+                scint = SettingsManagement.SetScintSettings(scint, false, false);
                 scint = KeywordImageGen.ApplyImageList(scint);
+            }
+            else if (file.FileExt == "s" || file.FileExt == "asm")
+            {
+                scint.Lexing.Lexer = Lexer.Asm;
+                scint = SettingsManagement.SetScintSettings(scint, true, false);
+            }
+            else if (file.FileName.ToLowerInvariant() == "makefile")
+            {
+                scint.Lexing.Lexer = Lexer.MakeFile;
+                scint = SettingsManagement.SetScintSettings(scint, true, true);
             }
             else
             {
-                scint.Lexing.Lexer = Lexer.Asm;
-                scint = SettingsManagement.SetScintSettings(scint, true);
+                scint.Lexing.Lexer = Lexer.Null;
+                scint = SettingsManagement.SetScintSettings(scint, true, true);
             }
 
             fileSystemWatcher1.Filter = file.FileName;
@@ -632,6 +658,7 @@ namespace AVRProjectIDE
                 file.Node.ImageKey = "file2.ico";
                 file.Node.SelectedImageKey = "file2.ico";
                 file.Node.StateImageKey = "file2.ico";
+                this.file.IsOpen = false;
             }
         }
 
@@ -959,6 +986,24 @@ namespace AVRProjectIDE
                 scint.Lines.Current.AddMarker(0);
             else
                 scint.Lines.Current.DeleteMarker(0);
+        }
+
+        private void scint_MarkerChanged(object sender, ScintillaNet.MarkerChangedEventArgs e)
+        {
+            if (e.Line < 0)
+                return;
+
+            // note e.modification type is useless
+            bool isAdding = false;
+            if (scint.Markers.GetMarkerMask(e.Line) != 0)
+            {
+                isAdding = true;
+            }
+
+            if (isAdding)
+            {
+                parent.BreakpointChanged(isAdding, this.FileName, e.Line);
+            }
         }
     }
 }

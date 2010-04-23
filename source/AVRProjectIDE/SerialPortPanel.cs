@@ -92,7 +92,10 @@ namespace AVRProjectIDE
 
             textboxBuffer = "";
             textChanged = true;
+        }
 
+        private void SerialPortPanel_Load(object sender, EventArgs e)
+        {
             StartThread();
         }
 
@@ -261,7 +264,13 @@ namespace AVRProjectIDE
         {
             if (InvokeRequired)
             {
-                Invoke(new SetProgBarCallback(SetRxBufferStatus), new object[] { bytesToRead, });
+                try
+                {
+                    Invoke(new SetProgBarCallback(SetRxBufferStatus), new object[] { bytesToRead, });
+                }
+                catch (Exception ex)
+                {
+                }
             }
             else
             {

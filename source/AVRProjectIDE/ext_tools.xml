@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ExternalTools>
-  <Tool text="" cmd="" dir="" args="" />
+  <Tool text="Edit Project File in Notepad" cmd="notepad" dir="" args="%PROJNAME%.avrproj" />
 </ExternalTools>

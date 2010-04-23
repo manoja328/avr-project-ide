@@ -498,6 +498,29 @@ namespace AVRProjectIDE
                     if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode)
                         tn.BeginEdit();
             }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (project == null)
+                    return;
+
+                TreeNode n = this.treeView1.SelectedNode;
+
+                if (n != sourceNode && n != headerNode && n != rootNode && n != otherNode)
+                {
+                    OpenNode(n);
+                }
+                else
+                {
+                    if (n == rootNode && string.IsNullOrEmpty(project.DirPath) == false)
+                    {
+                        System.Diagnostics.Process.Start(project.DirPath + Path.DirectorySeparatorChar);
+                    }
+                    else if (n != sourceNode)
+                    {
+                        n.Checked = false;
+                    }
+                }
+            }
         }
 
         private void mbtnSetOpt_Click(object sender, EventArgs e)

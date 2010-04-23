@@ -89,9 +89,7 @@ namespace AVRProjectIDE
             {
                 try
                 {
-                    StreamWriter writer = new StreamWriter(SettingsManagement.AppDataPath + "helplinks.xml");
-                    writer.Write(Properties.Resources.helplinks);
-                    writer.Close();
+                    File.WriteAllText(SettingsManagement.AppDataPath + "helplinks.xml", Properties.Resources.helplinks);
                     xDoc.Load(SettingsManagement.AppDataPath + "helplinks.xml");
                 }
                 catch
@@ -101,17 +99,37 @@ namespace AVRProjectIDE
             }
             else
             {
-                xDoc.Load(SettingsManagement.AppDataPath + "helplinks.xml");
+                try
+                {
+                    xDoc.Load(SettingsManagement.AppDataPath + "helplinks.xml");
+                }
+                catch (XmlException ex)
+                {
+                    MessageBox.Show("Error while reading helplinks.xml: " + ex.Message);
+                    return item;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error while reading helplinks.xml: " + ex.Message);
+                    return item;
+                }
             }
 
-            XmlElement xDocEle = xDoc.DocumentElement;
-
-            foreach (XmlElement xEle in xDocEle.ChildNodes)
+            try
             {
-                MenuWebLink link = new MenuWebLink(xEle.GetAttribute("Text"), xEle.GetAttribute("URL"));
-                link.Add(xEle);
+                XmlElement xDocEle = xDoc.DocumentElement;
 
-                item.DropDownItems.Add(link.MenuItem);
+                foreach (XmlElement xEle in xDocEle.ChildNodes)
+                {
+                    MenuWebLink link = new MenuWebLink(xEle.GetAttribute("Text"), xEle.GetAttribute("URL"));
+                    link.Add(xEle);
+
+                    item.DropDownItems.Add(link.MenuItem);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow.Show(ex, "Error while creating help links");
             }
 
             return item;

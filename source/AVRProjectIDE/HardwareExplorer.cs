@@ -58,9 +58,6 @@ namespace AVRProjectIDE
 
         public void LoadDataForChip(string chipName)
         {
-            //LoadWaitWindow lww = new LoadWaitWindow();
-            //lww.Show();
-
             this.chipName = Program.ProperChipName(chipName);
 
             treeIOModules.Nodes.Clear();
@@ -87,7 +84,14 @@ namespace AVRProjectIDE
                         xmlFilePathB = SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + chipName.Substring(0, cnt) + ".xml";
 
                         if (cnt == 0)
-                            throw new Exception("chip data xml (" + chipName + ".xml) was not found in " + SettingsManagement.AppInstallPath + "chip_xml or " + SettingsManagement.AppDataPath + "chip_xml");
+                        {
+                            txtChipInfo.Text = "Error: chip data xml (" + chipName + ".xml) was not found in " + SettingsManagement.AppInstallPath + "chip_xml or " + SettingsManagement.AppDataPath + "chip_xml";
+
+                            intVectListAVRLibc = LoadInterruptList(intVectListAVRLibc);
+                            GetInterruptsForChip(chipName);
+
+                            return;
+                        }
 
                         if (File.Exists(xmlFilePathB) == false)
                         {
@@ -126,19 +130,24 @@ namespace AVRProjectIDE
                 return;
             }
 
-            XmlElement docEle = xDoc.DocumentElement;
+            try
+            {
+                XmlElement docEle = xDoc.DocumentElement;
 
-            LoadChipInfo(txtChipInfo, docEle);
-            LoadAllXMLTree(treeXML, docEle);
-            LoadPinTree(treePins, docEle);
-            LoadIOModuleTree(treeIOModules, docEle);
+                LoadChipInfo(txtChipInfo, docEle);
+                LoadAllXMLTree(treeXML, docEle);
+                LoadPinTree(treePins, docEle);
+                LoadIOModuleTree(treeIOModules, docEle);
 
-            intVectListAVRLibc = LoadInterruptList(intVectListAVRLibc);
-            intVectListAtmelXML = LoadInterruptListFromAtmelXML(docEle, intVectListAtmelXML);
+                intVectListAVRLibc = LoadInterruptList(intVectListAVRLibc);
+                intVectListAtmelXML = LoadInterruptListFromAtmelXML(docEle, intVectListAtmelXML);
 
-            GetInterruptsForChip(chipName);
-
-            //lww.Close();
+                GetInterruptsForChip(chipName);
+            }
+            catch (Exception ex)
+            {
+                txtChipInfo.Text += Environment.NewLine + Environment.NewLine + "Error while loading chip data: " + ex.Message;
+            }
         }
 
         private void LoadIOModuleTree(TreeView treeIOModules, XmlElement docEle)

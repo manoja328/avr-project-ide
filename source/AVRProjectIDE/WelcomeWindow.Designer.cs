@@ -36,7 +36,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WelcomeWindow));
             this.btnNew = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
@@ -59,7 +58,7 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 31);
             this.btnNew.TabIndex = 6;
-            this.btnNew.Text = "New Blank";
+            this.btnNew.Text = "New &Blank";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -69,7 +68,7 @@
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(75, 75);
             this.btnOpen.TabIndex = 1;
-            this.btnOpen.Text = "Open";
+            this.btnOpen.Text = "&Open";
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
@@ -80,7 +79,7 @@
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(75, 75);
             this.btnFind.TabIndex = 4;
-            this.btnFind.Text = "Find";
+            this.btnFind.Text = "&Find";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
@@ -135,7 +134,7 @@
             this.btnImportAPS.Name = "btnImportAPS";
             this.btnImportAPS.Size = new System.Drawing.Size(75, 75);
             this.btnImportAPS.TabIndex = 5;
-            this.btnImportAPS.Text = "Import APS";
+            this.btnImportAPS.Text = "&Import APS";
             this.btnImportAPS.UseVisualStyleBackColor = true;
             this.btnImportAPS.Click += new System.EventHandler(this.btnImportAPS_Click);
             // 
@@ -146,7 +145,7 @@
             this.btnWizard.Name = "btnWizard";
             this.btnWizard.Size = new System.Drawing.Size(75, 76);
             this.btnWizard.TabIndex = 3;
-            this.btnWizard.Text = "New Wizard";
+            this.btnWizard.Text = "&New Wizard";
             this.btnWizard.UseVisualStyleBackColor = true;
             this.btnWizard.Click += new System.EventHandler(this.btnWizard_Click);
             // 
@@ -179,7 +178,6 @@
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.btnWizard);
             this.Controls.Add(this.btnNew);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WelcomeWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AVR Project IDE - Welcome";

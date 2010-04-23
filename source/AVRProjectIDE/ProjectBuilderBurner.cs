@@ -360,6 +360,7 @@ namespace AVRProjectIDE
                         if (fileHasMain == false)
                         {
                             avr_ar_targets += file.FileNameNoExt + ".o ";
+                            //objFileLoc.Add(outputAbsPath + Path.DirectorySeparatorChar + file.FileNameNoExt + ".o");
                         }
                         else
                         {
@@ -1490,7 +1491,7 @@ namespace AVRProjectIDE
                 try
                 {
                     // append the final bit
-                    ardWriter.WriteLine("#line 1 \"arduinomain.cxx\"");
+                    ardWriter.WriteLine("#line 1 \"arduinomain.cpp\"");
                     ardWriter.WriteLine(GetPDEMain()); // get from either existing file or internal resource
                     ardWriter.Close();
                 }
@@ -1518,7 +1519,25 @@ namespace AVRProjectIDE
                 foreach (string lib in ardLibList)
                 {
                     string folderPath = SettingsManagement.ArduinoLibPath + Path.DirectorySeparatorChar + lib;
-                    GetCompilableFiles(folderPath, ardExtList, true);
+                    if (Directory.Exists(folderPath))
+                    {
+                        GetCompilableFiles(folderPath, ardExtList, true);
+                    }
+                    else
+                    {
+                        //if (workingFileList.ContainsKey(lib + ".h"))
+                        //{
+                        //    ProjectFile f = workingFileList[lib + ".h"];
+                        //    try
+                        //    {
+                        //        File.Copy(f.FileAbsPath, SettingsManagement.AppDataPath + "temp" + Path.DirectorySeparatorChar + lib + ".h", true);
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+                        //        TextBoxModify(outputTextbox, "####Error while copying " + f.FileName + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
+                        //    }
+                        //}
+                    }
                 }
 
                 workingProject.IncludeDirList.Add(SettingsManagement.AppDataPath + "temp");
@@ -1589,19 +1608,24 @@ namespace AVRProjectIDE
                     {
                         string newLoc = SettingsManagement.AppDataPath + "temp" + Path.DirectorySeparatorChar + fnfo.Name;
 
-                        try
+                        if (fnfo.Name != "main.cpp")
                         {
-                            File.Copy(fnfo.FullName, newLoc, true);
-                        }
-                        catch (Exception ex)
-                        {
-                            TextBoxModify(outputTextbox, "####Error while copying " + fnfo.Name + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
-                        }
+                            try
+                            {
+                                File.Copy(fnfo.FullName, newLoc, true);
+                            }
+                            catch (Exception ex)
+                            {
+                                TextBoxModify(outputTextbox, "####Error while copying " + fnfo.Name + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
+                            }
 
-                        if (ext.EndsWith(".h") == false && ext.EndsWith(".hpp") == false)
-                        {
-                            ProjectFile newFile = new ProjectFile(newLoc, workingProject);
-                            fileList.Add(newFile);
+                            if (ext.EndsWith(".h") == false && ext.EndsWith(".hpp") == false)
+                            {
+
+                                ProjectFile newFile = new ProjectFile(newLoc, workingProject);
+                                fileList.Add(newFile);
+
+                            }
                         }
                     }
                 }
@@ -1638,9 +1662,9 @@ namespace AVRProjectIDE
             // if can't be found, use the template stored in the project resource
 
             string contents = Properties.Resources.arduinomain;
-            string filePath = SettingsManagement.ArduinoCorePath + Path.DirectorySeparatorChar + "main.cxx";
+            string filePath = SettingsManagement.ArduinoCorePath + Path.DirectorySeparatorChar + "main.cpp";
             if (workingProject.OverrideArduinoCore)
-                filePath = workingProject.ArduinoCoreOverride;
+                filePath = workingProject.ArduinoCoreOverride + Path.DirectorySeparatorChar + "main.cpp";
 
             try
             {
@@ -1648,7 +1672,7 @@ namespace AVRProjectIDE
             }
             catch (Exception ex)
             {
-                TextBoxModify(outputTextbox, "####Error while reading the core main.cxx file, embedded version used instead. " + ex.Message, TextBoxChangeMode.PrependNewLine);
+                TextBoxModify(outputTextbox, "####Error while reading the core main.cpp file, embedded version used instead. " + ex.Message, TextBoxChangeMode.PrependNewLine);
             }
 
             return contents;
@@ -2025,7 +2049,7 @@ namespace AVRProjectIDE
                 string cflags = proj.OtherOptions.Trim();
 
                 if (proj.ClockFreq != 0)
-                    cflags += "-DF_CPU=" + Math.Round(proj.ClockFreq).ToString("0") + "UL ";
+                    cflags += " -DF_CPU=" + Math.Round(proj.ClockFreq).ToString("0") + "UL ";
 
                 cflags += proj.Optimization + " ";
 

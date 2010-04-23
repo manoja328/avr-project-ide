@@ -26,6 +26,18 @@ namespace AVRProjectIDE
         {
             this.wind = editor;
 
+            if (text == null)
+                text = "";
+
+            if (cmd == null)
+                cmd = "";
+
+            if (args == null)
+                args = "";
+
+            if (dir == null)
+                dir = "";
+
             this.mbtn.Text = text;
 
             this.cmdStr = cmd;
@@ -37,7 +49,14 @@ namespace AVRProjectIDE
 
         void mbtn_Click(object sender, EventArgs e)
         {
-            Run(wind.CurrentFile, wind.CurrentProj);
+            try
+            {
+                Run(wind.CurrentFile, wind.CurrentProj);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while running external tool: " + ex.Message);
+            }
         }
 
         public void Run(ProjectFile file, AVRProject proj)
@@ -70,11 +89,12 @@ namespace AVRProjectIDE
                             args = args.Replace("%PROJNAME%", proj.FileNameNoExt);
                             args = args.Replace("%PROJDIR%", proj.DirPath);
                             args = args.Replace("%PROJOUTFOLDER%", proj.OutputDir);
+                            args = args.Replace("%PROJCHIP%", proj.Device);
 
                             if (file != null)
                             {
                                 args = args.Replace("%FILENAMENOEXT%", file.FileNameNoExt);
-                                args = args.Replace("%FILEEXT%", file.FileNameNoExt);
+                                args = args.Replace("%FILEEXT%", file.FileExt);
                                 args = args.Replace("%FILEDIR%", file.FileDir);
                             }
                         }
@@ -84,7 +104,7 @@ namespace AVRProjectIDE
                 }
 
                 string dir = this.dirStr;
-                if (string.IsNullOrEmpty(dir))
+                if (string.IsNullOrEmpty(dir) == false)
                 {
                     if (proj != null)
                     {
@@ -117,6 +137,64 @@ namespace AVRProjectIDE
                 MessageBox.Show("Error during execution: " + ex.Message);
             }
             
+        }
+
+        public static ToolStripMenuItem GetExternalToolsRoot(IDEWindow wind)
+        {
+            ToolStripMenuItem root = new ToolStripMenuItem("External Tools");
+
+            root.Image = GraphicsResx.tool_icon_png;
+
+            XmlDocument xDoc = new XmlDocument();
+
+            if (File.Exists(SettingsManagement.AppDataPath + "ext_tools.xml") == false)
+            {
+                try
+                {
+                    File.WriteAllText(SettingsManagement.AppDataPath + "ext_tools.xml", Properties.Resources.ext_tools);
+                    xDoc.Load(SettingsManagement.AppDataPath + "ext_tools.xml");
+                }
+                catch
+                {
+                    xDoc.LoadXml(Properties.Resources.ext_tools);
+                }
+            }
+            else
+            {
+                try
+                {
+                    xDoc.Load(SettingsManagement.AppDataPath + "ext_tools.xml");
+                }
+                catch (XmlException ex)
+                {
+                    MessageBox.Show("Error while reading ext_tools.xml: " + ex.Message);
+                    return root;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error while reading ext_tools.xml: " + ex.Message);
+                    return root;
+                }
+            }
+
+            try
+            {
+                XmlElement xDocEle = xDoc.DocumentElement;
+
+                foreach (XmlElement xEle in xDocEle.GetElementsByTagName("Tool"))
+                {
+                    ExternalTool link = new ExternalTool(xEle.GetAttribute("text"), xEle.GetAttribute("cmd"), xEle.GetAttribute("args"), xEle.GetAttribute("dir"), wind);
+                    link.mbtn.Image = GraphicsResx.tool_icon_png;
+                    toolList.Add(link);
+                    root.DropDownItems.Add(link.mbtn);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow.Show(ex, "Error while creating external tool buttons");
+            }
+
+            return root;
         }
     }
 }

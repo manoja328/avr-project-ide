@@ -6,12 +6,16 @@
     </Group>
     <Group type="types">
       void bool boolean byte char short int long word dword float double bool bit bitfield byte uchar ushort uint ulong uword struct union enum
+      int8_t int16_t int32_t int64_t uint8_t uint16_t uint32_t uint64_t
     </Group>
     <Group type="modifiers">
       signed unsigned static volatile const inline extern typedef
     </Group>
     <Group type="preproc">
       define elif endif error if ifdef ifndef include undef warning
+    </Group>
+    <Group type="functs">
+      _BV bit_is_clear bit_is_set loop_until_bit_is_clear loop_until_bit_is_set
     </Group>
   </C>
   <CPP>
@@ -32,13 +36,18 @@
       shiftOut pulseIn millis micros delay delayMicroseconds min max abs constrain
       map pow sqrt sin cos tan randomSeed random lowByte highByte bitRead bitWrite
       bitSet bitClear bit attachInterrupt detachInterrupt interrupts noInterrupts
-      Serial print println begin available read write flush
+      Serial print println begin available read write flush end tone noTone
     </Group>
     <Group type="consts">
       HIGH LOW INPUT OUTPUT true false
     </Group>
   </Arduino>
   <AVRLibc loadall="false">
+    <File name="inttypes.h">
+      <Group type="consts">
+        
+      </Group>
+    </File>
     <File name="avr/interrupt.h">
       <Group type="functs">
         cli sei reti

@@ -126,7 +126,7 @@ namespace AVRProjectIDE
 
                 if (string.IsNullOrEmpty(str))
                 {
-                    LastICEHardware = "JTAG mkI";
+                    LastICEHardware = "JTAG ICE mkI";
                     str = LastICEHardware;
                 }
                 return str.Trim();
@@ -147,10 +147,10 @@ namespace AVRProjectIDE
                 if (str != null)
                     str.Trim();
 
-                if (string.IsNullOrEmpty(str))
+                if (str == null)
                 {
-                    LastICEHardware = "";
-                    str = LastICEHardware;
+                    LastICEOptions = "";
+                    str = "";
                 }
                 return str.Trim();
             }
@@ -172,8 +172,8 @@ namespace AVRProjectIDE
 
                 if (string.IsNullOrEmpty(str))
                 {
-                    LastICEHardware = "COM1";
-                    str = LastICEHardware;
+                    LastJTAGPort = "COM1";
+                    str = LastJTAGPort;
                 }
                 return str.Trim();
             }
@@ -1120,49 +1120,52 @@ namespace AVRProjectIDE
         /// </summary>
         /// <param name="scinti">reference to the scint</param>
         /// <returns>the same reference that was passed in</returns>
-        static public Scintilla SetScintSettings(Scintilla scinti, bool asm)
+        static public Scintilla SetScintSettings(Scintilla scinti, bool asm, bool plaintext)
         {
-            if (asm == false)
+            if (plaintext == false)
             {
-                foreach (KeyValuePair<int, string> i in styleKeywords)
+                if (asm == false)
                 {
-                    scinti.Lexing.SetKeywords(i.Key, i.Value);
+                    foreach (KeyValuePair<int, string> i in styleKeywords)
+                    {
+                        scinti.Lexing.SetKeywords(i.Key, i.Value);
+                    }
                 }
-            }
 
-            foreach (KeyValuePair<int, Color> i in styleForeColour)
-            {
-                scinti.Styles[i.Key].ForeColor = i.Value;
-            }
+                foreach (KeyValuePair<int, Color> i in styleForeColour)
+                {
+                    scinti.Styles[i.Key].ForeColor = i.Value;
+                }
 
-            foreach (KeyValuePair<int, Color> i in styleBackColour)
-            {
-                scinti.Styles[i.Key].BackColor = i.Value;
-            }
+                foreach (KeyValuePair<int, Color> i in styleBackColour)
+                {
+                    scinti.Styles[i.Key].BackColor = i.Value;
+                }
 
-            foreach (KeyValuePair<int, int> i in styleFontSize)
-            {
-                scinti.Styles[i.Key].Size = i.Value;
-            }
+                foreach (KeyValuePair<int, int> i in styleFontSize)
+                {
+                    scinti.Styles[i.Key].Size = i.Value;
+                }
 
-            foreach (KeyValuePair<int, string> i in styleFont)
-            {
-                scinti.Styles[i.Key].FontName = i.Value;
-            }
+                foreach (KeyValuePair<int, string> i in styleFont)
+                {
+                    scinti.Styles[i.Key].FontName = i.Value;
+                }
 
-            foreach (KeyValuePair<int, bool> i in styleBold)
-            {
-                scinti.Styles[i.Key].Bold = i.Value;
-            }
+                foreach (KeyValuePair<int, bool> i in styleBold)
+                {
+                    scinti.Styles[i.Key].Bold = i.Value;
+                }
 
-            foreach (KeyValuePair<int, bool> i in styleItalic)
-            {
-                scinti.Styles[i.Key].Italic = i.Value;
-            }
+                foreach (KeyValuePair<int, bool> i in styleItalic)
+                {
+                    scinti.Styles[i.Key].Italic = i.Value;
+                }
 
-            foreach (KeyValuePair<int, bool> i in styleUnderline)
-            {
-                scinti.Styles[i.Key].Underline = i.Value;
+                foreach (KeyValuePair<int, bool> i in styleUnderline)
+                {
+                    scinti.Styles[i.Key].Underline = i.Value;
+                }
             }
 
             scinti.Selection.BackColor = selBackColour;
@@ -1438,37 +1441,18 @@ namespace AVRProjectIDE
 
         public static void LoadEditorState(DockContent form)
         {
-            return;
-
             try
             {
-                string winMax = iniFile.Read("Editor", "EditorMax");
                 string winWidth = iniFile.Read("Editor", "EditorWidth");
                 string winHeight = iniFile.Read("Editor", "EditorHeight");
-                if (string.IsNullOrEmpty(winMax) || string.IsNullOrEmpty(winWidth) || string.IsNullOrEmpty(winHeight))
+                if (string.IsNullOrEmpty(winWidth) == false && string.IsNullOrEmpty(winHeight) == false)
                 {
-                    form.DockState = DockState.Document;
-                }
-                else
-                {
-                    if (Program.StringToBool(winMax))
+                    int w;
+                    int h;
+                    if (int.TryParse(winWidth, out w) && int.TryParse(winHeight, out h))
                     {
-                        form.DockState = DockState.Document;
-                    }
-                    else
-                    {
-                        int w;
-                        int h;
-                        if (int.TryParse(winWidth, out w) == false || int.TryParse(winHeight, out h) == false)
-                        {
-                            form.DockState = DockState.Document;
-                        }
-                        else
-                        {
-                            form.DockState = DockState.Float; // this line mysteriously fails for now
-                            form.Width = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Width, w)));
-                            form.Height = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Height, h)));
-                        }
+                        form.Width = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Width, w)));
+                        form.Height = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Height, h)));
                     }
                 }
             }
@@ -1483,9 +1467,11 @@ namespace AVRProjectIDE
         {
             try
             {
-                iniFile.Write("Editor", "EditorMax", (form.DockState == DockState.Document).ToString().ToLowerInvariant());
-                iniFile.Write("Editor", "EditorWidth", form.Width.ToString("0"));
-                iniFile.Write("Editor", "EditorHeight", form.Height.ToString("0"));
+                if (form.DockState == DockState.Float)
+                {
+                    iniFile.Write("Editor", "EditorWidth", form.Width.ToString("0"));
+                    iniFile.Write("Editor", "EditorHeight", form.Height.ToString("0"));
+                }
             }
             catch (Exception ex)
             {
@@ -1515,15 +1501,15 @@ namespace AVRProjectIDE
                     {
                         int w;
                         int h;
-                        if (int.TryParse(winWidth, out w) == false || int.TryParse(winHeight, out h) == false)
-                        {
-                            form.WindowState = FormWindowState.Maximized;
-                        }
-                        else
+                        if (int.TryParse(winWidth, out w) && int.TryParse(winHeight, out h))
                         {
                             form.WindowState = FormWindowState.Normal;
                             form.Width = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Width, w)));
                             form.Height = Convert.ToInt32(Math.Round((double)Math.Max(form.MinimumSize.Height, h)));
+                        }
+                        else
+                        {
+                            form.WindowState = FormWindowState.Maximized;
                         }
                     }
                 }

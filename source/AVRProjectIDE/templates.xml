@@ -126,7 +126,7 @@
     <ClockFreq>16000000</ClockFreq>
     <BurnPart>atmega644p</BurnPart>
     <BurnFuseBox>-U lfuse:w:0xff:m -U hfuse:w:0xdc:m -U efuse:w:0xfd:m</BurnFuseBox>
-    <BurnProgrammer>stk500</BurnProgrammer>
+    <BurnProgrammer>stk500v1</BurnProgrammer>
     <BurnOptions>-F</BurnOptions>
     <BurnBaud>57600</BurnBaud>
     <ArduinoCoreOverride>Please Select A Path!!!</ArduinoCoreOverride>

@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
+//#define DEBUGGERWINTEST
+
 namespace AVRProjectIDE
 {
     public partial class IDEWindow : Form
@@ -30,6 +32,12 @@ namespace AVRProjectIDE
             }
         }
 
+        private static IDEWindow curOpenWind;
+        public static IDEWindow CurrentIDEWindow
+        {
+            get { return curOpenWind; }
+        }
+
         private AVRProject project;
 
         private SerialPortPanel serialWin;
@@ -37,7 +45,10 @@ namespace AVRProjectIDE
         private FileTreePanel fileTreeWin;
         private MessagePanel messageWin;
         private HardwareExplorer hardwareExplorerWin;
+        
+#if DEBUGGERWINTEST
         private DebuggerPanel debuggerWin;
+#endif
 
         private EditorPanel lastEditor;
         
@@ -117,8 +128,9 @@ namespace AVRProjectIDE
             messageWin = new MessagePanel();
             messageWin.GotoError += new MessagePanel.OnClickError(messageWin_GotoError);
 
-            //debuggerWin = new DebuggerPanel();
-
+            #if DEBUGGERWINTEST
+            debuggerWin = new DebuggerPanel(this);
+            #endif
 
             if (project.IsReady)
             {
@@ -143,6 +155,9 @@ namespace AVRProjectIDE
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Arduino Library Path: " + SettingsManagement.ArduinoLibPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppData Path: " + SettingsManagement.AppDataPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppInstall Path: " + SettingsManagement.AppInstallPath);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Build Version: " + Properties.Resources.BuildID);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Environment Version: " + Environment.Version);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "OS: " + Environment.OSVersion);
 
             hardwareExplorerWin.ClockFreq = project.ClockFreq;
 
@@ -171,8 +186,10 @@ namespace AVRProjectIDE
                 return fileTreeWin;
             else if (persistString == typeof(HardwareExplorer).ToString())
                 return hardwareExplorerWin;
+            #if DEBUGGERWINTEST
             else if (persistString == typeof(DebuggerPanel).ToString())
                 return debuggerWin;
+            #endif
             else
             {
                 return null;
@@ -407,7 +424,7 @@ namespace AVRProjectIDE
             if (project.FileList.TryGetValue(fileName, out file))
             {
                 // file is in project, so open the editor and attach events
-                EditorPanel editor = new EditorPanel(file, project);
+                EditorPanel editor = new EditorPanel(file, project, this);
                 editor.OnRename += new RenamedEventHandler(editor_OnRename);
                 editor.EditorClosed += new EditorPanel.EditorClosedEvent(editor_EditorClosed);
                 editor.CloseAllExceptMe += new EditorPanel.CloseAllButMe(editor_CloseAllExceptMe);
@@ -745,51 +762,58 @@ namespace AVRProjectIDE
 
             if (newProj.IsReady) // IsReady == false means that the user closed the welcome window without opening a project
             {
-                //LoadWaitWindow lww = new LoadWaitWindow();
-                //lww.Show();
-
-                EnableButtons();
-
-                // close all editors
-                List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
-                foreach (EditorPanel i in toClose)
-                {
-                    i.Close(false);
-                }
-
-
-                project = newProj; // reassign project
-
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
-                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
-                projBurner = new ProjectBurner(project);
-
-                // set title
-                this.Text = project.FileNameNoExt + " - AVR Project IDE";
-
-                editorList.Clear();
-
-                searchWin.Clear();
-
-                FillRecentProjects();
-
-                //lww.Close();
-
-                if (project.HasBeenConfigged == false)
-                {
-                    ConfigWindow wnd = new ConfigWindow(project);
-                    wnd.ShowDialog();
-                }
-
-                hardwareExplorerWin.LoadDataForChip(project.Device);
-                hardwareExplorerWin.ClockFreq = project.ClockFreq;
-
-                fileTreeWin.PopulateList(newProj, editorList);
-
-                ReloadLastOpened();
-
-                KeywordScanner.LaunchScan(project, editorList);
+                HandleNewOpenProj(newProj);
             }
+        }
+
+        private void HandleNewOpenProj(AVRProject newProj)
+        {
+            //LoadWaitWindow lww = new LoadWaitWindow();
+            //lww.Show();
+
+            curProj = this.project;
+
+            EnableButtons();
+
+            // close all editors
+            List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
+            foreach (EditorPanel i in toClose)
+            {
+                i.Close(false);
+            }
+
+
+            project = newProj; // reassign project
+
+            projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
+            projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
+            projBurner = new ProjectBurner(project);
+
+            // set title
+            this.Text = project.FileNameNoExt + " - AVR Project IDE";
+
+            editorList.Clear();
+
+            searchWin.Clear();
+
+            FillRecentProjects();
+
+            //lww.Close();
+
+            if (project.HasBeenConfigged == false)
+            {
+                ConfigWindow wnd = new ConfigWindow(project);
+                wnd.ShowDialog();
+            }
+
+            hardwareExplorerWin.LoadDataForChip(project.Device);
+            hardwareExplorerWin.ClockFreq = project.ClockFreq;
+
+            fileTreeWin.PopulateList(newProj, editorList);
+
+            ReloadLastOpened();
+
+            KeywordScanner.LaunchScan(project, editorList);
         }
 
         private void FillRecentProjects()
@@ -859,50 +883,7 @@ namespace AVRProjectIDE
             }
             else if (newProj.IsReady)
             {
-                //LoadWaitWindow lww = new LoadWaitWindow();
-                //lww.Show();
-
-                EnableButtons();
-
-                // close all editors
-                List<EditorPanel> toClose = new List<EditorPanel>(editorList.Values);
-                foreach (EditorPanel i in toClose)
-                {
-                    i.Close(false);
-                }
-
-
-                project = newProj; // reassign project
-
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
-                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
-                projBurner = new ProjectBurner(project);
-
-                // set title
-                this.Text = project.FileNameNoExt + " - AVR Project IDE";
-
-                editorList.Clear();
-
-                searchWin.Clear();
-
-                FillRecentProjects();
-
-                //lww.Close();
-
-                if (project.HasBeenConfigged == false)
-                {
-                    ConfigWindow wnd = new ConfigWindow(project);
-                    wnd.ShowDialog();
-                }
-
-                hardwareExplorerWin.LoadDataForChip(project.Device);
-                hardwareExplorerWin.ClockFreq = project.ClockFreq;
-
-                fileTreeWin.PopulateList(newProj, editorList);
-
-                ReloadLastOpened();
-
-                KeywordScanner.LaunchScan(project, editorList);
+                HandleNewOpenProj(newProj);
             }
         }
 
@@ -1242,6 +1223,8 @@ namespace AVRProjectIDE
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "AVRStudio Project (*.aps)|*.aps";
+            sfd.InitialDirectory = Path.GetDirectoryName(project.FilePath);
+            sfd.FileName = Path.GetDirectoryName(project.FilePath) + Path.DirectorySeparatorChar + project.FileNameNoExt + ".aps";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 if (project.ExportAPS(sfd.FileName) == false)
@@ -1345,6 +1328,18 @@ namespace AVRProjectIDE
 
         private void IDEWindow_Load(object sender, EventArgs e)
         {
+            curOpenWind = this;
+
+            // fill external tools
+            try
+            {
+                this.toolsToolStripMenuItem.DropDownItems.Add(ExternalTool.GetExternalToolsRoot(this));
+            }
+            catch (Exception ex)
+            {
+                messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Error Loading External Tools:, " + ex.Message);
+            }
+
             SettingsManagement.LoadWindowState(this);
 
             Program.SplashScreen.BringToFront();
@@ -1370,7 +1365,9 @@ namespace AVRProjectIDE
                 searchWin.Show(dockPanel1);
                 serialWin.Show(dockPanel1);
                 hardwareExplorerWin.Show(dockPanel1);
-                //debuggerWin.Show(dockPanel1);
+                #if DEBUGGERWINTEST
+                debuggerWin.Show(dockPanel1);
+                #endif
             }
             else
             {
@@ -1380,7 +1377,9 @@ namespace AVRProjectIDE
                 searchWin.Show(dockPanel1, DockState.DockBottom);
                 serialWin.Show(dockPanel1, DockState.DockBottom);
                 hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
-                //debuggerWin.Show(dockPanel1, DockState.DockRightAutoHide);
+                #if DEBUGGERWINTEST
+                debuggerWin.Show(dockPanel1, DockState.DockRightAutoHide);
+                #endif
             }
 
             Program.SplashScreen.Close();
@@ -1395,33 +1394,7 @@ namespace AVRProjectIDE
 
             if (project.IsReady)
             {
-                //LoadWaitWindow lww = new LoadWaitWindow();
-                //lww.Show();
-
-                EnableButtons();
-
-                KeywordScanner.LaunchScan(project, editorList);
-
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
-                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
-                projBurner = new ProjectBurner(project);
-
-                // set title
-                this.Text = project.FileNameNoExt + " - AVR Project IDE";
-
-                //lww.Close();
-
-                if (project.HasBeenConfigged == false)
-                {
-                    ConfigWindow wnd = new ConfigWindow(project);
-                    wnd.ShowDialog();
-                }
-
-                hardwareExplorerWin.ClockFreq = project.ClockFreq;
-                hardwareExplorerWin.LoadDataForChip(project.Device);
-
-                fileTreeWin.PopulateList(project, editorList);
-                ReloadLastOpened();
+                HandleNewOpenProj(project);
             }
         }
 
@@ -1435,9 +1408,11 @@ namespace AVRProjectIDE
             {
                 ProjectFile file = i.File;
                 if (file.FileExt == "c" || file.FileExt == "cpp" || file.FileExt == "h" || file.FileExt == "hpp" || file.FileExt == "pde")
-                    SettingsManagement.SetScintSettings(i.Scint, false);
+                    SettingsManagement.SetScintSettings(i.Scint, false, false);
+                else if (file.FileExt == "s" || file.FileExt == "asm")
+                    SettingsManagement.SetScintSettings(i.Scint, true, false);
                 else
-                    SettingsManagement.SetScintSettings(i.Scint, true);
+                    SettingsManagement.SetScintSettings(i.Scint, true, true);
             }
         }
 
@@ -1525,6 +1500,10 @@ namespace AVRProjectIDE
             {
                 i.Enabled = true;
             }
+
+            #if DEBUGGERWINTEST
+            debuggerWin.EnableButtons();
+            #endif
         }
 
         #region Bookmark Button Events
@@ -1611,9 +1590,38 @@ namespace AVRProjectIDE
 
         #endregion
 
+
+        #region Debug Related Functions
+
+        public void ReadyForDebug()
+        {
+            foreach (EditorPanel i in editorList.Values)
+            {
+                i.ReadOnly = true;
+            }
+        }
+
+        public void EndDebug()
+        {
+            foreach (EditorPanel i in editorList.Values)
+            {
+                i.ReadOnly = false;
+            }
+        }
+
+        #endregion
+
+
         private void mbtnDonate_Click(object sender, EventArgs e)
         {
             Program.LaunchDonate();
+        }
+
+        internal void BreakpointChanged(bool isAdding, string fileName, int lineNum)
+        {
+            #if DEBUGGERWINTEST
+            debuggerWin.BreakpointChanged(isAdding, fileName, lineNum);
+            #endif
         }
     }
 }

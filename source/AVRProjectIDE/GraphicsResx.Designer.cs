@@ -193,6 +193,76 @@ namespace AVRProjectIDE {
             }
         }
         
+        internal static System.Drawing.Icon debug {
+            get {
+                object obj = ResourceManager.GetObject("debug", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_breakptstog {
+            get {
+                object obj = ResourceManager.GetObject("debug_breakptstog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_goto {
+            get {
+                object obj = ResourceManager.GetObject("debug_goto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_pause {
+            get {
+                object obj = ResourceManager.GetObject("debug_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_play {
+            get {
+                object obj = ResourceManager.GetObject("debug_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_reset {
+            get {
+                object obj = ResourceManager.GetObject("debug_reset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_stepinto {
+            get {
+                object obj = ResourceManager.GetObject("debug_stepinto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_stepout {
+            get {
+                object obj = ResourceManager.GetObject("debug_stepout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_stepover {
+            get {
+                object obj = ResourceManager.GetObject("debug_stepover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap debug_stop {
+            get {
+                object obj = ResourceManager.GetObject("debug_stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
@@ -413,6 +483,20 @@ namespace AVRProjectIDE {
         internal static System.Drawing.Bitmap splash {
             get {
                 object obj = ResourceManager.GetObject("splash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon tool_icon {
+            get {
+                object obj = ResourceManager.GetObject("tool_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tool_icon_png {
+            get {
+                object obj = ResourceManager.GetObject("tool_icon_png", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

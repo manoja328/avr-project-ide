@@ -61,6 +61,10 @@ namespace AVRProjectIDE
                     MessageBox.Show("Error, Could Not Load Project");
                 }
             }
+            else
+            {
+                btnFind_Click(sender, e);
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)

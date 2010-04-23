@@ -20,8 +20,30 @@ namespace AVRProjectIDE
         private string fileAbsPath;
         public string FileAbsPath
         {
-            get { return Program.CleanFilePath(fileAbsPath); }
-            set { fileAbsPath = Program.CleanFilePath(value); }
+            get
+            {
+                string res = Program.CleanFilePath(fileAbsPath);
+                try
+                {
+                    return Path.GetFullPath(res);
+                }
+                catch
+                {
+                    return res;
+                }
+            }
+            set
+            {
+                string v = Program.CleanFilePath(value);
+                try
+                {
+                    fileAbsPath = Path.GetFullPath(v);
+                }
+                catch
+                {
+                    fileAbsPath = v;
+                }
+            }
         }
 
         public string FileName
@@ -456,7 +478,7 @@ namespace AVRProjectIDE
             set
             {
                 char c = value[value.IndexOf('O') + 1];
-                if (c != '0' || c != '1' || c != '2' || c != '3')
+                if (c != '0' && c != '1' && c != '2' && c != '3')
                 {
                     c = 's';
                 }
@@ -496,7 +518,7 @@ namespace AVRProjectIDE
         private string ardCoreOverride;
         public string ArduinoCoreOverride
         {
-            get { return ardCoreOverride.Trim(); }
+            get { return Program.CleanFilePath(ardCoreOverride); }
             set
             {
                 string v = value;
@@ -785,7 +807,8 @@ namespace AVRProjectIDE
                 foreach (KeyValuePair<string, ProjectFile> file in FileList)
                 {
                     xml.WriteStartElement("File");
-                    xml.WriteElementString("AbsPath", file.Value.FileAbsPath);
+                    xml.WriteComment("AbsPath: '" + file.Value.FileAbsPath + "'");
+                    //xml.WriteElementString("AbsPath", file.Value.FileAbsPath);
                     xml.WriteElementString("RelPath", file.Value.FileRelPathTo(DirPath));
                     xml.WriteElementString("ToCompile", file.Value.ToCompile.ToString().ToLowerInvariant());
                     xml.WriteElementString("Options", file.Value.Options);
@@ -1408,7 +1431,7 @@ namespace AVRProjectIDE
                             xml.WriteElementString("LIST", "1");
                             xml.WriteElementString("MAP", "1");
                             xml.WriteElementString("OUTPUTFILENAME", this.FileNameNoExt + ".elf");
-                            xml.WriteElementString("OUTPUTDIR", OutputDir);
+                            xml.WriteElementString("OUTPUTDIR", OutputDir.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar);
                             xml.WriteElementString("ISDIRTY", "0");
 
                             xml.WriteStartElement("OPTIONS");

@@ -158,10 +158,13 @@ namespace AVRProjectIDE
                     showMsg = true;
                 }
 
-                if (File.ReadAllText(SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "interruptvectors.xml") != Properties.Resources.interruptvectors)
+                if (File.Exists(SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "interruptvectors.xml"))
                 {
-                    msg += "Interrupt vector list file at '" + SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "interruptvectors.xml" + "'" + Environment.NewLine;
-                    showMsg = true;
+                    if (File.ReadAllText(SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "interruptvectors.xml") != Properties.Resources.interruptvectors)
+                    {
+                        msg += "Interrupt vector list file at '" + SettingsManagement.AppDataPath + "chip_xml" + Path.DirectorySeparatorChar + "interruptvectors.xml" + "'" + Environment.NewLine;
+                        showMsg = true;
+                    }
                 }
 
                 if (File.ReadAllText(SettingsManagement.AppDataPath + "helplinks.xml") != Properties.Resources.helplinks)
