@@ -79,7 +79,7 @@
             this.btnVerify.Name = "btnVerify";
             this.btnVerify.Size = new System.Drawing.Size(63, 48);
             this.btnVerify.TabIndex = 5;
-            this.btnVerify.Text = "Verify With File";
+            this.btnVerify.Text = "&Verify With File";
             this.btnVerify.UseVisualStyleBackColor = true;
             this.btnVerify.Click += new System.EventHandler(this.btnVerify_Click);
             // 
@@ -90,7 +90,7 @@
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(61, 48);
             this.btnRead.TabIndex = 4;
-            this.btnRead.Text = "Dump File";
+            this.btnRead.Text = "D&ump File";
             this.btnRead.UseVisualStyleBackColor = true;
             this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
@@ -101,7 +101,7 @@
             this.btnWriteNoVerify.Name = "btnWriteNoVerify";
             this.btnWriteNoVerify.Size = new System.Drawing.Size(125, 21);
             this.btnWriteNoVerify.TabIndex = 3;
-            this.btnWriteNoVerify.Text = "Write File No Verify";
+            this.btnWriteNoVerify.Text = "Write File N&o Verify";
             this.btnWriteNoVerify.UseVisualStyleBackColor = true;
             this.btnWriteNoVerify.Click += new System.EventHandler(this.btnWriteNoVerify_Click);
             // 
@@ -112,7 +112,7 @@
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(125, 21);
             this.btnWrite.TabIndex = 2;
-            this.btnWrite.Text = "Write File + Verify";
+            this.btnWrite.Text = "Write Fil&e + Verify";
             this.btnWrite.UseVisualStyleBackColor = true;
             this.btnWrite.Click += new System.EventHandler(this.btnWrite_Click);
             // 
@@ -153,7 +153,7 @@
             this.btnFuseTool.Name = "btnFuseTool";
             this.btnFuseTool.Size = new System.Drawing.Size(60, 48);
             this.btnFuseTool.TabIndex = 2;
-            this.btnFuseTool.Text = "Use Fuse Tool";
+            this.btnFuseTool.Text = "Use &Fuse Tool";
             this.btnFuseTool.UseVisualStyleBackColor = true;
             this.btnFuseTool.Click += new System.EventHandler(this.btnFuseTool_Click);
             // 
@@ -164,7 +164,7 @@
             this.btnInteractive.Name = "btnInteractive";
             this.btnInteractive.Size = new System.Drawing.Size(76, 48);
             this.btnInteractive.TabIndex = 3;
-            this.btnInteractive.Text = "Interactive Mode";
+            this.btnInteractive.Text = "&Interactive Mode";
             this.btnInteractive.UseVisualStyleBackColor = true;
             this.btnInteractive.Click += new System.EventHandler(this.btnInteractive_Click);
             // 
@@ -175,7 +175,7 @@
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnSaveAndClose.TabIndex = 2;
-            this.btnSaveAndClose.Text = "Save Changes";
+            this.btnSaveAndClose.Text = "&Save Changes";
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
@@ -186,7 +186,7 @@
             this.btnDiscardAndClose.Name = "btnDiscardAndClose";
             this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnDiscardAndClose.TabIndex = 3;
-            this.btnDiscardAndClose.Text = "Discard Changes";
+            this.btnDiscardAndClose.Text = "&Discard Changes";
             this.btnDiscardAndClose.UseVisualStyleBackColor = true;
             this.btnDiscardAndClose.Click += new System.EventHandler(this.btnDiscardAndClose_Click);
             // 

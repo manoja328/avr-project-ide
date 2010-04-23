@@ -61,7 +61,7 @@
             this.btnBurnOnlyOpt.Name = "btnBurnOnlyOpt";
             this.btnBurnOnlyOpt.Size = new System.Drawing.Size(418, 23);
             this.btnBurnOnlyOpt.TabIndex = 7;
-            this.btnBurnOnlyOpt.Text = "Run";
+            this.btnBurnOnlyOpt.Text = "&Run";
             this.btnBurnOnlyOpt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBurnOnlyOpt.UseVisualStyleBackColor = true;
             this.btnBurnOnlyOpt.Click += new System.EventHandler(this.btnBurnOnlyOpt_Click);

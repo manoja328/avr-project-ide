@@ -42,6 +42,7 @@
             this.btnOpenAppData = new System.Windows.Forms.Button();
             this.chkAutocomplete = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkHighlightCurLine = new System.Windows.Forms.CheckBox();
             this.dropSmartIndent = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.numIndentWidth = new System.Windows.Forms.NumericUpDown();
@@ -65,7 +66,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radMsgOnBottom = new System.Windows.Forms.RadioButton();
             this.chkReopenProject = new System.Windows.Forms.CheckBox();
-            this.chkHighlightCurLine = new System.Windows.Forms.CheckBox();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -252,6 +252,16 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editor Settings (may require restarting the editor to make changes take effect)";
+            // 
+            // chkHighlightCurLine
+            // 
+            this.chkHighlightCurLine.AutoSize = true;
+            this.chkHighlightCurLine.Location = new System.Drawing.Point(535, 19);
+            this.chkHighlightCurLine.Name = "chkHighlightCurLine";
+            this.chkHighlightCurLine.Size = new System.Drawing.Size(127, 17);
+            this.chkHighlightCurLine.TabIndex = 19;
+            this.chkHighlightCurLine.Text = "Highlight Current Line";
+            this.chkHighlightCurLine.UseVisualStyleBackColor = true;
             // 
             // dropSmartIndent
             // 
@@ -479,7 +489,7 @@
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnSaveAndClose.TabIndex = 20;
-            this.btnSaveAndClose.Text = "Save Changes";
+            this.btnSaveAndClose.Text = "&Save Changes";
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
@@ -490,7 +500,7 @@
             this.btnDiscardAndClose.Name = "btnDiscardAndClose";
             this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnDiscardAndClose.TabIndex = 21;
-            this.btnDiscardAndClose.Text = "Discard Changes";
+            this.btnDiscardAndClose.Text = "&Discard Changes";
             this.btnDiscardAndClose.UseVisualStyleBackColor = true;
             this.btnDiscardAndClose.Click += new System.EventHandler(this.btnDiscardAndClose_Click);
             // 
@@ -538,16 +548,6 @@
             this.chkReopenProject.TabIndex = 9;
             this.chkReopenProject.Text = "Reopen Last Open Project On Start";
             this.chkReopenProject.UseVisualStyleBackColor = true;
-            // 
-            // chkHighlightCurLine
-            // 
-            this.chkHighlightCurLine.AutoSize = true;
-            this.chkHighlightCurLine.Location = new System.Drawing.Point(535, 19);
-            this.chkHighlightCurLine.Name = "chkHighlightCurLine";
-            this.chkHighlightCurLine.Size = new System.Drawing.Size(127, 17);
-            this.chkHighlightCurLine.TabIndex = 19;
-            this.chkHighlightCurLine.Text = "Highlight Current Line";
-            this.chkHighlightCurLine.UseVisualStyleBackColor = true;
             // 
             // SettingsWindow
             // 

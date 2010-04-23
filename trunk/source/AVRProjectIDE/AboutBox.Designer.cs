@@ -150,7 +150,7 @@
             this.lnkButton.Name = "lnkButton";
             this.lnkButton.Size = new System.Drawing.Size(75, 20);
             this.lnkButton.TabIndex = 24;
-            this.lnkButton.Text = "Website";
+            this.lnkButton.Text = "&Website";
             this.lnkButton.Click += new System.EventHandler(this.lnkButton_Click);
             // 
             // btnDonate
@@ -159,7 +159,7 @@
             this.btnDonate.Name = "btnDonate";
             this.btnDonate.Size = new System.Drawing.Size(75, 20);
             this.btnDonate.TabIndex = 24;
-            this.btnDonate.Text = "Donate";
+            this.btnDonate.Text = "&Donate";
             this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
             // 
             // AboutBox
@@ -167,6 +167,7 @@
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.okButton;
             this.ClientSize = new System.Drawing.Size(506, 296);
             this.Controls.Add(this.tableLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -177,7 +178,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AboutBox";
+            this.Text = "About AVR Project IDE";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);

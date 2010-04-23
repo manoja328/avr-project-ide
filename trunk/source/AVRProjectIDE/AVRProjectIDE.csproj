@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AB21876B-FE2C-48D4-A5F4-3EB344272950}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -16,10 +16,11 @@
     <ManifestCertificateThumbprint>357C3D488677BF5BCC7E472B8FE5AEBA156D7659</ManifestCertificateThumbprint>
     <ManifestKeyFile>AVRProjectIDE_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <ApplicationIcon>mainicon.ico</ApplicationIcon>
-    <StartupObject>
-    </StartupObject>
+    <StartupObject>AVRProjectIDE.Program</StartupObject>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <SignAssembly>false</SignAssembly>
     <PublishUrl>C:\Users\Frank\Documents\Projects\Visual Studio\AVRProject\AVRProjectIDE\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -36,7 +37,6 @@
     <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -73,7 +73,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
     <DebugType>full</DebugType>
@@ -189,6 +190,9 @@
     <Compile Include="LoadWaitWindow.Designer.cs">
       <DependentUpon>LoadWaitWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemoryViewPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="MessagePanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,18 +251,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AvrDudeWindow.resx">
       <DependentUpon>AvrDudeWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="BurnerPanel.resx">
       <DependentUpon>BurnerPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DebuggerPanel.resx">
       <DependentUpon>DebuggerPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorReportWindow.resx">
       <DependentUpon>ErrorReportWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileAddWizard.resx">
       <DependentUpon>FileAddWizard.cs</DependentUpon>
@@ -267,15 +276,19 @@
     <EmbeddedResource Include="filetemplates.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>filetemplates.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FuseCalculator.resx">
       <DependentUpon>FuseCalculator.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FusePanel.resx">
       <DependentUpon>FusePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GotoDialog.resx">
       <DependentUpon>GotoDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsResx.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -284,9 +297,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HardwareExplorer.resx">
       <DependentUpon>HardwareExplorer.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadWaitWindow.resx">
       <DependentUpon>LoadWaitWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemoryViewPanel.resx">
+      <DependentUpon>MemoryViewPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MessagePanel.resx">
       <DependentUpon>MessagePanel.cs</DependentUpon>
@@ -294,27 +313,35 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditorPanel.resx">
       <DependentUpon>EditorPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="IDEWindow.resx">
       <DependentUpon>IDEWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileOptionsDialog.resx">
       <DependentUpon>FileOptionsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigWindow.resx">
       <DependentUpon>ConfigWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SerialPortPanel.resx">
       <DependentUpon>SerialPortPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsWindow.resx">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeWindow.resx">
       <DependentUpon>WelcomeWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -323,12 +350,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchPanel.resx">
       <DependentUpon>SearchPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileTreePanel.resx">
       <DependentUpon>FileTreePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizard.resx">
       <DependentUpon>Wizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -370,11 +400,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
@@ -1148,6 +1173,16 @@
     <None Include="graphics\help_img.png" />
     <None Include="graphics\chip.ico" />
     <Content Include="ext_tools.xml" />
+    <None Include="graphics\debug_breakptstog.png" />
+    <None Include="graphics\debug_goto.png" />
+    <None Include="graphics\debug_pause.png" />
+    <None Include="graphics\debug_play.png" />
+    <None Include="graphics\debug_reset.png" />
+    <None Include="graphics\debug_stepinto.png" />
+    <None Include="graphics\debug_stepout.png" />
+    <None Include="graphics\debug_stepover.png" />
+    <None Include="graphics\debug_stop.png" />
+    <None Include="graphics\debug.ico" />
     <Content Include="graphics\installer_large_banner.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1164,6 +1199,8 @@
     <None Include="graphics\redo_img.png" />
     <None Include="graphics\undo_img.png" />
     <None Include="graphics\newfile.png" />
+    <None Include="graphics\tool_icon.ico" />
+    <None Include="graphics\tool_icon_png.png" />
     <Content Include="graphics\unknown2.ico" />
     <None Include="graphics\web.png" />
     <None Include="installerscript.nsi">

@@ -210,6 +210,7 @@
             this.Name = "SerialPortPanel";
             this.TabText = "Serial Port";
             this.Text = "Serial Port";
+            this.Load += new System.EventHandler(this.SerialPortPanel_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SerialPortPanel_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

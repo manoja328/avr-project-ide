@@ -96,6 +96,7 @@
             this.scint.MarginClick += new System.EventHandler<ScintillaNet.MarginClickEventArgs>(this.scint_MarginClick);
             this.scint.CharAdded += new System.EventHandler<ScintillaNet.CharAddedEventArgs>(this.scint_CharAdded);
             this.scint.AutoCompleteAccepted += new System.EventHandler<ScintillaNet.AutoCompleteAcceptedEventArgs>(this.scint_AutoCompleteAccepted);
+            this.scint.MarkerChanged += new System.EventHandler<ScintillaNet.MarkerChangedEventArgs>(scint_MarkerChanged);
             // 
             // rClickMenu
             // 

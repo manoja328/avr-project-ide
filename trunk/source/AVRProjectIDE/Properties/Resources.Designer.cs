@@ -99,11 +99,10 @@ namespace AVRProjectIDE.Properties {
         ///    &lt;/Group&gt;
         ///    &lt;Group type=&quot;types&quot;&gt;
         ///      void bool boolean byte char short int long word dword float double bool bit bitfield byte uchar ushort uint ulong uword struct union enum
+        ///      int8_t int16_t int32_t int64_t uint8_t uint16_t uint32_t uint64_t
         ///    &lt;/Group&gt;
         ///    &lt;Group type=&quot;modifiers&quot;&gt;
-        ///      signed unsigned static volatile const inline extern typedef
-        ///    &lt;/Group&gt;
-        ///    &lt;Group type=&quot;pre [rest of string was truncated]&quot;;.
+        ///      signed unsigned static [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string autocomplete {
             get {
@@ -112,11 +111,24 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_Alpha_74.
+        ///   Looks up a localized string similar to AVRProjectIDE_Alpha_81.
         /// </summary>
         internal static string BuildID {
             get {
                 return ResourceManager.GetString("BuildID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;ExternalTools&gt;
+        ///  &lt;Tool text=&quot;Example Tool Name&quot; cmd=&quot;notepad&quot; dir=&quot;&quot; args=&quot;%PROJNAME%.avrproj&quot; /&gt;
+        ///&lt;/ExternalTools&gt;
+        ///.
+        /// </summary>
+        internal static string ext_tools {
+            get {
+                return ResourceManager.GetString("ext_tools", resourceCulture);
             }
         }
         

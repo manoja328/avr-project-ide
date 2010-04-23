@@ -117,6 +117,7 @@ namespace AVRProjectIDE
             project.OtherOptionsForC = txtCOptions.Text;
             project.OtherOptionsForCPP = txtCPPOptions.Text;
             project.OtherOptionsForS = txtSOptions.Text;
+            project.Optimization = (string)listOptimization.Items[listOptimization.SelectedIndex];
 
             project.PackStructs = chklistOptions.GetItemChecked(2);
             project.ShortEnums = chklistOptions.GetItemChecked(3);

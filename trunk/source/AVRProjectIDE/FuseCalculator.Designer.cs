@@ -113,25 +113,28 @@
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnSaveAndClose.TabIndex = 3;
-            this.btnSaveAndClose.Text = "Save Changes";
+            this.btnSaveAndClose.Text = "&Save Changes";
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
             // btnDiscardAndClose
             // 
             this.btnDiscardAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDiscardAndClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnDiscardAndClose.Location = new System.Drawing.Point(895, 493);
             this.btnDiscardAndClose.Name = "btnDiscardAndClose";
             this.btnDiscardAndClose.Size = new System.Drawing.Size(105, 23);
             this.btnDiscardAndClose.TabIndex = 4;
-            this.btnDiscardAndClose.Text = "Discard Changes";
+            this.btnDiscardAndClose.Text = "&Discard Changes";
             this.btnDiscardAndClose.UseVisualStyleBackColor = true;
             this.btnDiscardAndClose.Click += new System.EventHandler(this.btnDiscardAndClose_Click);
             // 
             // FuseCalculator
             // 
+            this.AcceptButton = this.btnSaveAndClose;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnDiscardAndClose;
             this.ClientSize = new System.Drawing.Size(1012, 528);
             this.Controls.Add(this.btnSaveAndClose);
             this.Controls.Add(this.btnDiscardAndClose);

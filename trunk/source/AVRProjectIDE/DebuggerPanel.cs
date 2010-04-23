@@ -15,6 +15,8 @@ namespace AVRProjectIDE
 {
     public partial class DebuggerPanel : DockContent
     {
+        private IDEWindow parent;
+
         private Process procAVaRICE;
         private Process procGDB;
 
@@ -22,9 +24,13 @@ namespace AVRProjectIDE
 
         private static readonly int[] ALLOWEDJTAGFREQ = new int[] { 1000, 500, 250, 125, };
 
-        public DebuggerPanel()
+        public DebuggerPanel(IDEWindow parent)
         {
+            this.parent = parent;
+
             InitializeComponent();
+
+            this.Icon = GraphicsResx.debug;
 
             this.numServerPort.Minimum = 1;
             this.numServerPort.Maximum = UInt16.MaxValue;
@@ -42,6 +48,8 @@ namespace AVRProjectIDE
 
             this.txtAVaRICEOtherOpts.Text = SettingsManagement.LastICEOptions;
             this.txtJTAGPort.Text = SettingsManagement.LastJTAGPort;
+
+            DisableButtons();
 
             if (CheckForAVARICE() == false)
             {
@@ -262,6 +270,83 @@ namespace AVRProjectIDE
             SettingsManagement.LastICEHardware = ((string)this.dropHardwareSelection.Items[this.dropHardwareSelection.SelectedIndex]).Trim();
             SettingsManagement.LastICEOptions = this.txtAVaRICEOtherOpts.Text.Trim();
             SettingsManagement.LastJTAGPort = this.txtJTAGPort.Text.Trim();
+        }
+
+        public void EnableButtons()
+        {
+            foreach (ToolStripItem i in toolStrip1.Items)
+            {
+                i.Enabled = true;
+            }
+        }
+
+        public void DisableButtons()
+        {
+            foreach (ToolStripItem i in toolStrip1.Items)
+            {
+                i.Enabled = false;
+            }
+        }
+
+        public void BreakpointChanged(bool isAdding, string fileName, int lineNum)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SendToGDB(string text)
+        {
+            if (procGDB == null)
+                return;
+
+            if (procGDB.HasExited == true)
+                return;
+
+            if (text == null)
+                return;
+
+            try
+            {
+                procGDB.StandardInput.WriteLine(text.TrimEnd());
+            }
+            catch { }
+        }
+
+        private void tmrReader_Tick(object sender, EventArgs e)
+        {
+            string line = "";
+            try
+            {
+                line = procGDB.StandardOutput.ReadLine().TrimEnd();
+            }
+            catch
+            { }
+
+            if (string.IsNullOrEmpty(line))
+            {
+                try
+                {
+                    line = procGDB.StandardError.ReadLine().TrimEnd();
+                }
+                catch { }
+            }
+
+            if (string.IsNullOrEmpty(line))
+                return;
+
+            if (txtOutput.Text.Length > txtOutput.MaxLength * 3 / 4)
+                txtOutput.Text = txtOutput.Text.Substring(txtOutput.Text.Length / 2);
+
+            HandleGDBOutput(line);
+
+            txtOutput.Text += line + Environment.NewLine;
+
+            txtOutput.Select(txtOutput.Text.Length, 0);
+            txtOutput.ScrollToCaret();
+        }
+
+        private void HandleGDBOutput(string line)
+        {
+            throw new NotImplementedException();
         }
     }
 }
