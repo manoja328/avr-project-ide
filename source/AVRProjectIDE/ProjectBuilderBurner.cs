@@ -1752,17 +1752,18 @@ namespace AVRProjectIDE
 
         private void PrepProject()
         {
-            // make a clone of the file list
-            workingFileList = new Dictionary<string, ProjectFile>();
-            workingFileList.Clear();
-            foreach (KeyValuePair<string, ProjectFile> file in origFileList)
-            {
-                ProjectFile newFile = (ProjectFile)file.Value.Clone();
-                workingFileList.Add(file.Key, newFile);
-            }
-
             // clone the project
             workingProject = (AVRProject)project.Clone();
+
+            // make a clone of the file list
+            workingFileList = workingProject.FileList;
+            //new Dictionary<string, ProjectFile>();
+            //workingFileList.Clear();
+            //foreach (KeyValuePair<string, ProjectFile> file in workingProject.FileList)
+            //{
+            //    ProjectFile newFile = (ProjectFile)file.Value.Clone();
+            //    workingFileList.Add(file.Key, newFile);
+            //}
 
             // all this cloning is to make sure the background worker thread used for the build
             // doesn't access the same resources as the main thread
