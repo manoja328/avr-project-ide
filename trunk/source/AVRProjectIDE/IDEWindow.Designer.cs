@@ -37,7 +37,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IDEWindow));
             WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin1 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
             WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin1 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
             WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient1 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
@@ -133,7 +132,6 @@
             this.tbtnCompile = new System.Windows.Forms.ToolStripButton();
             this.tbtnBurn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            //this.imgListFileTree = new System.Windows.Forms.ImageList(this.components);
             this.imgListTabs = new System.Windows.Forms.ImageList(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -154,6 +152,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timerScanner = new System.Windows.Forms.Timer(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
+            this.mbtnCloneProject = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -179,6 +178,7 @@
             this.mbtnSaveFileAs,
             this.mbtnSaveAllFiles,
             this.mbtnSaveConfigAs,
+            this.mbtnCloneProject,
             this.mbtnRecentProjects,
             this.mbtnExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -480,7 +480,7 @@
             // 
             this.mbtnConfig.Image = global::AVRProjectIDE.GraphicsResx.cog_edit;
             this.mbtnConfig.Name = "mbtnConfig";
-            this.mbtnConfig.Size = new System.Drawing.Size(190, 22);
+            this.mbtnConfig.Size = new System.Drawing.Size(233, 22);
             this.mbtnConfig.Text = "Con&figure Project";
             this.mbtnConfig.Click += new System.EventHandler(this.mbtnConfig_Click);
             // 
@@ -489,14 +489,14 @@
             this.mbtnCompile.Image = global::AVRProjectIDE.GraphicsResx.build_img;
             this.mbtnCompile.Name = "mbtnCompile";
             this.mbtnCompile.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.mbtnCompile.Size = new System.Drawing.Size(190, 22);
+            this.mbtnCompile.Size = new System.Drawing.Size(233, 22);
             this.mbtnCompile.Text = "&Compile All / Build Project";
             this.mbtnCompile.Click += new System.EventHandler(this.mbtnCompile_Click);
             // 
             // mbtnCompileCurrent
             // 
             this.mbtnCompileCurrent.Name = "mbtnCompileCurrent";
-            this.mbtnCompileCurrent.Size = new System.Drawing.Size(190, 22);
+            this.mbtnCompileCurrent.Size = new System.Drawing.Size(233, 22);
             this.mbtnCompileCurrent.Text = "Compile Current File";
             this.mbtnCompileCurrent.Click += new System.EventHandler(this.mbtnCompileCurrent_Click);
             // 
@@ -505,49 +505,49 @@
             this.mbtnBurn.Image = global::AVRProjectIDE.GraphicsResx.burn_img;
             this.mbtnBurn.Name = "mbtnBurn";
             this.mbtnBurn.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.mbtnBurn.Size = new System.Drawing.Size(190, 22);
+            this.mbtnBurn.Size = new System.Drawing.Size(233, 22);
             this.mbtnBurn.Text = "&Program Chip";
             this.mbtnBurn.Click += new System.EventHandler(this.mbtnBurn_Click);
             // 
             // mbtnAVRDUDE
             // 
             this.mbtnAVRDUDE.Name = "mbtnAVRDUDE";
-            this.mbtnAVRDUDE.Size = new System.Drawing.Size(190, 22);
+            this.mbtnAVRDUDE.Size = new System.Drawing.Size(233, 22);
             this.mbtnAVRDUDE.Text = "AVRDUDE Tool";
             this.mbtnAVRDUDE.Click += new System.EventHandler(this.mbtnAVRDUDE_Click);
             // 
             // mbtnFuseTool
             // 
             this.mbtnFuseTool.Name = "mbtnFuseTool";
-            this.mbtnFuseTool.Size = new System.Drawing.Size(190, 22);
+            this.mbtnFuseTool.Size = new System.Drawing.Size(233, 22);
             this.mbtnFuseTool.Text = "Fuse Tool";
             this.mbtnFuseTool.Click += new System.EventHandler(this.mbtnFuseTool_Click);
             // 
             // mbtnExportMakefile
             // 
             this.mbtnExportMakefile.Name = "mbtnExportMakefile";
-            this.mbtnExportMakefile.Size = new System.Drawing.Size(190, 22);
+            this.mbtnExportMakefile.Size = new System.Drawing.Size(233, 22);
             this.mbtnExportMakefile.Text = "Export Makefile";
             this.mbtnExportMakefile.Click += new System.EventHandler(this.mbtnExportMakefile_Click);
             // 
             // mbtnExportAPS
             // 
             this.mbtnExportAPS.Name = "mbtnExportAPS";
-            this.mbtnExportAPS.Size = new System.Drawing.Size(190, 22);
+            this.mbtnExportAPS.Size = new System.Drawing.Size(233, 22);
             this.mbtnExportAPS.Text = "Export AVRStudio .aps";
             this.mbtnExportAPS.Click += new System.EventHandler(this.mbtnExportAPS_Click);
             // 
             // mbtnRunMake
             // 
             this.mbtnRunMake.Name = "mbtnRunMake";
-            this.mbtnRunMake.Size = new System.Drawing.Size(190, 22);
+            this.mbtnRunMake.Size = new System.Drawing.Size(233, 22);
             this.mbtnRunMake.Text = "Run \"Make\"";
             this.mbtnRunMake.Click += new System.EventHandler(this.mbtnRunMake_Click);
             // 
             // mbtnEditorSettings
             // 
             this.mbtnEditorSettings.Name = "mbtnEditorSettings";
-            this.mbtnEditorSettings.Size = new System.Drawing.Size(190, 22);
+            this.mbtnEditorSettings.Size = new System.Drawing.Size(233, 22);
             this.mbtnEditorSettings.Text = "Editor Settings";
             this.mbtnEditorSettings.Click += new System.EventHandler(this.mbtnEditorSettings_Click);
             // 
@@ -898,11 +898,9 @@
             // 
             // imgListTabs
             // 
+            this.imgListTabs.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imgListTabs.ImageSize = new System.Drawing.Size(16, 16);
             this.imgListTabs.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListTabs.Images.Add("serial.ico", global::AVRProjectIDE.GraphicsResx.serial);
-            this.imgListTabs.Images.Add("searchall.ico", global::AVRProjectIDE.GraphicsResx.searchall);
-            this.imgListTabs.Images.Add("warning.ico", global::AVRProjectIDE.GraphicsResx.warning);
-            this.imgListTabs.Images.Add("message.ico", global::AVRProjectIDE.GraphicsResx.message);
             // 
             // toolStripSeparator2
             // 
@@ -1069,6 +1067,13 @@
             // 
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
             // 
+            // mbtnCloneProject
+            // 
+            this.mbtnCloneProject.Name = "mbtnCloneProject";
+            this.mbtnCloneProject.Size = new System.Drawing.Size(181, 22);
+            this.mbtnCloneProject.Text = "Clone Project";
+            this.mbtnCloneProject.Click += new System.EventHandler(this.mbtnCloneProject_Click);
+            // 
             // IDEWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1078,7 +1083,7 @@
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.menuStripMain);
             this.Controls.Add(this.dockPanel1);
-            this.Icon = GraphicsResx.mainicon;
+            this.Icon = global::AVRProjectIDE.GraphicsResx.mainicon;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripMain;
             this.MinimumSize = new System.Drawing.Size(400, 300);
@@ -1199,6 +1204,7 @@
         private System.Windows.Forms.ToolStripMenuItem mbtnBookmarkPrev;
         private System.Windows.Forms.ToolStripMenuItem mbtnBookmarkNext;
         private System.Windows.Forms.ToolStripMenuItem mbtnDonate;
+        private System.Windows.Forms.ToolStripMenuItem mbtnCloneProject;
 
 
     }
