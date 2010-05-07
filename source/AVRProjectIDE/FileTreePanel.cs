@@ -641,7 +641,7 @@ namespace AVRProjectIDE
             }
 
             ext = ext.Substring(ext.LastIndexOf('.'));
-            if (ext != "c" && ext != "cpp" && ext != "cxx" && ext != "s" && ext != "pde")
+            if (ext != ".c" && ext != ".cpp" && ext != ".cxx" && ext != ".s" && ext != ".pde")
             {
                 e.Cancel = true;
                 return;

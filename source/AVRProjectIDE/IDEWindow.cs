@@ -1465,6 +1465,7 @@ namespace AVRProjectIDE
             mbtnSaveConfigAs.Enabled = false;
             mbtnSaveFileAs.Enabled = false;
             mbtnSaveCurFile.Enabled = false;
+            mbtnCloneProject.Enabled = false;
 
             foreach (ToolStripMenuItem i in toolsToolStripMenuItem.DropDown.Items)
             {
@@ -1490,6 +1491,7 @@ namespace AVRProjectIDE
             mbtnSaveConfigAs.Enabled = true;
             mbtnSaveFileAs.Enabled = true;
             mbtnSaveCurFile.Enabled = true;
+            mbtnCloneProject.Enabled = true;
 
             foreach (ToolStripMenuItem i in toolsToolStripMenuItem.DropDown.Items)
             {
@@ -1622,6 +1624,21 @@ namespace AVRProjectIDE
             #if DEBUGGERWINTEST
             debuggerWin.BreakpointChanged(isAdding, fileName, lineNum);
             #endif
+        }
+
+        private void mbtnCloneProject_Click(object sender, EventArgs e)
+        {
+            if (project.IsReady)
+            {
+                if (SaveAll())
+                {
+                    CopyCatWizard.Show(project);
+                }
+                else
+                {
+                    MessageBox.Show("'Save All' was not successful, could not clone project");
+                }
+            }
         }
     }
 }
