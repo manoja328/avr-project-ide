@@ -3,6 +3,7 @@
 ==Update 85==
 
  * During cloning, a new folder called external_files will be created to store files outside the project directory.
+ * I stopped using the word alpha because it's probably never going to stop being in this constantly updated state
 
 ==Alpha 84==
 
