@@ -1,5 +1,9 @@
 #summary Change Log of New Uploaded Versions
 
+==Update 85==
+
+ * During cloning, a new folder called external_files will be created to store files outside the project directory.
+
 ==Alpha 84==
 
  * Added project cloning
