@@ -70,9 +70,11 @@ namespace AVRProjectIDE
                             string nfpath;
                             if (file.Value.FileRelProjPath.StartsWith(".."))
                             {
+                                
                                 if (radCopyAll.Checked)
                                 {
-                                    nfpath = targetDir + Path.DirectorySeparatorChar + file.Value.FileName;
+                                    string extDir = targetDir + Path.DirectorySeparatorChar + "external_files";
+                                    nfpath = extDir + Path.DirectorySeparatorChar + file.Value.FileName;
                                 }
                                 else
                                 {
