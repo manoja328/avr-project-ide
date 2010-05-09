@@ -1769,7 +1769,7 @@ namespace AVRProjectIDE
         {
             foreach (XmlElement param in docx.GetElementsByTagName("ClockFreq"))
             {
-                proj.ClockFreq = decimal.Parse(param.InnerText);
+                proj.ClockFreq = decimal.Parse(param.InnerText, System.Globalization.NumberStyles.AllowDecimalPoint | System.Globalization.NumberStyles.AllowLeadingWhite | System.Globalization.NumberStyles.AllowTrailingWhite);
                 appCnt++;
             }
             foreach (XmlElement param in docx.GetElementsByTagName("Device"))
