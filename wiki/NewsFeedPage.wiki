@@ -1,5 +1,7 @@
 This page is reserved for the latest news feeds to the AVR Project IDE's Welcome Window.
 
+===Version 86 added project cloning, improved file add wizard===
+
 ===Version 83 fixed an issue about ignoring files from compile process===
 
 ===Version 82 fixed an issue regarding new files added to project not being compiled===
