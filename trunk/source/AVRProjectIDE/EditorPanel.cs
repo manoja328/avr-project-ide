@@ -88,6 +88,32 @@ namespace AVRProjectIDE
 
         private bool closeWithoutSave = false;
 
+        private static Form _OnlyFindReplaceWindow;
+        public static Form OnlyFindReplaceWindow
+        {
+            get
+            {
+                return _OnlyFindReplaceWindow;
+            }
+
+            set
+            {
+                if (_OnlyFindReplaceWindow != null)
+                {
+                    if (_OnlyFindReplaceWindow != value)
+                    {
+                        try
+                        {
+                            _OnlyFindReplaceWindow.Close();
+                        }
+                        catch { }
+                    }
+                }
+
+                _OnlyFindReplaceWindow = value;
+            }
+        }
+
         #endregion
 
         #region Events and Delegates
@@ -667,6 +693,15 @@ namespace AVRProjectIDE
 
         private void EditorPanelContent_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (OnlyFindReplaceWindow == scint.FindReplace.Window)
+            {
+                try
+                {
+                    OnlyFindReplaceWindow.Close();
+                }
+                catch { }
+            }
+
             EditorClosed(FileName, sender, e);
         }
 
@@ -775,11 +810,19 @@ namespace AVRProjectIDE
         public void FindWindow()
         {
             scint.FindReplace.ShowFind();
+            OnlyFindReplaceWindow = scint.FindReplace.Window;
+
+            if (scint.FindReplace.Window.Text.Contains(this.file.FileName) == false)
+                scint.FindReplace.Window.Text += " for " + this.file.FileName;
         }
 
         public void ReplaceWindow()
         {
             scint.FindReplace.ShowReplace();
+            OnlyFindReplaceWindow = scint.FindReplace.Window;
+
+            if (scint.FindReplace.Window.Text.Contains(this.file.FileName) == false)
+                scint.FindReplace.Window.Text += " for " + this.file.FileName;
         }
 
         public void FindNext()
@@ -845,6 +888,10 @@ namespace AVRProjectIDE
         private void mbtnFind_Click(object sender, EventArgs e)
         {
             scint.FindReplace.ShowFind();
+            OnlyFindReplaceWindow = scint.FindReplace.Window;
+
+            if (scint.FindReplace.Window.Text.Contains(this.file.FileName) == false)
+                scint.FindReplace.Window.Text += " for " + this.file.FileName;
         }
 
         private void mbtnComment_Click(object sender, EventArgs e)

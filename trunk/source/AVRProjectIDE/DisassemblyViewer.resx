@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,44 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="helplinks" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\helplinks.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="scintconfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\scintconfig.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="arduinomakefile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\arduinomakefile;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="autocomplete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\autocomplete.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="templates" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\templates.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="interruptvectors" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\chip_xml\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="BuildID" xml:space="preserve">
-    <value>AVRProjectIDE_88</value>
-  </data>
-  <data name="WinAVRURL" xml:space="preserve">
-    <value>https://sourceforge.net/projects/winavr/files/</value>
-  </data>
-  <data name="WebsiteURL" xml:space="preserve">
-    <value>http://code.google.com/p/avr-project-ide/</value>
-  </data>
-  <data name="HelpURL" xml:space="preserve">
-    <value>http://code.google.com/p/avr-project-ide/wiki/Help</value>
-  </data>
-  <data name="FranksSiteURL" xml:space="preserve">
-    <value>http://frank.circleofcurrent.com/</value>
-  </data>
-  <data name="arduinomain" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\arduino\core\main.cpp;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="ext_tools" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\ext_tools.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
 </root>

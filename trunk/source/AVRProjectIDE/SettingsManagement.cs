@@ -1564,6 +1564,18 @@ namespace AVRProjectIDE
             }
         }
 
+        static public string LastDisassemblyOptions
+        {
+            get
+            {
+                return iniFile.Read("Editor", "LastDisassemblyOptions");
+            }
+            set
+            {
+                iniFile.Write("Editor", "LastDisassemblyOptions", value.Trim());
+            }
+        }
+
         #endregion
 
         #region Updater

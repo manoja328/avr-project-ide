@@ -45,6 +45,7 @@ namespace AVRProjectIDE
         private FileTreePanel fileTreeWin;
         private MessagePanel messageWin;
         private HardwareExplorer hardwareExplorerWin;
+        private DisassemblyViewer disassemViewer;
         
 #if DEBUGGERWINTEST
         private DebuggerPanel debuggerWin;
@@ -128,6 +129,8 @@ namespace AVRProjectIDE
             messageWin = new MessagePanel();
             messageWin.GotoError += new MessagePanel.OnClickError(messageWin_GotoError);
 
+            disassemViewer = new DisassemblyViewer();
+
             #if DEBUGGERWINTEST
             debuggerWin = new DebuggerPanel(this);
             #endif
@@ -186,6 +189,8 @@ namespace AVRProjectIDE
                 return fileTreeWin;
             else if (persistString == typeof(HardwareExplorer).ToString())
                 return hardwareExplorerWin;
+            else if (persistString == typeof(DisassemblyViewer).ToString())
+                return disassemViewer;
             #if DEBUGGERWINTEST
             else if (persistString == typeof(DebuggerPanel).ToString())
                 return debuggerWin;
@@ -428,6 +433,10 @@ namespace AVRProjectIDE
                 editor.OnRename += new RenamedEventHandler(editor_OnRename);
                 editor.EditorClosed += new EditorPanel.EditorClosedEvent(editor_EditorClosed);
                 editor.CloseAllExceptMe += new EditorPanel.CloseAllButMe(editor_CloseAllExceptMe);
+
+                file.Node.ImageKey = "file.ico";
+                file.Node.SelectedImageKey = "file.ico";
+                file.Node.StateImageKey = "file.ico";
 
                 // add editor to list and show it
                 editorList.Add(fileName, editor);
@@ -771,8 +780,6 @@ namespace AVRProjectIDE
             //LoadWaitWindow lww = new LoadWaitWindow();
             //lww.Show();
 
-            curProj = this.project;
-
             EnableButtons();
 
             // close all editors
@@ -783,7 +790,8 @@ namespace AVRProjectIDE
             }
 
 
-            project = newProj; // reassign project
+            this.project = newProj; // reassign project
+            curProj = this.project;
 
             projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
             projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
@@ -1046,7 +1054,9 @@ namespace AVRProjectIDE
 
         private void mbtnFindReplace_Click(object sender, EventArgs e)
         {
-            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(DisassemblyViewer))
+                ((DisassemblyViewer)dockPanel1.ActiveContent).FindWindow();
+            else if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
                 ((EditorPanel)dockPanel1.ActiveContent).FindWindow();
             else if (lastEditor != null)
             {
@@ -1057,6 +1067,8 @@ namespace AVRProjectIDE
         
         private void tbtnFind_Click(object sender, EventArgs e)
         {
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(DisassemblyViewer))
+                ((DisassemblyViewer)dockPanel1.ActiveContent).FindWindow();
             if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
                 ((EditorPanel)dockPanel1.ActiveContent).FindWindow();
             else if (lastEditor != null)
@@ -1068,6 +1080,8 @@ namespace AVRProjectIDE
 
         private void mbtnFindNext_Click(object sender, EventArgs e)
         {
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(DisassemblyViewer))
+                ((DisassemblyViewer)dockPanel1.ActiveContent).FindNext();
             if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
                 ((EditorPanel)dockPanel1.ActiveContent).FindNext();
             else if (lastEditor != null)
@@ -1079,6 +1093,8 @@ namespace AVRProjectIDE
 
         private void tbtnFindNext_Click(object sender, EventArgs e)
         {
+            if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(DisassemblyViewer))
+                ((DisassemblyViewer)dockPanel1.ActiveContent).FindNext();
             if (dockPanel1.ActiveContent != null && dockPanel1.ActiveContent.GetType() == typeof(EditorPanel))
                 ((EditorPanel)dockPanel1.ActiveContent).FindNext();
             else if (lastEditor != null)
@@ -1245,6 +1261,22 @@ namespace AVRProjectIDE
             }
         }
 
+        private void mbtnOpenCmdLine_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process cmd = new System.Diagnostics.Process();
+                cmd.StartInfo.FileName = "cmd";
+                if (project.IsReady)
+                    cmd.StartInfo.WorkingDirectory = project.DirPath;
+                cmd.Start();
+            }
+            catch (Exception ex)
+            {
+                ErrorReportWindow.Show(ex, "Error while opening command line window.");
+            }
+        }
+
         private void mbtnCompileCurrent_Click(object sender, EventArgs e)
         {
             if (project.IsReady == false)
@@ -1364,6 +1396,7 @@ namespace AVRProjectIDE
                 messageWin.Show(dockPanel1);
                 searchWin.Show(dockPanel1);
                 serialWin.Show(dockPanel1);
+                disassemViewer.Show(dockPanel1);
                 hardwareExplorerWin.Show(dockPanel1);
                 #if DEBUGGERWINTEST
                 debuggerWin.Show(dockPanel1);
@@ -1376,6 +1409,7 @@ namespace AVRProjectIDE
                 messageWin.Show(dockPanel1, DockState.DockBottom);
                 searchWin.Show(dockPanel1, DockState.DockBottom);
                 serialWin.Show(dockPanel1, DockState.DockBottom);
+                disassemViewer.Show(dockPanel1, DockState.DockBottom);
                 hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
                 #if DEBUGGERWINTEST
                 debuggerWin.Show(dockPanel1, DockState.DockRightAutoHide);
