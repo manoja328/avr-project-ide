@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Update 88==
+
+ * Disassembly Viewer added, see issue 53
+ * Google changed something that added an extra tag into the news feed, I changed the code in Welcome Window to fix that
+
 ==Update 87==
 
  * Only one find/replace dialog can be open at once
