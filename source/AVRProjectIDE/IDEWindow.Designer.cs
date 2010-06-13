@@ -95,7 +95,8 @@
             this.mbtnFuseTool = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportMakefile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportAPS = new System.Windows.Forms.ToolStripMenuItem();
-            this.mbtnRunMake = new System.Windows.Forms.ToolStripMenuItem();
+
+            this.mbtnOpenCmdLine = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnEditorSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnHelpTopics = new System.Windows.Forms.ToolStripMenuItem();
@@ -470,7 +471,7 @@
             this.mbtnFuseTool,
             this.mbtnExportMakefile,
             this.mbtnExportAPS,
-            this.mbtnRunMake,
+            this.mbtnOpenCmdLine,
             this.mbtnEditorSettings});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -536,13 +537,13 @@
             this.mbtnExportAPS.Size = new System.Drawing.Size(233, 22);
             this.mbtnExportAPS.Text = "Export AVRStudio .aps";
             this.mbtnExportAPS.Click += new System.EventHandler(this.mbtnExportAPS_Click);
-            // 
-            // mbtnRunMake
-            // 
-            this.mbtnRunMake.Name = "mbtnRunMake";
-            this.mbtnRunMake.Size = new System.Drawing.Size(233, 22);
-            this.mbtnRunMake.Text = "Run \"Make\"";
-            this.mbtnRunMake.Click += new System.EventHandler(this.mbtnRunMake_Click);
+            //
+            // mbtnOpenCmdLine
+            //
+            this.mbtnOpenCmdLine.Name = "mbtnOpenCmdLine";
+            this.mbtnOpenCmdLine.Size = new System.Drawing.Size(233, 22);
+            this.mbtnOpenCmdLine.Text = "Open Command Line Window";
+            this.mbtnOpenCmdLine.Click += new System.EventHandler(this.mbtnOpenCmdLine_Click);
             // 
             // mbtnEditorSettings
             // 
@@ -1183,7 +1184,7 @@
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
         private System.Windows.Forms.ToolStripMenuItem mbtnExportAPS;
-        private System.Windows.Forms.ToolStripMenuItem mbtnRunMake;
+        private System.Windows.Forms.ToolStripMenuItem mbtnOpenCmdLine;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Timer timerScanner;
         private System.Windows.Forms.ToolStripMenuItem mbtnEditorSettings;

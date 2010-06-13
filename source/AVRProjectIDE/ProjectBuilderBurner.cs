@@ -65,9 +65,12 @@ namespace AVRProjectIDE
 
             this.makefileWorker = new BackgroundWorker();
             this.makefileWorker.DoWork += new DoWorkEventHandler(makefileWorker_DoWork);
+            this.makefileWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(makefileWorker_RunWorkerCompleted);
 
             PrepProject();
         }
+
+        
 
         #region Background Worker
 
@@ -76,6 +79,11 @@ namespace AVRProjectIDE
             ListViewModify(errorList, new ListViewItem(new string[] { "", "", "", ((bool)e.Result) ? "OK" : "Failed","# of Errors: " + hasError.ToString("0"), }), ListViewChangeMode.AddToTop);
             ListViewModify(errorOnlyList, new ListViewItem(new string[] { "", "", "", ((bool)e.Result) ? "OK" : "Failed", "# of Errors: " + hasError.ToString("0"), }), ListViewChangeMode.AddToTop);
             DoneWork((bool)e.Result);
+        }
+
+        void makefileWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -410,7 +418,8 @@ namespace AVRProjectIDE
                 result &= CreateHex();
                 CreateEEP();
                 
-                //CreateLSS();
+
+                //CreateLST();
 
                 ReadSize();
             }
@@ -1021,32 +1030,34 @@ namespace AVRProjectIDE
             }
         }
 
-        private bool CreateLSS()
+        private bool CreateLST()
         {
             string outputAbsPath = workingProject.DirPath + Path.DirectorySeparatorChar + workingProject.OutputDir;
 
             if (Program.MakeSurePathExists(outputAbsPath) == false)
                 return false;
 
-            string lssFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.SafeFileNameNoExt + ".lss";
+            string lstFileAbsPath = outputAbsPath + Path.DirectorySeparatorChar + workingProject.SafeFileNameNoExt + ".lst";
 
-            if (File.Exists(lssFileAbsPath))
+            if (File.Exists(lstFileAbsPath))
             {
                 try
                 {
-                    File.Delete(lssFileAbsPath);
+                    File.Delete(lstFileAbsPath);
                 }
                 catch (Exception ex)
                 {
-                    TextBoxModify(outputTextbox, "####Error: LSS file could not be deleted at " + lssFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
+                    TextBoxModify(outputTextbox, "####Error: LSS file could not be deleted at " + lstFileAbsPath + ", " + ex.Message, TextBoxChangeMode.PrependNewLine);
                 }
             }
 
-            string args = "-h -S " + workingProject.SafeFileNameNoExt + ".elf >> " + workingProject.SafeFileNameNoExt + ".lss";
+            string args = "-h -S " + workingProject.SafeFileNameNoExt + ".elf > " + workingProject.SafeFileNameNoExt + ".lst";
 
             TextBoxModify(outputTextbox, "Execute: avr-objdump " + args, TextBoxChangeMode.PrependNewLine);
 
-            ProcessStartInfo psi = new ProcessStartInfo("avr-objdump", args);
+            string allText = "";
+
+            ProcessStartInfo psi = new ProcessStartInfo("cmd", "/C avr-objdump " + args);
             psi.WorkingDirectory = outputAbsPath + Path.DirectorySeparatorChar;
             psi.UseShellExecute = false;
             psi.RedirectStandardError = false;
@@ -1060,6 +1071,7 @@ namespace AVRProjectIDE
             {
                 if (avrobjcopy.Start())
                 {
+                    //allText += avrobjcopy.StandardError.ReadLine();
                     avrobjcopy.WaitForExit(10000);
                 }
                 else
@@ -1074,13 +1086,14 @@ namespace AVRProjectIDE
                 return false;
             }
 
-            if (File.Exists(lssFileAbsPath))
+            if (File.Exists(lstFileAbsPath))
             {
                 return true;
             }
             else
             {
-                TextBoxModify(outputTextbox, "####Error: LSS file not created at " + lssFileAbsPath, TextBoxChangeMode.PrependNewLine);
+                TextBoxModify(outputTextbox, "####Error: LST file not created at " + lstFileAbsPath, TextBoxChangeMode.PrependNewLine);
+                TextBoxModify(outputTextbox, "####avr-objdump output: " + allText, TextBoxChangeMode.PrependNewLine);
                 return false;
             }
         }

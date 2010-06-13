@@ -31,7 +31,7 @@
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dropFileExt = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblFileExtensions = new System.Windows.Forms.Label();
             this.txtDirLoc = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnFind = new System.Windows.Forms.Button();
@@ -45,19 +45,20 @@
             // 
             this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFileName.Location = new System.Drawing.Point(144, 12);
+            this.txtFileName.Location = new System.Drawing.Point(114, 12);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(234, 20);
+            this.txtFileName.Size = new System.Drawing.Size(277, 20);
             this.txtFileName.TabIndex = 0;
+            this.txtFileName.TextChanged += new System.EventHandler(this.txtFileName_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(51, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 13);
+            this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "File Name (no extension):";
+            this.label1.Text = "File Name:";
             // 
             // dropFileExt
             // 
@@ -71,34 +72,34 @@
             "pde",
             "h",
             "hpp"});
-            this.dropFileExt.Location = new System.Drawing.Point(144, 38);
+            this.dropFileExt.Location = new System.Drawing.Point(114, 38);
             this.dropFileExt.Name = "dropFileExt";
-            this.dropFileExt.Size = new System.Drawing.Size(234, 21);
+            this.dropFileExt.Size = new System.Drawing.Size(277, 21);
             this.dropFileExt.TabIndex = 2;
             // 
-            // label2
+            // lblFileExtensions
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "File Extension:";
+            this.lblFileExtensions.AutoSize = true;
+            this.lblFileExtensions.Location = new System.Drawing.Point(33, 41);
+            this.lblFileExtensions.Name = "lblFileExtensions";
+            this.lblFileExtensions.Size = new System.Drawing.Size(75, 13);
+            this.lblFileExtensions.TabIndex = 1;
+            this.lblFileExtensions.Text = "File Extension:";
             // 
             // txtDirLoc
             // 
             this.txtDirLoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDirLoc.Location = new System.Drawing.Point(144, 65);
+            this.txtDirLoc.Location = new System.Drawing.Point(114, 65);
             this.txtDirLoc.Name = "txtDirLoc";
             this.txtDirLoc.ReadOnly = true;
-            this.txtDirLoc.Size = new System.Drawing.Size(142, 20);
+            this.txtDirLoc.Size = new System.Drawing.Size(185, 20);
             this.txtDirLoc.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 68);
+            this.label3.Location = new System.Drawing.Point(12, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 1;
@@ -107,7 +108,7 @@
             // btnFind
             // 
             this.btnFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFind.Location = new System.Drawing.Point(292, 63);
+            this.btnFind.Location = new System.Drawing.Point(305, 63);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(86, 23);
             this.btnFind.TabIndex = 4;
@@ -118,7 +119,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(42, 94);
+            this.label4.Location = new System.Drawing.Point(12, 94);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(96, 13);
             this.label4.TabIndex = 1;
@@ -130,16 +131,16 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dropTemplates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropTemplates.FormattingEnabled = true;
-            this.dropTemplates.Location = new System.Drawing.Point(144, 91);
+            this.dropTemplates.Location = new System.Drawing.Point(114, 91);
             this.dropTemplates.Name = "dropTemplates";
-            this.dropTemplates.Size = new System.Drawing.Size(234, 21);
+            this.dropTemplates.Size = new System.Drawing.Size(277, 21);
             this.dropTemplates.TabIndex = 5;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(303, 124);
+            this.btnCancel.Location = new System.Drawing.Point(316, 124);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -150,7 +151,7 @@
             // btnCreate
             // 
             this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.Location = new System.Drawing.Point(222, 124);
+            this.btnCreate.Location = new System.Drawing.Point(235, 124);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
             this.btnCreate.TabIndex = 6;
@@ -164,7 +165,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(390, 159);
+            this.ClientSize = new System.Drawing.Size(403, 159);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnFind);
@@ -172,7 +173,7 @@
             this.Controls.Add(this.dropFileExt);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblFileExtensions);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDirLoc);
             this.Controls.Add(this.txtFileName);
@@ -194,7 +195,7 @@
         private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox dropFileExt;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblFileExtensions;
         private System.Windows.Forms.TextBox txtDirLoc;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnFind;

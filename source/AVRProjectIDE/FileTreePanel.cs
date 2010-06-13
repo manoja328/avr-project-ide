@@ -40,6 +40,9 @@ namespace AVRProjectIDE
         private List<TreeNode> sourceNodeList = new List<TreeNode>();
         private List<TreeNode> headerNodeList = new List<TreeNode>();
         private List<TreeNode> otherNodeList = new List<TreeNode>();
+        private Dictionary<string, List<TreeNode>> sourceFolderList = new Dictionary<string, List<TreeNode>>();
+        private Dictionary<string, List<TreeNode>> headerFolderList = new Dictionary<string, List<TreeNode>>();
+        private Dictionary<string, List<TreeNode>> otherFolderList = new Dictionary<string, List<TreeNode>>();
 
         #endregion
 
@@ -67,6 +70,17 @@ namespace AVRProjectIDE
             if (project.FileList.TryGetValue(fileName, out f))
             {
                 project.FileList.Remove(fileName);
+                if (f.BackupExists)
+                {
+                    try
+                    {
+                        File.Delete(f.BackupPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Could not delete backup of " + f.FileName + " due to error: " + ex.Message);
+                    }
+                }
             }
 
             EditorPanel editor;
@@ -82,7 +96,7 @@ namespace AVRProjectIDE
             {
                 if (f.Exists)
                 {
-                    if (MessageBox.Show("Delete '" + f.FileName + "' Permanently?", "Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show("'" + f.FileName + "' has been removed from the project. Do you want to delete '" + f.FileName + "' permanently?", "Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         try
                         {
@@ -237,6 +251,10 @@ namespace AVRProjectIDE
             rootNode.Text = project.FileName;
 
             //treeView1.SuspendLayout();
+
+            sourceFolderList.Clear();
+            headerFolderList.Clear();
+            otherFolderList.Clear();
 
             sourceNodeList.Clear();
             headerNodeList.Clear();
@@ -738,7 +756,8 @@ namespace AVRProjectIDE
                 {
                     foreach (string filePath in a)
                     {
-                        this.BeginInvoke(new DragInFile(AddFile), new object[] { filePath, });
+                        if (File.Exists(filePath))
+                            this.BeginInvoke(new DragInFile(AddFile), new object[] { filePath, });
                     }
 
                     this.Activate();

@@ -62,6 +62,8 @@ namespace AVRProjectIDE
 
         public FileAddWizard(AVRProject project)
         {
+            oldExt = SettingsManagement.LastFileExt;
+
             InitializeComponent();
 
             this.project = project;
@@ -143,8 +145,14 @@ namespace AVRProjectIDE
                 MessageBox.Show("File name must not be blank");
                 return;
             }
-
-            string fileName = f + "." + this.SelectedExtension;
+            
+            string fileName;
+            if (f.EndsWith("."))
+                fileName = f + this.SelectedExtension.TrimStart('.');
+            else if (f.Contains("."))
+                fileName = f;
+            else
+                fileName = f + "." + this.SelectedExtension.TrimStart('.');
 
             if (
                 fileName.Contains(" ") ||
@@ -228,6 +236,8 @@ namespace AVRProjectIDE
                 MessageBox.Show("Error saving project");
             }
 
+            SettingsManagement.LastFileExt = createdFile.FileExt;
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -236,6 +246,27 @@ namespace AVRProjectIDE
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private string oldExt;
+
+        private void txtFileName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtFileName.Text.Contains(".") && txtFileName.Text.EndsWith(".") == false)
+            {
+                lblFileExtensions.Visible = false;
+                dropFileExt.Visible = false;
+                oldExt = this.SelectedExtension;
+                this.SelectedExtension = txtFileName.Text.Substring(txtFileName.Text.LastIndexOf(".")).TrimStart('.');
+            }
+            else
+            {
+                lblFileExtensions.Visible = true;
+                dropFileExt.Visible = true;
+                if (string.IsNullOrEmpty(oldExt) == false)
+                    this.SelectedExtension = oldExt;
+                oldExt = "";
+            }
         }
     }
 }

@@ -194,6 +194,8 @@ namespace AVRProjectIDE
                     "(<h3>)" + 
                     "(<a name=\".*?\"\\/>)" +
                     "(.*?)" + 
+                    "(<\\/a>)" +
+                    "(.*?)" + 
                     "(<\\/h3>)",
                     RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
@@ -202,7 +204,11 @@ namespace AVRProjectIDE
                 Match m = r.Match(content);
                 while (m.Success)
                 {
-                    e.Result += System.Web.HttpUtility.HtmlDecode(m.Groups[3].Value) + Environment.NewLine + Environment.NewLine;
+                    string txt = m.Groups[3].Value;
+                    if (txt.Contains('<'))
+                        txt = txt.Substring(0, txt.IndexOf('<'));
+
+                    e.Result += System.Web.HttpUtility.HtmlDecode(txt) + Environment.NewLine + Environment.NewLine;
                     m = m.NextMatch();
                 }
 
