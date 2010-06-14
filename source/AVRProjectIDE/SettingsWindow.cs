@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -261,27 +262,62 @@ namespace AVRProjectIDE
 
         private void btnGotoAppdata_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(SettingsManagement.AppDataPath);
+            try
+            {
+                System.Diagnostics.Process.Start(SettingsManagement.AppDataPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void btnOpenInstallationFolder_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(SettingsManagement.AppInstallPath);
+            try
+            {
+                System.Diagnostics.Process.Start(SettingsManagement.AppInstallPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void lnkFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(txtFavoriteDir.Text);
+            try
+            {
+                System.Diagnostics.Process.Start(txtFavoriteDir.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void lnkCoreFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(txtArduinoCore.Text);
+            try
+            {
+                System.Diagnostics.Process.Start(txtArduinoCore.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void lnkLibFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(txtArduinoLibs.Text);
+            try
+            {
+                System.Diagnostics.Process.Start(txtArduinoLibs.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void SettingsWindow_FormClosing(object sender, FormClosingEventArgs e)
