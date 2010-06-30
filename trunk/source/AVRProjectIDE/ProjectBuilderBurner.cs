@@ -314,12 +314,14 @@ namespace AVRProjectIDE
 
             hasError = 0;
 
+            TextBoxModify(outputTextbox, "Build Starting...", TextBoxChangeMode.Set);
+            ListViewModify(errorList, null, ListViewChangeMode.Clear);
+            ListViewModify(errorOnlyList, null, ListViewChangeMode.Clear);
+
             PrepProject();
 
             // clear the relevent form elements
             TextBoxModify(outputTextbox, "", TextBoxChangeMode.Set);
-            ListViewModify(errorList, null, ListViewChangeMode.Clear);
-            ListViewModify(errorOnlyList, null, ListViewChangeMode.Clear);
 
 
             // start the build

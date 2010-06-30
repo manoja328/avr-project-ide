@@ -360,7 +360,7 @@ namespace AVRProjectIDE
         private void GotoEditor(string fileName, int line)
         {
             EditorPanel editor = null;
-            if (editorList.TryGetValue(fileName, out editor) == false)
+            if (editorList.TryGetValue(fileName.ToLowerInvariant(), out editor) == false)
             {
                 // not open, open it first, OpenEditor will add it to the dictionary
                 editor = OpenEditor(fileName);
@@ -386,7 +386,7 @@ namespace AVRProjectIDE
         private void GotoEditor(string fileName, int selectionStart, int selectionEnd)
         {
             EditorPanel editor = null;
-            if (editorList.TryGetValue(fileName, out editor) == false)
+            if (editorList.TryGetValue(fileName.ToLowerInvariant(), out editor) == false)
             {
                 editor = OpenEditor(fileName);
             }
@@ -409,7 +409,7 @@ namespace AVRProjectIDE
         public void GotoEditor(string fileName)
         {
             EditorPanel editor = null;
-            if (editorList.TryGetValue(fileName, out editor) == false)
+            if (editorList.TryGetValue(fileName.ToLowerInvariant(), out editor) == false)
             {
                 editor = OpenEditor(fileName);
             }
@@ -426,7 +426,7 @@ namespace AVRProjectIDE
         public EditorPanel OpenEditor(string fileName)
         {
             ProjectFile file;
-            if (project.FileList.TryGetValue(fileName, out file))
+            if (project.FileList.TryGetValue(fileName.ToLowerInvariant(), out file))
             {
                 // file is in project, so open the editor and attach events
                 EditorPanel editor = new EditorPanel(file, project, this);
@@ -439,7 +439,7 @@ namespace AVRProjectIDE
                 file.Node.StateImageKey = "file.ico";
 
                 // add editor to list and show it
-                editorList.Add(fileName, editor);
+                editorList.Add(fileName.ToLowerInvariant(), editor);
                 editor.Show(dockPanel1, DockState.Document);
 
                 lastEditor = editor;
@@ -458,7 +458,7 @@ namespace AVRProjectIDE
             {
                 if (i.FileName != fileName)
                 {
-                    editorList.Remove(i.FileName);
+                    editorList.Remove(i.FileName.ToLowerInvariant());
                     i.Close();
                 }
             }
@@ -484,13 +484,13 @@ namespace AVRProjectIDE
             // re-key the dictionary
             editor.File.FileAbsPath = e.FullPath;
             ProjectFile f;
-            if (project.FileList.TryGetValue(e.OldName, out f))
+            if (project.FileList.TryGetValue(e.OldName.ToLowerInvariant(), out f))
             {
-                project.FileList.Remove(e.OldName);
+                project.FileList.Remove(e.OldName.ToLowerInvariant());
 
-                if (project.FileList.TryGetValue(editor.FileName, out f) == false)
+                if (project.FileList.TryGetValue(editor.FileName.ToLowerInvariant(), out f) == false)
                 {
-                    project.FileList.Add(editor.FileName, editor.File);
+                    project.FileList.Add(editor.FileName.ToLowerInvariant(), editor.File);
                 }
                 else
                 {
@@ -1444,7 +1444,7 @@ namespace AVRProjectIDE
                 if (file.FileExt == "c" || file.FileExt == "cpp" || file.FileExt == "h" || file.FileExt == "hpp" || file.FileExt == "pde")
                     SettingsManagement.SetScintSettings(i.Scint, false, false);
                 else if (file.FileExt == "s" || file.FileExt == "asm")
-                    SettingsManagement.SetScintSettings(i.Scint, true, false);
+                    SettingsManagement.SetScintSettings(i.Scint, true, true);
                 else
                     SettingsManagement.SetScintSettings(i.Scint, true, true);
             }

@@ -187,9 +187,11 @@ namespace AVRProjectIDE
                 }
             }
 
-            if (project.FileList.ContainsKey(fileName))
+            string fileNameL = fileName.ToLowerInvariant();
+
+            if (project.FileList.ContainsKey(fileNameL))
             {
-                if (project.FileList[fileName].Exists)
+                if (project.FileList[fileNameL].Exists)
                 {
                     MessageBox.Show("File already exists in the project");
                     return;
@@ -197,10 +199,10 @@ namespace AVRProjectIDE
             }
             else
             {
-                project.FileList.Add(fileName, new ProjectFile(fileAbsPath, project));
+                project.FileList.Add(fileNameL, new ProjectFile(fileAbsPath, project));
             }
 
-            if (project.FileList[fileName].Exists == false)
+            if (project.FileList[fileNameL].Exists == false)
             {
                 if (((string)dropTemplates.Items[dropTemplates.SelectedIndex]) != "none")
                 {
@@ -226,10 +228,10 @@ namespace AVRProjectIDE
                 }
             }
 
-            createdFile = project.FileList[fileName];
+            createdFile = project.FileList[fileNameL];
 
             if (project.FileList.Count == 1)
-                project.FileList[fileName].IsOpen = true;
+                project.FileList[fileNameL].IsOpen = true;
 
             if (project.Save() == SaveResult.Failed)
             {

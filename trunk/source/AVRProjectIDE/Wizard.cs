@@ -256,7 +256,7 @@ namespace AVRProjectIDE
 
                 ProjectFile newFile = new ProjectFile(iniFilePath, project);
                 newFile.IsOpen = true;
-                project.FileList.Add(newFile.FileName, newFile);
+                project.FileList.Add(newFile.FileName.ToLowerInvariant(), newFile);
             }
 
             ProjTemplate.ApplyTemplate((string)dropTemplates.Items[dropTemplates.SelectedIndex], project);

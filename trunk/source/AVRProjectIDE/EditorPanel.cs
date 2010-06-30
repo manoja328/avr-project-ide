@@ -154,8 +154,9 @@ namespace AVRProjectIDE
             }
             else if (file.FileExt == "s" || file.FileExt == "asm")
             {
-                scint.Lexing.Lexer = Lexer.Asm;
-                scint = SettingsManagement.SetScintSettings(scint, true, false);
+                //scint.Lexing.Lexer = Lexer.Asm;
+                //scint = SettingsManagement.SetScintSettings(scint, true, false);
+                scint = SettingsManagement.SetScintSettings(scint, true, true);
             }
             else if (file.FileName.ToLowerInvariant() == "makefile")
             {
@@ -627,7 +628,7 @@ namespace AVRProjectIDE
                         return;
 
                     ProjectFile f;
-                    if (project.FileList.TryGetValue(e.Name, out f))
+                    if (project.FileList.TryGetValue(e.Name.ToLowerInvariant(), out f))
                         return;
 
                     string oldName = FileName;
