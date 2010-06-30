@@ -712,6 +712,8 @@ namespace AVRProjectIDE
 
             //LoadWaitWindow lww = new LoadWaitWindow();
             //lww.Show();
+            if (Program.MakeSurePathExists(Path.GetDirectoryName(path)) == false)
+                return false;
 
             try
             {
@@ -1047,8 +1049,8 @@ namespace AVRProjectIDE
                     {
                         foreach (ProjectFile file in flistNew)
                         {
-                            if (fileList.ContainsKey(file.FileName) == false)
-                                fileList.Add(file.FileName, file);
+                            if (fileList.ContainsKey(file.FileName.ToLowerInvariant()) == false)
+                                fileList.Add(file.FileName.ToLowerInvariant(), file);
                         }
                         xDirPath = dirPath;
                     }
@@ -1056,8 +1058,8 @@ namespace AVRProjectIDE
                     {
                         foreach (ProjectFile file in flistOld)
                         {
-                            if (fileList.ContainsKey(file.FileName) == false)
-                                fileList.Add(file.FileName, file);
+                            if (fileList.ContainsKey(file.FileName.ToLowerInvariant()) == false)
+                                fileList.Add(file.FileName.ToLowerInvariant(), file);
                         }
                         dirPath = xDirPath;
                     }
@@ -1297,7 +1299,7 @@ namespace AVRProjectIDE
                     foreach (XmlElement i in xProjFilesContainer.GetElementsByTagName("Name"))
                     {
                         ProjectFile file = new ProjectFile(i.InnerText, this);
-                        fileList.Add(file.FileName, file);
+                        fileList.Add(file.FileName.ToLowerInvariant(), file);
                     }
                 }
                 else if (docx.GetElementsByTagName("AVRGCCPLUGIN").Count > 0)
@@ -1309,7 +1311,7 @@ namespace AVRProjectIDE
                         foreach (XmlElement i in filesContainer.ChildNodes)
                         {
                             ProjectFile file = new ProjectFile(Program.AbsPathFromRel(dirPath, i.InnerText), this);
-                            fileList.Add(file.FileName, file);
+                            fileList.Add(file.FileName.ToLowerInvariant(), file);
                         }
                     }
                 }
@@ -1328,7 +1330,7 @@ namespace AVRProjectIDE
                                 string optionsForFile = param.InnerText;
 
                                 ProjectFile file;
-                                if (fileList.TryGetValue(fileName, out file))
+                                if (fileList.TryGetValue(fileName.ToLowerInvariant(), out file))
                                 {
                                     file.Options = optionsForFile;
                                 }

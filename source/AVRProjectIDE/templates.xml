@@ -29,6 +29,15 @@
     </LinkLibList>
   </template>
 
+  <template name="USnooBie ATmega168 12MHz">
+    <Device>atmega168</Device>
+    <ClockFreq>12000000</ClockFreq>
+    <BurnPart>atmega168</BurnPart>
+    <BurnFuseBox>-U lfuse:w:0xFF:m -U hfuse:w:0xDF:m -U efuse:w:0xF8:m</BurnFuseBox>
+    <Inherit>Maximum Optimization</Inherit>
+    <Inherit>USBaspLoader</Inherit>
+  </template>
+  
   <template name="Arduino ATmega8 8MHz">
     <Device>atmega8</Device>
     <ClockFreq>8000000</ClockFreq>
@@ -182,6 +191,10 @@
     <BurnBaud>57600</BurnBaud>
     <BurnAutoReset>true</BurnAutoReset>
     <BurnOptions>-F</BurnOptions>
+  </template>
+
+  <template name="USBaspLoader">
+    <BurnProgrammer>usbasp</BurnProgrammer>
   </template>
 
 </ProjTemplates>

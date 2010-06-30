@@ -381,7 +381,7 @@ namespace AVRProjectIDE
                     libList.Add(lib);
 
                     ProjectFile nextfile;
-                    if (project.FileList.TryGetValue(lib, out nextfile))
+                    if (project.FileList.TryGetValue(lib.ToLowerInvariant(), out nextfile))
                     {
                         if (fileContents.ContainsKey(nextfile))
                         {
@@ -456,14 +456,14 @@ namespace AVRProjectIDE
                             fileKeywords[file].Add(kw.Text, kw);
                     }
                 }
-                else if (project.FileList.ContainsKey(libName))
+                else if (project.FileList.ContainsKey(libName.ToLowerInvariant()))
                 {
-                    if (fileKeywords.ContainsKey(project.FileList[libName]) == false)
+                    if (fileKeywords.ContainsKey(project.FileList[libName.ToLowerInvariant()]) == false)
                     {
-                        GetAllKeywords(project.FileList[libName]);
+                        GetAllKeywords(project.FileList[libName.ToLowerInvariant()]);
                     }
 
-                    foreach (CodeKeyword kw in fileKeywords[project.FileList[libName]].Values)
+                    foreach (CodeKeyword kw in fileKeywords[project.FileList[libName.ToLowerInvariant()]].Values)
                     {
                         if (fileKeywords[file].ContainsKey(kw.Text) == false)
                             fileKeywords[file].Add(kw.Text, kw);

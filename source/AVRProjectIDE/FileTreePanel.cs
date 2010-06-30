@@ -67,9 +67,9 @@ namespace AVRProjectIDE
             string fileName = node.Text;
 
             ProjectFile f = null;
-            if (project.FileList.TryGetValue(fileName, out f))
+            if (project.FileList.TryGetValue(fileName.ToLowerInvariant(), out f))
             {
-                project.FileList.Remove(fileName);
+                project.FileList.Remove(fileName.ToLowerInvariant());
                 if (f.BackupExists)
                 {
                     try
@@ -84,10 +84,10 @@ namespace AVRProjectIDE
             }
 
             EditorPanel editor;
-            if (editorList.TryGetValue(fileName, out editor))
+            if (editorList.TryGetValue(fileName.ToLowerInvariant(), out editor))
             {
                 editor.Close();
-                editorList.Remove(fileName);
+                editorList.Remove(fileName.ToLowerInvariant());
             }
 
             node.Remove();
@@ -133,7 +133,7 @@ namespace AVRProjectIDE
                 return false;
 
             ProjectFile f;
-            if (project.FileList.TryGetValue(node.Text, out f))
+            if (project.FileList.TryGetValue(node.Text.ToLowerInvariant(), out f))
             {
                 if (f.Exists == false)
                     return false;
@@ -141,9 +141,9 @@ namespace AVRProjectIDE
             else
                 return false;
 
-            if (project.FileList.TryGetValue(newName, out f) == false)
+            if (project.FileList.TryGetValue(newName.ToLowerInvariant(), out f) == false)
             {
-                if (project.FileList.TryGetValue(node.Text, out f))
+                if (project.FileList.TryGetValue(node.Text.ToLowerInvariant(), out f))
                 {
                     string newPath = f.FileDir + Path.DirectorySeparatorChar + newName;
                     if (File.Exists(newPath) == false)
@@ -151,7 +151,7 @@ namespace AVRProjectIDE
                         try
                         {
                             EditorPanel editor = null;
-                            if (editorList.TryGetValue(node.Text, out editor))
+                            if (editorList.TryGetValue(node.Text.ToLowerInvariant(), out editor))
                             {
                                 editor.WatchingForChange = false;
                             }
@@ -161,8 +161,8 @@ namespace AVRProjectIDE
 
                             if (editor != null)
                             {
-                                editorList.Remove(node.Text);
-                                editorList.Add(newName, editor);
+                                editorList.Remove(node.Text.ToLowerInvariant());
+                                editorList.Add(newName.ToLowerInvariant(), editor);
                                 editor.File.FileAbsPath = newPath;
                                 editor.Text = newName;
                                 editor.TabText = newName;
@@ -173,8 +173,8 @@ namespace AVRProjectIDE
 
                         node.ToolTipText = f.FileRelPathTo(project.DirPath);
 
-                        project.FileList.Remove(node.Text);
-                        project.FileList.Add(newName, f);
+                        project.FileList.Remove(node.Text.ToLowerInvariant());
+                        project.FileList.Add(newName.ToLowerInvariant(), f);
 
                         if (project.Save() == SaveResult.Failed)
                         {
@@ -403,7 +403,7 @@ namespace AVRProjectIDE
             string fn = Path.GetFileName(filePath);
             string ext = Path.GetExtension(fn).ToLowerInvariant();
 
-            if (project.FileList.TryGetValue(fn, out file))
+            if (project.FileList.TryGetValue(fn.ToLowerInvariant(), out file))
             {
                 if (file.FileAbsPath != filePath && file.Exists)
                 {
@@ -458,7 +458,7 @@ namespace AVRProjectIDE
                     }
                 }
 
-                project.FileList.Add(fn, file);
+                project.FileList.Add(fn.ToLowerInvariant(), file);
 
                 if (project.Save() == SaveResult.Failed)
                 {
@@ -549,7 +549,7 @@ namespace AVRProjectIDE
                 if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode && tn.Parent == sourceNode)
                 {
                     ProjectFile file;
-                    if (project.FileList.TryGetValue(tn.Text, out file))
+                    if (project.FileList.TryGetValue(tn.Text.ToLowerInvariant(), out file))
                     {
                         if (file.FileExt != "pde")
                         {
@@ -671,7 +671,7 @@ namespace AVRProjectIDE
             if (e.Node != sourceNode && e.Node != headerNode && e.Node != rootNode && e.Node != otherNode && e.Node.Parent == sourceNode)
             {
                 ProjectFile f;
-                if (project.FileList.TryGetValue(e.Node.Text, out f))
+                if (project.FileList.TryGetValue(e.Node.Text.ToLowerInvariant(), out f))
                 {
                     f.ToCompile = e.Node.Checked;
                 }

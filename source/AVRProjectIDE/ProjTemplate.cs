@@ -120,9 +120,9 @@ namespace AVRProjectIDE
                             try
                             {
                                 ProjectFile f = new ProjectFile(Program.AbsPathFromRel(proj.DirPath, fname), proj);
-                                if (proj.FileList.ContainsKey(fname) == false)
+                                if (proj.FileList.ContainsKey(fname.ToLowerInvariant()) == false)
                                 {
-                                    proj.FileList.Add(fname, f);
+                                    proj.FileList.Add(fname.ToLowerInvariant(), f);
                                     proj.ShouldReloadFiles = true;
 
                                     if (f.Exists == false)
