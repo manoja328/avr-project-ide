@@ -542,7 +542,7 @@ namespace AVRProjectIDE
                             {
                                 long num = 0;
                                 if (Program.TryParseText(m.InnerText, out num, false))
-                                    result += String.Format("Boot Mode {0} Boot Size: {1} bytes ( 0x{1:X4} )" + Environment.NewLine, k, num);
+                                    result += String.Format("Boot Mode {0} Boot Size: {1} words ( 0x{1:X4} )" + Environment.NewLine, k, num);
                                 else if (string.IsNullOrEmpty(m.InnerText.Trim()) == false)
                                     result += String.Format("Boot Mode {0} Boot Size: {1}" + Environment.NewLine, k, m.InnerText.Trim());
                             }
