@@ -11,7 +11,7 @@ namespace AVRProjectIDE
 {
     public partial class BurnerPanel : UserControl
     {
-        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         protected override void WndProc(ref Message m)
         {
             try
@@ -179,6 +179,7 @@ namespace AVRProjectIDE
                 res = " -b " + project.BurnBaud.ToString("0");
 
             args += res;
+            args = args.Trim();
         }
 
         private string GetArgs()

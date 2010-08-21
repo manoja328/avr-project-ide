@@ -503,7 +503,14 @@ namespace AVRProjectIDE
         private string outputDir;
         public string OutputDir
         {
-            get { return outputDir; }
+            get
+            {
+                if (outputDir != null)
+                    return outputDir.Trim().Trim('/', '\\', ' ');
+                else
+                    return "";
+            }
+
             set
             {
                 string str = Program.CleanFilePath(value);

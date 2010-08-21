@@ -2285,6 +2285,17 @@ namespace AVRProjectIDE
                 writer.WriteLine("\t@avr-size -C --mcu=${MCU} ${TARGET}");
 
                 writer.WriteLine();
+                writer.WriteLine("## Program");
+                writer.WriteLine("burn:");
+                string overrides = "";
+                BurnerPanel.GetPortOverride(ref overrides, proj);
+                writer.WriteLine("\tavrdude -p {0} -c {1} {2} -U flash:w:{3}/$(PROJECT).hex:a {5}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.OutputDir.Replace('\\', '/'), proj.FileNameNoExt, proj.BurnOptions);
+                writer.WriteLine();
+                writer.WriteLine("burnfuses:");
+                BurnerPanel.GetPortOverride(ref overrides, proj);
+                writer.WriteLine("\tavrdude -p {0} -c {1} {2} {3} {4}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.BurnFuseBox, proj.BurnOptions);
+
+                writer.WriteLine();
                 writer.WriteLine("## Clean target");
                 writer.WriteLine(".PHONY: clean");
                 writer.WriteLine("clean:");
