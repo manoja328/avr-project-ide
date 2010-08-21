@@ -85,6 +85,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibUsbDotNet, Version=2.2.5.61, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\LibUsbDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="ScintillaNet, Version=2.0.3575.33829, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -252,6 +256,12 @@
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="UpdateMech.cs" />
+    <Compile Include="UsbPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsbPanel.Designer.cs">
+      <DependentUpon>UsbPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="WelcomeWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -360,6 +370,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsbPanel.resx">
+      <DependentUpon>UsbPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeWindow.resx">
@@ -1232,7 +1246,11 @@
     <None Include="nsiscompile.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="graphics\usbpanelicon.png" />
     <Content Include="helplinks.xml">
+    </Content>
+    <Content Include="LibUsbDotNet.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="mainicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

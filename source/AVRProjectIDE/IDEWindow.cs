@@ -46,6 +46,7 @@ namespace AVRProjectIDE
         private MessagePanel messageWin;
         private HardwareExplorer hardwareExplorerWin;
         private DisassemblyViewer disassemViewer;
+        private UsbPanel usbWin;
         
 #if DEBUGGERWINTEST
         private DebuggerPanel debuggerWin;
@@ -126,6 +127,8 @@ namespace AVRProjectIDE
             serialWin = new SerialPortPanel(SettingsManagement.PortName, SettingsManagement.BaudRate);
             serialWin.SerialPortException += new SerialPortPanel.SerialPortErrorHandler(serialWin_SerialPortException);
 
+            usbWin = new UsbPanel();
+
             messageWin = new MessagePanel();
             messageWin.GotoError += new MessagePanel.OnClickError(messageWin_GotoError);
 
@@ -181,6 +184,8 @@ namespace AVRProjectIDE
         {
             if (persistString == typeof(SerialPortPanel).ToString())
                 return serialWin;
+            else if (persistString == typeof(UsbPanel).ToString())
+                return usbWin;
             else if (persistString == typeof(SearchPanel).ToString())
                 return searchWin;
             else if (persistString == typeof(MessagePanel).ToString())
@@ -516,7 +521,7 @@ namespace AVRProjectIDE
         /// This intercepts the form closing signal, so that the parent window receives the close signal before the childs (aka the editor tabs)
         /// </summary>
         /// <param name="m"></param>
-        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         protected override void WndProc(ref Message m)
         {
             try
@@ -566,6 +571,8 @@ namespace AVRProjectIDE
 
         private void frmProjIDE_FormClosed(object sender, FormClosedEventArgs e)
         {
+            try { LibUsbDotNet.UsbDevice.Exit(); }
+            catch { }
             SettingsManagement.SaveZoomLevel();
             dockPanel1.SaveAsXml(SettingsManagement.AppDataPath + "workspace.xml");
         }
@@ -1379,12 +1386,13 @@ namespace AVRProjectIDE
 
             bool useSavedDockSettings = false;
             // if workspace setting exists, load it
-            if (File.Exists(SettingsManagement.AppDataPath + "workspace.xml"))
+            string workspaceName = "workspace_version_" + Properties.Resources.PanelWorkspaceVersion + ".xml";
+            if (File.Exists(SettingsManagement.AppDataPath + workspaceName))
             {
                 DeserializeDockContent deserDockCont = new DeserializeDockContent(GetPanelFromPersistString);
                 try
                 {
-                    dockPanel1.LoadFromXml(SettingsManagement.AppDataPath + "workspace.xml", deserDockCont);
+                    dockPanel1.LoadFromXml(SettingsManagement.AppDataPath + workspaceName, deserDockCont);
                     useSavedDockSettings = true;
                 }
                 catch { }
@@ -1396,6 +1404,7 @@ namespace AVRProjectIDE
                 messageWin.Show(dockPanel1);
                 searchWin.Show(dockPanel1);
                 serialWin.Show(dockPanel1);
+                usbWin.Show(dockPanel1);
                 disassemViewer.Show(dockPanel1);
                 hardwareExplorerWin.Show(dockPanel1);
                 #if DEBUGGERWINTEST
@@ -1409,6 +1418,7 @@ namespace AVRProjectIDE
                 messageWin.Show(dockPanel1, DockState.DockBottom);
                 searchWin.Show(dockPanel1, DockState.DockBottom);
                 serialWin.Show(dockPanel1, DockState.DockBottom);
+                usbWin.Show(dockPanel1, DockState.DockBottom);
                 disassemViewer.Show(dockPanel1, DockState.DockBottom);
                 hardwareExplorerWin.Show(dockPanel1, DockState.DockRightAutoHide);
                 #if DEBUGGERWINTEST

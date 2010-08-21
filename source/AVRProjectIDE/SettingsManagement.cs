@@ -355,7 +355,7 @@ namespace AVRProjectIDE
 
             set
             {
-                iniFile.Write("Project", "LastClockChoosen", value.ToString("0.00"));
+                iniFile.Write("Project", "LastClockChoosen", value.ToString("0"));
             }
         }
 

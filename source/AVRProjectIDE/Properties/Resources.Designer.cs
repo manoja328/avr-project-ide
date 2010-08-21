@@ -111,7 +111,7 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_93.
+        ///   Looks up a localized string similar to AVRProjectIDE_94.
         /// </summary>
         internal static string BuildID {
             get {
@@ -187,6 +187,15 @@ namespace AVRProjectIDE.Properties {
         internal static string interruptvectors {
             get {
                 return ResourceManager.GetString("interruptvectors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        internal static string PanelWorkspaceVersion {
+            get {
+                return ResourceManager.GetString("PanelWorkspaceVersion", resourceCulture);
             }
         }
         

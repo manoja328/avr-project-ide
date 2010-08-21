@@ -45,6 +45,7 @@ Section ;"Main Editor"
 	File mainicon.ico
 	File SciLexer.dll
 	File ScintillaNet.dll
+	File LibUsbDotNet.dll
 	File WeifenLuo.WinFormsUI.Docking.dll
 	
 	WriteUninstaller $INSTDIR\uninstaller.exe
