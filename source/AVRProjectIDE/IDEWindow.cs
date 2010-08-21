@@ -574,7 +574,7 @@ namespace AVRProjectIDE
             try { LibUsbDotNet.UsbDevice.Exit(); }
             catch { }
             SettingsManagement.SaveZoomLevel();
-            dockPanel1.SaveAsXml(SettingsManagement.AppDataPath + "workspace.xml");
+            dockPanel1.SaveAsXml(SettingsManagement.AppDataPath + "workspace_version_" + Properties.Resources.PanelWorkspaceVersion + ".xml");
         }
 
         private void mbtnAbout_Click(object sender, EventArgs e)
