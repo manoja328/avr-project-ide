@@ -4,7 +4,7 @@
 
 "Arduino" is not a programming language. When you write code for Arduino, you are writing C++. But the official Arduino IDE does some magic to your code in the background using a ton of regular expressions. This causes a huge problem, I will show you with an example:
 
-If you use a AVR-G++ to compile a C++ file like
+If you use a AVR-G++ to compile a C++ file with
 
 {{{
 
