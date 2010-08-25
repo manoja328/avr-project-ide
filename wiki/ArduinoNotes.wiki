@@ -43,3 +43,5 @@ Arduino secretly generates function prototypes for you using regular expressions
 Why is this bad? Well if you want to copy Arduino code to another C++ project, it might not compile. Arduino's background magic makes what is supposed to be perfectly valid C++ code into something that is not valid and thus breaking code portability.
 
 Arduino could get rid of this background magic and I will like it again, but they can't, because then a ton of pre-existing Arduino code will not work.
+
+There's a lot more magic going on with Arduino code, AVR Project IDE has replicated all of these magic spells.
