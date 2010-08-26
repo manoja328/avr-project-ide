@@ -1,5 +1,12 @@
 #summary Change Log of New Uploaded Versions
 
+==Update 95==
+
+ * FindReplace dialog in Disassembly Viewer behaviour changed, see issue 61
+ * Better USB info panel
+ * Issue 62
+ * added help for disassembly viewer
+
 ==Update 94==
 
  * USB Device Information and Notification Panel!!!!!
