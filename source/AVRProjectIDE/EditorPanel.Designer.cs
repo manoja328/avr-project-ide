@@ -61,6 +61,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblLineNum = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mbtnReplace = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scint)).BeginInit();
             this.rClickMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -95,8 +96,8 @@
             this.scint.ZoomChanged += new System.EventHandler(this.scint_ZoomChanged);
             this.scint.MarginClick += new System.EventHandler<ScintillaNet.MarginClickEventArgs>(this.scint_MarginClick);
             this.scint.CharAdded += new System.EventHandler<ScintillaNet.CharAddedEventArgs>(this.scint_CharAdded);
+            this.scint.MarkerChanged += new System.EventHandler<ScintillaNet.MarkerChangedEventArgs>(this.scint_MarkerChanged);
             this.scint.AutoCompleteAccepted += new System.EventHandler<ScintillaNet.AutoCompleteAcceptedEventArgs>(this.scint_AutoCompleteAccepted);
-            this.scint.MarkerChanged += new System.EventHandler<ScintillaNet.MarkerChangedEventArgs>(scint_MarkerChanged);
             // 
             // rClickMenu
             // 
@@ -108,11 +109,12 @@
             this.mbtnPaste,
             this.toolStripSeparator2,
             this.mbtnFind,
+            this.mbtnReplace,
             this.mbtnAdvancedEdit});
             this.rClickMenu.Name = "rClickMenu";
             this.rClickMenu.ShowImageMargin = false;
             this.rClickMenu.ShowItemToolTips = false;
-            this.rClickMenu.Size = new System.Drawing.Size(140, 148);
+            this.rClickMenu.Size = new System.Drawing.Size(140, 192);
             // 
             // mbtnSelectAll
             // 
@@ -270,6 +272,14 @@
             this.lblLineNum.Name = "lblLineNum";
             this.lblLineNum.Size = new System.Drawing.Size(0, 17);
             // 
+            // mbtnReplace
+            // 
+            this.mbtnReplace.Name = "mbtnReplace";
+            this.mbtnReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.mbtnReplace.Size = new System.Drawing.Size(139, 22);
+            this.mbtnReplace.Text = "Replace";
+            this.mbtnReplace.Click += new System.EventHandler(this.mbtnReplace_Click);
+            // 
             // EditorPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,7 +288,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.scint);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
-            this.Font = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimizeBox = false;
             this.Name = "EditorPanel";
             this.ShowIcon = false;
@@ -325,5 +335,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblLineNum;
+        private System.Windows.Forms.ToolStripMenuItem mbtnReplace;
     }
 }

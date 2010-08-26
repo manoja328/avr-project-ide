@@ -895,6 +895,15 @@ namespace AVRProjectIDE
                 scint.FindReplace.Window.Text += " for " + this.file.FileName;
         }
 
+        private void mbtnReplace_Click(object sender, EventArgs e)
+        {
+            scint.FindReplace.ShowReplace();
+            OnlyFindReplaceWindow = scint.FindReplace.Window;
+
+            if (scint.FindReplace.Window.Text.Contains(this.file.FileName) == false)
+                scint.FindReplace.Window.Text += " for " + this.file.FileName;
+        }
+
         private void mbtnComment_Click(object sender, EventArgs e)
         {
             BlockComment();

@@ -126,8 +126,8 @@ namespace AVRProjectIDE
 
                 string eventText = DateTime.Now.ToString("HH:mm:ss.fff - ") + "USB Event Exception";
 
-                TreeNode tvEvent = treeEvents.Nodes.Insert(0, eventText);
-                tvEvent.Nodes.Add(ex.Message);
+                TreeNode tvEvent = treeErrors.Nodes.Insert(0, eventText);
+                treeErrors.Nodes.Add(ex.Message);
             }
         }
 
@@ -155,34 +155,88 @@ namespace AVRProjectIDE
 
                     UsbRegistry mUsbRegistry = device;
 
-                    string[] sDeviceAdd = mUsbDevice.Info.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string s in sDeviceAdd)
-                        tvDevice.Nodes.Add(s);
+                    tvDevice.Nodes.Add(string.Format("{0}: 0x{1:X4}", "CurrentCultureLangID", mUsbDevice.Info.CurrentCultureLangID));
+                    tvDevice.Nodes.Add(string.Format("{0}: {1}", "ManufacturerString", mUsbDevice.Info.ManufacturerString));
+                    tvDevice.Nodes.Add(string.Format("{0}: {1}", "ProductString", mUsbDevice.Info.ProductString));
+                    tvDevice.Nodes.Add(string.Format("{0}: {1}", "SerialString", mUsbDevice.Info.SerialString));
+                    tvDevice.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "DriverMode", mUsbDevice.DriverMode, (int)mUsbDevice.DriverMode));
+
+                    if (mUsbDevice.Info.Descriptor != null)
+                    {
+                        TreeNode tvDescriptor = tvDevice.Nodes.Add(string.Format("Descriptor [Length: {0}]", mUsbDevice.Info.Descriptor.Length));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "DescriptorType", mUsbDevice.Info.Descriptor.DescriptorType, (int)mUsbDevice.Info.Descriptor.DescriptorType));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "Class", mUsbDevice.Info.Descriptor.Class, (int)mUsbDevice.Info.Descriptor.Class));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: 0x{1:X2}", "SubClass", mUsbDevice.Info.Descriptor.SubClass));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: {1}", "ConfigurationCount", mUsbDevice.Info.Descriptor.ConfigurationCount));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: {1}", "MaxPacketSize0", mUsbDevice.Info.Descriptor.MaxPacketSize0));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: {1}", "ManufacturerStringIndex", mUsbDevice.Info.Descriptor.ManufacturerStringIndex));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: {1}", "ProductStringIndex", mUsbDevice.Info.Descriptor.ProductStringIndex));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: {1}", "SerialStringIndex", mUsbDevice.Info.Descriptor.SerialStringIndex));
+                        tvDescriptor.Nodes.Add(string.Format("{0}: 0x{1:X4}, {2}: 0x{3:X4}", "BcdUsb", mUsbDevice.Info.Descriptor.BcdUsb, "BcdDevice", mUsbDevice.Info.Descriptor.BcdDevice));
+                    }
+
+                    if (mUsbDevice.ActiveEndpoints != null)
+                    {
+                        TreeNode tvActiveEndpoints = tvDevice.Nodes.Add(string.Format("{0} [Count: {1}]", "ActiveEndpoints", mUsbDevice.ActiveEndpoints.Count));
+                        foreach (var i in mUsbDevice.ActiveEndpoints)
+                        {
+                            FillEndpointInfo(tvActiveEndpoints, i);
+                        }
+                    }
+
+                    //string[] sDeviceAdd = mUsbDevice.Info.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    //foreach (string s in sDeviceAdd)
+                    //    tvDevice.Nodes.Add(s);
 
                     foreach (UsbConfigInfo cfgInfo in mUsbDevice.Configs)
                     {
-                        TreeNode tvConfig = tvDevice.Nodes.Add("Config " + cfgInfo.Descriptor.ConfigID);
-                        string[] sCfgAdd = cfgInfo.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                        foreach (string s in sCfgAdd)
-                            tvConfig.Nodes.Add(s);
+                        TreeNode tvConfig = tvDevice.Nodes.Add("Config 0x" + cfgInfo.Descriptor.ConfigID.ToString("X2"));
+
+                        tvConfig.Nodes.Add(string.Format("{0}: {1}", "ConfigString", cfgInfo.ConfigString));
+
+                        //string[] sCfgAdd = cfgInfo.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                        //foreach (string s in sCfgAdd)
+                        //    tvConfig.Nodes.Add(s);
 
                         TreeNode tvInterfaces = tvConfig; //.Nodes.Add("Interfaces");
                         foreach (UsbInterfaceInfo interfaceInfo in cfgInfo.InterfaceInfoList)
                         {
-                            TreeNode tvInterface =
-                                tvInterfaces.Nodes.Add("Interface [" + interfaceInfo.Descriptor.InterfaceID + "," + interfaceInfo.Descriptor.AlternateID + "]");
-                            string[] sInterfaceAdd = interfaceInfo.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                            foreach (string s in sInterfaceAdd)
-                                tvInterface.Nodes.Add(s);
+                            TreeNode tvInterface = tvInterfaces.Nodes.Add("Interface [0x" + interfaceInfo.Descriptor.InterfaceID.ToString("X2") + ", 0x" + interfaceInfo.Descriptor.AlternateID.ToString("X2") + "]");
 
-                            TreeNode tvEndpoints = tvInterface; //.Nodes.Add("Endpoints");
-                            foreach (UsbEndpointInfo endpointInfo in interfaceInfo.EndpointInfoList)
+                            tvInterface.Nodes.Add(string.Format("{0}: {1}", "InterfaceString", interfaceInfo.InterfaceString));
+                            if (interfaceInfo.EndpointInfoList != null)
                             {
-                                TreeNode tvEndpoint = tvEndpoints.Nodes.Add("Endpoint 0x" + (endpointInfo.Descriptor.EndpointID).ToString("X2"));
-                                string[] sEndpointAdd = endpointInfo.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                                foreach (string s in sEndpointAdd)
-                                    tvEndpoint.Nodes.Add(s);
+                                TreeNode tvEndpoints = tvInterface.Nodes.Add(string.Format("Endpoints [Count: {0}]", interfaceInfo.EndpointInfoList.Count));
+                                foreach (var i in interfaceInfo.EndpointInfoList)
+                                {
+                                    FillEndpointInfo(tvEndpoints, i);
+                                }
                             }
+
+                            if (interfaceInfo.Descriptor != null)
+                            {
+                                TreeNode tvDesc = tvInterface.Nodes.Add(string.Format("Descriptor [Length: {0}]", interfaceInfo.Descriptor.Length));
+                                tvDesc.Nodes.Add(string.Format("{0}: 0x{1:X2}, {2}: 0x{3:X2}", "InterfaceID", interfaceInfo.Descriptor.InterfaceID, "AlternateID", interfaceInfo.Descriptor.AlternateID));
+                                tvDesc.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "Class", interfaceInfo.Descriptor.Class, (int)interfaceInfo.Descriptor.Class));
+                                tvDesc.Nodes.Add(string.Format("{0}: 0x{1:X2}", "Subclass", interfaceInfo.Descriptor.SubClass));
+                                tvDesc.Nodes.Add(string.Format("{0}: 0x{1:X2}", "Protocol", interfaceInfo.Descriptor.Protocol));
+                                tvDesc.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "Class", interfaceInfo.Descriptor.DescriptorType, (int)interfaceInfo.Descriptor.DescriptorType));
+                                tvDesc.Nodes.Add(string.Format("{0}: {1}", "EndpointCount", interfaceInfo.Descriptor.EndpointCount));
+                                tvDesc.Nodes.Add(string.Format("{0}: 0x{1:X2}", "StringIndex", interfaceInfo.Descriptor.StringIndex));
+                            }
+
+                            //string[] sInterfaceAdd = interfaceInfo.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                            //foreach (string s in sInterfaceAdd)
+                            //    tvInterface.Nodes.Add(s);
+
+                            //TreeNode tvEndpoints = tvInterface; //.Nodes.Add("Endpoints");
+                            //foreach (UsbEndpointInfo endpointInfo in interfaceInfo.EndpointInfoList)
+                            //{
+                            //    TreeNode tvEndpoint = tvEndpoints.Nodes.Add("Endpoint 0x" + (endpointInfo.Descriptor.EndpointID).ToString("X2"));
+                            //    string[] sEndpointAdd = endpointInfo.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                            //    foreach (string s in sEndpointAdd)
+                            //        tvEndpoint.Nodes.Add(s);
+                            //}
                         }
                     }
                     mUsbDevice.Close();
@@ -191,14 +245,18 @@ namespace AVRProjectIDE
                     mUsbRegistry = device;
                     UsbSymbolicName symName = UsbSymbolicName.Parse(mUsbRegistry.SymbolicName);
 
-                    if (symName.SerialNumber != string.Empty)
-                    {
-                        tvRegistry.Nodes.Add(string.Format("SerialNumber: {0}", symName.SerialNumber));
-                    }
-                    if (symName.ClassGuid != Guid.Empty)
-                    {
-                        tvRegistry.Nodes.Add(string.Format("Class Guid: {0}", symName.ClassGuid));
-                    }
+                    if (string.IsNullOrEmpty(symName.SerialNumber) == false)
+                        tvRegistry.Nodes.Add(string.Format("{0}: {1}", "SerialNumber", symName.SerialNumber));
+                    else
+                        tvRegistry.Nodes.Add(string.Format("{0}: {1}", "SerialNumber", "None"));
+
+                    if (symName.ClassGuid == null)
+                        tvRegistry.Nodes.Add(string.Format("{0}: (NULL)", "ClassGuid"));
+                    else if (symName.ClassGuid != Guid.Empty)
+                        tvRegistry.Nodes.Add(string.Format("{0}: {1}", "ClassGuid", symName.ClassGuid));
+                    else
+                        tvRegistry.Nodes.Add(string.Format("{0}: {1} (None)", "ClassGuid", symName.ClassGuid));
+
                     foreach (KeyValuePair<string, object> current in mUsbRegistry.DeviceProperties)
                     {
                         string key = current.Key;
@@ -208,8 +266,8 @@ namespace AVRProjectIDE
                         {
                             if (string.IsNullOrEmpty(key) == false && string.IsNullOrEmpty(key.Trim()) == false)
                             {
-                                TreeNode tvKey = tvRegistry.Nodes.Add(key);
                                 string[] saValue = oValue as string[];
+                                TreeNode tvKey = tvRegistry.Nodes.Add(key + " [" + saValue.Length.ToString() + " Items]");
                                 foreach (string s in saValue)
                                 {
                                     if (string.IsNullOrEmpty(s) == false && string.IsNullOrEmpty(s.Trim()) == false)
@@ -220,8 +278,13 @@ namespace AVRProjectIDE
                         else if (oValue is string)
                         {
                             string s = oValue as string;
-                            if (string.IsNullOrEmpty(s) == false && string.IsNullOrEmpty(s.Trim()) == false)
-                                tvRegistry.Nodes.Add(s);
+                            if (string.IsNullOrEmpty(key) == false && string.IsNullOrEmpty(key.Trim()) == false)
+                            {
+                                key = key.Trim();
+
+                                if (string.IsNullOrEmpty(s) == false && string.IsNullOrEmpty(s.Trim()) == false)
+                                    tvRegistry.Nodes.Add(key + ": " + s);
+                            }
                         }
                     }
                 }
@@ -239,9 +302,53 @@ namespace AVRProjectIDE
                 //ErrorReportWindow.Show(ex, "Error While Getting USB Device Data");
                 string eventText = DateTime.Now.ToString("HH:mm:ss.fff - ") + "Exception During Device Refresh";
 
-                TreeNode tvEvent = treeEvents.Nodes.Insert(0, eventText);
-                tvEvent.Nodes.Add(ex.Message);
+                TreeNode tvEvent = treeErrors.Nodes.Insert(0, eventText);
+                treeErrors.Nodes.Add(ex.Message);
             }
+        }
+
+        private static void FillEndpointInfo(TreeNode tvEndpoints, UsbEndpointInfo i)
+        {
+            if (i.Descriptor != null)
+            {
+                TreeNode tvEpDesc = tvEndpoints.Nodes.Add(string.Format("EP (ID: 0x{0:X4} Descriptor [Length: {1}]", i.Descriptor.EndpointID, i.Descriptor.Length));
+                tvEpDesc.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "DescriptorType", i.Descriptor.DescriptorType, (int)i.Descriptor.DescriptorType));
+                tvEpDesc.Nodes.Add(string.Format("{0}: {1}", "Attributes", i.Descriptor.Attributes));
+                tvEpDesc.Nodes.Add(string.Format("{0}: {1}", "MaxPacketSize", i.Descriptor.MaxPacketSize));
+                tvEpDesc.Nodes.Add(string.Format("{0}: {1}", "Interval", i.Descriptor.Interval));
+                tvEpDesc.Nodes.Add(string.Format("{0}: {1}", "Refresh", i.Descriptor.Refresh));
+                tvEpDesc.Nodes.Add(string.Format("{0}: 0x{1:X2}", "SynchAddress", i.Descriptor.SynchAddress));
+            }
+
+            if (i.CustomDescriptors != null)
+            {
+                TreeNode tvEpDesc = tvEndpoints.Nodes.Add(string.Format("EP Custom Descriptor [Length: {0}]", i.CustomDescriptors.Count));
+                FillCustomDescriptor(i.CustomDescriptors, tvEpDesc);
+            }
+        }
+
+        private static void FillEndpointInfo(TreeNode tvEndpoint, UsbEndpointBase i)
+        {
+            tvEndpoint.Nodes.Add(string.Format("{0}: {1}", "Endpoint Number", i.EpNum));
+            tvEndpoint.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "Type", i.Type, (int)i.Type));
+
+            FillEndpointInfo(tvEndpoint, i.EndpointInfo);
+        }
+
+        private static void FillCustomDescriptor(System.Collections.ObjectModel.ReadOnlyCollection<byte[]> readOnlyCollection, TreeNode tvNode)
+        {
+            string text = "";
+            for (int j = 0; j < readOnlyCollection.Count; j++)
+            {
+                text += string.Format("{0:X2} ", readOnlyCollection[j]);
+                if (j % 16 == 0 && j != 0)
+                {
+                    tvNode.Nodes.Add(text);
+                    text = "";
+                }
+            }
+            if (string.IsNullOrEmpty(text) == false)
+                tvNode.Nodes.Add(text);
         }
 
         private void OnUsbError(object sender, UsbError usbError)
@@ -250,7 +357,7 @@ namespace AVRProjectIDE
             {
                 string eventText = DateTime.Now.ToString("HH:mm:ss.fff - ") + "USB Error";
 
-                TreeNode tvEvent = treeEvents.Nodes.Insert(0, eventText);
+                TreeNode tvEvent = treeErrors.Nodes.Insert(0, eventText);
 
                 string s;
 
@@ -295,8 +402,8 @@ namespace AVRProjectIDE
                 //ErrorReportWindow.Show(ex, "Exception During USB Error Event");
                 string eventText = DateTime.Now.ToString("HH:mm:ss.fff - ") + "USB Error Exception";
 
-                TreeNode tvEvent = treeEvents.Nodes.Insert(0, eventText);
-                tvEvent.Nodes.Add(ex.Message);
+                TreeNode tvEvent = treeErrors.Nodes.Insert(0, eventText);
+                treeErrors.Nodes.Add(ex.Message);
             }
         }
 
@@ -308,6 +415,11 @@ namespace AVRProjectIDE
         private void btnEventsClear_Click(object sender, EventArgs e)
         {
             treeEvents.Nodes.Clear();
+        }
+
+        private void btnClearErrors_Click(object sender, EventArgs e)
+        {
+            treeErrors.Nodes.Clear();
         }
     }
 }
