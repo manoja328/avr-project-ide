@@ -523,7 +523,7 @@ namespace AVRProjectIDE
                     {
                         long num = 0;
                         if (Program.TryParseText(k.InnerText, out num, false))
-                            result += String.Format("Page Size: {0} ( 0x{0:X4} )" + Environment.NewLine, num);
+                            result += String.Format("Page Size: {0} words ( 0x{0:X4} )" + Environment.NewLine, num);
                         else if (string.IsNullOrEmpty(k.InnerText.Trim()) == false)
                             result += String.Format("Page Size: {0}" + Environment.NewLine, k.InnerText.Trim());
                     }

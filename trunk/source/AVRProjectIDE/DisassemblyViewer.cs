@@ -68,6 +68,8 @@ namespace AVRProjectIDE
                 txtOptions.Text = "-h -D -S";
 
             SettingsManagement.SetScintSettings(scintilla1, false, true);
+
+            mbtnInvisible.Visible = false;
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -190,6 +192,44 @@ namespace AVRProjectIDE
                 if (r != null)
                     scintilla1.Selection.Range = r;
             }
+        }
+
+        private void mbtnReplace_Click(object sender, EventArgs e)
+        {
+            return;
+            EditorPanel.OnlyFindReplaceWindow = scintilla1.FindReplace.Window;
+
+            scintilla1.FindReplace.ShowFind();
+            EditorPanel.OnlyFindReplaceWindow = scintilla1.FindReplace.Window;
+
+            if (scintilla1.FindReplace.Window.Text.Contains("Disassembly Viewer") == false)
+                scintilla1.FindReplace.Window.Text += " for " + "Disassembly Viewer";
+        }
+
+        private void mbtnSelectAll_Click(object sender, EventArgs e)
+        {
+            scintilla1.Selection.SelectAll();
+        }
+
+        private void mbtnCopy_Click(object sender, EventArgs e)
+        {
+            scintilla1.Clipboard.Copy();
+        }
+
+        private void mbtnFind_Click(object sender, EventArgs e)
+        {
+            EditorPanel.OnlyFindReplaceWindow = scintilla1.FindReplace.Window;
+
+            scintilla1.FindReplace.ShowFind();
+            EditorPanel.OnlyFindReplaceWindow = scintilla1.FindReplace.Window;
+
+            if (scintilla1.FindReplace.Window.Text.Contains("Disassembly Viewer") == false)
+                scintilla1.FindReplace.Window.Text += " for " + "Disassembly Viewer";
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("avrobjdump help: " + Environment.NewLine + HelpText);
         }
     }
 }

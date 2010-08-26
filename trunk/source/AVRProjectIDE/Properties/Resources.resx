@@ -137,7 +137,7 @@
     <value>..\chip_xml\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="BuildID" xml:space="preserve">
-    <value>AVRProjectIDE_94</value>
+    <value>AVRProjectIDE_95</value>
   </data>
   <data name="WinAVRURL" xml:space="preserve">
     <value>https://sourceforge.net/projects/winavr/files/</value>

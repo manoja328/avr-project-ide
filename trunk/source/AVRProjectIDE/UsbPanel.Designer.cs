@@ -35,15 +35,20 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeEvents = new System.Windows.Forms.TreeView();
             this.btnEventsClear = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.treeErrors = new System.Windows.Forms.TreeView();
+            this.btnClearErrors = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -119,6 +124,40 @@
             this.btnEventsClear.UseVisualStyleBackColor = true;
             this.btnEventsClear.Click += new System.EventHandler(this.btnEventsClear_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.treeErrors);
+            this.tabPage3.Controls.Add(this.btnClearErrors);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(568, 236);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "USB Errors";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // treeErrors
+            // 
+            this.treeErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeErrors.Location = new System.Drawing.Point(5, 6);
+            this.treeErrors.Name = "treeErrors";
+            this.treeErrors.Size = new System.Drawing.Size(492, 224);
+            this.treeErrors.TabIndex = 5;
+            // 
+            // btnClearErrors
+            // 
+            this.btnClearErrors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearErrors.Location = new System.Drawing.Point(503, 6);
+            this.btnClearErrors.Name = "btnClearErrors";
+            this.btnClearErrors.Size = new System.Drawing.Size(61, 222);
+            this.btnClearErrors.TabIndex = 4;
+            this.btnClearErrors.Text = "Clear";
+            this.btnClearErrors.UseVisualStyleBackColor = true;
+            this.btnClearErrors.Click += new System.EventHandler(this.btnClearErrors_Click);
+            // 
             // UsbPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,6 +175,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -149,5 +189,8 @@
         private System.Windows.Forms.TreeView treeDevices;
         private System.Windows.Forms.TreeView treeEvents;
         private System.Windows.Forms.Button btnEventsClear;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TreeView treeErrors;
+        private System.Windows.Forms.Button btnClearErrors;
     }
 }
