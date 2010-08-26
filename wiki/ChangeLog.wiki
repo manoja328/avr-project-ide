@@ -2,7 +2,7 @@
 
 ==Update 95==
 
- * FindReplace dialog in Disassembly Viewer behaviour changed, see issue 61
+ * Find dialog in Disassembly Viewer behaviour changed, see issue 61
  * Better USB info panel
  * Issue 62
  * added help for disassembly viewer
