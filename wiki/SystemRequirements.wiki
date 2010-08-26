@@ -5,3 +5,7 @@
 
  * [http://www.microsoft.com/downloads/details.aspx?FamilyId=333325FD-AE52-4E35-B531-508D977D32A6 .NET Framework 3.5]
  * [http://winavr.sourceforge.net/ WinAVR]
+
+== Optional ==
+
+To use the USB device information and events panel, see UsbInfoPanel
