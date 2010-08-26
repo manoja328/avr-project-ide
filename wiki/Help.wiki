@@ -1,4 +1,5 @@
 #summary Main Help Page
+#labels Featured
 
 This help page contains general help information.
 
