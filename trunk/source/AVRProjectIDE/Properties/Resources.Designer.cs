@@ -111,7 +111,7 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_95.
+        ///   Looks up a localized string similar to AVRProjectIDE_96.
         /// </summary>
         internal static string BuildID {
             get {
@@ -244,6 +244,15 @@ namespace AVRProjectIDE.Properties {
         internal static string templates {
             get {
                 return ResourceManager.GetString("templates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://code.google.com/p/avr-project-ide/wiki/UsbInfoPanel.
+        /// </summary>
+        internal static string UsbInfoPanelWikiURL {
+            get {
+                return ResourceManager.GetString("UsbInfoPanelWikiURL", resourceCulture);
             }
         }
         

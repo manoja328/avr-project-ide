@@ -34,10 +34,10 @@
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkCopyUnmanaged = new System.Windows.Forms.CheckBox();
             this.radCopyAll = new System.Windows.Forms.RadioButton();
             this.radOnlyLocal = new System.Windows.Forms.RadioButton();
             this.chkOpenAfterClone = new System.Windows.Forms.CheckBox();
-            this.chkCopyUnmanaged = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +112,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Files to Copy";
             // 
+            // chkCopyUnmanaged
+            // 
+            this.chkCopyUnmanaged.AutoSize = true;
+            this.chkCopyUnmanaged.Location = new System.Drawing.Point(6, 65);
+            this.chkCopyUnmanaged.Name = "chkCopyUnmanaged";
+            this.chkCopyUnmanaged.Size = new System.Drawing.Size(136, 17);
+            this.chkCopyUnmanaged.TabIndex = 2;
+            this.chkCopyUnmanaged.Text = "Copy unmanaged files?";
+            this.chkCopyUnmanaged.UseVisualStyleBackColor = true;
+            // 
             // radCopyAll
             // 
             this.radCopyAll.AutoSize = true;
@@ -145,16 +155,6 @@
             this.chkOpenAfterClone.Text = "Open Folder After Cloning?";
             this.chkOpenAfterClone.UseVisualStyleBackColor = true;
             // 
-            // chkCopyUnmanaged
-            // 
-            this.chkCopyUnmanaged.AutoSize = true;
-            this.chkCopyUnmanaged.Location = new System.Drawing.Point(6, 65);
-            this.chkCopyUnmanaged.Name = "chkCopyUnmanaged";
-            this.chkCopyUnmanaged.Size = new System.Drawing.Size(136, 17);
-            this.chkCopyUnmanaged.TabIndex = 2;
-            this.chkCopyUnmanaged.Text = "Copy unmanaged files?";
-            this.chkCopyUnmanaged.UseVisualStyleBackColor = true;
-            // 
             // CopyCatWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,6 +167,8 @@
             this.Controls.Add(this.btnClone);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CopyCatWizard";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Clone Project";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

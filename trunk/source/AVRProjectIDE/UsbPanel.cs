@@ -253,7 +253,7 @@ namespace AVRProjectIDE
                     if (symName.ClassGuid == null)
                         tvRegistry.Nodes.Add(string.Format("{0}: (NULL)", "ClassGuid"));
                     else if (symName.ClassGuid != Guid.Empty)
-                        tvRegistry.Nodes.Add(string.Format("{0}: {1}", "ClassGuid", symName.ClassGuid));
+                        tvRegistry.Nodes.Add(string.Format("{0}: {1}", "ClassGuid", symName.ClassGuid.ToString().ToUpperInvariant()));
                     else
                         tvRegistry.Nodes.Add(string.Format("{0}: {1} (None)", "ClassGuid", symName.ClassGuid));
 
@@ -291,10 +291,12 @@ namespace AVRProjectIDE
 
                 if (treeDevices.Nodes.Count <= 1)
                 {
-                    TreeNode tvNoDev = treeDevices.Nodes.Add("No Devices Found");
-                    tvNoDev.Nodes.Add("A device must be installed which uses the LibUsb-Win32 driver.");
-                    tvNoDev.Nodes.Add("Or");
-                    tvNoDev.Nodes.Add("The LibUsb-Win32 kernel service must be enabled.");
+                    treeDevices.Nodes.Add("No Devices Found");
+                    treeDevices.Nodes.Add("A device must be installed which uses the LibUsb-Win32 driver.");
+                    treeDevices.Nodes.Add("Or");
+                    treeDevices.Nodes.Add("The LibUsb-Win32 kernel service must be enabled.");
+                    treeDevices.Nodes.Add("See the AVR Project IDE wiki for details");
+                    treeDevices.Nodes.Add(Properties.Resources.UsbInfoPanelWikiURL);
                 }
             }
             catch (Exception ex)
@@ -311,7 +313,7 @@ namespace AVRProjectIDE
         {
             if (i.Descriptor != null)
             {
-                TreeNode tvEpDesc = tvEndpoints.Nodes.Add(string.Format("EP (ID: 0x{0:X4} Descriptor [Length: {1}]", i.Descriptor.EndpointID, i.Descriptor.Length));
+                TreeNode tvEpDesc = tvEndpoints.Nodes.Add(string.Format("Endpoint (ID: 0x{0:X4}) Descriptor [Length: {1}]", i.Descriptor.EndpointID, i.Descriptor.Length));
                 tvEpDesc.Nodes.Add(string.Format("{0}: {1} (0x{2:X2})", "DescriptorType", i.Descriptor.DescriptorType, (int)i.Descriptor.DescriptorType));
                 tvEpDesc.Nodes.Add(string.Format("{0}: {1}", "Attributes", i.Descriptor.Attributes));
                 tvEpDesc.Nodes.Add(string.Format("{0}: {1}", "MaxPacketSize", i.Descriptor.MaxPacketSize));
@@ -407,18 +409,19 @@ namespace AVRProjectIDE
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void treeDevices_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            e.CancelEdit = true;
+        }
+
+        private void mbtnRefreshDevices_Click(object sender, EventArgs e)
         {
             FillDeviceInfo();
         }
 
-        private void btnEventsClear_Click(object sender, EventArgs e)
+        private void mbtnClearEventsErrors_Click(object sender, EventArgs e)
         {
             treeEvents.Nodes.Clear();
-        }
-
-        private void btnClearErrors_Click(object sender, EventArgs e)
-        {
             treeErrors.Nodes.Clear();
         }
     }

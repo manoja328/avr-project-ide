@@ -17,11 +17,51 @@ namespace AVRProjectIDE
             this.Icon = GraphicsResx.mainicon;
 
             this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            this.textBox1.Text = string.Format(
+                "{0}" + Environment.NewLine +
+                "Version {1}" + Environment.NewLine +
+                "{2}" + Environment.NewLine +
+                "Company: {3}" + Environment.NewLine +
+                "Description: {4}" + Environment.NewLine +
+                "----------" + Environment.NewLine,
+                AssemblyProduct,
+                AssemblyVersion,
+                AssemblyCopyright,
+                AssemblyCompany,
+                AssemblyDescription);
+
+            this.textBox1.Text += "Default Arduino Core Path: " + SettingsManagement.ArduinoCorePath + Environment.NewLine;
+            this.textBox1.Text += "Arduino Library Path: " + SettingsManagement.ArduinoLibPath + Environment.NewLine;
+            this.textBox1.Text += "AppData Path: " + SettingsManagement.AppDataPath + Environment.NewLine;
+            this.textBox1.Text += "AppInstall Path: " + SettingsManagement.AppInstallPath + Environment.NewLine;
+            this.textBox1.Text += "----------" + Environment.NewLine;
+            var assems = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var a in assems)
+            {
+                if (a.Location.ToLowerInvariant().StartsWith(SettingsManagement.AppInstallPath.ToLowerInvariant()))
+                {
+                    this.textBox1.Text += string.Format(
+                        "Assembly: {0}" + Environment.NewLine +
+                        "File: {1}" + Environment.NewLine +
+                        "-----------" + Environment.NewLine,
+                        a.FullName,
+                        a.Location
+                        );
+                }
+            }
+            foreach (var a in assems)
+            {
+                if (false == a.Location.ToLowerInvariant().StartsWith(SettingsManagement.AppInstallPath.ToLowerInvariant()))
+                {
+                    this.textBox1.Text += string.Format(
+                        "Assembly: {0}" + Environment.NewLine +
+                        "File: {1}" + Environment.NewLine +
+                        "-----------" + Environment.NewLine,
+                        a.FullName,
+                        a.Location
+                        );
+                }
+            }
         }
 
         #region Assembly Attribute Accessors

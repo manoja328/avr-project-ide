@@ -1082,6 +1082,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigWindow";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Project Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmProjEditor_FormClosing);
