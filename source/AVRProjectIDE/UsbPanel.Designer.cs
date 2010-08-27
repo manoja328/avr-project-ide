@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.treeDevices = new System.Windows.Forms.TreeView();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeEvents = new System.Windows.Forms.TreeView();
-            this.btnEventsClear = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.treeErrors = new System.Windows.Forms.TreeView();
-            this.btnClearErrors = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mbtnRefreshDevices = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnClearEventsErrors = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -59,7 +61,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.treeDevices);
-            this.tabPage1.Controls.Add(this.btnRefresh);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -70,30 +71,18 @@
             // 
             // treeDevices
             // 
-            this.treeDevices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeDevices.Location = new System.Drawing.Point(6, 6);
+            this.treeDevices.ContextMenuStrip = this.contextMenuStrip1;
+            this.treeDevices.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeDevices.LabelEdit = true;
+            this.treeDevices.Location = new System.Drawing.Point(3, 3);
             this.treeDevices.Name = "treeDevices";
-            this.treeDevices.Size = new System.Drawing.Size(482, 224);
+            this.treeDevices.Size = new System.Drawing.Size(562, 230);
             this.treeDevices.TabIndex = 1;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(494, 6);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(71, 224);
-            this.btnRefresh.TabIndex = 0;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.treeDevices.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeDevices_AfterLabelEdit);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.treeEvents);
-            this.tabPage2.Controls.Add(this.btnEventsClear);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -104,30 +93,16 @@
             // 
             // treeEvents
             // 
-            this.treeEvents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeEvents.Location = new System.Drawing.Point(5, 6);
+            this.treeEvents.ContextMenuStrip = this.contextMenuStrip1;
+            this.treeEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeEvents.Location = new System.Drawing.Point(3, 3);
             this.treeEvents.Name = "treeEvents";
-            this.treeEvents.Size = new System.Drawing.Size(492, 224);
+            this.treeEvents.Size = new System.Drawing.Size(562, 230);
             this.treeEvents.TabIndex = 3;
-            // 
-            // btnEventsClear
-            // 
-            this.btnEventsClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEventsClear.Location = new System.Drawing.Point(503, 6);
-            this.btnEventsClear.Name = "btnEventsClear";
-            this.btnEventsClear.Size = new System.Drawing.Size(61, 222);
-            this.btnEventsClear.TabIndex = 2;
-            this.btnEventsClear.Text = "Clear";
-            this.btnEventsClear.UseVisualStyleBackColor = true;
-            this.btnEventsClear.Click += new System.EventHandler(this.btnEventsClear_Click);
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.treeErrors);
-            this.tabPage3.Controls.Add(this.btnClearErrors);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -138,37 +113,50 @@
             // 
             // treeErrors
             // 
-            this.treeErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeErrors.Location = new System.Drawing.Point(5, 6);
+            this.treeErrors.ContextMenuStrip = this.contextMenuStrip1;
+            this.treeErrors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeErrors.Location = new System.Drawing.Point(3, 3);
             this.treeErrors.Name = "treeErrors";
-            this.treeErrors.Size = new System.Drawing.Size(492, 224);
+            this.treeErrors.Size = new System.Drawing.Size(562, 230);
             this.treeErrors.TabIndex = 5;
             // 
-            // btnClearErrors
+            // contextMenuStrip1
             // 
-            this.btnClearErrors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearErrors.Location = new System.Drawing.Point(503, 6);
-            this.btnClearErrors.Name = "btnClearErrors";
-            this.btnClearErrors.Size = new System.Drawing.Size(61, 222);
-            this.btnClearErrors.TabIndex = 4;
-            this.btnClearErrors.Text = "Clear";
-            this.btnClearErrors.UseVisualStyleBackColor = true;
-            this.btnClearErrors.Click += new System.EventHandler(this.btnClearErrors_Click);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mbtnRefreshDevices,
+            this.mbtnClearEventsErrors});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 48);
+            // 
+            // mbtnRefreshDevices
+            // 
+            this.mbtnRefreshDevices.Name = "mbtnRefreshDevices";
+            this.mbtnRefreshDevices.Size = new System.Drawing.Size(169, 22);
+            this.mbtnRefreshDevices.Text = "Refresh Devices";
+            this.mbtnRefreshDevices.Click += new System.EventHandler(this.mbtnRefreshDevices_Click);
+            // 
+            // mbtnClearEventsErrors
+            // 
+            this.mbtnClearEventsErrors.Name = "mbtnClearEventsErrors";
+            this.mbtnClearEventsErrors.Size = new System.Drawing.Size(169, 22);
+            this.mbtnClearEventsErrors.Text = "Clear Events and Errors";
+            this.mbtnClearEventsErrors.Click += new System.EventHandler(this.mbtnClearEventsErrors_Click);
             // 
             // UsbPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 262);
+            this.CloseButton = false;
+            this.CloseButtonVisible = false;
             this.Controls.Add(this.tabControl1);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft)
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop)
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom)));
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "UsbPanel";
             this.ShowInTaskbar = false;
             this.Text = "USB Info";
@@ -176,6 +164,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -185,12 +174,12 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TreeView treeDevices;
         private System.Windows.Forms.TreeView treeEvents;
-        private System.Windows.Forms.Button btnEventsClear;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TreeView treeErrors;
-        private System.Windows.Forms.Button btnClearErrors;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mbtnRefreshDevices;
+        private System.Windows.Forms.ToolStripMenuItem mbtnClearEventsErrors;
     }
 }

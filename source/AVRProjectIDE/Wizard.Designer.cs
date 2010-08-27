@@ -209,6 +209,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Wizard";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Project Creation Wizard";
             this.ResumeLayout(false);

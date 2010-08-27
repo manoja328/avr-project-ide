@@ -46,6 +46,7 @@
             this.mbtnPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mbtnFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnAdvancedEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnComment = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnUncomment = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblLineNum = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mbtnReplace = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scint)).BeginInit();
             this.rClickMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -114,7 +114,7 @@
             this.rClickMenu.Name = "rClickMenu";
             this.rClickMenu.ShowImageMargin = false;
             this.rClickMenu.ShowItemToolTips = false;
-            this.rClickMenu.Size = new System.Drawing.Size(140, 192);
+            this.rClickMenu.Size = new System.Drawing.Size(140, 170);
             // 
             // mbtnSelectAll
             // 
@@ -165,6 +165,14 @@
             this.mbtnFind.Size = new System.Drawing.Size(139, 22);
             this.mbtnFind.Text = "Find";
             this.mbtnFind.Click += new System.EventHandler(this.mbtnFind_Click);
+            // 
+            // mbtnReplace
+            // 
+            this.mbtnReplace.Name = "mbtnReplace";
+            this.mbtnReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.mbtnReplace.Size = new System.Drawing.Size(139, 22);
+            this.mbtnReplace.Text = "Replace";
+            this.mbtnReplace.Click += new System.EventHandler(this.mbtnReplace_Click);
             // 
             // mbtnAdvancedEdit
             // 
@@ -272,14 +280,6 @@
             this.lblLineNum.Name = "lblLineNum";
             this.lblLineNum.Size = new System.Drawing.Size(0, 17);
             // 
-            // mbtnReplace
-            // 
-            this.mbtnReplace.Name = "mbtnReplace";
-            this.mbtnReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.mbtnReplace.Size = new System.Drawing.Size(139, 22);
-            this.mbtnReplace.Text = "Replace";
-            this.mbtnReplace.Click += new System.EventHandler(this.mbtnReplace_Click);
-            // 
             // EditorPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,6 +292,7 @@
             this.MinimizeBox = false;
             this.Name = "EditorPanel";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.TabPageContextMenuStrip = this.tabMenuStrip;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.EditorPanelContent_Shown);

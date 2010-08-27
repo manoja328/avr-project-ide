@@ -49,6 +49,7 @@
             this.ClientSize = new System.Drawing.Size(632, 183);
             this.Controls.Add(this.txtException);
             this.Name = "ErrorReportWindow";
+            this.ShowInTaskbar = false;
             this.Text = "Error Report";
             this.ResumeLayout(false);
             this.PerformLayout();

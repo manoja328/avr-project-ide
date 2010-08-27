@@ -179,6 +179,8 @@
             this.Controls.Add(this.btnWizard);
             this.Controls.Add(this.btnNew);
             this.Name = "WelcomeWindow";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AVR Project IDE - Welcome";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmWelcome_FormClosed);
