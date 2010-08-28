@@ -1,5 +1,12 @@
 #summary Change Log of New Uploaded Versions
 
+==Update 96==
+
+ * issue 63 and issue 64
+ * better about box
+ * double checked "show in taskbar"
+ * better error report window
+
 ==Update 95==
 
  * Find dialog in Disassembly Viewer behaviour changed, see issue 61
