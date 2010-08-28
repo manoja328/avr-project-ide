@@ -20,7 +20,8 @@ namespace AVRProjectIDE
         {
             get
             {
-                return Properties.Resources.BuildID;
+                //return Properties.Resources.BuildID;
+                return "AVRProjectIDE_" + Application.ProductVersion;
             }
         }
 

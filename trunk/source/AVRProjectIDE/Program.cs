@@ -131,12 +131,12 @@ namespace AVRProjectIDE
 
             try
             {
-                if (SettingsManagement.LastRunVersion != Properties.Resources.BuildID)
+                if (SettingsManagement.LastRunVersion != SettingsManagement.BuildID)
                 {
                     NotifyOfUserAction();
                 }
 
-                SettingsManagement.LastRunVersion = Properties.Resources.BuildID;
+                SettingsManagement.LastRunVersion = SettingsManagement.BuildID;
             }
             catch { }
         }
