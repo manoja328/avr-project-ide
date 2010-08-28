@@ -161,7 +161,7 @@ namespace AVRProjectIDE
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Arduino Library Path: " + SettingsManagement.ArduinoLibPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppData Path: " + SettingsManagement.AppDataPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppInstall Path: " + SettingsManagement.AppInstallPath);
-            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Build Version: " + Properties.Resources.BuildID);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Build Version: " + SettingsManagement.BuildID);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Environment Version: " + Environment.Version);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "OS: " + Environment.OSVersion);
 

@@ -27,7 +27,7 @@ namespace AVRProjectIDE
                 txtException.Text += "If this is an issue or bug, please report this to http://code.google.com/p/avr-project-ide/issues/list" + Environment.NewLine;
             }
             catch { }
-            try { txtException.Text += Environment.NewLine + "Version: " + Properties.Resources.BuildID + Environment.NewLine; }
+            try { txtException.Text += Environment.NewLine + "Version: " + SettingsManagement.BuildID + Environment.NewLine; }
             catch { }
             try { txtException.Text += Environment.NewLine + "Date: " + DateTime.Now.ToString("MMMM d yyyy") + Environment.NewLine; }
             catch { }
@@ -35,26 +35,28 @@ namespace AVRProjectIDE
             catch { }
             try { txtException.Text += Environment.NewLine + "Environment Version: " + Environment.Version + Environment.NewLine; }
             catch { }
-            try { txtException.Text += Environment.NewLine + "Message: " + ex.Message + Environment.NewLine; }
+
+            PrintException(ex, "");
+        }
+
+        private void PrintException(Exception ex, string tabs)
+        {
+            try { txtException.Text += Environment.NewLine + tabs + "Type: " + ex.GetType().ToString() + Environment.NewLine; }
             catch { }
-            try { txtException.Text += Environment.NewLine + "Target Site: " + ex.TargetSite + Environment.NewLine; }
+            try { txtException.Text += Environment.NewLine + tabs + "Message: " + ex.Message + Environment.NewLine; }
             catch { }
-            try { txtException.Text += Environment.NewLine + "Stack Trace: " + ex.StackTrace + Environment.NewLine; }
+            try { txtException.Text += Environment.NewLine + tabs + "Target Site: " + ex.TargetSite + Environment.NewLine; }
             catch { }
-            try { txtException.Text += Environment.NewLine + "Source: " + ex.Source + Environment.NewLine; }
+            try { txtException.Text += Environment.NewLine + tabs + "Stack Trace: " + ex.StackTrace + Environment.NewLine; }
             catch { }
-            try
+            try { txtException.Text += Environment.NewLine + tabs + "Source: " + ex.Source + Environment.NewLine; }
+            catch { }
+
+            if (ex.InnerException != null)
             {
-                string ie = ex.InnerException.ToString();
-                if (ie != null)
-                {
-                    if (string.IsNullOrEmpty(ie.Trim()) == false)
-                    {
-                        txtException.Text += Environment.NewLine + "Inner Exception: " + ie.Trim() + Environment.NewLine;
-                    }
-                }
+                txtException.Text += Environment.NewLine + tabs + "Inner Exception:" + Environment.NewLine;
+                PrintException(ex.InnerException, tabs + "\t");
             }
-            catch { }
         }
     }
 }

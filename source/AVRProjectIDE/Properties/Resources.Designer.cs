@@ -111,15 +111,6 @@ namespace AVRProjectIDE.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVRProjectIDE_96.
-        /// </summary>
-        internal static string BuildID {
-            get {
-                return ResourceManager.GetString("BuildID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;ExternalTools&gt;
         ///  &lt;Tool text=&quot;Edit Project File in Notepad&quot; cmd=&quot;notepad&quot; dir=&quot;&quot; args=&quot;%PROJNAME%.avrproj&quot; /&gt;
