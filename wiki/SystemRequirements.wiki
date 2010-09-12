@@ -4,7 +4,7 @@
 = System Requirements =
 
  * [http://www.microsoft.com/downloads/details.aspx?FamilyId=333325FD-AE52-4E35-B531-508D977D32A6 .NET Framework 3.5]
- * [http://winavr.sourceforge.net/ WinAVR]
+ * [http://winavr.sourceforge.net/ WinAVR] or [http://www.makehackvoid.com/group-projects/mhvavrtools MHV AVR Tools]
 
 == Optional ==
 
