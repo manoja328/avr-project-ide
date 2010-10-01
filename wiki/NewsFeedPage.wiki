@@ -1,7 +1,3 @@
 This page is reserved for the latest news feeds to the AVR Project IDE's Welcome Window.
 
-===Version 94 added a USB panel to display device info and event notifications===
-
-===Version 88 added Disassembly Viewer===
-
-===Version 86 added project cloning, improved file add wizard===
+===Version 98 added major fixes, newer Arduino files===
