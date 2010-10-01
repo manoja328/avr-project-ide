@@ -22,13 +22,14 @@ namespace AVRProjectIDE
 
         public static void CheckForUpdates()
         {
+            UpdateCheckError = true;
+
             if (SettingsManagement.CheckForUpdates == false)
             {
-
                 return;
             }
 
-            oldBuildID = SettingsManagement.BuildID;
+            oldBuildID = SettingsManagement.Version;
 
             checkerThread = new Thread(new ThreadStart(GetBuildID));
             checkerThread.IsBackground = true;
@@ -50,18 +51,38 @@ namespace AVRProjectIDE
                 wStream.Close();
                 wResp.Close();
 
-                Regex r = new Regex("(BUILDID:)(\".*?\")");
+                string re1="(AVRProjectIDE_Installer)";	// Variable Name 1
+                string re2="(\\.)";	// Any Single Character 1
+                string re3="(\\d+)";	// Integer Number 1
+                string re4="(\\.)";	// Any Single Character 2
+                string re5="(\\d+)";	// Integer Number 2
+                string re6="(\\.)";	// Any Single Character 3
+                string re7="(\\d+)";	// Integer Number 3
+                string re8="(\\.)";	// Any Single Character 4
+                string re9="(\\d+)";	// Integer Number 4
+                string re10="(\\.)";	// Any Single Character 5
+                string re11="(exe)";	// Word 1
+
+                Regex r = new Regex(re1+re2+re3+re4+re5+re6+re7+re8+re9+re10+re11,RegexOptions.IgnoreCase|RegexOptions.Singleline);
                 Match m = r.Match(content);
                 if (m.Success)
                 {
-                    newBuildID = m.Groups[2].Value.Trim('"');
-                    if (newBuildID != oldBuildID)
+                    newBuildID = string.Format("{0}.{1}.{2}.{3}",
+                        m.Groups[3].Value,
+                        m.Groups[5].Value,
+                        m.Groups[7].Value,
+                        m.Groups[9].Value);
+
+                    if (newBuildID.ToLowerInvariant() != oldBuildID.ToLowerInvariant())
                         updateAvail = true;
+
+                    UpdateCheckError = false;
                 }
             }
             catch
             {
                 updateAvail = false;
+                UpdateCheckError = true;
             }
         }
 
@@ -85,6 +106,12 @@ namespace AVRProjectIDE
                 else
                     return false;
             }
+        }
+
+        public static bool UpdateCheckError
+        {
+            get;
+            set;
         }
 
         public static string NewBuildID

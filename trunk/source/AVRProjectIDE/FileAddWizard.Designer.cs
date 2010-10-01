@@ -76,6 +76,7 @@
             this.dropFileExt.Name = "dropFileExt";
             this.dropFileExt.Size = new System.Drawing.Size(277, 21);
             this.dropFileExt.TabIndex = 2;
+            this.dropFileExt.SelectedIndexChanged += new System.EventHandler(this.dropFileExt_SelectedIndexChanged);
             // 
             // lblFileExtensions
             // 

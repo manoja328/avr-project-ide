@@ -111,7 +111,7 @@ namespace AVRProjectIDE
                     {
                         try
                         {
-                            if (MessageBox.Show("An Updated Version of AVR Project IDE is Available (" + SettingsManagement.BuildID + " to " + UpdateMech.NewBuildID + "). Would you like to download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            if (MessageBox.Show("An Updated Version of AVR Project IDE is Available (" + SettingsManagement.Version + " to " + UpdateMech.NewBuildID + "). Would you like to download it?", "Update Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
                                 System.Diagnostics.Process.Start(Properties.Resources.WebsiteURL);
                             }
@@ -131,12 +131,12 @@ namespace AVRProjectIDE
 
             try
             {
-                if (SettingsManagement.LastRunVersion != SettingsManagement.BuildID)
+                if (SettingsManagement.LastRunVersion != SettingsManagement.Version)
                 {
                     NotifyOfUserAction();
                 }
 
-                SettingsManagement.LastRunVersion = SettingsManagement.BuildID;
+                SettingsManagement.LastRunVersion = SettingsManagement.Version;
             }
             catch { }
         }
@@ -392,8 +392,8 @@ namespace AVRProjectIDE
 
         public static void LaunchDonate()
         {
-            System.Windows.Forms.MessageBox.Show("There is a donate button on my website");
-            System.Diagnostics.Process.Start(Properties.Resources.FranksSiteURL);
+            System.Windows.Forms.MessageBox.Show("Help me out by buying an USnooBie");
+            GotoUSnooBie();
         }
 
         public static string ProperChipName(string chipName)
@@ -402,6 +402,11 @@ namespace AVRProjectIDE
                 chipName = "";
 
             return chipName.Trim().ToUpperInvariant().Replace("ATXMEGA", "ATxmega").Replace("ATMEGA", "ATmega").Replace("ATTINY", "ATtiny");
+        }
+
+        public static void GotoUSnooBie()
+        {
+            System.Diagnostics.Process.Start(Properties.Resources.AdURL);
         }
     }
 }

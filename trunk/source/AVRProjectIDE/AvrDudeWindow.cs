@@ -55,6 +55,8 @@ namespace AVRProjectIDE
             // the .NET built-in stream redirection only has
             // the ability to read line by line so the progress
             // bar is lost
+
+            ProjectBuilder.SetEnviroVarsForProc(avrdude.StartInfo);
             avrdude.StartInfo.FileName = "cmd";
         }
 
@@ -159,6 +161,7 @@ namespace AVRProjectIDE
             if (ofd.ShowDialog() != DialogResult.OK)
                 return;
 
+            ProjectBuilder.SetEnviroVarsForProc(avrdude.StartInfo);
             avrdude.StartInfo.Arguments = GetArgs(GetMemType(), GetOverrides(), "w", ofd.FileName, GetFileFormat(), true);
 
             TryRun();
@@ -175,6 +178,7 @@ namespace AVRProjectIDE
 
             burnerPanel.FormToProj();
 
+            ProjectBuilder.SetEnviroVarsForProc(avrdude.StartInfo);
             avrdude.StartInfo.Arguments = GetArgs(GetMemType(), GetOverrides(), "w", ofd.FileName, GetFileFormat(), false);
 
             TryRun();
@@ -191,6 +195,7 @@ namespace AVRProjectIDE
 
             burnerPanel.FormToProj();
 
+            ProjectBuilder.SetEnviroVarsForProc(avrdude.StartInfo);
             avrdude.StartInfo.Arguments = GetArgs(GetMemType(), GetOverrides(), "r", sfd.FileName, GetFileFormat(), true);
 
             TryRun();
@@ -207,6 +212,7 @@ namespace AVRProjectIDE
 
             burnerPanel.FormToProj();
 
+            ProjectBuilder.SetEnviroVarsForProc(avrdude.StartInfo);
             avrdude.StartInfo.Arguments = GetArgs(GetMemType(), GetOverrides(), "v", ofd.FileName, GetFileFormat(), true);
 
             TryRun();
@@ -231,6 +237,7 @@ namespace AVRProjectIDE
             if (ProjectBuilder.CheckForWinAVR())
             {
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
+                ProjectBuilder.SetEnviroVarsForProc(p.StartInfo);
                 p.StartInfo.FileName = "cmd";
                 p.StartInfo.Arguments = "/k avrdude ";
 

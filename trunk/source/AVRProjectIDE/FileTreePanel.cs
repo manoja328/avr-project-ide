@@ -32,6 +32,7 @@ namespace AVRProjectIDE
         private AVRProject project;
         private Dictionary<string, EditorPanel> editorList;
 
+        private TreeNode updateNoticeNode;
         private TreeNode rootNode;
         private TreeNode sourceNode;
         private TreeNode headerNode;
@@ -237,6 +238,25 @@ namespace AVRProjectIDE
 
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add(rootNode);
+
+            if (AboutBox.AssemblyDate.AddMonths(1) <= DateTime.Now)
+            {
+                updateNoticeNode = new TreeNode("IMPORTANT NOTICE");
+                updateNoticeNode.Nodes.Add("The build date of this version");
+                updateNoticeNode.Nodes.Add("of AVR Project IDE is");
+                updateNoticeNode.Nodes.Add(AboutBox.AssemblyDate.ToString("MMMM d yyyy"));
+                updateNoticeNode.Nodes.Add("It is over a month old");
+                updateNoticeNode.Nodes.Add("Frank usually updates once");
+                updateNoticeNode.Nodes.Add("per month even if he has no");
+                updateNoticeNode.Nodes.Add("real changes to make.");
+                updateNoticeNode.Nodes.Add("This could mean that the");
+                updateNoticeNode.Nodes.Add("automatic update checking mechanism");
+                updateNoticeNode.Nodes.Add("has malfunctioned. Whatever the");
+                updateNoticeNode.Nodes.Add("reason may be, you should");
+                updateNoticeNode.Nodes.Add("check for an update manually");
+                updateNoticeNode.Nodes.Add("from the website.");
+                treeView1.Nodes.Add(updateNoticeNode);
+            }
         }
 
         public void PopulateList(AVRProject newProj, Dictionary<string, EditorPanel> newList)
@@ -485,8 +505,20 @@ namespace AVRProjectIDE
             TreeNode tn = treeView1.SelectedNode;
 
             if (tn != null)
-                if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode)
+                if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode && !IsNoticeNode(tn))
                     tn.BeginEdit();
+        }
+
+        private bool IsNoticeNode(TreeNode tn)
+        {
+            if (updateNoticeNode == null)
+                return false;
+            if (tn == updateNoticeNode)
+                return true;
+            if (updateNoticeNode.Nodes.Contains(tn))
+                return true;
+
+            return false;
         }
 
         private void mbtnDelete_Click(object sender, EventArgs e)
@@ -494,7 +526,7 @@ namespace AVRProjectIDE
             TreeNode tn = treeView1.SelectedNode;
 
             if (tn != null)
-                if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode)
+                if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode && !IsNoticeNode(tn))
                     RemoveNode(tn);
         }
 
@@ -513,7 +545,7 @@ namespace AVRProjectIDE
                 TreeNode tn = treeView1.SelectedNode;
 
                 if (tn != null)
-                    if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode)
+                    if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode && !IsNoticeNode(tn))
                         tn.BeginEdit();
             }
             else if (e.KeyCode == Keys.Enter)
@@ -523,7 +555,7 @@ namespace AVRProjectIDE
 
                 TreeNode n = this.treeView1.SelectedNode;
 
-                if (n != sourceNode && n != headerNode && n != rootNode && n != otherNode)
+                if (n != sourceNode && n != headerNode && n != rootNode && n != otherNode && !IsNoticeNode(n))
                 {
                     OpenNode(n);
                 }
@@ -546,7 +578,7 @@ namespace AVRProjectIDE
             TreeNode tn = treeView1.SelectedNode;
 
             if (tn != null)
-                if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode && tn.Parent == sourceNode)
+                if (tn != rootNode && tn != sourceNode && tn != headerNode && tn != otherNode && tn.Parent == sourceNode && !IsNoticeNode(tn))
                 {
                     ProjectFile file;
                     if (project.FileList.TryGetValue(tn.Text.ToLowerInvariant(), out file))
@@ -588,7 +620,7 @@ namespace AVRProjectIDE
 
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            if (e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode)
+            if (e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode || IsNoticeNode(e.Node))
             {
                 e.CancelEdit = true;
                 return;
@@ -597,7 +629,7 @@ namespace AVRProjectIDE
 
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            if (e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode)
+            if (e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode || IsNoticeNode(e.Node))
             {
                 e.CancelEdit = true;
                 return;
@@ -621,7 +653,7 @@ namespace AVRProjectIDE
             if (project == null)
                 return;
 
-            if (e.Node != sourceNode && e.Node != headerNode && e.Node != rootNode && e.Node != otherNode)
+            if (e.Node != sourceNode && e.Node != headerNode && e.Node != rootNode && e.Node != otherNode && !IsNoticeNode(e.Node))
             {
                 OpenNode(e.Node);
             }
@@ -645,7 +677,7 @@ namespace AVRProjectIDE
 
         private void treeView1_BeforeCheck(object sender, TreeViewCancelEventArgs e)
         {
-            if ((e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode) || e.Node.Parent != sourceNode)
+            if ((e.Node == sourceNode || e.Node == headerNode || e.Node == rootNode || e.Node == otherNode) || e.Node.Parent != sourceNode || IsNoticeNode(e.Node))
             {
                 e.Cancel = true;
                 return;
@@ -668,7 +700,7 @@ namespace AVRProjectIDE
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            if (e.Node != sourceNode && e.Node != headerNode && e.Node != rootNode && e.Node != otherNode && e.Node.Parent == sourceNode)
+            if (e.Node != sourceNode && e.Node != headerNode && e.Node != rootNode && e.Node != otherNode && e.Node.Parent == sourceNode && !IsNoticeNode(e.Node))
             {
                 ProjectFile f;
                 if (project.FileList.TryGetValue(e.Node.Text.ToLowerInvariant(), out f))
@@ -702,6 +734,10 @@ namespace AVRProjectIDE
 
                 if (headerNode.Checked == true)
                     headerNode.Checked = false;
+
+                if (updateNoticeNode != null && updateNoticeNode.Checked == true)
+                    updateNoticeNode.Checked = false;
+
 
                 foreach (TreeNode n in headerNode.Nodes)
                 {

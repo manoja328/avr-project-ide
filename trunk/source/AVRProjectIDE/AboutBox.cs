@@ -20,12 +20,14 @@ namespace AVRProjectIDE
             this.textBox1.Text = string.Format(
                 "{0}" + Environment.NewLine +
                 "Version {1}" + Environment.NewLine +
-                "{2}" + Environment.NewLine +
-                "Company: {3}" + Environment.NewLine +
-                "Description: {4}" + Environment.NewLine +
+                "Version Date: {2}" + Environment.NewLine +
+                "{3}" + Environment.NewLine +
+                "Company: {4}" + Environment.NewLine +
+                "Description: {5}" + Environment.NewLine +
                 "----------" + Environment.NewLine,
                 AssemblyProduct,
                 AssemblyVersion,
+                AssemblyDate <= DateTime.Now ? AssemblyDate.ToString("MMMM d yyyy") : "Error",
                 AssemblyCopyright,
                 AssemblyCompany,
                 AssemblyDescription);
@@ -66,7 +68,7 @@ namespace AVRProjectIDE
 
         #region Assembly Attribute Accessors
 
-        public string AssemblyTitle
+        public static string AssemblyTitle
         {
             get
             {
@@ -83,15 +85,15 @@ namespace AVRProjectIDE
             }
         }
 
-        public string AssemblyVersion
+        public static string AssemblyVersion
         {
             get
             {
-                return SettingsManagement.BuildID;
+                return SettingsManagement.Version;
             }
         }
 
-        public string AssemblyDescription
+        public static string AssemblyDescription
         {
             get
             {
@@ -104,7 +106,7 @@ namespace AVRProjectIDE
             }
         }
 
-        public string AssemblyProduct
+        public static string AssemblyProduct
         {
             get
             {
@@ -117,7 +119,7 @@ namespace AVRProjectIDE
             }
         }
 
-        public string AssemblyCopyright
+        public static string AssemblyCopyright
         {
             get
             {
@@ -130,7 +132,7 @@ namespace AVRProjectIDE
             }
         }
 
-        public string AssemblyCompany
+        public static string AssemblyCompany
         {
             get
             {
@@ -142,6 +144,57 @@ namespace AVRProjectIDE
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
+
+        public static DateTime AssemblyDate
+        {
+            get
+            {
+                try
+                {
+                    var version = Assembly.GetEntryAssembly().GetName().Version;
+                    return new DateTime(2000, 1, 1).Add(new TimeSpan(
+                    TimeSpan.TicksPerDay * version.Build + // days since 1 January 2000
+                    TimeSpan.TicksPerSecond * 2 * version.Revision)); // seconds since midnight, (multiply by 2 to get original)
+                }
+                catch
+                {
+                }
+
+                try
+                {
+                    string filePath = System.Reflection.Assembly.GetCallingAssembly().Location;
+                    const int c_PeHeaderOffset = 60;
+                    const int c_LinkerTimestampOffset = 8;
+                    byte[] b = new byte[2048];
+                    System.IO.Stream s = null;
+
+                    try
+                    {
+                        s = new System.IO.FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                        s.Read(b, 0, 2048);
+                    }
+                    finally
+                    {
+                        if (s != null)
+                        {
+                            s.Close();
+                        }
+                    }
+
+                    int i = System.BitConverter.ToInt32(b, c_PeHeaderOffset);
+                    int secondsSince1970 = System.BitConverter.ToInt32(b, i + c_LinkerTimestampOffset);
+                    DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0);
+                    dt = dt.AddSeconds(secondsSince1970);
+                    dt = dt.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(dt).Hours);
+                    return dt;
+                }
+                catch
+                {
+                    return DateTime.Now.AddDays(2).Date;
+                }
+            }
+        }
+
         #endregion
 
         private void lnkButton_Click(object sender, EventArgs e)
@@ -166,6 +219,11 @@ namespace AVRProjectIDE
         private void btnDonate_Click(object sender, EventArgs e)
         {
             Program.LaunchDonate();
+        }
+
+        private void picAdBox_Click(object sender, EventArgs e)
+        {
+            Program.GotoUSnooBie();
         }
     }
 }

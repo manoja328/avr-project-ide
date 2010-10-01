@@ -39,13 +39,15 @@
             this.lnkButton = new System.Windows.Forms.Button();
             this.btnDonate = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.picAdBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picAdBox)).BeginInit();
             this.SuspendLayout();
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(12, 255);
+            this.okButton.Location = new System.Drawing.Point(12, 279);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 20);
             this.okButton.TabIndex = 24;
@@ -54,7 +56,7 @@
             // lnkButton
             // 
             this.lnkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lnkButton.Location = new System.Drawing.Point(93, 255);
+            this.lnkButton.Location = new System.Drawing.Point(93, 279);
             this.lnkButton.Name = "lnkButton";
             this.lnkButton.Size = new System.Drawing.Size(75, 20);
             this.lnkButton.TabIndex = 24;
@@ -64,7 +66,7 @@
             // btnDonate
             // 
             this.btnDonate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDonate.Location = new System.Drawing.Point(174, 255);
+            this.btnDonate.Location = new System.Drawing.Point(174, 279);
             this.btnDonate.Name = "btnDonate";
             this.btnDonate.Size = new System.Drawing.Size(75, 20);
             this.btnDonate.TabIndex = 24;
@@ -81,8 +83,22 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(489, 237);
+            this.textBox1.Size = new System.Drawing.Size(620, 169);
             this.textBox1.TabIndex = 25;
+            // 
+            // picAdBox
+            // 
+            this.picAdBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.picAdBox.BackColor = System.Drawing.Color.White;
+            this.picAdBox.BackgroundImage = global::AVRProjectIDE.GraphicsResx.usnoobie_ad;
+            this.picAdBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picAdBox.Location = new System.Drawing.Point(12, 187);
+            this.picAdBox.Name = "picAdBox";
+            this.picAdBox.Size = new System.Drawing.Size(620, 86);
+            this.picAdBox.TabIndex = 26;
+            this.picAdBox.TabStop = false;
+            this.picAdBox.Click += new System.EventHandler(this.picAdBox_Click);
             // 
             // AboutBox
             // 
@@ -90,7 +106,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
-            this.ClientSize = new System.Drawing.Size(513, 287);
+            this.ClientSize = new System.Drawing.Size(644, 311);
+            this.Controls.Add(this.picAdBox);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.btnDonate);
@@ -104,6 +121,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About AVR Project IDE";
+            ((System.ComponentModel.ISupportInitialize)(this.picAdBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,5 +133,6 @@
         private System.Windows.Forms.Button lnkButton;
         private System.Windows.Forms.Button btnDonate;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox picAdBox;
     }
 }

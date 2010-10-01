@@ -161,7 +161,7 @@ namespace AVRProjectIDE
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Arduino Library Path: " + SettingsManagement.ArduinoLibPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppData Path: " + SettingsManagement.AppDataPath);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "AppInstall Path: " + SettingsManagement.AppInstallPath);
-            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Build Version: " + SettingsManagement.BuildID);
+            messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Build Version: " + SettingsManagement.Version);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "Environment Version: " + Environment.Version);
             messageWin.MessageBoxModify(TextBoxChangeMode.AppendNewLine, "OS: " + Environment.OSVersion);
 
@@ -471,6 +471,7 @@ namespace AVRProjectIDE
 
         void editor_EditorClosed(string fileName, object sender, FormClosedEventArgs e)
         {
+            fileName = fileName.ToLowerInvariant();
             EditorPanel editor;
             if (editorList.TryGetValue(fileName, out editor))
             {
@@ -1273,6 +1274,7 @@ namespace AVRProjectIDE
             try
             {
                 System.Diagnostics.Process cmd = new System.Diagnostics.Process();
+                ProjectBuilder.SetEnviroVarsForProc(cmd.StartInfo);
                 cmd.StartInfo.FileName = "cmd";
                 if (project.IsReady)
                     cmd.StartInfo.WorkingDirectory = project.DirPath;

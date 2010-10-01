@@ -16,7 +16,7 @@ Name "AVR Project IDE"
 
 RequestExecutionLevel highest
 
-OutFile "AVRProjectIDE_Installer.exe"
+OutFile "AVRProjectIDE_Installer.VERSIONSTRINGGOESGERE.exe"
 
 InstallDir $PROGRAMFILES\AVRProjectIDE
 InstallDirRegKey HKCU "Software\AVRProjectIDE" ""
@@ -65,7 +65,7 @@ Section ;"Main Editor"
 	
 SectionEnd
 
-Section "Arduino 0018 Core" SecArdCore
+Section "Arduino Core" SecArdCore
 
 	SetOutPath $INSTDIR\arduino\core
 	
@@ -73,7 +73,7 @@ Section "Arduino 0018 Core" SecArdCore
 
 SectionEnd
 
-Section "Arduino 0018 Libraries" SecArdLib
+Section "Arduino Libraries" SecArdLib
 
 	SetOutPath $INSTDIR\arduino\libraries
 	
@@ -103,8 +103,8 @@ Section "File Association" SecFileAssociate
 	
 SectionEnd
 
-LangString DESC_ArdCore ${LANG_ENGLISH} "Arduino 0018 Core Files"
-LangString DESC_ArdLib ${LANG_ENGLISH} "Arduino 0018 Library Files"
+LangString DESC_ArdCore ${LANG_ENGLISH} "Arduino Core Files"
+LangString DESC_ArdLib ${LANG_ENGLISH} "Arduino Library Files"
 LangString DESC_DesktopShortcut ${LANG_ENGLISH} "A shortcut to AVR Project IDE on your desktop"
 LangString DESC_FileAssociate ${LANG_ENGLISH} "Open *.avrproj files with AVR Project IDE"
 LangString DESC_AtmelPartXML ${LANG_ENGLISH} "Files used by the Hardware Explorer feature that provides information about the AVR chip you are using"

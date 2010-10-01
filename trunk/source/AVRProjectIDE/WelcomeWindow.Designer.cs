@@ -48,7 +48,9 @@
             this.btnWizard = new System.Windows.Forms.Button();
             this.txtNews = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.picAdBox = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAdBox)).BeginInit();
             this.SuspendLayout();
             // 
             // btnNew
@@ -154,12 +156,12 @@
             this.txtNews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNews.Location = new System.Drawing.Point(12, 297);
+            this.txtNews.Location = new System.Drawing.Point(12, 390);
             this.txtNews.Multiline = true;
             this.txtNews.Name = "txtNews";
             this.txtNews.ReadOnly = true;
             this.txtNews.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNews.Size = new System.Drawing.Size(629, 61);
+            this.txtNews.Size = new System.Drawing.Size(629, 96);
             this.txtNews.TabIndex = 8;
             // 
             // backgroundWorker1
@@ -167,11 +169,26 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // picAdBox
+            // 
+            this.picAdBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.picAdBox.BackColor = System.Drawing.Color.White;
+            this.picAdBox.BackgroundImage = global::AVRProjectIDE.GraphicsResx.usnoobie_ad;
+            this.picAdBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picAdBox.Location = new System.Drawing.Point(12, 297);
+            this.picAdBox.Name = "picAdBox";
+            this.picAdBox.Size = new System.Drawing.Size(629, 87);
+            this.picAdBox.TabIndex = 9;
+            this.picAdBox.TabStop = false;
+            this.picAdBox.Click += new System.EventHandler(this.picAdBox_Click);
+            // 
             // WelcomeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 370);
+            this.ClientSize = new System.Drawing.Size(653, 498);
+            this.Controls.Add(this.picAdBox);
             this.Controls.Add(this.txtNews);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnImportAPS);
@@ -186,6 +203,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmWelcome_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAdBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,5 +223,6 @@
         private System.Windows.Forms.TextBox txtNews;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.CheckBox chkShowWelcomeAtStart;
+        private System.Windows.Forms.PictureBox picAdBox;
     }
 }

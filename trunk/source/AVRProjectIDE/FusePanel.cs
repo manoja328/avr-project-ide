@@ -564,6 +564,7 @@ namespace AVRProjectIDE
                 owner.BurnerPanel.FormToProj();
 
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
+                ProjectBuilder.SetEnviroVarsForProc(p.StartInfo);
                 p.StartInfo.FileName = "avrdude";
                 p.StartInfo.Arguments = "";
                 //p.StartInfo.FileName = "cmd";
@@ -672,6 +673,7 @@ namespace AVRProjectIDE
                 owner.BurnerPanel.FormToProj();
 
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
+                ProjectBuilder.SetEnviroVarsForProc(p.StartInfo);
                 p.StartInfo.FileName = "cmd";
                 p.StartInfo.Arguments = "/k avrdude ";
 

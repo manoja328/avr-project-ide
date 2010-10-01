@@ -100,6 +100,7 @@ namespace AVRProjectIDE
                         }
                     }
 
+                    ProjectBuilder.SetEnviroVarsForProc(p.StartInfo);
                     p.StartInfo.Arguments = args;
                 }
 
