@@ -16,12 +16,12 @@ namespace AVRProjectIDE
 {
     public class SettingsManagement
     {
-        public static string BuildID
+        public static string Version
         {
             get
             {
-                //return Properties.Resources.BuildID;
-                return "AVRProjectIDE_" + Application.ProductVersion;
+                //return Properties.Resources.Version;
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();//Application.ProductVersion;
             }
         }
 

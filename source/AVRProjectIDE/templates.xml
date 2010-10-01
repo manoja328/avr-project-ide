@@ -25,15 +25,14 @@
     <LinkLibList>
       <Lib>libm.a</Lib>
       <Lib>libc.a</Lib>
-      <Lib>libobjc.a</Lib>
     </LinkLibList>
   </template>
 
-  <template name="USnooBie ATmega168 12MHz">
-    <Device>atmega168</Device>
+  <template name="USnooBie ATmega328P 12MHz">
+    <Device>atmega328P</Device>
     <ClockFreq>12000000</ClockFreq>
-    <BurnPart>atmega168</BurnPart>
-    <BurnFuseBox>-U lfuse:w:0xFF:m -U hfuse:w:0xDF:m -U efuse:w:0xF8:m</BurnFuseBox>
+    <BurnPart>atmega328P</BurnPart>
+    <BurnFuseBox>-U lfuse:w:0xFF:m -U hfuse:w:0xDF:m -U efuse:w:0xFF:m</BurnFuseBox>
     <Inherit>Maximum Optimization</Inherit>
     <Inherit>USBaspLoader</Inherit>
   </template>

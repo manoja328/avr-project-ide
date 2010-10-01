@@ -180,6 +180,7 @@ namespace AVRProjectIDE
             try
             {
                 Process proc = new Process();
+                ProjectBuilder.SetEnviroVarsForProc(proc.StartInfo);
                 proc.StartInfo.FileName = "avarice";
                 proc.StartInfo.Arguments = "--known-devices";
                 proc.StartInfo.UseShellExecute = false;

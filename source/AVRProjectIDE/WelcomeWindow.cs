@@ -233,5 +233,10 @@ namespace AVRProjectIDE
         {
             Program.LaunchDonate();
         }
+
+        private void picAdBox_Click(object sender, EventArgs e)
+        {
+            Program.GotoUSnooBie();
+        }
     }
 }

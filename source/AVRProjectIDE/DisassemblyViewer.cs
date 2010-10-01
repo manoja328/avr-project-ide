@@ -130,6 +130,7 @@ namespace AVRProjectIDE
             }
 
             Process avrobjdump = new Process();
+            ProjectBuilder.SetEnviroVarsForProc(avrobjdump.StartInfo);
             avrobjdump.StartInfo.FileName = "cmd";
             avrobjdump.StartInfo.Arguments = "/C avr-objdump " + txtOptions.Text.Trim() + " " + IDEWindow.CurrentProject.FileNameNoExt + ".elf > " + fileName;
             avrobjdump.StartInfo.WorkingDirectory = dirPath;

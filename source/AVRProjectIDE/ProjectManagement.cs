@@ -731,7 +731,7 @@ namespace AVRProjectIDE
                 xml.Formatting = Formatting.Indented;
                 xml.WriteStartDocument();
 
-                xml.WriteComment("This file is meant to be opened with AVR Project IDE, http://code.google.com/p/avr-project-ide/ ");
+                xml.WriteComment("This file is meant to be opened with AVR Project IDE, " + Properties.Resources.WebsiteURL + " ");
 
                 xml.WriteStartElement("Project");
 

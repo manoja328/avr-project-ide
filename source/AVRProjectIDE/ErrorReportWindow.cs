@@ -27,7 +27,9 @@ namespace AVRProjectIDE
                 txtException.Text += "If this is an issue or bug, please report this to http://code.google.com/p/avr-project-ide/issues/list" + Environment.NewLine;
             }
             catch { }
-            try { txtException.Text += Environment.NewLine + "Version: " + SettingsManagement.BuildID + Environment.NewLine; }
+            try { txtException.Text += Environment.NewLine + "Version: " + SettingsManagement.Version + Environment.NewLine; }
+            catch { }
+            try { txtException.Text += Environment.NewLine + "Version Date: " + AboutBox.AssemblyDate.ToString("MMMM d yyyy") + Environment.NewLine; }
             catch { }
             try { txtException.Text += Environment.NewLine + "Date: " + DateTime.Now.ToString("MMMM d yyyy") + Environment.NewLine; }
             catch { }

@@ -137,7 +137,7 @@
     <value>..\chip_xml\interruptvectors.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="WinAVRURL" xml:space="preserve">
-    <value>https://sourceforge.net/projects/winavr/files/</value>
+    <value>http://code.google.com/p/avr-project-ide/wiki/SystemRequirements</value>
   </data>
   <data name="WebsiteURL" xml:space="preserve">
     <value>http://code.google.com/p/avr-project-ide/</value>
@@ -159,5 +159,8 @@
   </data>
   <data name="UsbInfoPanelWikiURL" xml:space="preserve">
     <value>http://code.google.com/p/avr-project-ide/wiki/UsbInfoPanel</value>
+  </data>
+  <data name="AdURL" xml:space="preserve">
+    <value>http://frank.circleofcurrent.com/usnoobie/</value>
   </data>
 </root>
