@@ -610,7 +610,7 @@ namespace AVRProjectIDE
                 clkStr = String.Format(" -DF_CPU={0:0}UL ", Math.Round(project.ClockFreq));
 
             args += String.Format(" -mmcu={0}{1}{2} {3} {4} -MD -MP -MT {5}.o {6} -c {7} {8} \"{9}\"",
-                workingProject.Device,
+                workingProject.Device.ToLowerInvariant(),
                 clkStr,
                 workingProject.Optimization,
                 checklist,
@@ -718,7 +718,7 @@ namespace AVRProjectIDE
 
             // construct options and arguments
 
-            string LDSFLAGS = "-mmcu=" + workingProject.Device + " ";
+            string LDSFLAGS = "-mmcu=" + workingProject.Device.ToLowerInvariant() + " ";
             foreach (MemorySegment seg in workingProject.MemorySegList.Values)
             {
                 int addr = (int)seg.Addr;
@@ -1164,7 +1164,7 @@ namespace AVRProjectIDE
         {
             string outputAbsPath = workingProject.DirPath + Path.DirectorySeparatorChar + workingProject.OutputDir;
 
-            string args = "-C --mcu=" + workingProject.Device + " " + workingProject.SafeFileNameNoExt + ".elf";
+            string args = "-C --mcu=" + workingProject.Device.ToLowerInvariant() + " " + workingProject.SafeFileNameNoExt + ".elf";
 
             TextBoxModify(outputTextbox, "Execute: avr-size " + args, TextBoxChangeMode.PrependNewLine);
 
@@ -2217,7 +2217,7 @@ namespace AVRProjectIDE
                 writer.WriteLine();
                 writer.WriteLine("## General Flags");
                 writer.WriteLine("PROJECT = {0}", proj.SafeFileNameNoExt);
-                writer.WriteLine("MCU = {0}", proj.Device);
+                writer.WriteLine("MCU = {0}", proj.Device.ToLowerInvariant());
                 writer.WriteLine("TARGET = {0}/$(PROJECT).elf", proj.OutputDir.Replace('\\', '/'));
                 writer.WriteLine("CC = avr-gcc");
                 writer.WriteLine("CCXX = avr-g++");
@@ -2505,7 +2505,7 @@ namespace AVRProjectIDE
                 makefileTemplate = makefileTemplate.Replace("###@@@AVRDUDE_PART@@@###", proj.BurnPart);
                 makefileTemplate = makefileTemplate.Replace("###@@@AVRDUDE_OPTIONS@@@###", proj.BurnOptions);
                 makefileTemplate = makefileTemplate.Replace("###@@@AVRDUDE_PROGRAMMER@@@###", proj.BurnProgrammer);
-                makefileTemplate = makefileTemplate.Replace("###@@@MCU@@@###", proj.Device);
+                makefileTemplate = makefileTemplate.Replace("###@@@MCU@@@###", proj.Device.ToLowerInvariant());
                 makefileTemplate = makefileTemplate.Replace("###@@@F_CPU@@@###", proj.ClockFreq.ToString());
 
                 string cinc = "";

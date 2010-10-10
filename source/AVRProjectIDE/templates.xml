@@ -29,9 +29,9 @@
   </template>
 
   <template name="USnooBie ATmega328P 12MHz">
-    <Device>atmega328P</Device>
+    <Device>atmega328p</Device>
     <ClockFreq>12000000</ClockFreq>
-    <BurnPart>atmega328P</BurnPart>
+    <BurnPart>atmega328p</BurnPart>
     <BurnFuseBox>-U lfuse:w:0xFF:m -U hfuse:w:0xDF:m -U efuse:w:0xFF:m</BurnFuseBox>
     <Inherit>Maximum Optimization</Inherit>
     <Inherit>USBaspLoader</Inherit>
