@@ -4,6 +4,7 @@
 
  * fixed a bug related to capitalization of chip names
  * did a check for new supported chips
+ * there was a capitalized "P" in the new USnooBie entry inside the project template xml file, that was changed to a lower case "p"
 
 ==Update 98==
 
