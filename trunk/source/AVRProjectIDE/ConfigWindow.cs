@@ -37,18 +37,45 @@ namespace AVRProjectIDE
         private bool doNotAllowClose = false;
         private bool closingViaButtons = false;
         private BurnerPanel burnerPanel;
-
+        private static List<string> orderedDevices;
         #endregion
 
         public ConfigWindow(AVRProject project)
         {
             InitializeComponent();
 
-            List<string> orderedDevices = new List<string>();
-            foreach (string s in dropDevices.Items)
-                orderedDevices.Add(s);
+            if (orderedDevices == null)
+                orderedDevices = new List<string>();
 
-            orderedDevices.Sort((x, y) => string.Compare(x, y));
+            if (orderedDevices.Count == 0)
+            {
+                foreach (string s in dropDevices.Items)
+                {
+                    if (orderedDevices.Contains(s.ToLowerInvariant()) == false)
+                    {
+                        orderedDevices.Add(s.ToLowerInvariant());
+                    }
+                }
+
+                string pathToXmls = SettingsManagement.AppInstallPath + "chip_xml" + Path.DirectorySeparatorChar;
+                if (Directory.Exists(pathToXmls))
+                {
+                    foreach (FileInfo fi in new DirectoryInfo(pathToXmls).GetFiles())
+                    {
+                        if (fi.Name.ToLowerInvariant() != "interruptvectors.xml")
+                        {
+                            if (fi.Name.ToLowerInvariant().EndsWith(".xml"))
+                            {
+                                string name = Path.GetFileNameWithoutExtension(fi.Name).ToLowerInvariant().Trim();
+                                if (orderedDevices.Contains(name) == false)
+                                    orderedDevices.Add(name);
+                            }
+                        }
+                    }
+                }
+
+                orderedDevices.Sort((x, y) => string.Compare(x, y));
+            }
 
             dropDevices.Items.Clear();
             foreach (string s in orderedDevices)
@@ -182,8 +209,8 @@ namespace AVRProjectIDE
             if (dropDevices.Items.Count > 0)
             {
                 dropDevices.SelectedIndex = 0;
-                if (dropDevices.Items.Contains(project.Device))
-                    dropDevices.SelectedIndex = dropDevices.Items.IndexOf(project.Device);
+                if (dropDevices.Items.Contains(project.Device.ToLowerInvariant()))
+                    dropDevices.SelectedIndex = dropDevices.Items.IndexOf(project.Device.ToLowerInvariant());
                 else
                     dropDevices.SelectedIndex = dropDevices.Items.Add(project.Device);
             }
