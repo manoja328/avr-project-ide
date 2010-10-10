@@ -1,5 +1,10 @@
 #summary Change Log of New Uploaded Versions
 
+==Update 99==
+
+ * fixed a bug related to capitalization of chip names
+ * did a check for new supported chips
+
 ==Update 98==
 
  * Advertising for [http://frank.circleofcurrent.com/usnoobie/ USnooBie], added to template
