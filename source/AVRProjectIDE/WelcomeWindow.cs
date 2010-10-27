@@ -31,6 +31,8 @@ namespace AVRProjectIDE
 
         private AVRProject project;
 
+        public static WelcomeWindow OnlyWelcomeWindow;
+
         public WelcomeWindow(AVRProject project)
         {
             InitializeComponent();
@@ -167,6 +169,7 @@ namespace AVRProjectIDE
             }
 
             SettingsManagement.WelcomeWindowAtStart = chkShowWelcomeAtStart.Checked;
+            OnlyWelcomeWindow = null;
         }
 
         private void btnWizard_Click(object sender, EventArgs e)
@@ -175,6 +178,7 @@ namespace AVRProjectIDE
             if (wiz.ShowDialog() == DialogResult.OK)
             {
                 SettingsManagement.AddFileAsMostRecent(project.FilePath);
+                OnlyWelcomeWindow = null;
                 this.Close();
             }
         }
@@ -237,6 +241,11 @@ namespace AVRProjectIDE
         private void picAdBox_Click(object sender, EventArgs e)
         {
             Program.GotoUSnooBie();
+        }
+
+        private void WelcomeWindow_Load(object sender, EventArgs e)
+        {
+            OnlyWelcomeWindow = this;
         }
     }
 }

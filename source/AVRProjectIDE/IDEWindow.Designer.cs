@@ -1090,6 +1090,7 @@
             this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "IDEWindow";
             this.Text = "AVR Project IDE";
+            this.SizeChanged += new System.EventHandler(IDEWindow_SizeChanged);
             this.Load += new System.EventHandler(this.IDEWindow_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmProjIDE_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmProjIDE_FormClosing);
