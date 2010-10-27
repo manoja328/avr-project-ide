@@ -518,6 +518,21 @@ namespace AVRProjectIDE
             SettingsManagement.SaveWindowState(this);
         }
 
+        private void IDEWindow_SizeChanged(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (WelcomeWindow.OnlyWelcomeWindow != null)
+                {
+                    if (this.WindowState != FormWindowState.Minimized)
+                    {
+                        WelcomeWindow.OnlyWelcomeWindow.BringToFront();
+                    }
+                }
+            }
+            catch { }
+        }
+
         /// <summary>
         /// This intercepts the form closing signal, so that the parent window receives the close signal before the childs (aka the editor tabs)
         /// </summary>

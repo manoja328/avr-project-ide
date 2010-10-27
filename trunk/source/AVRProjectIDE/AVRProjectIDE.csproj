@@ -1008,6 +1008,10 @@
       <Link>chip_xml\AT90CAN64.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM1.xml">
+      <Link>chip_xml\AT90PWM1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM2.xml">
       <Link>chip_xml\AT90PWM2.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1108,6 +1112,10 @@
       <Link>chip_xml\AT90USB82.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATA6289.xml">
+      <Link>chip_xml\ATA6289.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega103.xml">
       <Link>chip_xml\ATmega103.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1126,6 +1134,10 @@
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega1281.xml">
       <Link>chip_xml\ATmega1281.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega1284.xml">
+      <Link>chip_xml\ATmega1284.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega1284P.xml">
@@ -1160,6 +1172,10 @@
       <Link>chip_xml\ATmega163.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega164A.xml">
+      <Link>chip_xml\ATmega164A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega164P.xml">
       <Link>chip_xml\ATmega164P.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1170,6 +1186,10 @@
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega165.xml">
       <Link>chip_xml\ATmega165.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega165A.xml">
+      <Link>chip_xml\ATmega165A.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega165P.xml">
@@ -1198,6 +1218,10 @@
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega169.xml">
       <Link>chip_xml\ATmega169.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega169A.xml">
+      <Link>chip_xml\ATmega169A.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega169P.xml">
@@ -1252,6 +1276,10 @@
       <Link>chip_xml\ATmega323.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega324A.xml">
+      <Link>chip_xml\ATmega324A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega324P.xml">
       <Link>chip_xml\ATmega324P.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1272,8 +1300,16 @@
       <Link>chip_xml\ATmega3250P.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega325A.xml">
+      <Link>chip_xml\ATmega325A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega325P.xml">
       <Link>chip_xml\ATmega325P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega328.xml">
+      <Link>chip_xml\ATmega328.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega328P.xml">
@@ -1290,6 +1326,10 @@
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega3290P.xml">
       <Link>chip_xml\ATmega3290P.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega329A.xml">
+      <Link>chip_xml\ATmega329A.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega329P.xml">
@@ -1360,6 +1400,10 @@
       <Link>chip_xml\ATmega644.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega644A.xml">
+      <Link>chip_xml\ATmega644A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega644P.xml">
       <Link>chip_xml\ATmega644P.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1376,12 +1420,28 @@
       <Link>chip_xml\ATmega6450.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega6450A.xml">
+      <Link>chip_xml\ATmega6450A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega645A.xml">
+      <Link>chip_xml\ATmega645A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega649.xml">
       <Link>chip_xml\ATmega649.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega6490.xml">
       <Link>chip_xml\ATmega6490.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega6490A.xml">
+      <Link>chip_xml\ATmega6490A.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega649A.xml">
+      <Link>chip_xml\ATmega649A.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATmega649P.xml">
@@ -1590,6 +1650,10 @@
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega128A1.xml">
       <Link>chip_xml\ATxmega128A1.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega128A1U.xml">
+      <Link>chip_xml\ATxmega128A1U.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\ATxmega128A3.xml">

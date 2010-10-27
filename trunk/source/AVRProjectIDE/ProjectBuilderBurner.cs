@@ -2208,7 +2208,7 @@ namespace AVRProjectIDE
             StreamWriter writer = null;
             try
             {
-                writer = new StreamWriter(proj.DirPath + "\\Makefile");
+                writer = new StreamWriter(proj.DirPath + Path.DirectorySeparatorChar + "Makefile");
 
                 writer.WriteLine("##################################");
                 writer.WriteLine("## Makefile for project: {0}", proj.SafeFileNameNoExt);
@@ -2218,6 +2218,8 @@ namespace AVRProjectIDE
                 writer.WriteLine("## General Flags");
                 writer.WriteLine("PROJECT = {0}", proj.SafeFileNameNoExt);
                 writer.WriteLine("MCU = {0}", proj.Device.ToLowerInvariant());
+                writer.WriteLine("BURNMCU = {0}", proj.BurnPart.ToLowerInvariant());
+                writer.WriteLine("BURNPROGRAMMER = {0}", proj.BurnProgrammer.ToLowerInvariant());
                 writer.WriteLine("TARGET = {0}/$(PROJECT).elf", proj.OutputDir.Replace('\\', '/'));
                 writer.WriteLine("CC = avr-gcc");
                 writer.WriteLine("CCXX = avr-g++");
@@ -2456,11 +2458,11 @@ namespace AVRProjectIDE
                 writer.WriteLine("burn:");
                 string overrides = "";
                 BurnerPanel.GetPortOverride(ref overrides, proj);
-                writer.WriteLine("\tavrdude -p {0} -c {1} {2} -U flash:w:{3}/$(PROJECT).hex:a {5}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.OutputDir.Replace('\\', '/'), proj.FileNameNoExt, proj.BurnOptions);
+                writer.WriteLine("\tavrdude -p $(BURNMCU) -c $(BURNPROGRAMMER) {2} -U flash:w:{3}/$(PROJECT).hex:a {5}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.OutputDir.Replace('\\', '/'), proj.FileNameNoExt, proj.BurnOptions);
                 writer.WriteLine();
                 writer.WriteLine("burnfuses:");
                 BurnerPanel.GetPortOverride(ref overrides, proj);
-                writer.WriteLine("\tavrdude -p {0} -c {1} {2} {3} {4}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.BurnFuseBox, proj.BurnOptions);
+                writer.WriteLine("\tavrdude -p $(BURNMCU) -c $(BURNPROGRAMMER) {2} {3} {4}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.BurnFuseBox, proj.BurnOptions);
 
                 writer.WriteLine();
                 writer.WriteLine("## Clean target");
