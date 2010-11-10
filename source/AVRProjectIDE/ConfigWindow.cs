@@ -622,6 +622,8 @@ namespace AVRProjectIDE
 
         private void btnApplyTemplate_Click(object sender, EventArgs e)
         {
+            FormToProj();
+
             if (ProjTemplate.ApplyTemplate((string)dropTemplates.Items[dropTemplates.SelectedIndex], project) == false)
             {
                 MessageBox.Show("Template was not applied successfully");

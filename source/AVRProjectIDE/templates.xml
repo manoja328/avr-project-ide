@@ -100,6 +100,15 @@
     <Inherit>Arduino Bootloader 19200 Baud</Inherit>
   </template>
 
+  <template name="Arduino UNO ATmega328P 16MHz">
+    <Device>atmega328p</Device>
+    <ClockFreq>16000000</ClockFreq>
+    <BurnPart>atmega328p</BurnPart>
+    <BurnFuseBox>-U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m</BurnFuseBox>
+    <Inherit>Maximum Optimization</Inherit>
+    <Inherit>Arduino Bootloader 115200 Baud</Inherit>
+  </template>
+
   <template name="Arduino ATmega328P 16MHz">
     <Device>atmega328p</Device>
     <ClockFreq>16000000</ClockFreq>
@@ -178,6 +187,13 @@
     <BurnFuseBox></BurnFuseBox>
   </template>
 
+  <template name="Arduino Bootloader 115200 Baud">
+    <BurnProgrammer>stk500v1</BurnProgrammer>
+    <BurnBaud>19200</BurnBaud>
+    <BurnAutoReset>true</BurnAutoReset>
+    <BurnOptions>-F</BurnOptions>
+  </template>
+  
   <template name="Arduino Bootloader 19200 Baud">
     <BurnProgrammer>stk500v1</BurnProgrammer>
     <BurnBaud>19200</BurnBaud>
