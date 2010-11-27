@@ -1390,6 +1390,8 @@ namespace AVRProjectIDE
                 xml.Formatting = Formatting.Indented;
                 xml.WriteStartDocument();
 
+
+
                 xml.WriteStartElement("AVRStudio");
 
                 xml.WriteStartElement("MANAGEMENT");

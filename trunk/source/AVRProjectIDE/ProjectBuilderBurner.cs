@@ -2220,7 +2220,8 @@ namespace AVRProjectIDE
                 writer.WriteLine("MCU = {0}", proj.Device.ToLowerInvariant());
                 writer.WriteLine("BURNMCU = {0}", proj.BurnPart.ToLowerInvariant());
                 writer.WriteLine("BURNPROGRAMMER = {0}", proj.BurnProgrammer.ToLowerInvariant());
-                writer.WriteLine("TARGET = {0}/$(PROJECT).elf", proj.OutputDir.Replace('\\', '/'));
+                writer.WriteLine("OUTDIR = {0}", proj.OutputDir.Replace('\\', '/'));
+                writer.WriteLine("TARGET = $(OUTDIR)/$(PROJECT).elf");
                 writer.WriteLine("CC = avr-gcc");
                 writer.WriteLine("CCXX = avr-g++");
                 writer.WriteLine();
@@ -2275,7 +2276,7 @@ namespace AVRProjectIDE
                 writer.WriteLine();
                 writer.WriteLine("## Flags common to Linker only");
                 writer.WriteLine("LDFLAGS = $(COMMON)");
-                writer.WriteLine("LDFLAGS += -Wl,-Map={0}/$(PROJECT).map", proj.OutputDir.Replace('\\', '/'));
+                writer.WriteLine("LDFLAGS += -Wl,-Map=$(OUTDIR)/$(PROJECT).map");
 
                 writer.WriteLine("LDFLAGS += -Wl,--gc-sections");
 
@@ -2438,19 +2439,24 @@ namespace AVRProjectIDE
                 writer.WriteLine(compileStr);
 
                 writer.WriteLine();
+                writer.WriteLine();
+                writer.WriteLine("$(OUTDIR):");
+                writer.WriteLine("\t mkdir $@");
+                writer.WriteLine();
+                writer.WriteLine();
                 writer.WriteLine("## Link");
-                writer.WriteLine("$(TARGET): $(OBJECTS)");
+                writer.WriteLine("$(TARGET): $(OBJECTS) $(OUTDIR)");
 
-                writer.WriteLine("\t-rm -rf $(TARGET) {0}/$(PROJECT).map", proj.OutputDir.Replace('\\', '/'));
+                writer.WriteLine("\t-rm -rf $(TARGET) $(OUTDIR)/$(PROJECT).map");
 
                 writer.WriteLine("\t $(CC) $(LDFLAGS) $(OBJECTS) $(LINKONLYOBJECTS) $(LIBDIRS) $(LIBS) -o $(TARGET)");
 
                 writer.WriteLine("\t-rm -rf $(OBJECTS) {0}", (ofiles + " ").Replace(".o ", ".d "));
-                writer.WriteLine("\t-rm -rf {0}/$(PROJECT).hex {0}/$(PROJECT).eep {0}/$(PROJECT).lss", proj.OutputDir.Replace('\\', '/'));
+                writer.WriteLine("\t-rm -rf $(OUTDIR)/$(PROJECT).hex $(OUTDIR)/$(PROJECT).eep $(OUTDIR)/$(PROJECT).lss");
 
-                writer.WriteLine("\tavr-objcopy -O ihex $(HEX_FLASH_FLAGS) $(TARGET) {0}/$(PROJECT).hex", proj.OutputDir.Replace('\\', '/'));
-                writer.WriteLine("\tavr-objcopy $(HEX_FLASH_FLAGS) -O ihex $(TARGET) {0}/$(PROJECT).eep || exit 0", proj.OutputDir.Replace('\\', '/'));
-                writer.WriteLine("\tavr-objdump -h -S $(TARGET) >> {0}/$(PROJECT).lss", proj.OutputDir.Replace('\\', '/'));
+                writer.WriteLine("\tavr-objcopy -O ihex $(HEX_FLASH_FLAGS) $(TARGET) $(OUTDIR)/$(PROJECT).hex");
+                writer.WriteLine("\tavr-objcopy $(HEX_FLASH_FLAGS) -O ihex $(TARGET) $(OUTDIR)/$(PROJECT).eep || exit 0");
+                writer.WriteLine("\tavr-objdump -h -S $(TARGET) >> $(OUTDIR)/$(PROJECT).lss");
                 writer.WriteLine("\t@avr-size -C --mcu=${MCU} ${TARGET}");
 
                 writer.WriteLine();
@@ -2458,7 +2464,7 @@ namespace AVRProjectIDE
                 writer.WriteLine("burn:");
                 string overrides = "";
                 BurnerPanel.GetPortOverride(ref overrides, proj);
-                writer.WriteLine("\tavrdude -p $(BURNMCU) -c $(BURNPROGRAMMER) {2} -U flash:w:{3}/$(PROJECT).hex:a {5}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.OutputDir.Replace('\\', '/'), proj.FileNameNoExt, proj.BurnOptions);
+                writer.WriteLine("\tavrdude -p $(BURNMCU) -c $(BURNPROGRAMMER) {2} -U flash:w:$(OUTDIR)/$(PROJECT).hex:a {4}", proj.BurnPart, proj.BurnProgrammer, overrides, proj.FileNameNoExt, proj.BurnOptions);
                 writer.WriteLine();
                 writer.WriteLine("burnfuses:");
                 BurnerPanel.GetPortOverride(ref overrides, proj);
@@ -2468,7 +2474,7 @@ namespace AVRProjectIDE
                 writer.WriteLine("## Clean target");
                 writer.WriteLine(".PHONY: clean");
                 writer.WriteLine("clean:");
-                writer.WriteLine("\t-rm -rf $(OBJECTS) {1} {0}/$(PROJECT).elf {0}/$(PROJECT).map {0}/$(PROJECT).lss {0}/$(PROJECT).hex {0}/$(PROJECT).eep", proj.OutputDir.Replace('\\', '/'), (ofiles + " ").Replace(".o ", ".d "));
+                writer.WriteLine("\t-rm -rf $(OBJECTS) {0} $(OUTDIR)/$(PROJECT).elf $(OUTDIR)/$(PROJECT).map $(OUTDIR)/$(PROJECT).lss $(OUTDIR)/$(PROJECT).hex $(OUTDIR)/$(PROJECT).eep $(OUTDIR)", (ofiles + " ").Replace(".o ", ".d "));
             }
             catch
             {
