@@ -1,5 +1,3 @@
 This page is reserved for the latest news feeds to the AVR Project IDE's Welcome Window.
 
-===There's two downloads for version 98, because Arduino 0021 came out. 1.98.3928.36665 contains the 0021 core and libraries===
-
-===Version 98 added major fixes, newer Arduino files===
+===Sold all USnooBie kits!===
