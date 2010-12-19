@@ -156,12 +156,12 @@
             this.txtNews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNews.Location = new System.Drawing.Point(12, 429);
+            this.txtNews.Location = new System.Drawing.Point(12, 313);
             this.txtNews.Multiline = true;
             this.txtNews.Name = "txtNews";
             this.txtNews.ReadOnly = true;
             this.txtNews.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNews.Size = new System.Drawing.Size(629, 106);
+            this.txtNews.Size = new System.Drawing.Size(629, 93);
             this.txtNews.TabIndex = 8;
             // 
             // backgroundWorker1
@@ -178,16 +178,17 @@
             this.picAdBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picAdBox.Location = new System.Drawing.Point(12, 297);
             this.picAdBox.Name = "picAdBox";
-            this.picAdBox.Size = new System.Drawing.Size(629, 126);
+            this.picAdBox.Size = new System.Drawing.Size(629, 10);
             this.picAdBox.TabIndex = 9;
             this.picAdBox.TabStop = false;
+            this.picAdBox.Visible = false;
             this.picAdBox.Click += new System.EventHandler(this.picAdBox_Click);
             // 
             // WelcomeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 547);
+            this.ClientSize = new System.Drawing.Size(653, 418);
             this.Controls.Add(this.picAdBox);
             this.Controls.Add(this.txtNews);
             this.Controls.Add(this.groupBox1);
