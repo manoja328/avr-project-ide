@@ -161,7 +161,7 @@
             this.txtNews.Name = "txtNews";
             this.txtNews.ReadOnly = true;
             this.txtNews.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNews.Size = new System.Drawing.Size(629, 93);
+            this.txtNews.Size = new System.Drawing.Size(629, 11);
             this.txtNews.TabIndex = 8;
             // 
             // backgroundWorker1
@@ -188,7 +188,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 418);
+            this.ClientSize = new System.Drawing.Size(653, 336);
             this.Controls.Add(this.picAdBox);
             this.Controls.Add(this.txtNews);
             this.Controls.Add(this.groupBox1);
@@ -197,8 +197,6 @@
             this.Controls.Add(this.btnWizard);
             this.Controls.Add(this.btnNew);
             this.Name = "WelcomeWindow";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AVR Project IDE - Welcome";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmWelcome_FormClosed);

@@ -23,7 +23,7 @@ namespace AVRProjectIDE
             catch (Exception ex)
             {
                 ErrorReportWindow.Show(ex, "Error In File Tree Panel");
-                
+
             }
         }
 
@@ -319,7 +319,7 @@ namespace AVRProjectIDE
                 }
 
                 string ext = file.FileExt;
-                if (ext == "s" || ext  == "c" || ext == "cpp" || ext == "cxx" || ext == "pde")
+                if (ext == "s" || ext == "c" || ext == "cpp" || ext == "cxx" || ext == "pde")
                 {
                     // only source files can be compiled
 
@@ -382,16 +382,70 @@ namespace AVRProjectIDE
                 return SaveResult.Cancelled;
         }
 
-        public SaveResult AddFile(out ProjectFile file)
+        public SaveResult AddNewFile(out ProjectFile file)
         {
             file = null;
 
             SaveFileDialog sfd = new SaveFileDialog();
 
-            sfd.Title = "Find or Create a File to Add";
+            sfd.Title = "Add New File";
 
             sfd.InitialDirectory = project.DirPath;
 
+            string filter = GetSaveFileFilters();
+            sfd.Filter = filter;
+            sfd.FilterIndex = SettingsManagement.LastFileTypeFilter;
+
+            sfd.AddExtension = true;
+
+            sfd.OverwritePrompt = true;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                SettingsManagement.LastFileTypeFilter = sfd.FilterIndex;
+                return AddFile(out file, sfd.FileName);
+            }
+
+            return SaveResult.Cancelled;
+        }
+
+        public SaveResult AddExistingFile(out ProjectFile file)
+        {
+            file = null;
+
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Title = "Add Existing File(s)";
+
+            ofd.InitialDirectory = project.DirPath;
+
+            string filter = "";
+            filter += "Code/Header Files (*.c;*.cpp;*.S;*.pde;*.h;*.hpp)|*.c;*.cpp;*.S;*.pde;*.h;*.hpp" + "|";
+            filter += GetSaveFileFilters();
+            ofd.Filter = filter;
+            ofd.FilterIndex = 0;
+
+            ofd.Multiselect = true;
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                SaveResult result = SaveResult.Successful;
+                foreach (string fileName in ofd.FileNames)
+                {
+                    SaveResult addFileResult = AddFile(out file, fileName);
+                    if (addFileResult != SaveResult.Successful)
+                    {
+                        result = addFileResult;
+                    }
+                }
+                return result;
+            }
+
+            return SaveResult.Cancelled;
+        }
+
+        private string GetSaveFileFilters()
+        {
             string filter = "";
             filter += "C Source Code (*.c)|*.c" + "|";
             filter += "CPP Source Code (*.cpp)|*.cpp" + "|";
@@ -400,22 +454,7 @@ namespace AVRProjectIDE
             filter += "H Header File (*.h)|*.h" + "|";
             filter += "HPP Header File (*.hpp)|*.hpp" + "|";
             filter += "Any File (*.*)|*.*";
-            sfd.Filter = filter;
-            sfd.FilterIndex = SettingsManagement.LastFileTypeFilter;
-
-            sfd.AddExtension = true;
-
-            sfd.OverwritePrompt = false;
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                SettingsManagement.LastFileTypeFilter = sfd.FilterIndex;
-                return AddFile(out file, sfd.FileName);
-            }
-            else
-            {
-                return SaveResult.Cancelled;
-            }
+            return filter;
         }
 
         public SaveResult AddFile(out ProjectFile file, string filePath)
@@ -474,7 +513,7 @@ namespace AVRProjectIDE
                     catch (Exception ex)
                     {
                         ErrorReportWindow.Show(ex, "Error Creating New File " + file.FileName);
-                        
+
                     }
                 }
 
@@ -490,7 +529,7 @@ namespace AVRProjectIDE
             }
         }
 
-        public SaveResult AddFile(string filePath)
+        public SaveResult AddNewFile(string filePath)
         {
             ProjectFile file;
             return AddFile(out file, filePath);
@@ -592,7 +631,7 @@ namespace AVRProjectIDE
                 }
         }
 
-        private void mbtnAddFile_Click(object sender, EventArgs e)
+        private void mbtnAddNewFile_Click(object sender, EventArgs e)
         {
             if (project == null)
                 return;
@@ -601,7 +640,20 @@ namespace AVRProjectIDE
                 return;
 
             ProjectFile file;
-            if (AddFile(out file) == SaveResult.Successful)
+            if (AddNewFile(out file) == SaveResult.Successful)
+                OpenNode(new TreeNode(file.FileName)); // this is cheating, but i don't want to write another open event
+        }
+
+        private void mbtnAddExistingFile_Click(object sender, EventArgs e)
+        {
+            if (project == null)
+                return;
+
+            if (project.IsReady == false)
+                return;
+
+            ProjectFile file;
+            if (AddExistingFile(out file) == SaveResult.Successful)
                 OpenNode(new TreeNode(file.FileName)); // this is cheating, but i don't want to write another open event
         }
 
@@ -793,7 +845,7 @@ namespace AVRProjectIDE
                     foreach (string filePath in a)
                     {
                         if (File.Exists(filePath))
-                            this.BeginInvoke(new DragInFile(AddFile), new object[] { filePath, });
+                            this.BeginInvoke(new DragInFile(AddNewFile), new object[] { filePath, });
                     }
 
                     this.Activate();

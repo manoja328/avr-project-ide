@@ -39,7 +39,8 @@
             this.components = new System.ComponentModel.Container();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.treeRClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mbtnAddFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnAddNewFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnAddExistingFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnAddFileWiz = new System.Windows.Forms.ToolStripMenuItem();
             this.imgListFileTree = new System.Windows.Forms.ImageList(this.components);
             this.nodeRClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -83,19 +84,27 @@
             // treeRClickMenu
             // 
             this.treeRClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mbtnAddFile,
+            this.mbtnAddNewFile,
+            this.mbtnAddExistingFile,
             this.mbtnAddFileWiz,
             this.mbtnEnableCompileAll});
             this.treeRClickMenu.Name = "treeRClickMenu";
             this.treeRClickMenu.ShowImageMargin = false;
             this.treeRClickMenu.Size = new System.Drawing.Size(164, 48);
             // 
-            // mbtnAddFile
+            // mbtnAddNewFile
             // 
-            this.mbtnAddFile.Name = "mbtnAddFile";
-            this.mbtnAddFile.Size = new System.Drawing.Size(163, 22);
-            this.mbtnAddFile.Text = "Add / Find File";
-            this.mbtnAddFile.Click += new System.EventHandler(this.mbtnAddFile_Click);
+            this.mbtnAddNewFile.Name = "mbtnAddNewFile";
+            this.mbtnAddNewFile.Size = new System.Drawing.Size(163, 22);
+            this.mbtnAddNewFile.Text = "Add New File...";
+            this.mbtnAddNewFile.Click += new System.EventHandler(this.mbtnAddNewFile_Click);
+            // 
+            // mbtnAddExistingFile
+            // 
+            this.mbtnAddExistingFile.Name = "mbtnAddExistingFile";
+            this.mbtnAddExistingFile.Size = new System.Drawing.Size(163, 22);
+            this.mbtnAddExistingFile.Text = "Add Existing File(s)...";
+            this.mbtnAddExistingFile.Click += new System.EventHandler(this.mbtnAddExistingFile_Click);
             // 
             // mbtnAddFileWiz
             // 
@@ -195,7 +204,8 @@
         private System.Windows.Forms.ToolStripMenuItem mbtnRemove;
         private System.Windows.Forms.ToolStripMenuItem mbtnSetOpt;
         private System.Windows.Forms.ContextMenuStrip treeRClickMenu;
-        private System.Windows.Forms.ToolStripMenuItem mbtnAddFile;
+        private System.Windows.Forms.ToolStripMenuItem mbtnAddNewFile;
+        private System.Windows.Forms.ToolStripMenuItem mbtnAddExistingFile;
         private System.Windows.Forms.ToolStripMenuItem mbtnAddFileWiz;
         private System.Windows.Forms.ToolStripMenuItem mbtnEnableCompileAll;
         private System.Windows.Forms.Timer tmrHeaderUnchecker;
