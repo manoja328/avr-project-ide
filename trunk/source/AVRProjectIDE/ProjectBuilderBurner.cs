@@ -1479,6 +1479,34 @@ namespace AVRProjectIDE
                     continue;
                 }
 
+                // undefined reference
+                //   EXAMPLE: Serial.o:(.rodata._ZTV6Serial+0x12): undefined reference to `Stream::skipUntil(unsigned char)'
+                re1 = "(.*?)"; // object filename
+                re2 = "(:\\()";
+                re3 = "(.*?)";
+                re4 = "(: undefined reference to)";
+                re5 = "(.*)"; // message
+
+                r = new Regex(re1 + re2 + re3 + re4 + re5, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                m = r.Match(line);
+                if (m.Success)
+                {
+                    string type = "";
+                    string lineNum = "";
+                    string msg = "undefined reference to" + m.Groups[5].Value.Trim();
+                    loc = m.Groups[1].Value;
+                    string fileName = loc;
+                    locIsFunct = false;
+
+                    hasError++;
+                    ListViewItem lvi = new ListViewItem(new string[] { fileName, lineNum, loc, type, msg });
+                    ListViewModify(errorList, lvi, ListViewChangeMode.AddToTop);
+                    ListViewModify(errorOnlyList, lvi, ListViewChangeMode.AddToTop);
+
+                    line = reader.ReadLine();
+                    continue;
+                }
+
                 if (outputElse)
                 {
                     if (string.IsNullOrEmpty(line) == false)
