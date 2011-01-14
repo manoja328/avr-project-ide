@@ -85,7 +85,7 @@ Please note that this will only work when the file does not already exist.
 
 File templates are stores inside the app data path, under the file_templates folder
 
-The following text (*.txt) files: defaultcode, defaultheader, initialmain, and initialpde, are used by the editor, and will be unpacked if missing. copyright will be unpacked if missing but is not required.
+The following text (`*`.txt) files: defaultcode, defaultheader, initialmain, and initialpde, are used by the editor, and will be unpacked if missing. copyright will be unpacked if missing but is not required.
 
 If those files are not missing, you are free to edit them, if they are missing, the editor will recreate them.
 
