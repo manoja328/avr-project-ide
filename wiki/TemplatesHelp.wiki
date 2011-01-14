@@ -25,6 +25,38 @@ The each template is stored in its own "template" tag, with a "name" attribute.
 
 The easiest way to write your own template is to save a project with the desired settings, and then open the .avrproj file with a text editor. Copy and paste in the tags that you want the template to set.
 
+These tags are supported
+{{{
+<ClockFreq>
+<Device>
+<LinkerOpt>
+<OtherOpt>
+<OtherOptionsForC>
+<OtherOptionsForCPP>
+<OtherOptionsForS>
+<Optimization>
+<UseInitStack>
+<InitStackAddr>
+<PackStructs>
+<ShortEnums>
+<UnsignedBitfields>
+<UnsignedChars>
+<FunctionSections>
+<DataSections>
+<BurnPart>
+<BurnProgrammer>
+<BurnOptions>
+<BurnBaud>
+<BurnAutoReset>
+<BurnFuseBox>
+<IncludeDirList>
+<LibraryDirList>
+<LinkObjList>
+<LinkLibList>
+<MemorySegList>
+<ArduinoCoreOverride>
+}}}
+
 A template can inherit from other templates by doing something like this:
 
 {{{
