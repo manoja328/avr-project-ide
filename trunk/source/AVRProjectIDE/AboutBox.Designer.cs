@@ -47,7 +47,7 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(12, 225);
+            this.okButton.Location = new System.Drawing.Point(12, 388);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 20);
             this.okButton.TabIndex = 24;
@@ -56,7 +56,7 @@
             // lnkButton
             // 
             this.lnkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lnkButton.Location = new System.Drawing.Point(93, 225);
+            this.lnkButton.Location = new System.Drawing.Point(93, 388);
             this.lnkButton.Name = "lnkButton";
             this.lnkButton.Size = new System.Drawing.Size(75, 20);
             this.lnkButton.TabIndex = 24;
@@ -66,7 +66,7 @@
             // btnDonate
             // 
             this.btnDonate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDonate.Location = new System.Drawing.Point(174, 225);
+            this.btnDonate.Location = new System.Drawing.Point(174, 388);
             this.btnDonate.Name = "btnDonate";
             this.btnDonate.Size = new System.Drawing.Size(75, 20);
             this.btnDonate.TabIndex = 24;
@@ -84,7 +84,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(620, 191);
+            this.textBox1.Size = new System.Drawing.Size(620, 234);
             this.textBox1.TabIndex = 25;
             // 
             // picAdBox
@@ -94,9 +94,9 @@
             this.picAdBox.BackColor = System.Drawing.Color.White;
             this.picAdBox.BackgroundImage = global::AVRProjectIDE.GraphicsResx.usnoobie_ad;
             this.picAdBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.picAdBox.Location = new System.Drawing.Point(12, 209);
+            this.picAdBox.Location = new System.Drawing.Point(12, 252);
             this.picAdBox.Name = "picAdBox";
-            this.picAdBox.Size = new System.Drawing.Size(620, 10);
+            this.picAdBox.Size = new System.Drawing.Size(620, 130);
             this.picAdBox.TabIndex = 26;
             this.picAdBox.TabStop = false;
             this.picAdBox.Visible = false;
@@ -108,7 +108,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
-            this.ClientSize = new System.Drawing.Size(644, 257);
+            this.ClientSize = new System.Drawing.Size(644, 420);
             this.Controls.Add(this.picAdBox);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.okButton);
