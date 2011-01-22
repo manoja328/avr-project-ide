@@ -1133,6 +1133,45 @@ namespace AVRProjectIDE
                     }
                 }
 
+                foreach (KeyValuePair<int, int> i in styleFontSize)
+                {
+                    scinti.Styles[i.Key].Size = Convert.ToSingle(i.Value);
+                    scinti.Styles[i.Key].Font = new Font(scinti.Styles[i.Key].Font.Name, Convert.ToSingle(i.Value), scinti.Styles[i.Key].Font.Style);
+                }
+
+                foreach (KeyValuePair<int, string> i in styleFont)
+                {
+                    scinti.Styles[i.Key].FontName = i.Value;
+                    scinti.Styles[i.Key].Font = new Font(i.Value, scinti.Styles[i.Key].Font.Size, scinti.Styles[i.Key].Font.Style);
+                }
+
+                foreach (KeyValuePair<int, bool> i in styleBold)
+                {
+                    scinti.Styles[i.Key].Bold = i.Value;
+                    if (i.Value)
+                    {
+                        scinti.Styles[i.Key].Font = new Font(scinti.Styles[i.Key].Font.Name, scinti.Styles[i.Key].Font.Size, scinti.Styles[i.Key].Font.Style | FontStyle.Bold);
+                    }
+                }
+
+                foreach (KeyValuePair<int, bool> i in styleItalic)
+                {
+                    scinti.Styles[i.Key].Italic = i.Value;
+                    if (i.Value)
+                    {
+                        scinti.Styles[i.Key].Font = new Font(scinti.Styles[i.Key].Font.Name, scinti.Styles[i.Key].Font.Size, scinti.Styles[i.Key].Font.Style | FontStyle.Italic);
+                    }
+                }
+
+                foreach (KeyValuePair<int, bool> i in styleUnderline)
+                {
+                    scinti.Styles[i.Key].Underline = i.Value;
+                    if (i.Value)
+                    {
+                        scinti.Styles[i.Key].Font = new Font(scinti.Styles[i.Key].Font.Name, scinti.Styles[i.Key].Font.Size, scinti.Styles[i.Key].Font.Style | FontStyle.Underline);
+                    }
+                }
+
                 foreach (KeyValuePair<int, Color> i in styleForeColour)
                 {
                     scinti.Styles[i.Key].ForeColor = i.Value;
@@ -1141,31 +1180,6 @@ namespace AVRProjectIDE
                 foreach (KeyValuePair<int, Color> i in styleBackColour)
                 {
                     scinti.Styles[i.Key].BackColor = i.Value;
-                }
-
-                foreach (KeyValuePair<int, int> i in styleFontSize)
-                {
-                    scinti.Styles[i.Key].Size = i.Value;
-                }
-
-                foreach (KeyValuePair<int, string> i in styleFont)
-                {
-                    scinti.Styles[i.Key].FontName = i.Value;
-                }
-
-                foreach (KeyValuePair<int, bool> i in styleBold)
-                {
-                    scinti.Styles[i.Key].Bold = i.Value;
-                }
-
-                foreach (KeyValuePair<int, bool> i in styleItalic)
-                {
-                    scinti.Styles[i.Key].Italic = i.Value;
-                }
-
-                foreach (KeyValuePair<int, bool> i in styleUnderline)
-                {
-                    scinti.Styles[i.Key].Underline = i.Value;
                 }
             }
 
