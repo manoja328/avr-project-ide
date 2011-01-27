@@ -91,6 +91,7 @@
             this.mbtnCompile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnCompileCurrent = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnBurn = new System.Windows.Forms.ToolStripMenuItem();
+            this.mbtnBuildNBurn = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnAVRDUDE = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnFuseTool = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExportMakefile = new System.Windows.Forms.ToolStripMenuItem();
@@ -467,6 +468,7 @@
             this.mbtnCompile,
             this.mbtnCompileCurrent,
             this.mbtnBurn,
+            this.mbtnBuildNBurn,
             this.mbtnAVRDUDE,
             this.mbtnFuseTool,
             this.mbtnExportMakefile,
@@ -509,6 +511,14 @@
             this.mbtnBurn.Size = new System.Drawing.Size(233, 22);
             this.mbtnBurn.Text = "&Program Chip";
             this.mbtnBurn.Click += new System.EventHandler(this.mbtnBurn_Click);
+            // 
+            // mbtnBuildNBurn
+            // 
+            this.mbtnBuildNBurn.Name = "mbtnBuildNBurn";
+            this.mbtnBuildNBurn.ShortcutKeys = System.Windows.Forms.Keys.F9;
+            this.mbtnBuildNBurn.Size = new System.Drawing.Size(233, 22);
+            this.mbtnBuildNBurn.Text = "Build n' Burn";
+            this.mbtnBuildNBurn.Click += new System.EventHandler(this.mbtnBuildNBurn_Click);
             // 
             // mbtnAVRDUDE
             // 
@@ -889,7 +899,7 @@
             this.tbtnBurn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbtnBurn.Name = "tbtnBurn";
             this.tbtnBurn.Size = new System.Drawing.Size(23, 22);
-            this.tbtnBurn.Text = "Program";
+            this.tbtnBurn.Text = "Program (hold shift to build n' burn)";
             this.tbtnBurn.Click += new System.EventHandler(this.tbtnBurn_Click);
             // 
             // toolStripSeparator9
@@ -1136,6 +1146,7 @@
         private System.Windows.Forms.ToolStripMenuItem mbtnConfig;
         private System.Windows.Forms.ToolStripMenuItem mbtnCompile;
         private System.Windows.Forms.ToolStripMenuItem mbtnBurn;
+        private System.Windows.Forms.ToolStripMenuItem mbtnBuildNBurn;
         private System.Windows.Forms.ToolStripMenuItem mbtnHelpTopics;
         private System.Windows.Forms.ToolStripMenuItem mbtnAbout;
         private System.Windows.Forms.ToolStripMenuItem mbtnRecentProjects;

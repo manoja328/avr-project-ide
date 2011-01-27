@@ -47,6 +47,8 @@ namespace AVRProjectIDE
         private HardwareExplorer hardwareExplorerWin;
         private DisassemblyViewer disassemViewer;
         private UsbPanel usbWin;
+
+        private bool toBurnAfterBuild = false;
         
 #if DEBUGGERWINTEST
         private DebuggerPanel debuggerWin;
@@ -234,6 +236,11 @@ namespace AVRProjectIDE
             {
                 messageWin.MessageBoxModify(TextBoxChangeMode.PrependNewLine, "Build Succeeded");
                 messageWin.SwitchToMessageBox();
+
+                if (toBurnAfterBuild)
+                {
+                    mbtnBurn_Click(null, null);
+                }
             }
             else
             {
@@ -1172,6 +1179,8 @@ namespace AVRProjectIDE
 
         private void mbtnCompile_Click(object sender, EventArgs e)
         {
+            toBurnAfterBuild = false;
+
             if (project.IsReady == false)
                 return;
 
@@ -1187,6 +1196,8 @@ namespace AVRProjectIDE
 
         private void tbtnCompile_Click(object sender, EventArgs e)
         {
+            toBurnAfterBuild = false;
+
             if (project.IsReady == false)
                 return;
 
@@ -1208,7 +1219,13 @@ namespace AVRProjectIDE
             if (ProjectBuilder.CheckForWinAVR() == false)
                 return;
 
-            if (serialWin.IsConnected && serialWin.CurrentPort == project.BurnPort)
+            if (Control.ModifierKeys == Keys.Shift)
+            {
+                mbtnBuildNBurn_Click(sender, e);
+                return;
+            }
+
+            if (serialWin.IsConnected && serialWin.CurrentPort.ToLower() == project.BurnPort.ToLower())
                 serialWin.Disconnect();
 
             projBurner.BurnCMD(false, false, messageWin);
@@ -1237,6 +1254,23 @@ namespace AVRProjectIDE
             {
                 serialWin.Activate();
                 serialWin.BringToFront();
+            }
+        }
+
+        private void mbtnBuildNBurn_Click(object sender, EventArgs e)
+        {
+            toBurnAfterBuild = true;
+
+            if (project.IsReady == false)
+                return;
+
+            if (ProjectBuilder.CheckForWinAVR())
+            {
+                messageWin.BringToFront();
+                messageWin.Activate();
+                messageWin.SwitchToMessageBox();
+                SaveAll();
+                projBuilder.StartBuild();
             }
         }
 
