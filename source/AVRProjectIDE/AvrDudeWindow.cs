@@ -110,9 +110,9 @@ namespace AVRProjectIDE
         private string GetArgs(string memType, string overrides, string operationChar, string filePath, string fileFormat, bool verify)
         {
             return "/k avrdude " + String.Format(
-                "-c {0} -p {1} {2} {3} -U {4}:{5}:\"{6}\":{7} {8}",
+                "-c {0} -p {1} {2} {3} {4} -U {5}:{6}:\"{7}\":{8}",
                 project.BurnProgrammer, project.BurnPart, project.BurnOptions,
-                overrides, memType, operationChar, filePath, fileFormat, verify ? "" : "-V");
+                overrides, verify ? "" : "-V", memType, operationChar, filePath, fileFormat);
         }
 
         private string GetMemType()

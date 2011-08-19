@@ -1015,6 +1015,7 @@
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM2.xml">
       <Link>chip_xml\AT90PWM2.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Atmel\AVR Tools\Partdescriptionfiles\AT90PWM216.xml">
       <Link>chip_xml\AT90PWM216.xml</Link>

@@ -144,8 +144,8 @@ namespace AVRProjectIDE
             {
                 EnableButtons();
 
-                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
-                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
+                //projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
+                //projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBurner = new ProjectBurner(project);
             }
 
@@ -823,8 +823,6 @@ namespace AVRProjectIDE
             this.project = newProj; // reassign project
             curProj = this.project;
 
-            projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
-            projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
             projBurner = new ProjectBurner(project);
 
             // set title
@@ -1190,6 +1188,9 @@ namespace AVRProjectIDE
                 messageWin.Activate();
                 messageWin.SwitchToMessageBox();
                 SaveAll();
+
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
+                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBuilder.StartBuild();
             }
         }
@@ -1207,6 +1208,9 @@ namespace AVRProjectIDE
                 messageWin.Activate();
                 messageWin.SwitchToMessageBox();
                 SaveAll();
+
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
+                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBuilder.StartBuild();
             }
         }
@@ -1270,6 +1274,9 @@ namespace AVRProjectIDE
                 messageWin.Activate();
                 messageWin.SwitchToMessageBox();
                 SaveAll();
+
+                projBuilder = new ProjectBuilder(project, messageWin.MyTextBox, messageWin.MyListView, messageWin.MyErrorOnlyListView);
+                projBuilder.DoneWork += new ProjectBuilder.EventHandler(projBuilder_DoneWork);
                 projBuilder.StartBuild();
             }
         }

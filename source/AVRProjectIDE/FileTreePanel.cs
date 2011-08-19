@@ -131,7 +131,13 @@ namespace AVRProjectIDE
             }
 
             if (Path.GetExtension(newName) != Path.GetExtension(node.Text))
-                return false;
+            {
+                if ((newName.ToLowerInvariant().EndsWith(".c") || newName.ToLowerInvariant().EndsWith(".cpp") || newName.ToLowerInvariant().EndsWith(".asm") || newName.ToLowerInvariant().EndsWith(".s")) && (node.Text.ToLowerInvariant().EndsWith(".h") || node.Text.ToLowerInvariant().EndsWith(".hpp")))
+                    return false;
+
+                if ((newName.ToLowerInvariant().EndsWith(".h") || newName.ToLowerInvariant().EndsWith(".hpp")) && (node.Text.ToLowerInvariant().EndsWith(".c") || node.Text.ToLowerInvariant().EndsWith(".cpp") || node.Text.ToLowerInvariant().EndsWith(".s") || node.Text.ToLowerInvariant().EndsWith(".asm")))
+                    return false;
+            }
 
             ProjectFile f;
             if (project.FileList.TryGetValue(node.Text.ToLowerInvariant(), out f))
@@ -239,7 +245,7 @@ namespace AVRProjectIDE
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add(rootNode);
 
-            if (AboutBox.AssemblyDate.AddMonths(1) <= DateTime.Now)
+            if (AboutBox.AssemblyDate.AddMonths(1) <= DateTime.Now && true == false)
             {
                 updateNoticeNode = new TreeNode("IMPORTANT NOTICE");
                 updateNoticeNode.Nodes.Add("The build date of this version");
