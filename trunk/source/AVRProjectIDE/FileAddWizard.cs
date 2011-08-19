@@ -276,5 +276,10 @@ namespace AVRProjectIDE
             if (string.IsNullOrEmpty(this.SelectedExtension) == false)
                 oldExt = this.SelectedExtension;
         }
+
+        private void dropFileExt_TextChanged(object sender, EventArgs e)
+        {
+            oldExt = dropFileExt.Text;
+        }
     }
 }

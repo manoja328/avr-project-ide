@@ -2053,7 +2053,7 @@ namespace AVRProjectIDE
 
             BurnerPanel.GetPortOverride(ref overrides, project);
 
-            string args = String.Format("avrdude -p {0} -c {1} {2} {3} {4}", project.BurnPart.ToUpperInvariant(), project.BurnProgrammer, overrides, fileStr, project.BurnOptions);
+            string args = String.Format("avrdude -p {0} -c {1} {2} {3} {4}", project.BurnPart.ToUpperInvariant(), project.BurnProgrammer, overrides, project.BurnOptions, fileStr);
             avrdude.StartInfo = new ProcessStartInfo("cmd", "/k " + args);
             ProjectBuilder.SetEnviroVarsForProc(avrdude.StartInfo);
             if (project.BurnAutoReset && string.IsNullOrEmpty(project.BurnPort) == false)
